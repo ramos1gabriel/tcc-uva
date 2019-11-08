@@ -1,0 +1,29 @@
+O que já foi feito:
+
+CAPÍTULO I – INTRODUÇÃO
+ANÁLISE DO AMBIENTE ORGANIZACIONAL
+LEVANTAMENTO DO SISTEMA
+CRONOGRAMA DE EXECUÇÃO
+CAPÍTULO II – MODELO DE CASOS DE USO
+CAPÍTULO III – MODELO DE CLASSE
+
+O que ainda falta fazer:
+
+METODOLOGIA DO DESENVOLVIMENTO
+(pesquisa de app/sites)
+(entrevistas)
+
+CAPÍTULO IV – MODELO DE INTERAÇÕES
+(fazer um diagrama de classe para cada caso de uso)
+
+CAPÍTULO V – MODELO DE TRANSIÇÃO DE ESTADO
+(verificar slide de APOO sobre esse diagrama)
+((inventar status/receitas/ arrumar no minimo 1 diagrama))
+
+BIBLIOGRAFIA
+*sites referencias aos apps
+*livros uml
+*olhar bibliografia dos slides de APOO
+
+ANEXO – DOCUMENTO DE VISÃO
+*falta passar ele para o documentao final (demorado)
