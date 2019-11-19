@@ -4,7 +4,7 @@ Paginação de numeros romanos (INICIO) - OK
 Paginação normal (RESTO DO DOCUMENTO) - PENDENTE
 SUMARIO - PENDENTE
 LISTA DE FIGURAS - OK
-LISTA DE TABELAS - EM DESENVOLVIMENTO
+LISTA DE TABELAS - OK
 
 BIBLIOGRAFIA??
 
@@ -14,59 +14,3 @@ BIBLIOGRAFIA??
 fontes (tamanho, tipo)
 alinhamento
 correção ortografica
-
---
-Tabela 1 – Equipamentos necessários para o desenvolvimento	5
-Tabela 2 – Equipamentos necessários para a implantação	5
-
-Tabela 3 – RF01 – Manter usuário	9
-Tabela 4 – RF02 – Manter receita	9
-Tabela 5 – RF03 – Manter ingrediente	10
-Tabela 6 – RF04 – Manter modo de preparo	10
-Tabela 7 – RF05 – Planejar cardápio semanal	10
-Tabela 8 – RF06 – Gerar lista de compras	10
-
-Tabela 9 – RNF01 – Desenvolvimento	10
-Tabela 10 – RNF02 – Segurança de acesso	10
-Tabela 11 – RNF03 – Metodologia	11
-
-Tabela 12 – RN01 – Categoria de receita	11
-Tabela 13 – RN02 – Unidade de Medida	12
-Tabela 14 – RN03 – Ingrediente	12
-Tabela 15 – RN04 – Duplicidade de ingrediente	12
-
-Tabela 16 – RN05 – Tipos de unidade de medidas	12
-Tabela 17 – RN06 – Tipos de modo de preparo	12
-Tabela 18 – RN07 – Ordem de modo de preparo	12
-Tabela 19 – RN08 – Calculo de conversão de unidade de medida	13
-Tabela 20 – RN09 – Autor da receita 	13
-
-Tabela 21 – Contagem de função de dados	13
-Tabela 22 – Contagem de funções transacionais	14
-Tabela 23 – Contagem de pontos de função não ajustados	15
-
-Tabela 24 – Cronograma de execução	17
-Tabela 25 – Hardware	18
-Tabela 26 – Software	18
-Tabela 27 – Total do orçamento	19
-
-Tabela 28 – Mapeamento dos requisitos funcionais em caso de uso	20
-Tabela 29 – Descrição textual dos atores	20
-
-Tabela 30 – Descrição de caso de uso – Manter usuário	23
-Tabela 31 – Descrição de caso de uso – Manter receita	24
-Tabela 32 – Descrição de caso de uso – Manter ingrediente	26
-
-Tabela 33 – Descrição de caso de uso – Manter modo preparo	27
-Tabela 33 – Descrição de caso de uso – Planejar cardápio semanal	28
-Tabela 34 – Descrição de caso de uso – Gerar lista de compras	29
-
-Tabela 35 – Dicionário de classe - Usuário	30
-Tabela 36 – Dicionário de classe - Receita	31
-Tabela 37 – Dicionário de classe - Ingrediente	31
-
-Tabela 38 – Dicionário de classe - Modo Preparo	31
-Tabela 39 – Dicionário de classe - Categoria	31
-Tabela 40 – Dicionário de classe - Cardápio Semanal	32
-
-Tabela 25 – Transição de estado – Classe Exemplar	39
