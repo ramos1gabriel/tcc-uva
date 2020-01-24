@@ -10,10 +10,10 @@
  - paragrafos que não tem nada haver com o tema (resquícios do documento original)
  - Referência Bibliográfica (????) (Procurar sites/livros)
  
- **BACK-END - Springboot **
+ **BACK-END - Springboot**
  - Começar desenvolvimento..
  
- **FRONT-END Angular **
+ **FRONT-END Angular**
   - Começar desenvolvimento..
   
   **OUTROS**
