@@ -7,18 +7,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.tcc.api.entity.Usuario;
-import com.tcc.api.repository.UserRepository;
+import com.tcc.api.repository.UsuarioRepository;
 import com.tcc.api.service.UsuarioService;
 
 @Service
 public class UserServiceImpl implements UsuarioService {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UsuarioRepository userRepository;
 
 	@Override
-	public Usuario findByEmail(String email) {
-		return this.userRepository.findByEmail(email);
+	public Usuario findByUsername(String username) {
+		return this.userRepository.findByUsername(username);
 	}
 
 	@Override

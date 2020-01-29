@@ -17,11 +17,11 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 	private UsuarioService userService;
 	
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		Usuario user = userService.findByEmail(email);
+		Usuario user = userService.findByUsername(username);
 		if(user == null) {
-			throw new UsernameNotFoundException(String.format("Nenhum usuario encontrado com nome de %s", email));
+			throw new UsernameNotFoundException(String.format("Nenhum usuario encontrado com nome de %s", username));
 		} else {
 			return JwtUserFactory.create(user);
 		}

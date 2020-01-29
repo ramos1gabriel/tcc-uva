@@ -3,7 +3,6 @@ package com.tcc.api.security.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,12 +42,12 @@ public class AuthenticationRestController {
 	private UsuarioService usuarioService;
 	
 	//Solicitar um token ao realizar acesso
-	@PostMapping(value="/api/geraToken")
+	@PostMapping(value="/api/auth")
     public ResponseEntity<?> gerarToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
         final Authentication autenticacao = authenticationManager.authenticate(
         		new UsernamePasswordAuthenticationToken(
-        				authenticationRequest.getPassword(), 
+        				authenticationRequest.getUsername(), 
         				authenticationRequest.getPassword(), null
         		));
         
@@ -66,11 +65,11 @@ public class AuthenticationRestController {
     public ResponseEntity<?> refreshAndRegerarToken(HttpServletRequest request) {
 	    String token = request.getHeader("Authorization");
 	    String username = jwtTokenUtil.getUsernameToken(token);
-	    final Usuario user = usuarioService.findByUsername(username);
+	    final Usuario usuario = usuarioService.findByUsername(username);
 	    
-	    if (jwtTokenUtil.canTokenBeRefreshed(token)) {
+	    if (jwtTokenUtil.atualizarToken(token)) {
 	        String refreshedToken = jwtTokenUtil.refreshToken(token);
-	        return ResponseEntity.ok(new CurrentUser(refreshedToken, user));
+	        return ResponseEntity.ok(new CurrentUser(refreshedToken, usuario));
 	    } else {
 	        return ResponseEntity.badRequest().body(null);
 	    }

@@ -4,13 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 
 @Entity
 @Table(name="usuario")
@@ -36,6 +34,7 @@ public class Usuario {
 	
 	@NotBlank(message = "Senha obrigatoria!")
 	@Size(min = 6)
+	@Column(name = "SENHA", nullable = false)
 	private String senha;
 //	private ProfileEnum profile;
 

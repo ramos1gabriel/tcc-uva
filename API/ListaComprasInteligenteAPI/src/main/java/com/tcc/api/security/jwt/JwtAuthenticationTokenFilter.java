@@ -28,19 +28,18 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) 
 			throws ServletException, IOException {
 		
-		String authToken = request.getHeader("Authorization");
-		String username = jwtTokenUtil.getUsernameFromToken(authToken);
+		String tokenAutorizado = request.getHeader("Authorization");
+		String username = jwtTokenUtil.getUsernameToken(tokenAutorizado);
 
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+			UserDetails userDetails = this.userDetailsService.loadUserByUsername(username); //login
 			
-			if (jwtTokenUtil.validateToken(authToken, userDetails)) {
-				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-						userDetails, null, userDetails.getAuthorities());
+			if (jwtTokenUtil.validateToken(tokenAutorizado, userDetails)) {
+				UsernamePasswordAuthenticationToken autenticacao = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities()); //pega permissoes
 				
-				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+				autenticacao.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				logger.info("Usuario autenticado " + username + ", definindo contexto de seguranca");
-				SecurityContextHolder.getContext().setAuthentication(authentication);
+				SecurityContextHolder.getContext().setAuthentication(autenticacao);
 			}
 		}
 		
