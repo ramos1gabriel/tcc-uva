@@ -29,7 +29,7 @@ import com.tcc.api.service.UsuarioService;
 @RestController
 @RequestMapping("/api/usuario")
 @CrossOrigin(origins="*")
-public class UserController {
+public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
@@ -46,6 +46,7 @@ public class UserController {
 		
 		try {
 			validaUsuarioCriado(usuario, result);
+			validaDuplicidade(usuario, result);
 			
 			if(result.hasErrors()) {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
@@ -53,6 +54,7 @@ public class UserController {
 			}
 			
 			usuario.setSenha(passwordEncoder.encode(usuario.getSenha())); //CRIPTOGRAFAR SENHA
+			usuario.setUsername(usuario.getUsername().toLowerCase());
 			
 			//SALVAR DADOS
 			Usuario userPersisted = (Usuario) usuarioService.createOrUpdate(usuario);
@@ -71,6 +73,15 @@ public class UserController {
 	private void validaUsuarioCriado(Usuario usuario, BindingResult result) {
 		if(usuario.getUsername() == null) {
 			result.addError(new ObjectError("Usuario", "Nome de usuario nao informado!"));
+		}
+	}
+	
+	private void validaDuplicidade(Usuario usuario, BindingResult result) {
+		
+		Usuario usuarioPesquisa = usuarioService.findByUsername(usuario.getUsername());
+		
+		if(usuarioPesquisa != null) {
+			result.addError(new ObjectError("Usuario", "Nome de usuario ja cadastrado!"));
 		}
 	}
 	
