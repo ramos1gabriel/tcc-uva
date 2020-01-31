@@ -10,6 +10,12 @@
  - paragrafos que não tem nada haver com o tema (resquícios do documento original)
  - Referência Bibliográfica (????) (Procurar sites/livros)
  
+ **DIAGRAMAS**
+ - rever diagramas de sequencia (ingredientes) (ninguem olha pra esses..)
+ 
+ **SIMPLIFICAR PROJETO**
+ - remover QUALQUER referencia ao ADMINISTRADOR(?)
+ 
  **BACK-END - Springboot**
  - Começar desenvolvimento..
  
