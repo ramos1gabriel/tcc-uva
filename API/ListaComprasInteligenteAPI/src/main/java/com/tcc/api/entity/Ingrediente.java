@@ -2,9 +2,12 @@ package com.tcc.api.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -21,11 +24,9 @@ public class Ingrediente {
 	@Column(name = "NOME", length = 50, nullable = false)
 	private String nome;
 	
-//	@JsonIgnore
-//    @OneToMany(mappedBy = "receita_ingrediente", fetch=FetchType.LAZY)
-//    //@Cascade({org.hibernate.annotations.CascadeType.ALL, org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
-//    //@OrderBy(clause = "AS_OFF_DATE")
-//    private List<ReceitaIngrediente> receitasIngredientes;
+	@ManyToOne
+    @JoinColumn(name = "RECEITA_INGREDIENTE_ID", foreignKey = @ForeignKey(name = "FK_RECEITA_INGREDIENTE"), nullable = false)
+    private ReceitaIngrediente receitaIngrediente;
 
 	public Long getId() {
 		return id;
@@ -43,11 +44,11 @@ public class Ingrediente {
 		this.nome = nome;
 	}
 	
-//	public List<ReceitaIngrediente> getReceitasIngredientes() {
-//		return receitasIngredientes;
-//	}
-//	
-//	public void setReceitasIngredientes(List<ReceitaIngrediente> receitasIngredientes) {
-//		this.receitasIngredientes = receitasIngredientes;
-//	}
+	public ReceitaIngrediente getReceitaIngrediente() {
+		return receitaIngrediente;
+	}
+	
+	public void setReceitaIngrediente(ReceitaIngrediente receitaIngrediente) {
+		this.receitaIngrediente = receitaIngrediente;
+	}
 }
