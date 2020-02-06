@@ -40,3 +40,12 @@ public class APIApplication {
 	}
 }
 
+/**
+ORDEM CRIACAO SERVICO:
+
+- entity
+- repository
+- service
+- serviceImpl
+- controller
+*/
