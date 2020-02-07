@@ -4,16 +4,17 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import com.tcc.api.enums.CategoriaEnum;
 
 
 @Entity
@@ -32,9 +33,9 @@ public class Receita {
     @Column(name = "DESCRICAO", length = 100, nullable = true)
     private String descricao;
     
-    @ManyToOne
-    @JoinColumn(name = "CATEGORIA_ID", foreignKey = @ForeignKey(name = "FK_CATEGORIA"), nullable = false)
-    private Categoria categoria;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "CATEGORIA", length = 100, nullable = false)
+    private CategoriaEnum categoria;
     
     @OneToMany(mappedBy = "receita", fetch=FetchType.LAZY)
     private List<ReceitaIngrediente> receitaIngredientes;
@@ -45,7 +46,7 @@ public class Receita {
     
     public Receita() {}
     
-    public Receita(Long id, String nome, String descricao, Categoria categoria) {
+    public Receita(Long id, String nome, String descricao, CategoriaEnum categoria) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -77,14 +78,6 @@ public class Receita {
 		this.descricao = descricao;
 	}
 	
-	public Categoria getCategoria() {
-		return categoria;
-	}
-	
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-	
 	public List<ReceitaIngrediente> getReceitaIngredientes() {
 		return receitaIngredientes;
 	}
@@ -99,6 +92,14 @@ public class Receita {
 	
 	public void setModopreparo(List<ModoPreparo> modopreparo) {
 		this.modopreparo = modopreparo;
+	}
+	
+	public CategoriaEnum getCategoria() {
+		return categoria;
+	}
+	
+	public void setCategoria(CategoriaEnum categoria) {
+		this.categoria = categoria;
 	}
 	
 //	@Override

@@ -5,20 +5,22 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.api.entity.Ingrediente;
-import com.tcc.api.entity.Ticket;
 import com.tcc.api.entity.Usuario;
-import com.tcc.api.enums.StatusEnum;
 import com.tcc.api.response.Response;
 import com.tcc.api.security.jwt.JwtTokenUtil;
 import com.tcc.api.service.IngredienteService;
@@ -39,7 +41,7 @@ public class IngredienteController {
 	private UsuarioService usuarioService;
 	
 	@PostMapping()
-	@PreAuthorize("hasAnyRole('CUSTOMER')")
+//	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<Ingrediente>> create(HttpServletRequest request, @RequestBody Ingrediente ingrediente,
 			BindingResult result) {
 		
@@ -55,10 +57,10 @@ public class IngredienteController {
 			}
 			
 			//CREATE
-			ticket.setStatus(StatusEnum.getStatus("Novo"));
-			ticket.setUser(userFromRequest(request));
-			ticket.setDate(new java.util.Date());
-			ticket.setNumber(generateNumber());
+//			ticket.setStatus(StatusEnum.getStatus("Novo"));
+//			ticket.setUser(userFromRequest(request));
+//			ticket.setDate(new java.util.Date());
+//			ticket.setNumber(generateNumber());
 			
 			
 			Ingrediente ingredientePersitido = (Ingrediente) ingredienteService.createOrUpdate(ingrediente);
@@ -99,63 +101,59 @@ public class IngredienteController {
 		return random.nextInt(9999);
 	}
 	
-//	@PutMapping()
+	@PutMapping()
 //	@PreAuthorize("hasAnyRole('CUSTOMER')")
-//	public ResponseEntity<Response<Ticket>> update(HttpServletRequest request, @RequestBody Ticket ticket,
-//			BindingResult result) {
-//		
-//		Response<Ticket> response = new Response<Ticket>();
-//		
-//		try {
-//			validateUpdateTicket(ticket, result);
-//			if(result.hasErrors()) {
-//				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
-//				return ResponseEntity.badRequest().body(response);
-//			}
-//			
-//			//UPDATE
-//			Ticket ticketCurrent = ticketService.findById(ticket.getId());
-//			ticket.setStatus(ticketCurrent.getStatus());
-//			ticket.setUser(ticketCurrent.getUser());
-//			ticket.setDate(ticket.getDate());
-//			ticket.setNumber(ticketCurrent.getNumber());
-//			if(ticketCurrent.getAssignedUser() != null) {
-//				ticket.setAssignedUser(ticketCurrent.getAssignedUser());
-//			}
-//			Ticket  ticketPersisted = (Ticket) ticketService.createOrUpdate(ticket);
-//			response.setData(ticketPersisted);
-//			
-//		} catch (Exception e) {
-//			response.getErrors().add(e.getMessage());
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//		
-//		return ResponseEntity.ok(response);
-//	}
-//	
-//	private void validateUpdateTicket(Ticket ticket, BindingResult result) {
-//		if(ticket.getId() == null) {
-//			result.addError(new ObjectError("Ticket", "ID nao informado!"));
-//			return;
-//		}
-//		if(ticket.getTitle() == null) {
-//			result.addError(new ObjectError("Ticket", "Ticket nao informado!"));
-//			return;
-//		}
-//	}
-//	
-//	@GetMapping(value = "{id}")
+	public ResponseEntity<Response<Ingrediente>> update(HttpServletRequest request, @RequestBody Ingrediente ingrediente,
+			BindingResult result) {
+		
+		Response<Ingrediente> response = new Response<Ingrediente>();
+		
+		try {
+			validaIngredienteUpdate(ingrediente, result);
+			if(result.hasErrors()) {
+				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
+				return ResponseEntity.badRequest().body(response);
+			}
+			
+			//UPDATE
+			Ingrediente ingredienteAtual = ingredienteService.findById(ingrediente.getId());
+			ingrediente.setNome(ingredienteAtual.getNome());
+			
+			Ingrediente  ticketPersistido = (Ingrediente) ingredienteService.createOrUpdate(ingrediente);
+			response.setData(ticketPersistido);
+			
+		} catch (Exception e) {
+			response.getErrors().add(e.getMessage());
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	private void validaIngredienteUpdate(Ingrediente ingrediente, BindingResult result) {
+		if(ingrediente.getId() == null) {
+			result.addError(new ObjectError("Ingrediente", "ID nao informado!"));
+			return;
+		}
+		
+		if(ingrediente.getNome() == null) {
+			result.addError(new ObjectError("Ingrediente", "Ingrediente nao informado!"));
+			return;
+		}
+	}
+	
+	@GetMapping(value = "{id}")
 //	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
-//	public ResponseEntity<Response<Ticket>> findById(@PathVariable("id") String id) {
-//		
-//		Response<Ticket> response = new Response<Ticket>();
-//		
-//		Ticket ticket = ticketService.findById(id);
-//		if(ticket == null) {
-//			response.getErrors().add("Registro nao encontrado id: "+id);
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//		
+	public ResponseEntity<Response<Ingrediente>> findById(@PathVariable("id") Long id) {
+		
+		Response<Ingrediente> response = new Response<Ingrediente>();
+		
+		Ingrediente ingrediente = ingredienteService.findById(id);
+		if(ingrediente == null) {
+			response.getErrors().add("Registro nao encontrado id: "+id);
+			return ResponseEntity.badRequest().body(response);
+		}
+		
 //		List<ChangeStatus> changes = new ArrayList<ChangeStatus>();
 //		Iterable<ChangeStatus> changesCurrent = ticketService.listChangeStatus(ticket.getId());
 //		for (Iterator<ChangeStatus> iterator = changesCurrent.iterator(); iterator.hasNext();) {
@@ -165,36 +163,36 @@ public class IngredienteController {
 //		}
 //		
 //		ticket.setChanges(changes);
-//		response.setData(ticket);
-//		
-//		return ResponseEntity.ok(response);
-//	}
-//	
-//	@DeleteMapping(value = "{id}")
+		response.setData(ingrediente);
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	@DeleteMapping(value = "{id}")
 //	@PreAuthorize("hasAnyRole('CUSTOMER')")
-//	public ResponseEntity<Response<String>> delete(@PathVariable("id") String id) {
-//		
-//		Response<String> response = new Response<String>();
-//		
-//		Ticket ticket = ticketService.findById(id);
-//		
-//		if(ticket == null) {
-//			response.getErrors().add("Registro nao encontrado id: "+id);
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//		
-//		ticketService.delete(id);
-//		
-//		return ResponseEntity.ok(new Response<String>());
-//	}
-//	
-//	@GetMapping(value = "{page}/{count}")
+	public ResponseEntity<Response<String>> delete(@PathVariable("id") Long id) {
+		
+		Response<String> response = new Response<String>();
+		
+		Ingrediente ingrediente = ingredienteService.findById(id);
+		
+		if(ingrediente == null) {
+			response.getErrors().add("Registro nao encontrado id: "+id);
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		ingredienteService.delete(id);
+		
+		return ResponseEntity.ok(new Response<String>());
+	}
+	
+	@GetMapping(value = "{page}/{count}")
 //	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
-//	public ResponseEntity<Response<Page<Ticket>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
-//
-//		Response<Page<Ticket>> response = new Response<Page<Ticket>>();
-//		Page<Ticket> tickets = null;
-//		
+	public ResponseEntity<Response<Page<Ingrediente>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
+
+		Response<Page<Ingrediente>> response = new Response<Page<Ingrediente>>();
+		Page<Ingrediente> ingredientes = null;
+		
 //		Usuario userRequest = userFromRequest(request);
 //		if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECHNICIAN)) {
 //			tickets = ticketService.listTicket(page, count);
@@ -202,13 +200,38 @@ public class IngredienteController {
 //		if(userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTOMER)) {
 //			tickets = ticketService.findByCurrentUser(page, count, userRequest.getId());
 //		}
-//		
-//		response.setData(tickets);
-//		
-//		return ResponseEntity.ok(response);
-//	}
-//	
-//	
+		
+		ingredientes = ingredienteService.findAll(page, count);
+		
+		if(ingredientes.isEmpty()) {
+			response.getErrors().add("Nenhum registro encontrado");
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		response.setData(ingredientes);
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	
+	@GetMapping(value = "{page}/{count}/{nome}")
+	public ResponseEntity<Response<Page<Ingrediente>>> findByNome(HttpServletRequest request, @PathVariable("page") int page, 
+			@PathVariable("count") int count, @PathVariable("nome") String nome) {
+		
+		Response<Page<Ingrediente>> response = new Response<Page<Ingrediente>>();
+		Page<Ingrediente> ingredientes = null;
+		
+		ingredientes = ingredienteService.findByNomeIgnoreCaseContainingOrderByDesc(page, count, nome);
+		
+		if(ingredientes.isEmpty()) {
+			response.getErrors().add("Nenhum registro encontrado com o nome: "+nome);
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		response.setData(ingredientes);
+		return ResponseEntity.ok(response);
+	}
+	
 //	@GetMapping(value = "{page}/{count}/{number}/{title}/{status}/{priority}/{assigned}")
 //	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
 //	public ResponseEntity<Response<Page<Ticket>>> findByParams(HttpServletRequest request, 

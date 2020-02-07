@@ -35,8 +35,8 @@ public class ReceitaIngrediente {
     @JoinColumn(name = "RECEITA_ID", foreignKey = @ForeignKey(name = "FK_REC_ING_RECEITA"), nullable = false)
     private Receita receita;
     
-    @OneToMany(mappedBy = "receitaIngrediente", fetch=FetchType.LAZY)
-    private List<Ingrediente> ingredientes;
+//    @OneToMany(mappedBy = "receitaIngrediente", fetch=FetchType.LAZY)
+//    private List<Ingrediente> ingredientes;
     
     @Column(name = "QTD", nullable = false)
     private Double quantidade;
@@ -85,11 +85,11 @@ public class ReceitaIngrediente {
 		this.unidadeMedida = unidadeMedida;
 	}
 	
-	public List<Ingrediente> getIngredientes() {
-		return ingredientes;
-	}
-	
-	public void setIngredientes(List<Ingrediente> ingredientes) {
-		this.ingredientes = ingredientes;
-	}
+//	public List<Ingrediente> getIngredientes() {
+//		return ingredientes;
+//	}
+//	
+//	public void setIngredientes(List<Ingrediente> ingredientes) {
+//		this.ingredientes = ingredientes;
+//	}
 }

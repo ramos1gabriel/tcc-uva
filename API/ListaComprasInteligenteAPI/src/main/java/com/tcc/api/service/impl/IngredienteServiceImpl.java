@@ -27,12 +27,12 @@ public class IngredienteServiceImpl implements IngredienteService {
 	}
 
 	@Override
-	public Ingrediente findById(String id) {
+	public Ingrediente findById(Long id) {
 		return this.ingredienteRepository.findById(id).orElse(null); //findOne nao funciona da mesma forma q antes no SPRING 2
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(Long id) {
 		this.ingredienteRepository.deleteById(id); //delete nao funciona da mesma forma q antes no SPRING 2
 	}
 
@@ -42,4 +42,10 @@ public class IngredienteServiceImpl implements IngredienteService {
 		return this.ingredienteRepository.findAll(pages);
 	}
 	
+	@Override
+	public Page<Ingrediente> findByNomeIgnoreCaseContainingOrderByDesc(int page, int count, String nome) {
+
+		Pageable pages = PageRequest.of(page, count);
+		return this.ingredienteRepository.findByNomeIgnoreCaseContainingOrderByNomeDesc(nome, pages);
+	}
 }

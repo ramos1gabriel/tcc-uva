@@ -1,6 +1,7 @@
 package com.tcc.api.service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.tcc.api.entity.Ingrediente;
 
@@ -10,9 +11,11 @@ public interface IngredienteService {
 	
 	Ingrediente createOrUpdate(Ingrediente ingrediente);
 	
-	Ingrediente findById(String id);
+	Ingrediente findById(Long id);
 	
-	void delete(String id);
+	void delete(Long id);
 	
 	Page<Ingrediente> findAll(int page, int count);
+	
+	Page<Ingrediente> findByNomeIgnoreCaseContainingOrderByDesc(int page, int count, String nome);
 }
