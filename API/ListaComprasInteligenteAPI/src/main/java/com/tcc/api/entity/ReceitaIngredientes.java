@@ -1,27 +1,23 @@
 package com.tcc.api.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.tcc.api.enums.UnidadeMedidaEnum;
 
 
 @Entity
-@Table(name="receitaingrediente")
-public class ReceitaIngrediente {
+@Table(name="receita_ingredientes")
+public class ReceitaIngredientes {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +31,9 @@ public class ReceitaIngrediente {
     @JoinColumn(name = "RECEITA_ID", foreignKey = @ForeignKey(name = "FK_REC_ING_RECEITA"), nullable = false)
     private Receita receita;
     
-//    @OneToMany(mappedBy = "receitaIngrediente", fetch=FetchType.LAZY)
-//    private List<Ingrediente> ingredientes;
+    @ManyToOne
+    @JoinColumn(name = "INGREDIENTE_ID", foreignKey = @ForeignKey(name = "FK_REC_ING_INGREDIENTE"), nullable = false)
+    private Ingrediente ingrediente;
     
     @Column(name = "QTD", nullable = false)
     private Double quantidade;
@@ -85,11 +82,11 @@ public class ReceitaIngrediente {
 		this.unidadeMedida = unidadeMedida;
 	}
 	
-//	public List<Ingrediente> getIngredientes() {
-//		return ingredientes;
-//	}
-//	
-//	public void setIngredientes(List<Ingrediente> ingredientes) {
-//		this.ingredientes = ingredientes;
-//	}
+	public Ingrediente getIngrediente() {
+		return ingrediente;
+	}
+	
+	public void setIngrediente(Ingrediente ingrediente) {
+		this.ingrediente = ingrediente;
+	}
 }

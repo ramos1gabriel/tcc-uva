@@ -38,7 +38,7 @@ public class Receita {
     private CategoriaEnum categoria;
     
     @OneToMany(mappedBy = "receita", fetch=FetchType.LAZY)
-    private List<ReceitaIngrediente> receitaIngredientes;
+    private List<ReceitaIngredientes> receitaIngredientes;
     
     //cascade = CascadeType.ALL
     @OneToMany(mappedBy = "receita", fetch=FetchType.LAZY)
@@ -78,11 +78,11 @@ public class Receita {
 		this.descricao = descricao;
 	}
 	
-	public List<ReceitaIngrediente> getReceitaIngredientes() {
+	public List<ReceitaIngredientes> getReceitaIngredientes() {
 		return receitaIngredientes;
 	}
 	
-	public void setReceitaIngredientes(List<ReceitaIngrediente> receitaIngredientes) {
+	public void setReceitaIngredientes(List<ReceitaIngredientes> receitaIngredientes) {
 		this.receitaIngredientes = receitaIngredientes;
 	}
 	
