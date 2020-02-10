@@ -13,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tcc.api.enums.CategoriaEnum;
 
 
@@ -33,13 +35,16 @@ public class Receita {
     @Column(name = "DESCRICAO", length = 100, nullable = true)
     private String descricao;
     
+    @NotNull
     @Enumerated(value = EnumType.STRING)
     @Column(name = "CATEGORIA", length = 100, nullable = false)
     private CategoriaEnum categoria;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "receita", fetch=FetchType.LAZY)
     private List<ReceitaIngredientes> receitaIngredientes;
     
+    @JsonIgnore
     //cascade = CascadeType.ALL
     @OneToMany(mappedBy = "receita", fetch=FetchType.LAZY)
     private List<ModoPreparo> modopreparo;

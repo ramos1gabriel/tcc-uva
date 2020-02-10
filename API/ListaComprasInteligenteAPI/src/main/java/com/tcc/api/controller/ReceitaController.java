@@ -19,20 +19,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tcc.api.entity.Ingrediente;
+import com.tcc.api.entity.Receita;
 import com.tcc.api.entity.Usuario;
 import com.tcc.api.response.Response;
 import com.tcc.api.security.jwt.JwtTokenUtil;
-import com.tcc.api.service.IngredienteService;
+import com.tcc.api.service.ReceitaService;
 import com.tcc.api.service.UsuarioService;
 
 @RestController
-@RequestMapping(value="/api/ingrediente")
+@RequestMapping(value="/api/receita")
 @CrossOrigin(origins="*")
 public class ReceitaController {
 	
 	@Autowired
-	private IngredienteService ingredienteService;
+	private ReceitaService receitaService;
 	
 	@Autowired
 	protected JwtTokenUtil jwtTokenUtil;
@@ -42,14 +42,14 @@ public class ReceitaController {
 	
 	@PostMapping()
 //	@PreAuthorize("hasAnyRole('CUSTOMER')")
-	public ResponseEntity<Response<Ingrediente>> create(HttpServletRequest request, @RequestBody Ingrediente ingrediente,
+	public ResponseEntity<Response<Receita>> create(HttpServletRequest request, @RequestBody Receita receita,
 			BindingResult result) {
 		
-		Response<Ingrediente> response = new Response<Ingrediente>();
+		Response<Receita> response = new Response<Receita>();
 		
 		try {
-			validaIngredienteCriado(ingrediente, result);
-			validaDuplicidade(ingrediente, result);
+			validaReceitaCriada(receita, result);
+			validaDuplicidade(receita, result);
 			
 			if(result.hasErrors()) {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
@@ -57,14 +57,11 @@ public class ReceitaController {
 			}
 			
 			//CREATE
-//			ticket.setStatus(StatusEnum.getStatus("Novo"));
-//			ticket.setUser(userFromRequest(request));
-//			ticket.setDate(new java.util.Date());
-//			ticket.setNumber(generateNumber());
+			//receita.setCategoria(CategoriaEnum);
 			
 			
-			Ingrediente ingredientePersitido = (Ingrediente) ingredienteService.createOrUpdate(ingrediente);
-			response.setData(ingredientePersitido);
+			Receita receitaPersitido = (Receita) receitaService.createOrUpdate(receita);
+			response.setData(receitaPersitido);
 		
 		} catch (Exception e) {
 			response.getErrors().add(e.getMessage());
@@ -74,19 +71,23 @@ public class ReceitaController {
 		return ResponseEntity.ok(response);
 	}
 
-	private void validaIngredienteCriado(Ingrediente ingrediente, BindingResult result) {
-		if(ingrediente.getNome() == null) {
-			result.addError(new ObjectError("Ticket", "Nome do ingrediente nao informado!"));
+	private void validaReceitaCriada(Receita receita, BindingResult result) {
+		if(receita.getNome() == null) {
+			result.addError(new ObjectError("Receita", "Nome nao informado!"));
+			return;
+		}
+		if(receita.getCategoria() == null) {
+			result.addError(new ObjectError("Receita", "Categoria nao informada!"));
 			return;
 		}
 	}
 	
-	private void validaDuplicidade(Ingrediente ingrediente, BindingResult result) {
+	private void validaDuplicidade(Receita receita, BindingResult result) {
 		
-		Ingrediente ingredientePesquisa = ingredienteService.findByNome(ingrediente.getNome());
+		Receita receitaPesquisa = receitaService.findByNome(receita.getNome());
 		
-		if(ingredientePesquisa != null) {
-			result.addError(new ObjectError("Ingrediente", "Nome de ingrediente ja cadastrado!"));
+		if(receitaPesquisa != null) {
+			result.addError(new ObjectError("Ingrediente", "Receita ja cadastrada!"));
 		}
 	}
 	
@@ -103,24 +104,24 @@ public class ReceitaController {
 	
 	@PutMapping()
 //	@PreAuthorize("hasAnyRole('CUSTOMER')")
-	public ResponseEntity<Response<Ingrediente>> update(HttpServletRequest request, @RequestBody Ingrediente ingrediente,
+	public ResponseEntity<Response<Receita>> update(HttpServletRequest request, @RequestBody Receita receita,
 			BindingResult result) {
 		
-		Response<Ingrediente> response = new Response<Ingrediente>();
+		Response<Receita> response = new Response<Receita>();
 		
 		try {
-			validaIngredienteUpdate(ingrediente, result);
+			validaReceitaUpdate(receita, result);
 			if(result.hasErrors()) {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 				return ResponseEntity.badRequest().body(response);
 			}
 			
 			//UPDATE
-			Ingrediente ingredienteAtual = ingredienteService.findById(ingrediente.getId());
-			ingrediente.setNome(ingredienteAtual.getNome());
+			Receita receitaAtual = receitaService.findById(receita.getId());
+			receita.setNome(receitaAtual.getNome());
 			
-			Ingrediente  ticketPersistido = (Ingrediente) ingredienteService.createOrUpdate(ingrediente);
-			response.setData(ticketPersistido);
+			Receita  receitaPersistido = (Receita) receitaService.createOrUpdate(receita);
+			response.setData(receitaPersistido);
 			
 		} catch (Exception e) {
 			response.getErrors().add(e.getMessage());
@@ -130,26 +131,31 @@ public class ReceitaController {
 		return ResponseEntity.ok(response);
 	}
 	
-	private void validaIngredienteUpdate(Ingrediente ingrediente, BindingResult result) {
-		if(ingrediente.getId() == null) {
-			result.addError(new ObjectError("Ingrediente", "ID nao informado!"));
+	private void validaReceitaUpdate(Receita receita, BindingResult result) {
+		if(receita.getId() == null) {
+			result.addError(new ObjectError("Receita", "ID nao informado!"));
 			return;
 		}
 		
-		if(ingrediente.getNome() == null) {
-			result.addError(new ObjectError("Ingrediente", "Ingrediente nao informado!"));
+		if(receita.getNome() == null) {
+			result.addError(new ObjectError("Receita", "Nome nao informado!"));
+			return;
+		}
+		
+		if(receita.getCategoria() == null) {
+			result.addError(new ObjectError("Receita", "Categoria nao informada!"));
 			return;
 		}
 	}
 	
 	@GetMapping(value = "{id}")
 //	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
-	public ResponseEntity<Response<Ingrediente>> findById(@PathVariable("id") Long id) {
+	public ResponseEntity<Response<Receita>> findById(@PathVariable("id") Long id) {
 		
-		Response<Ingrediente> response = new Response<Ingrediente>();
+		Response<Receita> response = new Response<Receita>();
 		
-		Ingrediente ingrediente = ingredienteService.findById(id);
-		if(ingrediente == null) {
+		Receita receita = receitaService.findById(id);
+		if(receita == null) {
 			response.getErrors().add("Registro nao encontrado id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
@@ -163,7 +169,7 @@ public class ReceitaController {
 //		}
 //		
 //		ticket.setChanges(changes);
-		response.setData(ingrediente);
+		response.setData(receita);
 		
 		return ResponseEntity.ok(response);
 	}
@@ -174,24 +180,24 @@ public class ReceitaController {
 		
 		Response<String> response = new Response<String>();
 		
-		Ingrediente ingrediente = ingredienteService.findById(id);
+		Receita receita = receitaService.findById(id);
 		
-		if(ingrediente == null) {
+		if(receita == null) {
 			response.getErrors().add("Registro nao encontrado id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
 		
-		ingredienteService.delete(id);
+		receitaService.delete(id);
 		
 		return ResponseEntity.ok(new Response<String>());
 	}
 	
 	@GetMapping(value = "{page}/{count}")
 //	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
-	public ResponseEntity<Response<Page<Ingrediente>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
+	public ResponseEntity<Response<Page<Receita>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
 
-		Response<Page<Ingrediente>> response = new Response<Page<Ingrediente>>();
-		Page<Ingrediente> ingredientes = null;
+		Response<Page<Receita>> response = new Response<Page<Receita>>();
+		Page<Receita> receitas = null;
 		
 //		Usuario userRequest = userFromRequest(request);
 //		if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECHNICIAN)) {
@@ -201,173 +207,39 @@ public class ReceitaController {
 //			tickets = ticketService.findByCurrentUser(page, count, userRequest.getId());
 //		}
 		
-		ingredientes = ingredienteService.findAll(page, count);
+		receitas = receitaService.findAll(page, count);
 		
-		if(ingredientes.isEmpty()) {
+		if(receitas.isEmpty()) {
 			response.getErrors().add("Nenhum registro encontrado");
 			return ResponseEntity.badRequest().body(response);
 		}
 		
-		response.setData(ingredientes);
+		response.setData(receitas);
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	
-	@GetMapping(value = "{page}/{count}/{nome}")
-	public ResponseEntity<Response<Page<Ingrediente>>> findByNome(HttpServletRequest request, @PathVariable("page") int page, 
-			@PathVariable("count") int count, @PathVariable("nome") String nome) {
-		
-		Response<Page<Ingrediente>> response = new Response<Page<Ingrediente>>();
-		Page<Ingrediente> ingredientes = null;
-		
-		ingredientes = ingredienteService.findByNomeIgnoreCaseContainingOrderByDesc(page, count, nome);
-		
-		if(ingredientes.isEmpty()) {
-			response.getErrors().add("Nenhum registro encontrado com o nome: "+nome);
-			return ResponseEntity.badRequest().body(response);
-		}
-		
-		response.setData(ingredientes);
-		return ResponseEntity.ok(response);
-	}
-	
-//	@GetMapping(value = "{page}/{count}/{number}/{title}/{status}/{priority}/{assigned}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
-//	public ResponseEntity<Response<Page<Ticket>>> findByParams(HttpServletRequest request, 
-//			@PathVariable("page") int page, 
-//			@PathVariable("count") int count, 
-//			@PathVariable("number") Integer number,
-//			@PathVariable("title") String title,
-//			@PathVariable("status") String status,
-//			@PathVariable("priority") String priority,
-//			@PathVariable boolean assigned) {
+//	@GetMapping(value = "{page}/{count}/{nome}")
+//	public ResponseEntity<Response<Page<Receita>>> findByNome(HttpServletRequest request, @PathVariable("page") int page, 
+//			@PathVariable("count") int count, @PathVariable("nome") String nome) {
 //		
-//		//TRATAMENTO
-//		title = title.equals("uninformed") ? "" : title;
-//		status = status.equals("uninformed") ? "" : status;
-//		priority = priority.equals("uninformed") ? "" : priority;
+//		Response<Page<Receita>> response = new Response<Page<Receita>>();
+//		Page<Receita> receitas = null;
 //		
-//		Response<Page<Ticket>> response = new Response<Page<Ticket>>();
-//		Page<Ticket> tickets = null;
-//		if(number > 0) {
-//			tickets = ticketService.findByNumber(page, count, title, number);
-//		} else {
-//			Usuario userRequest = userFromRequest(request);
-//			if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECHNICIAN)) {
-//				if(assigned) {
-//					tickets = ticketService.findByParametersAndAssignedUser(page, count, title, status, priority, userRequest.getId());
-//				} else {
-//					tickets = ticketService.findByParameters(page, count, title, status, priority);
-//				}
-//			} else if(userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTOMER)) {
-//				tickets = ticketService.findByParametersAndCurrentUser(page, count, title, status, priority, userRequest.getId());
-//			}
-//		}
+//		receitas = receitaService.findByNomeIgnoreCaseContainingOrderByNomeDesc(page, count, nome);
 //		
-//		response.setData(tickets);
-//		return ResponseEntity.ok(response);
-//	}
-//	
-//	@PutMapping(value = "/{id}/{status}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
-//	public ResponseEntity<Response<Ticket>> changeStatus(
-//			@PathVariable("id") String id, 
-//			@PathVariable("status") String status, 
-//			HttpServletRequest request,
-//			@RequestBody Ticket ticket,
-//			BindingResult result) {
-//		
-//		Response<Ticket> response = new Response<Ticket>();
-//		
-//		try {
-//			validateChangeStatus(id, status, result);
-//			if(result.hasErrors()) {
-//				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
-//				return ResponseEntity.badRequest().body(response);
-//			}
-//			
-//			Ticket ticketCurrent = ticketService.findById(id);
-//			ticketCurrent.setStatus(StatusEnum.getStatus(status));
-//			if("Atribuido".equals(status)) {
-//				ticketCurrent.setAssignedUser(userFromRequest(request));
-//			}
-//			Ticket ticketPersisted = (Ticket) ticketService.createOrUpdate(ticketCurrent);
-//			ChangeStatus changeStatus = new ChangeStatus();
-//			changeStatus.setUserChange(userFromRequest(request));
-//			changeStatus.setDateChangeStatus(new java.util.Date());
-//			changeStatus.setStatus(StatusEnum.getStatus(status));
-//			changeStatus.setTicket(ticketPersisted);
-//			ticketService.createChangeStatus(changeStatus);
-//			response.setData(ticketPersisted);
-//			
-//		} catch (Exception e) {
-//			response.getErrors().add(e.getMessage());
+//		if(receitas.isEmpty()) {
+//			response.getErrors().add("Nenhum registro encontrado com o nome: "+nome);
 //			return ResponseEntity.badRequest().body(response);
 //		}
 //		
+//		response.setData(receitas);
 //		return ResponseEntity.ok(response);
 //	}
-//	
-//	private void validateChangeStatus(String id, String status, BindingResult result) {
-//		if(id == null || "".equals(id)) {
-//			result.addError(new ObjectError("Ticket", "ID nao informado!"));
-//			return;
-//		}
-//		if(status == null) {
-//			result.addError(new ObjectError("Ticket", "Status nao informado!"));
-//			return;
-//		}
-//	}
-//	
-//	@GetMapping(value = "/summary")
-//	public ResponseEntity<Response<Summary>> findSummary() {
-//		
-//		Response<Summary> response = new Response<Summary>();
-//		
-//		Summary summary = new Summary();
-//		
-//		int amountNew = 0;
-//		int amountResolved = 0;
-//		int amountApproved = 0;
-//		int amountDisapproved = 0;
-//		int amountAssigned = 0;
-//		int amountClosed = 0;
-//		
-//		Iterable<Ticket> tickets = ticketService.findAll();
-//		if(tickets != null) {
-//			for (Iterator<Ticket> iterator = tickets.iterator(); iterator.hasNext();) {
-//				Ticket ticket = (Ticket) iterator.next();
-//				if(ticket.getStatus().equals(StatusEnum.Novo)) {
-//					amountNew++;
-//				}
-//				if(ticket.getStatus().equals(StatusEnum.Resolvido)) {
-//					amountResolved++;
-//				}
-//				if(ticket.getStatus().equals(StatusEnum.Aprovado)) {
-//					amountApproved++;
-//				}
-//				
-//				if(ticket.getStatus().equals(StatusEnum.Reprovado)) {
-//					amountDisapproved++;
-//				}
-//				if(ticket.getStatus().equals(StatusEnum.Atribuido)) {
-//					amountAssigned++;
-//				}
-//				if(ticket.getStatus().equals(StatusEnum.Finalizado)) {
-//					amountClosed++;
-//				}
-//			}
-//		}
-//		
-//		summary.setAmountNew(amountNew);
-//		summary.setAmountResolved(amountResolved);
-//		summary.setAmountApproved(amountApproved);
-//		summary.setAmountDisapproved(amountDisapproved);
-//		summary.setAmountAssigned(amountAssigned);
-//		summary.setAmountClosed(amountClosed);
-//		response.setData(summary);
-//		
-//		return ResponseEntity.ok(response);
-//	}
+	
+	//ROLLBACK
+	public void deleteReceitaRollback(Long id) {
+		receitaService.delete(id);
+	}
 }
