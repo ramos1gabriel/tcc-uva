@@ -21,13 +21,13 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnYWJyaWVsIiwiY3JlYXRlZCI6MTU4MTAxODgzODY3OSwiZXhwIjoxNTgxNjIzNjM4fQ.ZvLBVLuJgYSHbx7o_EOeWWQzf8f1DEPrVrZ1n5IOxUrbCsv2PcOqTJ6yKzYd2NIOC57cjNvZ91BSdhWBtfWXJw",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODExMDE5OTY3ODEsImV4cCI6MTU4MTcwNjc5Nn0.jmfJCyfPaVRWs5OYdQq0XeqViX3ihqOXAE4Fg4PE8z2DtKhATYYcAfLrIIs-PZ-z-vKWD-_MuKUDFYp6Z0dt3w",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\" : \"Farinha de Trigo\"\n}",
+							"raw": "{\n\t\"nome\" : \"agua\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -280,8 +280,455 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "categoria",
-			"item": [],
+			"name": "receita",
+			"item": [
+				{
+					"name": "cadastroReceita",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODExMDE5OTY3ODEsImV4cCI6MTU4MTcwNjc5Nn0.jmfJCyfPaVRWs5OYdQq0XeqViX3ihqOXAE4Fg4PE8z2DtKhATYYcAfLrIIs-PZ-z-vKWD-_MuKUDFYp6Z0dt3w"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\" : \"Sopa de alho poro\",\n\t\"descricao\" : \"\",\n\t\"categoria\" : \"Sopas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/receita",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"receita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateReceita",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODExMDE5OTY3ODEsImV4cCI6MTU4MTcwNjc5Nn0.jmfJCyfPaVRWs5OYdQq0XeqViX3ihqOXAE4Fg4PE8z2DtKhATYYcAfLrIIs-PZ-z-vKWD-_MuKUDFYp6Z0dt3w"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : \"1\",\n\t\"nome\" : \"Bolo de Limão\",\n\t\"descricao\" : \"Bolo bonzão\",\n\t\"categoria\" : \"Sopas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/receita",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"receita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteReceita",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODExMDE5OTY3ODEsImV4cCI6MTU4MTcwNjc5Nn0.jmfJCyfPaVRWs5OYdQq0XeqViX3ihqOXAE4Fg4PE8z2DtKhATYYcAfLrIIs-PZ-z-vKWD-_MuKUDFYp6Z0dt3w"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/receita/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"receita",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById_Receita",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODE3MDA0NjkwNDUsImV4cCI6MTU4MjMwNTI2OX0.kxnS4AMx-Fx2N5wWZqJZao_HXI1awCDi0c0jlmmIuQW0uYz7En-mGynSryEUHHyKE1EmKAgT4i32JXH5Y5cnwg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/receita/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"receita",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll_Receita",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODE3MDA0NjkwNDUsImV4cCI6MTU4MjMwNTI2OX0.kxnS4AMx-Fx2N5wWZqJZao_HXI1awCDi0c0jlmmIuQW0uYz7En-mGynSryEUHHyKE1EmKAgT4i32JXH5Y5cnwg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/receita/0/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"receita",
+								"0",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "recIng",
+			"item": [
+				{
+					"name": "cadastroRecIng",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODE3MDUyNzI3NzgsImV4cCI6MTU4MjMxMDA3Mn0.H374c91wNuFP36NZ096AT-LFAR18Et_5ZzL4vCsZq6KB_TkvBb1-7OUAdLbZyRAEXjR_vJ8qeCXBfw-pnN5Pvw"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"observacao\" : \"fervida\",\n\t\"receita\" : {\n\t\t\"id\" : \"1\"\n\t},\n\t\"ingrediente\" : {\n\t\t\"id\" : \"3\"\n\t},\n\t\"quantidade\" : \"100\",\n\t\"unidadeMedida\" : \"ML\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/recIng",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"recIng"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateRecIng",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODE3MDUyNzI3NzgsImV4cCI6MTU4MjMxMDA3Mn0.H374c91wNuFP36NZ096AT-LFAR18Et_5ZzL4vCsZq6KB_TkvBb1-7OUAdLbZyRAEXjR_vJ8qeCXBfw-pnN5Pvw"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : \"1\",\n\t\"observacao\" : \"\",\n\t\"receita\" : {\n\t\t\"id\" : \"1\"\n\t},\n\t\"ingrediente\" : {\n\t\t\"id\" : \"2\"\n\t},\n\t\"quantidade\" : \"100\",\n\t\"unidadeMedida\" : \"KG\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/recIng",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"recIng"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRecIng",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODE3MDUyNzI3NzgsImV4cCI6MTU4MjMxMDA3Mn0.H374c91wNuFP36NZ096AT-LFAR18Et_5ZzL4vCsZq6KB_TkvBb1-7OUAdLbZyRAEXjR_vJ8qeCXBfw-pnN5Pvw"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : \"5\",\n\t\"nome\" : \"Farinha de Trigo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/recIng/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"recIng",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById_RecIng",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODE3MDA0NjkwNDUsImV4cCI6MTU4MjMwNTI2OX0.kxnS4AMx-Fx2N5wWZqJZao_HXI1awCDi0c0jlmmIuQW0uYz7En-mGynSryEUHHyKE1EmKAgT4i32JXH5Y5cnwg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/recIng/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"recIng",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll_RecIng",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODE3MDA0NjkwNDUsImV4cCI6MTU4MjMwNTI2OX0.kxnS4AMx-Fx2N5wWZqJZao_HXI1awCDi0c0jlmmIuQW0uYz7En-mGynSryEUHHyKE1EmKAgT4i32JXH5Y5cnwg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/recIng/0/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"recIng",
+								"0",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -298,7 +745,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"gabriel\",\n\t\"password\": \"123456\"\n}",
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -335,7 +782,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nome\" : \"LUIS CARLSO SOUSA\",\n\t\"email\" : \"lulu@gmail.com.br\",\n\t\"username\" : \"grs\",\n\t\"senha\" : \"123455\"\n}",
+					"raw": "{\n\t\"nome\" : \"nelio santos\",\n\t\"email\" : \"nelio.santos@gmail.com.br\",\n\t\"username\" : \"nelio\",\n\t\"senha\" : \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

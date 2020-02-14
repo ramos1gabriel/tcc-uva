@@ -24,8 +24,8 @@ public class ReceitaIngredientes {
 	@Column(name="ID")
 	private Long id;
 	
-	@Column(name = "DESCRICAO", length = 100, nullable = true)
-    private String descricao;
+	@Column(name = "OBSERVACAO", length = 100, nullable = true)
+    private String observacao;
     
     @ManyToOne
     @JoinColumn(name = "RECEITA_ID", foreignKey = @ForeignKey(name = "FK_REC_ING_RECEITA"), nullable = false)
@@ -50,12 +50,12 @@ public class ReceitaIngredientes {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getObservacao() {
+		return observacao;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	public Receita getReceita() {
