@@ -1,3 +1,4 @@
+<!--
 <div class="col-md-6" style="margin-left:  0%">
   <div class="box box-info">
     <div class="box-header with-border">
@@ -78,31 +79,116 @@
           </div>
         </div>
 
-        <!-- PERFIL 
-        <div [ngClass]="getFromGroupClass(profile.invalid, profile.dirty)">
-          <label for="inputProfile" class="col-sm-2 control-label">Perfil</label>
-          <div class="col-sm-10">
-            <select [(ngModel)]="user.profile" 
-                  class="form-control select2" 
-                  id="inputProfile" 
-                  name="profile" 
-                  #profile="ngModel" 
-                  style="width: 100%"
-                  required>
-                  <option>ROLE_ADMIN</option>
-                  <option>ROLE_CUSTOMER</option>
-                  <option>ROLE_TECHNICIAN</option>
-            </select>
-            <span class="help-block" *ngIf="profile.invalid && profile.dirty">Perfil é necessária</span>
-          </div>
-        </div>
-        -->
-
       </div>
       <div class="box-footer">
         <button type="button" [routerLink]="['/login']" class="btn btn-info">Voltar</button>
         <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Gravar</button>
       </div>
     </form>
+  </div>
+</div>
+-->
+
+<!-- LAYOUT ALTERNATIVO -->
+<div class="login-box">
+  <div class="login-logo">
+    <p class=""><b>Lista de Compras </b>Inteligente</p>
+  </div>
+
+  <div class="box box-info">
+    <div class="card-body">
+      <p></p>
+      <p class="login-box-msg">Criar sua conta para acessar o sistema</p>
+
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <span>{{ message.text }}</span>
+      </div>
+
+      <form #form="ngForm" (ngSubmit)="register()">
+
+        <div [ngClass]="getFromGroupClass(nome.invalid, nome.dirty)">
+
+          <div class="mb-3">
+            <input type="text" 
+            [(ngModel)]="user.nome" 
+            class="form-control" 
+            name="nome" 
+            id="inputNome" 
+            #nome="ngModel" 
+            placeholder="Nome"
+            required>
+
+            <span class="help-block" *ngIf="nome.invalid && nome.dirty">Nome é necessário</span>
+          </div>
+
+        </div>
+
+        <div [ngClass]="getFromGroupClass(email.invalid, email.dirty)">
+
+          <div class="mb-3">
+            <input type="email" 
+            [(ngModel)]="user.email" 
+            class="form-control" 
+            name="email" 
+            id="inputEmail" 
+            #email="ngModel" 
+            placeholder="Email"
+            email>
+
+            <span class="help-block" *ngIf="email.invalid && email.dirty">Email é inválido</span>
+          </div>
+
+        </div>
+
+        <div [ngClass]="getFromGroupClass(username.invalid, username.dirty)">
+
+          <div class="mb-3">
+            <input type="text" 
+            [(ngModel)]="user.username" 
+            class="form-control" 
+            name="username" 
+            id="inputUsername" 
+            #username="ngModel" 
+            placeholder="Nome de Usuário"
+            required>
+
+            <span class="help-block" *ngIf="username.invalid && username.dirty">Nome de Usuário é necessário</span>
+          </div>
+
+        </div>
+
+        <div [ngClass]="getFromGroupClass(senha.invalid, senha.dirty)">
+
+          <div class="mb-3">
+            <input type="password" 
+            [(ngModel)]="user.senha" 
+            class="form-control" 
+            name="senha" 
+            id="inputSenha" 
+            #senha="ngModel" 
+            placeholder="Senha"
+            required>
+          </div>
+
+          <span class="help-block" *ngIf="senha.invalid && senha.dirty">Senha é necessária</span>
+        </div>
+        
+        <div class="col-8"></div>
+        <div class="col-4">
+          <button type="submit" [disabled]="!form.valid" class="btn btn-info btn-block">Gravar</button>
+        </div>
+        
+      </form>
+
+      <div class="social-auth-links text-center mb-3">
+        <p></p>
+      </div>
+
+      <p class="mb-1"></p>
+      <p class="mb-0">
+        <a [routerLink]="['/login']"><h4>Faça login em vez disso</h4></a>
+      </p>
+
+    </div>
   </div>
 </div>
