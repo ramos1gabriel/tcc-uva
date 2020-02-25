@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       this.shared.showTemplate.emit(true);
       this.router.navigate(['/']);
 
-      //sessionStorage.setItem("currentUser", userAuthentication.toString()); //TESTE F5
+      sessionStorage.setItem("currentUser", userAuthentication.toString()); //TESTE F5
     }, err => {
       this.shared.token = null;
       this.shared.user = null;

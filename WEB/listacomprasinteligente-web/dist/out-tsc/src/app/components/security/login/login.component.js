@@ -21,7 +21,7 @@ var LoginComponent = /** @class */ (function () {
             //this.shared.user.profile = this.shared.user.profile.substring(5);
             _this.shared.showTemplate.emit(true);
             _this.router.navigate(['/']);
-            //sessionStorage.setItem("currentUser", userAuthentication.toString()); //TESTE F5
+            sessionStorage.setItem("currentUser", userAuthentication.toString()); //TESTE F5
         }, function (err) {
             _this.shared.token = null;
             _this.shared.user = null;

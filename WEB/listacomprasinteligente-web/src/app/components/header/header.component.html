@@ -2,8 +2,8 @@
 
     <!-- Logo -->
     <a [routerLink]="['/']" class="logo">
-      <span class="logo-mini"><b>Help</b></span>
-      <span class="logo-lg"><b>Help Desk</b></span>
+      <span class="logo-mini"><b>LCI</b></span>
+      <span class="logo-lg"><b>ListaCompras</b></span>
     </a>
 
     <nav class="navbar navbar-static-top">
@@ -13,8 +13,85 @@
 
       <!-- MENU -->
       <div class="navbar-custom-menu">
-        <p style="color:white">{{ shared.user.email }} - {{ shared.user.profile }} | 
-          <button class="btn btn-link" (click)="signOut();"><font style="color:white">Sair</font></button></p>
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown messages-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-envelope-o"></i>
+              <span class="label label-success">4</span>
+            </a>
+          </li>
+
+          <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">10</span>
+            </a>
+          </li>
+
+          <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-flag-o"></i>
+              <span class="label label-danger">9</span>
+            </a>
+          </li>
+
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="assets\img\cozinheira.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs">{{ shared.user.nome }}</span>
+            </a>
+
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="assets\img\cozinheira.jpg" class="img-circle" alt="User Image">
+
+                <p>
+                  Alexander Pierce - Web Developer
+                  <small>Member since Nov. 2012</small>
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+                <div class="row">
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Followers</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Sales</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                    <a href="#">Friends</a>
+                  </div>
+                </div>
+                <!-- /.row -->
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+
+        </ul>
+
+        <!--
+        <p style="color:white">{{ shared.user.nome }} | 
+        <button class="btn btn-link" (click)="signOut();"><font style="color:white">Sair</font></button></p>
+        -->
       </div>
 
     </nav>

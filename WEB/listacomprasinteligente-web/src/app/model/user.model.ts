@@ -8,7 +8,7 @@ export class User {
     ){}
 
     //TESTE F5
-    /*public toString(){
-        return this.id+","+this.email+","+this.password+","+this.profile;
-    }*/
+    /**/public toString(){
+        return this.id+","+this.username+","+this.senha;
+    }
 }

@@ -6,7 +6,7 @@ export class currentUser {
 
     
     //TESTE F5
-    /*public toString(){
+    /**/public toString(){
         return this.user.toString()+"|"+this.token;
-    }*/
+    }
 }

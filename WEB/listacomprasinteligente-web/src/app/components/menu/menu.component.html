@@ -1,10 +1,22 @@
 <aside class="main-sidebar">
     <section class="sidebar">
-      <ul class="sidebar-menu" data-widget="tree">
 
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+      <div class="pull-left image">
+        <img src="assets/img/cozinheira.jpg" class="img-circle" alt="User Image">
+      </div>
+      <div class="pull-left info">
+        <p>{{ shared.user.nome }}</p>
+        <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i> Online</a>
+      </div>
+    </div>
+
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-edit"></i><span>Ingredientes</span>
+            <i class="fa fa-apple"></i><span>Ingredientes</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -14,42 +26,55 @@
             <li><a [routerLink]="['/user-new']"><i class="fa fa-circle-o"></i>Novo Ingrediente</a></li>
           </ul>
         </li>
-        
-        <li class="treeview" *ngIf="shared.user.profile == 'ADMIN'">
-          <a href="#">
-            <i class="fa fa-edit"></i><span>Usuário</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a [routerLink]="['/user-list']"><i class="fa fa-circle-o"></i>Lista</a></li>
-            <li><a [routerLink]="['/user-new']"><i class="fa fa-circle-o"></i>Novo Usuário</a></li>
-          </ul>
-        </li>
 
-        <li class="treeview" *ngIf="shared.user.profile != 'ADMIN'">
+        <li class="treeview">
             <a href="#">
-              <i class="fa fa-edit"></i><span>Ticket</span>
+              <i class="fa fa-book"></i><span>Receitas</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
               <li><a [routerLink]="['/ticket-list']"><i class="fa fa-circle-o"></i>Lista</a></li>
-              <li *ngIf="shared.user.profile == 'CUSTOMER'"><a [routerLink]="['/ticket-new']"><i class="fa fa-circle-o"></i>Novo Ticket</a></li>
+              <li><a [routerLink]="['/ticket-new']"><i class="fa fa-circle-o"></i>Novo Ticket</a></li>
+            </ul>
+          </li>
+
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-pencil-square-o "></i><span>Cardápios</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a [routerLink]="['/ticket-list']"><i class="fa fa-circle-o"></i>Lista</a></li>
+              <li><a [routerLink]="['/ticket-new']"><i class="fa fa-circle-o"></i>Novo Ticket</a></li>
             </ul>
           </li>
 
           <li class="treeview">
               <a href="#">
-                <i class="fa fa-edit"></i><span>Resumo</span>
+                <i class="fa fa-shopping-basket"></i><span>Lista de Compras</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
                 <li><a [routerLink]="['/summary']"><i class="fa fa-circle-o"></i>Ver</a></li>
+              </ul>
+            </li>
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-edit"></i><span>USAR COMO EXEMPLO</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a [routerLink]="['/user-list']"><i class="fa fa-circle-o"></i>Lista</a></li>
+                <li><a [routerLink]="['/user-new']"><i class="fa fa-circle-o"></i>Novo Usuário</a></li>
               </ul>
             </li>
 
