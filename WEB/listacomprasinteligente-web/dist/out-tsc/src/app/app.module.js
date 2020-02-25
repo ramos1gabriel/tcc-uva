@@ -23,6 +23,7 @@ import { TicketService } from './services/ticket.service';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { IngredienteNewComponent } from './components/ingrediente-new/ingrediente-new.component';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -40,7 +41,8 @@ var AppModule = /** @class */ (function () {
                 TicketNewComponent,
                 TicketListComponent,
                 TicketDetailComponent,
-                SummaryComponent
+                SummaryComponent,
+                IngredienteNewComponent
             ],
             imports: [
                 BrowserModule,

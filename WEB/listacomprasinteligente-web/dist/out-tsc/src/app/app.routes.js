@@ -8,6 +8,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { TicketNewComponent } from './components/ticket-new/ticket-new.component';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
+import { IngredienteComponent } from './components/ingrediente-new/ingrediente-new.component';
+
 export var ROUTES = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
@@ -18,7 +20,9 @@ export var ROUTES = [
     { path: 'ticket-new', component: TicketNewComponent, canActivate: [AuthGuard] },
     { path: 'ticket-new/:id', component: TicketNewComponent, canActivate: [AuthGuard] },
     { path: 'ticket-detail/:id', component: TicketDetailComponent, canActivate: [AuthGuard] },
-    { path: 'summary', component: SummaryComponent, canActivate: [AuthGuard] }
+    { path: 'summary', component: SummaryComponent, canActivate: [AuthGuard] },
+    { path: 'ingrediente-new/', component: IngredienteComponent, canActivate: [AuthGuard] },
+    { path: 'ingrediente-new/:id', component: IngredienteComponent, canActivate: [AuthGuard] }
 ];
 export var routes = RouterModule.forRoot(ROUTES);
 //# sourceMappingURL=app.routes.js.map

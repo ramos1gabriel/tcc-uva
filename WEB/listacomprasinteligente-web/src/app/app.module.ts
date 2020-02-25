@@ -23,6 +23,8 @@ import { TicketService } from './services/ticket.service';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { IngredienteNewComponent } from './components/ingrediente-new/ingrediente-new.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { SummaryComponent } from './components/summary/summary.component';
     TicketNewComponent,
     TicketListComponent,
     TicketDetailComponent,
-    SummaryComponent
+    SummaryComponent,
+    IngredienteNewComponent
   ],
   imports: [
     BrowserModule,
