@@ -12,3 +12,9 @@ VERIFICAR app.routes.js
 
 GERAR .JS.MAP:
 ng build
+
+
+-----------------
+REGRAS DE NEGOCIO
+-----------------
+

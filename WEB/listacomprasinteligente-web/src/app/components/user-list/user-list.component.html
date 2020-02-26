@@ -12,14 +12,18 @@
       <div class="box-body">
         <table class="table table-bordered">
           <tr>
+            <th>Nome</th>
             <th>Email</th>
-            <th>Perfil</th>
+            <th>Nome de Usuário</th>
+            <th>Senha</th>
             <th style="width: 40px">&nbsp;</th>
             <th style="width: 40px">&nbsp;</th>
           </tr>
           <tr *ngFor="let user of listUser">
+            <td>{{ user.nome }}</td>
             <td>{{ user.email }}</td>
-            <td>{{ user.profile }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.senha }}</td>
             <td><button  class="btn btn-primary" (click)="edit(user.id);">Editar</button></td>
             <td><button  class="btn btn-danger" (click)="delete(user.id);">Excluir</button></td>
           </tr>
