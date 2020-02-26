@@ -1,0 +1,14 @@
+CRIANDO NOVA TELA:
+*criar tudo em suas respectivas pastas
+
+ng generate component <nome>
+ng generate service <nome>
+
+CRIAR model.js
+
+VERIFICAR app-module.js
+
+VERIFICAR app.routes.js
+
+GERAR OS .JS.MAP:
+ng build
