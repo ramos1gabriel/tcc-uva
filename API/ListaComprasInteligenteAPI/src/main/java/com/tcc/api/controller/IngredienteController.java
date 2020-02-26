@@ -115,12 +115,8 @@ public class IngredienteController {
 				return ResponseEntity.badRequest().body(response);
 			}
 			
-			//UPDATE
-			Ingrediente ingredienteAtual = ingredienteService.findById(ingrediente.getId());
-			ingrediente.setNome(ingredienteAtual.getNome());
-			
-			Ingrediente  ticketPersistido = (Ingrediente) ingredienteService.createOrUpdate(ingrediente);
-			response.setData(ticketPersistido);
+			Ingrediente  ingredientePersistido = (Ingrediente) ingredienteService.createOrUpdate(ingrediente);
+			response.setData(ingredientePersistido);
 			
 		} catch (Exception e) {
 			response.getErrors().add(e.getMessage());

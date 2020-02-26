@@ -10,5 +10,5 @@ VERIFICAR app-module.js
 
 VERIFICAR app.routes.js
 
-GERAR OS .JS.MAP:
+GERAR .JS.MAP:
 ng build

@@ -23,6 +23,7 @@ public class APIApplication {
 		};
 	}
 	
+	//CRIA USUARIO PARA DESENVOLVIMENTO
 	private void initUsers(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
 		Usuario admin = new Usuario();
 		
@@ -30,7 +31,7 @@ public class APIApplication {
 		admin.setEmail("admin@uva.com");
 		
 		admin.setUsername("admin");
-		admin.setSenha(passwordEncoder.encode("123456"));
+		admin.setSenha(passwordEncoder.encode("admin"));
 		//admin.setProfile(ProfileEnum.ROLE_ADMIN);
 		
 		Usuario usuario = usuarioRepository.findByUsername(admin.getUsername());

@@ -116,10 +116,6 @@ public class ReceitaController {
 				return ResponseEntity.badRequest().body(response);
 			}
 			
-			//UPDATE
-			Receita receitaAtual = receitaService.findById(receita.getId());
-			receita.setNome(receitaAtual.getNome());
-			
 			Receita  receitaPersistido = (Receita) receitaService.createOrUpdate(receita);
 			response.setData(receitaPersistido);
 			

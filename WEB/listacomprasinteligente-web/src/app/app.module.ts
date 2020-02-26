@@ -24,6 +24,7 @@ import { TicketListComponent } from './components/ticket-list/ticket-list.compon
 import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { IngredienteNewComponent } from './components/ingrediente-new/ingrediente-new.component';
+import { IngredienteListComponent } from './components/ingrediente-list/ingrediente-list.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { IngredienteNewComponent } from './components/ingrediente-new/ingredient
     TicketListComponent,
     TicketDetailComponent,
     SummaryComponent,
-    IngredienteNewComponent
+    IngredienteNewComponent,
+    IngredienteListComponent
   ],
   imports: [
     BrowserModule,

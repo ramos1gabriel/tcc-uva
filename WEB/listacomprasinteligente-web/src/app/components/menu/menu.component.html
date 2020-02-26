@@ -13,7 +13,7 @@
     </div>
 
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">MENU DE NAVEGAÇÃO</li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-apple"></i><span>Ingredientes</span>
@@ -22,7 +22,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a [routerLink]="['/user-list']"><i class="fa fa-circle-o"></i>Lista</a></li>
+            <li><a [routerLink]="['/ingrediente-list']"><i class="fa fa-circle-o"></i>Lista</a></li>
             <li><a [routerLink]="['/ingrediente-new']"><i class="fa fa-circle-o"></i>Novo Ingrediente</a></li>
           </ul>
         </li>
@@ -65,9 +65,9 @@
               </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview" *ngIf="shared.user.username == 'admin'">
               <a href="#">
-                <i class="fa fa-edit"></i><span>USAR COMO EXEMPLO</span>
+                <i class="fa fa-user"></i><span>Usuário</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
