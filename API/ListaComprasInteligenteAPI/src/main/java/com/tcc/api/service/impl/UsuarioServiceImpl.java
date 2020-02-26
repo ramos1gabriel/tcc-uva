@@ -27,12 +27,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario findById(String id) {
+	public Usuario findById(Long id) {
 		return this.usuarioRepository.findById(id).orElse(null); //findOne nao funciona da mesma forma q antes no SPRING 2
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(Long id) {
 		this.usuarioRepository.deleteById(id); //delete nao funciona da mesma forma q antes no SPRING 2
 	}
 
