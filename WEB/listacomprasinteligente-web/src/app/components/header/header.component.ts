@@ -1,7 +1,7 @@
 import { SharedService } from './../../services/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user.model';
-import * as $ from 'jquery';
+
 
 
 @Component({

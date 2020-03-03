@@ -4,7 +4,6 @@ import { User } from './../../../model/user.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { currentUser } from 'src/app/model/current-user.model';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-login',
