@@ -51,8 +51,6 @@ END AS NIVEL
 
 FROM RECEITA R
 
+-----------------
 
-
-
-
-
+https://forum.ionicframework.com/t/pass-ngfor-index-to-click-event/39753/5
