@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.api.entity.Receita;
 import com.tcc.api.entity.Usuario;
+import com.tcc.api.enums.CategoriaEnum;
 import com.tcc.api.response.Response;
 import com.tcc.api.security.jwt.JwtTokenUtil;
 import com.tcc.api.service.ReceitaService;
@@ -57,7 +58,7 @@ public class ReceitaController {
 			}
 			
 			//CREATE
-			//receita.setCategoria(CategoriaEnum);
+			//receita.setCategoria(CategoriaEnum.getCategoria(receita.getCategoria().toString()));
 			
 			
 			Receita receitaPersitido = (Receita) receitaService.createOrUpdate(receita);

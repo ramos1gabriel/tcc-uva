@@ -2,53 +2,62 @@ package com.tcc.api.enums;
 
 public enum CategoriaEnum {
 	
-	Bolos_tortas_doces("Bolos e tortas doces"),
-	Carnes("Carnes"),
-	Peixes_frutos_mar("Peixes e frutos do mar"),
-	Saladas_molhos_acompanhamentos("Saladas, molhos e acompanhamentos"),
-	Sopas("Sopas"),
-	Bebidas("Bebidas"),
-	Doces_sobremesas("Doces e sobremesas"),
-	Lanches("Lanches"),
-	Alimentacao_saudavel("Alimentação Saudável"),
-	Outros("Outros");
+	bolos_tortas_doces,
+	carnes,
+	peixes_frutos_mar,
+	saladas_molhos_acompanhamentos,
+	sopas,
+	bebidas,
+	doces_sobremesas,
+	lanches,
+	alimentacao_saudavel,
+	outros;
 	
-	private String descricao;
-	 
-	CategoriaEnum(String descricao) {
-        this.descricao = descricao;
-    }
- 
-    public String getDescricao() {
-        return descricao;
-    }
+//	Bolos_tortas_doces("Bolos e tortas doces"),
+//	Carnes("Carnes"),
+//	Peixes_frutos_mar("Peixes e frutos do mar"),
+//	Saladas_molhos_acompanhamentos("Saladas, molhos e acompanhamentos"),
+//	Sopas("Sopas"),
+//	Bebidas("Bebidas"),
+//	Doces_sobremesas("Doces e sobremesas"),
+//	Lanches("Lanches"),
+//	Alimentacao_saudavel("Alimentação Saudável"),
+//	Outros("Outros");
 	
-//	public static CategoriaEnum getStatus(String status) {
-//		switch(status) {
-//			case "Bolos e tortas doces":
-//				return XCR;
-//			case "Carnes":
-//				return COL;
-//			case "Peixes e frutos do mar":
-//				return K;
-//			case "Quilograma(s)":
-//				return KG;
-//			case "Grama(s)":
-//				return G;
-//			case "Miligrama(s)":
-//				return MG;
-//			case "Litro(s)":
-//				return L;
-//			case "Mililitro(s)":
-//				return ML;
-//			case "Metro(s)":
-//				return M;
-//			case "Centímetro(s)":
-//				return CM;
-//			case "Milímetro(s)":
-//				return MM;
-//			default:
-//				return SEM_CATEGORIA;
-//		}
-//	}
+//	private String descricao;
+//	 
+//	CategoriaEnum(String descricao) {
+//        this.descricao = descricao;
+//    }
+// 
+//    public String getDescricao() {
+//        return descricao;
+//    }
+	
+	public static CategoriaEnum getCategoria(String categoria) {
+		switch(categoria) {
+			case "Bolos e tortas doces":
+				return bolos_tortas_doces;
+			case "Carnes":
+				return carnes;
+			case "Peixes e frutos do mar":
+				return peixes_frutos_mar;
+			case "Saladas, molhos e acompanhamentos":
+				return saladas_molhos_acompanhamentos;
+			case "Sopas":
+				return sopas;
+			case "Bebidas":
+				return bebidas;
+			case "Doces e sobremesas":
+				return doces_sobremesas;
+			case "Lanches":
+				return lanches;
+			case "Alimentação Saudável":
+				return alimentacao_saudavel;
+			case "Outros":
+				return outros;
+			default:
+				return null;
+		}
+	}
 }

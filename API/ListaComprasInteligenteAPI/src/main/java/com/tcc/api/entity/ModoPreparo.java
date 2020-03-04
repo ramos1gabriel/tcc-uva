@@ -2,6 +2,8 @@ package com.tcc.api.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.tcc.api.enums.TipoEnum;
 
 @Entity
 @Table(name="modopreparo")
@@ -23,6 +28,11 @@ public class ModoPreparo {
 	@NotBlank(message = "numero da ordem obrigatorio!")
 	@Column(name = "ORDEM", nullable = false)
     private Long ordem;
+	
+	@NotNull
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "TIPO", length = 1, nullable = false)
+    private TipoEnum tipo;
     
 	@NotBlank(message = "Descricao obrigatorio!")
     @Column(name = "DESCRICAO", length = 255, nullable = false)
@@ -47,6 +57,14 @@ public class ModoPreparo {
 	public void setOrdem(Long ordem) {
 		this.ordem = ordem;
 	}
+	
+	public TipoEnum getTipo() {
+		return tipo;
+	}
+	
+	public void setTipo(TipoEnum tipo) {
+		this.tipo = tipo;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -64,3 +82,4 @@ public class ModoPreparo {
 		this.receita = receita;
 	}
 }
+

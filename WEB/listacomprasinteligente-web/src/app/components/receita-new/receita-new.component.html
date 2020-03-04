@@ -1,3 +1,79 @@
-<p>
-  receita-new works!
-</p>
+<div class="col-md-6" style="margin-left:  0%">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Nova Receita</h3>
+    </div>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="save()">
+
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <span>{{ message.text }}</span>
+      </div>
+
+      <div class="box-body">
+
+        <div [ngClass]="getFromGroupClass(nome.invalid, nome.dirty)">
+          <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+
+          <div class="col-sm-10">
+            <input 
+                  type="text" 
+                  [(ngModel)]="receita.nome" 
+                  class="form-control" 
+                  name="nome" 
+                  id="inputNome" 
+                  #nome="ngModel" 
+                  placeholder="Nome" 
+                  required>
+            <span class="help-block" *ngIf="nome.invalid && nome.dirty">Nome é necessário</span>
+          </div>
+        </div>
+        
+        <div [ngClass]="getFromGroupClass(categoria.invalid, categoria.dirty)">
+          <label for="inputCategoria" class="col-sm-2 control-label">Categoria</label>
+
+          <div class="col-sm-10">
+            <select [(ngModel)]="receita.categoria" 
+                class="form-control" 
+                name="categoria" 
+                #categoria="ngModel" 
+                id="inputCategoria"
+                style="width: 100%"
+                required>
+                <option value="bolos_tortas_doces">Bolos e tortas doces</option>
+                <option value="carnes">Carnes</option>
+                <option value="peixes_frutos_mar">Peixes e frutos do mar</option>
+                <option value="saladas_molhos_acompanhamentos">Saladas, molhos e acompanhamentos</option>
+                <option value="sopas">Sopas</option>
+                <option value="bebidas">Bebidas</option>
+                <option value="doces_sobremesas">Doces e sobremesas</option>
+                <option value="lanches">Lanches</option>
+                <option value="alimentacao_saudavel">Alimentação Saudável</option>
+                <option value="outros">Outros</option>
+            </select>
+            <span class="help-block" *ngIf="categoria.invalid && categoria.dirty">Categoria é obrigatório</span>
+          </div>
+      </div>
+
+        <div [ngClass]="getFromGroupClass(descricao.invalid, descricao.dirty)">
+          <label for="inputDescricao" class="col-sm-2 control-label">Descrição</label>
+
+          <div class="col-sm-10">
+            <textarea 
+                    [(ngModel)]="receita.descricao" 
+                    class="form-control" 
+                    name="descricao" 
+                    rows="3"
+                    id="inputDescricao" 
+                    #descricao="ngModel" 
+                    placeholder="Descrição">
+            </textarea>
+          </div>
+        </div>
+
+      </div>
+      <div class="box-footer">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Gravar</button>
+      </div>
+    </form>
+  </div>
+</div>
