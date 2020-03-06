@@ -1,0 +1,48 @@
+<p>TESTE</p>
+<br>
+
+<p>
+  <b>ID_RECEITA: </b>{{idReceita}}
+</p>
+
+<p>
+  <b>Ingredientes: </b>
+  <select>
+    <option *ngFor="let ingrediente of listIngrediente" value= {{ingrediente.id}}>
+      {{ingrediente.nome}}
+    </option>
+  </select>
+</p>
+
+<p>
+  <b>QTD: </b>
+  <input type="number" min="1" max="99" maxlength="2">
+</p>
+
+<p>
+  <b>Unidade de medida: </b>
+  <select>
+    <option value="XCR">Xícara(s)</option>
+    <option value="COL">Colher(es)</option>
+    <option value="K">Quilo(s)</option>
+    <option value="KG">Quilograma(s)</option>
+    <option value="G">Grama(s)</option>
+    <option value="MG">Miligrama(s)</option>
+    <option value="L">Litro(s)</option>
+    <option value="ML">Mililitro(s)</option>
+    <option value="M">Metro(s)</option>
+    <option value="CM">Centímetro(s)</option>
+    <option value="MM">Milímetro(s)</option>
+  </select>
+</p>
+
+<p>
+  <b>Observação: </b>
+  <textarea></textarea>
+</p>
+
+<li>
+  Notas:
+  <ul>- validar duplicidade pelo nome via JAVASCRIPT</ul>
+  <ul>- cria validacao para o campo QTD via JAVASCRIPT</ul>
+</li>

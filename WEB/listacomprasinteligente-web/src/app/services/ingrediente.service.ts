@@ -30,4 +30,9 @@ export class IngredienteService {
   delete(id : string) {
     return this.http.delete(`${BACK_END_API}/api/ingrediente/${id}`);
   }
+
+  //novo
+  findAllCombo() {
+    return this.http.get(`${BACK_END_API}/api/ingrediente/`);
+  }
 }

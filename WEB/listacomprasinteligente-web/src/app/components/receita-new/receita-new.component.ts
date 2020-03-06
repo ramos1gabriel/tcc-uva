@@ -5,6 +5,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ResponseApi } from 'src/app/model/response-api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-receita-new',
@@ -23,7 +24,8 @@ export class ReceitaNewComponent implements OnInit {
 
   constructor(
     private ReceitaService : ReceitaService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private router : Router
   ) { 
 
     this.shared = SharedService.getInstance();
@@ -58,7 +60,8 @@ export class ReceitaNewComponent implements OnInit {
         type : 'success',
         text : `${receitaRet.nome} cadastrado com sucesso!`
       });
-      //window.location.href = '/login';
+      //window.location.href = `/receitaingrediente-new/${receitaRet.id}`;
+      this.router.navigate(['/receitaingrediente-new', receitaRet.id]);
     }, err => {
       this.showMessage({
         type : 'error',

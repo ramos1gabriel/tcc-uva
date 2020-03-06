@@ -1,5 +1,6 @@
 package com.tcc.api.controller;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -225,6 +226,25 @@ public class IngredienteController {
 		}
 		
 		response.setData(ingredientes);
+		return ResponseEntity.ok(response);
+	}
+	
+	//NOVO
+	@GetMapping()
+	public ResponseEntity<Response<List<Ingrediente>>> findAll(HttpServletRequest request) {
+		
+		Response<List<Ingrediente>> response = new Response<List<Ingrediente>>();
+		List<Ingrediente> ingredientes = null;
+		
+		ingredientes = ingredienteService.findAll();
+		
+		if(ingredientes.isEmpty()) {
+			response.getErrors().add("Nenhum registro encontrado");
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		response.setData(ingredientes);
+		
 		return ResponseEntity.ok(response);
 	}
 	

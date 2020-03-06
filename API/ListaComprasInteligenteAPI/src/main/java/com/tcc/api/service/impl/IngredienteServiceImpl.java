@@ -1,5 +1,7 @@
 package com.tcc.api.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -47,5 +49,10 @@ public class IngredienteServiceImpl implements IngredienteService {
 
 		Pageable pages = PageRequest.of(page, count);
 		return this.ingredienteRepository.findByNomeIgnoreCaseContainingOrderByNomeDesc(nome, pages);
+	}
+
+	@Override
+	public List<Ingrediente> findAll() {
+		return this.ingredienteRepository.findAll();
 	}
 }
