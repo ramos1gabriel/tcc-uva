@@ -54,3 +54,11 @@ FROM RECEITA R
 -----------------
 
 https://forum.ionicframework.com/t/pass-ngfor-index-to-click-event/39753/5
+
+------------------------
+FormArray
+
+https://stackblitz.com/edit/angular-form-array-example
+https://www.tektutorialshub.com/angular/angular-formarray-example-in-reactive-forms/
+https://medium.com/aubergine-solutions/add-push-and-remove-form-fields-dynamically-to-formarray-with-reactive-forms-in-angular-acf61b4a2afe
+https://www.codementor.io/@vishnusiddareddy/dynamically-adding-form-fields-using-angular-formarray-kw5mn7exx

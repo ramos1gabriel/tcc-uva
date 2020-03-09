@@ -1,6 +1,6 @@
 <p>TESTE</p>
 <br>
-
+<!--
 <p>
   <b>ID_RECEITA: </b>{{idReceita}}
 </p>
@@ -48,3 +48,15 @@
   <ul>https://pt.stackoverflow.com/questions/284860/max-length-em-input-type-number-html</ul>
   <ul>https://stackblitz.com/edit/angular-form-array-example</ul>
 </li>
+-->
+<form [formGroup]="demoForm">
+  <div formArrayName="demoArray" 
+     *ngFor="let arrayItem of arrayItems; let i=index">
+        
+     <input [id]="arrayItem.id" type="checkbox"
+        [formControl]="demoArray[i]">
+     <label [for]="arrayItem.id" class="array-item-title">
+        {{arrayItem.title}}</label>
+  
+  </div>
+</form>
