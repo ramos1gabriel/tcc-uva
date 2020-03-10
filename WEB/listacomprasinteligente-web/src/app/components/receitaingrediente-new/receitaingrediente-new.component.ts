@@ -1,40 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-receitaingrediente-new',
   templateUrl: './receitaingrediente-new.component.html',
   styleUrls: ['./receitaingrediente-new.component.css']
 })
-export class ReceitaingredienteNewComponent implements OnInit {
-  demoForm: FormGroup;
-  
-  arrayItems: {
-    id: number;
-    title: string;
-  }[];
+export class ReceitaingredienteNewComponent {
+  form: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) {
-     this.demoForm = this._formBuilder.group({
-        demoArray: this._formBuilder.array([])
-     });
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      published: true,
+      credentials: this.fb.array([]),
+    });
   }
 
-  ngOnInit() {
-    this.arrayItems = [];
-  }
-
-  get demoArray() {
-    return this.demoForm.get('demoArray') as FormArray;
-  }
-  
-  addItem(item) {
-    this.arrayItems.push(item);
-    this.demoArray.push(this._formBuilder.control(false));
-  }
-
-  removeItem() {
-    this.arrayItems.pop();
-    this.demoArray.removeAt(this.demoArray.length - 1);
+  addCreds() {
+    const creds = this.form.controls.credentials as FormArray;
+    creds.push(this.fb.group({
+      username: '',
+      password: '',
+    }));
   }
 }
