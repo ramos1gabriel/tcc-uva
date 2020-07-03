@@ -1,4 +1,4 @@
-<p>TESTE</p>
+<p>IMPLEMENTAR METODO DE GRAVACAO DE ARRAY DE INGREDIENTES</p>
 <br>
 <!--
 <p>
@@ -50,6 +50,7 @@
   GRAVAR FORMARRAY: https://www.c-sharpcorner.com/article/angular-7-multiple-data-save-using-formgroup-formarray/
 </li>
 -->
+<!--
 <form [formGroup]="form">
   <input type="checkbox" formControlName="published"> Published
   <div *ngIf="form.controls.published.value">
@@ -63,6 +64,172 @@
         <input placeholder="Password" formControlName="password">
       </ng-container>
     </div>
-
-  </div>
 </form>
+-->
+<!--
+<form #form="ngForm" class="container mt-3" (ngSubmit)="logValue()">
+  <div class="row justify-content-center">
+    <div class="col-6">
+
+
+      <button type="button" class="btn btn-primary mb-2" (click)="addAddress()">Add Address</button>
+
+      <section class="container border mb-4 p-3" *ngFor="let address of addresses; let i = index;">
+       
+        <div class="row">
+          <div class="col-6">
+              <h4>Address {{i + 1}}</h4>
+          </div>
+          <div class="col-6 text-right">
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeAddress(i)">Remove</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+              <div class="form-group">
+                  <label>Address</label>
+                  <input type="text" class="form-control" [(ngModel)]="address.address" name="address_{{address.id}}" placeholder="St. Thomas Apartment"/>
+                </div>
+          </div>
+          <div class="col-6">
+              <div class="form-group">
+                  <label>Street</label>
+                  <input type="text" class="form-control" [(ngModel)]="address.street" name="street_{{address.id}}" placeholder="South Street"/>
+                </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-6">
+              <div class="form-group">
+                  <label>City</label>
+                  <input type="text" class="form-control" [(ngModel)]="address.city" name="city_{{address.id}}" placeholder="Mumbai"/>
+                </div>
+          </div>
+          <div class="col-6">
+              <div class="form-group">
+                  <label>Country</label>
+                  <select class="form-control" [(ngModel)]="address.country" name="country_{{address.id}}" placeholder="India">
+                    <option value="india">India</option>
+                    <option value="usa">USA</option>
+                    <option value="england">England</option>
+                  </select>
+                </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="text-right">
+          <input type="submit" class="btn btn-success" value="Submit"/>
+      </div>
+      
+    </div>
+  </div>
+
+</form>
+-->
+
+<div class="col-md-8" style="margin-left:  0%">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Adicione os Ingredientes</h3>
+    </div>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="save()">
+
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <span>{{ message.text }}</span>
+      </div>
+
+      <div class="box-body">
+
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 30%;">Ingrediente</th>
+            <th style="width: 10%;">Quantidade</th>
+            <th style="width: 15%;">Unidade</th>
+            <th>&nbsp;</th>
+          </tr>
+          <tr *ngFor="let ing of ingredientes; let i = index;">
+            <td>
+              <div [ngClass]="getFromGroupClass(ingrediente.invalid, ingrediente.dirty)" style="margin: 0px;">
+                <select [(ngModel)]="ingredientes[i].ingrediente" 
+                        class="form-control" 
+                        name="ingrediente_{{ing.index}}" 
+                        #ingrediente="ngModel" 
+                        id="inputIngrediente"
+                        required>
+                      <option value="">Selecione[...]</option>
+                      <option *ngFor="let ingrediente of listIngrediente" value={{ingrediente.id}}>
+                        {{ingrediente.nome}}
+                      </option>
+                  </select>
+              </div>
+            </td>
+            <td>
+              <div [ngClass]="getFromGroupClass(quantidade.invalid, quantidade.dirty)" style="margin: 0px;">
+                <input  type="number" 
+                        min="1" max="1000" maxlength="4"
+                        [(ngModel)]="ingredientes[i].quantidade" 
+                        class="form-control" 
+                        name="quantidade_{{ing.index}}" 
+                        id="inputQuantidade" 
+                        #quantidade="ngModel" 
+                        placeholder="Quantidade" 
+                        required>
+              </div>
+            </td>
+            <td>
+              <div [ngClass]="getFromGroupClass(unidadeMedida.invalid, unidadeMedida.dirty)" style="margin: 0px;">
+                <select [(ngModel)]="ingredientes[i].unidadeMedida" 
+                          class="form-control" 
+                          name="unidadeMedida_{{ing.index}}" 
+                          #unidadeMedida="ngModel" 
+                          id="inputUnidadeMedida">
+                    <option value="">Selecione[...]</option>
+                    <option value="XCR">Xícara(s)</option>
+                    <option value="COL">Colher(es)</option>
+                    <option value="K">Quilo(s)</option>
+                    <option value="KG">Quilograma(s)</option>
+                    <option value="G">Grama(s)</option>
+                    <option value="MG">Miligrama(s)</option>
+                    <option value="L">Litro(s)</option>
+                    <option value="ML">Mililitro(s)</option>
+                    <option value="M">Metro(s)</option>
+                    <option value="CM">Centímetro(s)</option>
+                    <option value="MM">Milímetro(s)</option>
+                  </select>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger" (click)="removeIngrediente(i)">Remover</button>
+            </td>
+          </tr>
+        </table>
+        <!--
+        <div [ngClass]="getFromGroupClass(observacao.invalid, observacao.dirty)">
+          <label for="inputObservacao" class="col-sm-2 control-label">Observação</label>
+
+          <div class="col-sm-10">
+            <textarea 
+                    [(ngModel)]="receitaingrediente.observacao" 
+                    class="form-control" 
+                    name="observacao" 
+                    rows="3"
+                    id="inputObservacao" 
+                    #observacao="ngModel" 
+                    placeholder="Observação">
+            </textarea>
+          </div>
+        </div>
+        -->
+
+      </div>
+      <div class="box-footer">
+        <button type="button" class="btn btn-success" (click)="addIngrediente()">Adicionar</button>&nbsp;
+        <button type="button" class="btn btn-warning" (click)="persistirArray()">console.log</button>
+        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Gravar</button>
+      </div>
+    </form>
+  </div>
+</div>
