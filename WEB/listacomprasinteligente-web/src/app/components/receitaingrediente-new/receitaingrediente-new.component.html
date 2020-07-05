@@ -137,9 +137,11 @@
     </div>
     <form class="form-horizontal" #form="ngForm" (ngSubmit)="save()">
 
+      <!--
       <div [ngClass]="classCss" role="alert" *ngIf="message">
         <span>{{ message.text }}</span>
       </div>
+      -->
 
       <div class="box-body">
 
@@ -227,8 +229,7 @@
       </div>
       <div class="box-footer">
         <button type="button" class="btn btn-success" (click)="addIngrediente()">Adicionar</button>&nbsp;
-        <button type="button" class="btn btn-warning" (click)="persistirArray()">console.log</button>
-        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Gravar</button>
+        <button type="button" [disabled]="!form.valid" class="btn btn-info pull-right" (click)="persistirArray()">Gravar</button>
       </div>
     </form>
   </div>

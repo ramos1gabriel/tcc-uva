@@ -147,21 +147,53 @@ export class ReceitaingredienteNewComponent implements OnInit {
   persistirArray() {
     
     //percorre array de ingredientes
-    this.ingredientes.forEach(function(recing){
-      console.log(recing.ingrediente+','+recing.quantidade+','+recing.unidadeMedida);
-      //this.findByIdReceita(this.idReceita);
-      //this.findByIdIngrediente(recing.ingrediente);
+    //this.ingredientes.forEach(function(recing){
+      //console.log(recing.ingrediente+','+recing.quantidade+','+recing.unidadeMedida);
       //console.log('nome receita='+this.receita.nome+'nome ingrediente='+this.ingrediente.nome);
-    });
+    //});
 
+    //diferenca de let of de for normal
+
+    for (var i = 0; this.ingredientes.length > i; i++) {
+      console.log('count='+i);
+      //seta valores
+      let ingrediente : string = this.ingredientes[i].ingrediente;
+      let qtde : any = this.ingredientes[i].quantidade;
+      let unidade : string = this.ingredientes[i].unidadeMedida;
+
+      //recupera externos
+      let receitaNovo : Receita = this.findByIdReceita(this.idReceita);
+      let ingredienteNovo : Ingrediente = this.findByIdIngrediente(ingrediente);
+      console.log(receitaNovo);
+      console.log(ingredienteNovo);
+
+      //cria objeto receita ingrediente
+      let recingNovo = new ReceitaIngrediente('', '', qtde, unidade, receitaNovo, ingredienteNovo);
+
+      console.log(recingNovo);
+      //persiste dado
+      //this.save(recingNovo);
+    }
     
-    /*
-    this.showMessage({
+    //imprime msg de sucesso e limpa form
+    /*this.showMessage({
       type : 'success',
       text : `Ingredientes cadastrados com sucesso!`
     });
-    this.form.resetForm();
-    */
+    this.form.resetForm();*/
+  }
+
+  save(recing : ReceitaIngrediente){
+    this.message = {};
+    this.ReceitaIngredienteService.createOrUpdate(recing).subscribe((responseApi : ResponseApi) => {
+      let recingRet : ReceitaIngrediente = responseApi.data;
+      console.log('id gravado='+recingRet.id);
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
   }
 
   //POPULA COMBO INGREDIENTES
@@ -177,37 +209,32 @@ export class ReceitaingredienteNewComponent implements OnInit {
   }
 
   //RECUPERA RECEITA PAI
-  findByIdReceita(id : string) {
+  findByIdReceita(id : string) : Receita {
+    let receitaNovo : Receita;
     this.ReceitaService.findById(id).subscribe((responseApi : ResponseApi) => {
-      this.receita = responseApi.data;
+      receitaNovo = responseApi.data;
     }, err => {
       this.showMessage({
         type : 'error',
         text : err['error']['errors'][0]
       });
     });
+
+    return receitaNovo;
   }
 
-  findByIdIngrediente(id : string) {
+  //RECUPERA INGREDIENTES
+  findByIdIngrediente(id : string) : Ingrediente {
+    let ingredienteNovo : Ingrediente;
+
     this.IngredienteService.findById(id).subscribe((responseApi : ResponseApi) => {
-      this.ingrediente = responseApi.data;
+      ingredienteNovo = responseApi.data;
     }, err => {
       this.showMessage({
         type : 'error',
         text : err['error']['errors'][0]
       });
     });
-  }
-
-  save(recing : ReceitaIngrediente){
-    this.message = {};
-    this.ReceitaIngredienteService.createOrUpdate(recing).subscribe((responseApi : ResponseApi) => {
-      this.recing = new ReceitaIngrediente('', '', 0, '', this.receita, this.ingrediente);
-    }, err => {
-      this.showMessage({
-        type : 'error',
-        text : err['error']['errors'][0]
-      });
-    });
+    return ingredienteNovo;
   }
 }
