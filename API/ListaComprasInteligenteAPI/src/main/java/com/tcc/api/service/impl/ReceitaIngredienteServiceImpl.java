@@ -1,5 +1,7 @@
 package com.tcc.api.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,11 @@ public class ReceitaIngredienteServiceImpl implements ReceitaIngredienteService 
 	@Override
 	public ReceitaIngredientes createOrUpdate(ReceitaIngredientes recIng) {
 		return this.recIngRepository.save(recIng);
+	}
+	
+	@Override
+	public List<ReceitaIngredientes> createOrUpdateAll(List<ReceitaIngredientes> listRecIng) {
+		return this.recIngRepository.saveAll(listRecIng);
 	}
 
 	@Override

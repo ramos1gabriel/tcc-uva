@@ -1,5 +1,7 @@
 package com.tcc.api.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +41,13 @@ public class ReceitaIngredienteController {
 	private UsuarioService usuarioService;
 	
 	@PostMapping()
-	public ResponseEntity<Response<ReceitaIngredientes>> create(HttpServletRequest request, @RequestBody ReceitaIngredientes recIng,
+	public ResponseEntity<Response<ReceitaIngredientes>> create(HttpServletRequest request, @RequestBody List<ReceitaIngredientes> listRecIng,
 			BindingResult result) {
 		
 		Response<ReceitaIngredientes> response = new Response<ReceitaIngredientes>();
 		
 		try {
-			validaCriacao(recIng, result);
+			validaCriacao(listRecIng, result);
 			//validaDuplicidade(recIng, result); //NAO TEM DUPLICIDADE NO JAVA, TEM APENAS NO FRONT!!
 			
 			if(result.hasErrors()) {
@@ -53,12 +55,11 @@ public class ReceitaIngredienteController {
 				return ResponseEntity.badRequest().body(response);
 			}
 			
-			//CREATE
-			//receita.setCategoria(CategoriaEnum);
-			
-			
-			ReceitaIngredientes recIngPersitido = (ReceitaIngredientes) recIngService.createOrUpdate(recIng);
-			response.setData(recIngPersitido);
+			//ReceitaIngredientes recIngPersitido = (ReceitaIngredientes) recIngService.createOrUpdate(recIng);
+			List<ReceitaIngredientes> listRecIngPersitido = (List<ReceitaIngredientes>) recIngService.createOrUpdateAll(listRecIng); //TESTE
+			for (int i = 0; i < listRecIngPersitido.size(); i++) {
+				response.getDatas().add(listRecIngPersitido.get(i));
+			}
 		
 		} catch (Exception e) {
 			response.getErrors().add(e.getMessage());
@@ -68,15 +69,17 @@ public class ReceitaIngredienteController {
 		return ResponseEntity.ok(response);
 	}
 
-	private void validaCriacao(ReceitaIngredientes recIng, BindingResult result) {
-		if(recIng.getIngrediente().getId() == null) {
-			result.addError(new ObjectError("ReceitaIngredientes", "Ingrediente nao informado!"));
-			return;
-		}
-		if(recIng.getReceita().getId() == null) {
-			result.addError(new ObjectError("ReceitaIngredientes", "Receita nao informada!"));
-			return;
-		}
+	private void validaCriacao(List<ReceitaIngredientes> listRecIng, BindingResult result) {
+		listRecIng.forEach(recing -> {
+			if(recing.getIngrediente().getId() == null) {
+				result.addError(new ObjectError("ReceitaIngredientes", "Ingrediente nao informado!"));
+				return;
+			}
+			if(recing.getReceita().getId() == null) {
+				result.addError(new ObjectError("ReceitaIngredientes", "Receita nao informada!"));
+				return;
+			}
+		});
 	}
 	
 //	private void validaDuplicidade(ReceitaIngredientes recIng, BindingResult result) {
@@ -95,20 +98,22 @@ public class ReceitaIngredienteController {
 	}
 	
 	@PutMapping()
-	public ResponseEntity<Response<ReceitaIngredientes>> update(HttpServletRequest request, @RequestBody ReceitaIngredientes recIng,
+	public ResponseEntity<Response<ReceitaIngredientes>> update(HttpServletRequest request, @RequestBody List<ReceitaIngredientes> listRecIng,
 			BindingResult result) {
 		
 		Response<ReceitaIngredientes> response = new Response<ReceitaIngredientes>();
 		
 		try {
-			validaUpdate(recIng, result);
+			validaUpdate(listRecIng, result);
 			if(result.hasErrors()) {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 				return ResponseEntity.badRequest().body(response);
 			}
 			
-			ReceitaIngredientes  recIngPersistido = (ReceitaIngredientes) recIngService.createOrUpdate(recIng);
-			response.setData(recIngPersistido);
+			List<ReceitaIngredientes>  listRecIngPersitido = (List<ReceitaIngredientes>) recIngService.createOrUpdateAll(listRecIng);
+			for (int i = 0; i < listRecIngPersitido.size(); i++) {
+				response.getDatas().add(listRecIngPersitido.get(i));
+			}
 			
 		} catch (Exception e) {
 			response.getErrors().add(e.getMessage());
@@ -118,20 +123,21 @@ public class ReceitaIngredienteController {
 		return ResponseEntity.ok(response);
 	}
 	
-	private void validaUpdate(ReceitaIngredientes recIng, BindingResult result) {
-		if(recIng.getId() == null) {
-			result.addError(new ObjectError("ReceitaIngredientes", "ID nao informado!"));
-			return;
-		}
-		
-		if(recIng.getIngrediente().getId() == null) {
-			result.addError(new ObjectError("ReceitaIngredientes", "Ingrediente nao informado!"));
-			return;
-		}
-		if(recIng.getReceita().getId() == null) {
-			result.addError(new ObjectError("ReceitaIngredientes", "Receita nao informada!"));
-			return;
-		}
+	private void validaUpdate(List<ReceitaIngredientes> listRecIng, BindingResult result) {
+		listRecIng.forEach(recing -> {
+			if(recing.getId() == null) {
+				result.addError(new ObjectError("ReceitaIngredientes", "ID nao informado!"));
+				return;
+			}
+			if(recing.getIngrediente().getId() == null) {
+				result.addError(new ObjectError("ReceitaIngredientes", "Ingrediente nao informado!"));
+				return;
+			}
+			if(recing.getReceita().getId() == null) {
+				result.addError(new ObjectError("ReceitaIngredientes", "Receita nao informada!"));
+				return;
+			}
+		});
 	}
 	
 	@GetMapping(value = "{id}")

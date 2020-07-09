@@ -13,7 +13,7 @@ public enum UnidadeMedidaEnum {
 	M,
 	CM,
 	MM,
-	ERRO;
+	UNI;
 	
 //	XCR("Xícara(s)"),
 //	COL("Colher(es)"),
@@ -54,7 +54,7 @@ public enum UnidadeMedidaEnum {
 			case "Milímetro(s)":
 				return MM;
 			default:
-				return ERRO;
+				return UNI;
 		}
 	}
 }

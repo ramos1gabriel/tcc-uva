@@ -1,167 +1,54 @@
-<p>IMPLEMENTAR METODO DE GRAVACAO DE ARRAY DE INGREDIENTES</p>
-<br>
-<!--
-<p>
-  <b>ID_RECEITA: </b>{{idReceita}}
-</p>
-
-<p>
-  <b>Ingredientes: </b>
-  <select>
-    <option *ngFor="let ingrediente of listIngrediente" value= {{ingrediente.id}}>
-      {{ingrediente.nome}}
-    </option>
-  </select>
-</p>
-
-<p>
-  <b>QTD: </b>
-  <input type="number" min="1" max="99" maxlength="2">
-</p>
-
-<p>
-  <b>Unidade de medida: </b>
-  <select>
-    <option value="XCR">Xícara(s)</option>
-    <option value="COL">Colher(es)</option>
-    <option value="K">Quilo(s)</option>
-    <option value="KG">Quilograma(s)</option>
-    <option value="G">Grama(s)</option>
-    <option value="MG">Miligrama(s)</option>
-    <option value="L">Litro(s)</option>
-    <option value="ML">Mililitro(s)</option>
-    <option value="M">Metro(s)</option>
-    <option value="CM">Centímetro(s)</option>
-    <option value="MM">Milímetro(s)</option>
-  </select>
-</p>
-
-<p>
-  <b>Observação: </b>
-  <textarea></textarea>
-</p>
-
-<li>
-  Notas:
-  <ul>- validar duplicidade pelo nome via JAVASCRIPT</ul>
-  <ul>- cria validacao para o campo QTD via JAVASCRIPT</ul>
-  <ul>https://pt.stackoverflow.com/questions/284860/max-length-em-input-type-number-html</ul>
-  <ul>https://stackblitz.com/edit/angular-form-array-example</ul>
-  GRAVAR FORMARRAY: https://www.c-sharpcorner.com/article/angular-7-multiple-data-save-using-formgroup-formarray/
-</li>
--->
-<!--
-<form [formGroup]="form">
-  <input type="checkbox" formControlName="published"> Published
-  <div *ngIf="form.controls.published.value">
-
-    <h2>Credentials</h2>
-    <button (click)="addCreds()">Add</button>
-
-    <div formArrayName="credentials" *ngFor="let creds of form.controls.credentials?.value; let i = index">
-      <ng-container [formGroupName]="i">
-        <input placeholder="Username" formControlName="username">
-        <input placeholder="Password" formControlName="password">
-      </ng-container>
-    </div>
-</form>
--->
-<!--
-<form #form="ngForm" class="container mt-3" (ngSubmit)="logValue()">
-  <div class="row justify-content-center">
-    <div class="col-6">
-
-
-      <button type="button" class="btn btn-primary mb-2" (click)="addAddress()">Add Address</button>
-
-      <section class="container border mb-4 p-3" *ngFor="let address of addresses; let i = index;">
-       
-        <div class="row">
-          <div class="col-6">
-              <h4>Address {{i + 1}}</h4>
-          </div>
-          <div class="col-6 text-right">
-              <button type="button" class="btn btn-danger btn-sm" (click)="removeAddress(i)">Remove</button>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-6">
-              <div class="form-group">
-                  <label>Address</label>
-                  <input type="text" class="form-control" [(ngModel)]="address.address" name="address_{{address.id}}" placeholder="St. Thomas Apartment"/>
-                </div>
-          </div>
-          <div class="col-6">
-              <div class="form-group">
-                  <label>Street</label>
-                  <input type="text" class="form-control" [(ngModel)]="address.street" name="street_{{address.id}}" placeholder="South Street"/>
-                </div>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col-6">
-              <div class="form-group">
-                  <label>City</label>
-                  <input type="text" class="form-control" [(ngModel)]="address.city" name="city_{{address.id}}" placeholder="Mumbai"/>
-                </div>
-          </div>
-          <div class="col-6">
-              <div class="form-group">
-                  <label>Country</label>
-                  <select class="form-control" [(ngModel)]="address.country" name="country_{{address.id}}" placeholder="India">
-                    <option value="india">India</option>
-                    <option value="usa">USA</option>
-                    <option value="england">England</option>
-                  </select>
-                </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="text-right">
-          <input type="submit" class="btn btn-success" value="Submit"/>
-      </div>
-      
-    </div>
-  </div>
-
-</form>
--->
-
+CRIAR TELA DE MODO DE PREPARO => alterar bd/java para ter 6 campos: 
+3 campo de checkbox(nao tem cobertura?nao tem massa?nao tem recheio?)
+3 campos de textarea(cobertura,massa,recheio)TAMANHO=VARCHAR500
 <div class="col-md-8" style="margin-left:  0%">
   <div class="box box-info">
     <div class="box-header with-border">
       <h3 class="box-title">Adicione os Ingredientes</h3>
     </div>
     <form class="form-horizontal" #form="ngForm" (ngSubmit)="save()">
-
       <!--
+      <div class="callout callout-info">
+        <h4>REGRAS DE NEGOCIO</h4>
+        <ul>
+          <li>Quantidade deve ser maior do que ZERO.</li>
+          <li>Caso a Unidade de Medida não seja informada, será entendido como se tratando de uma UNIDADE. Ex.: 2 ovos.</li>
+          <li>Não é permitido duplicidade de ingredientes.</li>
+          <li>Quantidade máxima de 10 ingredientes permitidos.</li>
+          <li>A Receita deve possuir ao menos 1 igrendiente</li>
+        </ul>
+      </div>
+      -->
       <div [ngClass]="classCss" role="alert" *ngIf="message">
         <span>{{ message.text }}</span>
       </div>
-      -->
 
       <div class="box-body">
 
         <table class="table table-bordered">
           <tr>
+            <th style="width: 3%;">Nº</th>
             <th style="width: 30%;">Ingrediente</th>
             <th style="width: 10%;">Quantidade</th>
-            <th style="width: 15%;">Unidade</th>
+            <th style="width: 15%;">Unidade&nbsp;
+              <a data-toggle="tooltip" title="Unidade de Medida caso não seja informada será entendido como uma 'unidade única'. Exemplo: 2 ovos">
+                <i class="fa fa-question-circle"></i>
+              </a>
+            </th>
             <th>&nbsp;</th>
           </tr>
           <tr *ngFor="let ing of ingredientes; let i = index;">
+            <td><h5>{{i+1}}</h5></td>
             <td>
               <div [ngClass]="getFromGroupClass(ingrediente.invalid, ingrediente.dirty)" style="margin: 0px;">
                 <select [(ngModel)]="ingredientes[i].ingrediente" 
+                        (change)="validaDuplicidade($event.target.value, i)" 
                         class="form-control" 
                         name="ingrediente_{{ing.index}}" 
                         #ingrediente="ngModel" 
                         id="inputIngrediente"
                         required>
-                      <option value="">Selecione[...]</option>
+                      <option value="" selected>Selecione[...]</option>
                       <option *ngFor="let ingrediente of listIngrediente" value={{ingrediente.id}}>
                         {{ingrediente.nome}}
                       </option>
@@ -171,8 +58,9 @@
             <td>
               <div [ngClass]="getFromGroupClass(quantidade.invalid, quantidade.dirty)" style="margin: 0px;">
                 <input  type="number" 
-                        min="1" max="1000" maxlength="4"
+                        min="1" max="10000" maxlength="5"
                         [(ngModel)]="ingredientes[i].quantidade" 
+                        (blur)="validaQtde($event.target.value, i)" 
                         class="form-control" 
                         name="quantidade_{{ing.index}}" 
                         id="inputQuantidade" 
@@ -188,7 +76,7 @@
                           name="unidadeMedida_{{ing.index}}" 
                           #unidadeMedida="ngModel" 
                           id="inputUnidadeMedida">
-                    <option value="">Selecione[...]</option>
+                    <option value="" selected>Selecione[...]</option>
                     <option value="XCR">Xícara(s)</option>
                     <option value="COL">Colher(es)</option>
                     <option value="K">Quilo(s)</option>
@@ -229,6 +117,7 @@
       </div>
       <div class="box-footer">
         <button type="button" class="btn btn-success" (click)="addIngrediente()">Adicionar</button>&nbsp;
+        <!--<button type="button" class="btn btn-warning">Limpar</button>&nbsp;-->
         <button type="button" [disabled]="!form.valid" class="btn btn-info pull-right" (click)="persistirArray()">Gravar</button>
       </div>
     </form>

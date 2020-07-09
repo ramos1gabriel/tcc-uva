@@ -32,7 +32,7 @@ public class Receita {
 	@Column(name = "NOME", length = 50, nullable = false, unique = true)
     private String nome;
     
-    @Column(name = "DESCRICAO", length = 100, nullable = true)
+    @Column(name = "DESCRICAO", length = 250, nullable = true)
     private String descricao;
     
     @NotNull

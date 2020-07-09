@@ -19,6 +19,17 @@ export class ReceitaIngredienteService {
     }
   }
 
+  createOrUpdateAll(listRecIng : Array<ReceitaIngrediente>) {
+    if(listRecIng[0].id != null && listRecIng[0].id != ''){ //GANBIARRA?? ALTERNATIVA?
+      return this.http.put(`${BACK_END_API}/api/recIng`, listRecIng); //UPDATE
+    } else {
+      for (let i = 0; i < listRecIng.length; i++) {
+        listRecIng[i].id = null;
+      }
+      return this.http.post(`${BACK_END_API}/api/recIng`, listRecIng); //CREATE
+    }
+  }
+
   findAll(page : number, count : number) {
     return this.http.get(`${BACK_END_API}/api/recIng/${page}/${count}`);
   }
