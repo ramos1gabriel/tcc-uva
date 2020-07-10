@@ -27,6 +27,7 @@ import { IngredienteNewComponent } from './components/ingrediente-new/ingredient
 import { IngredienteListComponent } from './components/ingrediente-list/ingrediente-list.component';
 import { ReceitaNewComponent } from './components/receita-new/receita-new.component';
 import { ReceitaingredienteNewComponent } from './components/receitaingrediente-new/receitaingrediente-new.component';
+import { ModopreparoNewComponent } from './components/modopreparo-new/modopreparo-new.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { ReceitaingredienteNewComponent } from './components/receitaingrediente-
     IngredienteNewComponent,
     IngredienteListComponent,
     ReceitaNewComponent,
-    ReceitaingredienteNewComponent
+    ReceitaingredienteNewComponent,
+    ModopreparoNewComponent
   ],
   imports: [
     BrowserModule,

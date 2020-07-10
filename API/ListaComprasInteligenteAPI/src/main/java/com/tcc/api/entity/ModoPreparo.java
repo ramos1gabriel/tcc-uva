@@ -2,8 +2,6 @@ package com.tcc.api.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,10 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import com.tcc.api.enums.TipoEnum;
 
 @Entity
 @Table(name="modopreparo")
@@ -25,18 +19,29 @@ public class ModoPreparo {
 	@Column(name="ID")
 	private Long id;
 	
-	@NotBlank(message = "numero da ordem obrigatorio!")
-	@Column(name = "ORDEM", nullable = false)
-    private Long ordem;
+	@Column(name = "FLCOB", nullable = false)
+    private Boolean flagCobertura;
 	
-	@NotNull
+	@Column(name = "FLMAS", nullable = false)
+    private Boolean flagMassa;
+	
+	@Column(name = "FLREC", nullable = false)
+    private Boolean flagRecheio;
+	
+	/*@NotNull
     @Enumerated(value = EnumType.STRING)
     @Column(name = "TIPO", length = 1, nullable = false)
-    private TipoEnum tipo;
+    private TipoEnum tipo;*/
     
-	@NotBlank(message = "Descricao obrigatorio!")
-    @Column(name = "DESCRICAO", length = 255, nullable = false)
-    private String descricao;
+	 //definir o tamanho melhor da descricoes, avaliar impacto..
+    @Column(name = "DSCOB", length = 255)
+    private String descricaoCobertura;
+    
+    @Column(name = "DSMAS", length = 255)
+    private String descricaoMassa;
+    
+    @Column(name = "DSREC", length = 255)
+    private String descricaoRecheio;
     
     @ManyToOne
     @JoinColumn(name = "RECEITA_ID", foreignKey = @ForeignKey(name = "FK_MODOPREPARO_RECEITA"), nullable = false)
@@ -50,28 +55,52 @@ public class ModoPreparo {
 		this.id = id;
 	}
 
-	public Long getOrdem() {
-		return ordem;
+	public Boolean getFlagCobertura() {
+		return flagCobertura;
 	}
 
-	public void setOrdem(Long ordem) {
-		this.ordem = ordem;
-	}
-	
-	public TipoEnum getTipo() {
-		return tipo;
-	}
-	
-	public void setTipo(TipoEnum tipo) {
-		this.tipo = tipo;
+	public void setFlagCobertura(Boolean flagCobertura) {
+		this.flagCobertura = flagCobertura;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public Boolean getFlagMassa() {
+		return flagMassa;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setFlagMassa(Boolean flagMassa) {
+		this.flagMassa = flagMassa;
+	}
+
+	public Boolean getFlagRecheio() {
+		return flagRecheio;
+	}
+
+	public void setFlagRecheio(Boolean flagRecheio) {
+		this.flagRecheio = flagRecheio;
+	}
+
+	public String getDescricaoCobertura() {
+		return descricaoCobertura;
+	}
+
+	public void setDescricaoCobertura(String descricaoCobertura) {
+		this.descricaoCobertura = descricaoCobertura;
+	}
+
+	public String getDescricaoMassa() {
+		return descricaoMassa;
+	}
+
+	public void setDescricaoMassa(String descricaoMassa) {
+		this.descricaoMassa = descricaoMassa;
+	}
+
+	public String getDescricaoRecheio() {
+		return descricaoRecheio;
+	}
+
+	public void setDescricaoRecheio(String descricaoRecheio) {
+		this.descricaoRecheio = descricaoRecheio;
 	}
 
 	public Receita getReceita() {

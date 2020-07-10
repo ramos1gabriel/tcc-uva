@@ -37,7 +37,8 @@
             <ul class="treeview-menu">
               <li><a [routerLink]="['/receita-list']"><i class="fa fa-circle-o"></i>Lista</a></li>
               <li><a [routerLink]="['/receita-new']"><i class="fa fa-circle-o"></i>Nova Receita</a></li>
-              <li><a [routerLink]="['/receitaingrediente-new/10']" *ngIf="shared.user.username == 'admin'"><i class="fa fa-circle-o"></i>[DSV] RECEITA TELA 2</a></li>
+              <li><a [routerLink]="['/receitaingrediente-new/10']" *ngIf="shared.user.username == 'admin'"><i class="fa fa-circle-o"></i>[DSV] TELA 2</a></li>
+              <li><a [routerLink]="['/modopreparo-new/10']" *ngIf="shared.user.username == 'admin'"><i class="fa fa-circle-o"></i>[DSV] TELA 3</a></li>
             </ul>
           </li>
 

@@ -13,6 +13,7 @@ import { IngredienteNewComponent } from './components/ingrediente-new/ingredient
 import { IngredienteListComponent } from './components/ingrediente-list/ingrediente-list.component';
 import { ReceitaNewComponent } from './components/receita-new/receita-new.component';
 import { ReceitaingredienteNewComponent } from './components/receitaingrediente-new/receitaingrediente-new.component';
+import { ModopreparoNewComponent } from './components/modopreparo-new/modopreparo-new.component';
 
 export const ROUTES : Routes = [
     { path : '', component : HomeComponent, canActivate : [AuthGuard]},
@@ -31,7 +32,7 @@ export const ROUTES : Routes = [
     { path : 'receita-new', component : ReceitaNewComponent, canActivate : [AuthGuard] },
     { path : 'receita-new/:id', component : ReceitaNewComponent, canActivate : [AuthGuard] },
     { path : 'receitaingrediente-new/:idReceita', component : ReceitaingredienteNewComponent, canActivate : [AuthGuard] },
-    { path : 'receitaingrediente-new/:id', component : ReceitaingredienteNewComponent, canActivate : [AuthGuard] }
+    { path : 'modopreparo-new/:idReceita', component : ModopreparoNewComponent, canActivate : [AuthGuard] }
 ]
 
 export const routes : ModuleWithProviders = RouterModule.forRoot(ROUTES);
