@@ -229,7 +229,6 @@ public class IngredienteController {
 		return ResponseEntity.ok(response);
 	}
 	
-	//NOVO
 	@GetMapping()
 	public ResponseEntity<Response<List<Ingrediente>>> findAll(HttpServletRequest request) {
 		
@@ -244,6 +243,25 @@ public class IngredienteController {
 		}
 		
 		response.setData(ingredientes);
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	//TESTE
+	@GetMapping(value = "recing/{id}")
+	public ResponseEntity<Response<List<String>>> findReceitaNomeInRecIng(HttpServletRequest request, @PathVariable("id") Long id) {
+		
+		Response<List<String>> response = new Response<List<String>>();
+		List<String> nomes = null;
+		
+		nomes = ingredienteService.findReceitaNomeInRecIng(id);
+		
+		if(nomes.isEmpty()) {
+			response.getErrors().add("Nenhum registro encontrado");
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		response.setData(nomes);
 		
 		return ResponseEntity.ok(response);
 	}

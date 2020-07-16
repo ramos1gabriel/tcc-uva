@@ -31,7 +31,7 @@ public class APIApplication {
 		admin.setEmail("admin@uva.com");
 		
 		admin.setUsername("admin");
-		admin.setSenha(passwordEncoder.encode("admin"));
+		admin.setSenha(passwordEncoder.encode("admin@123"));
 		//admin.setProfile(ProfileEnum.ROLE_ADMIN);
 		
 		Usuario usuario = usuarioRepository.findByUsername(admin.getUsername());

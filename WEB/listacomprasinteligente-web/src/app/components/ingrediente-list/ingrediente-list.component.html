@@ -13,16 +13,16 @@
       <div class="box-body">
         <table class="table table-bordered">
           <tr>
-            <th>ID</th>
+            <th style="text-align: center;">ID</th>
             <th>Nome</th>
             <th style="width: 40px">&nbsp;</th>
             <th style="width: 40px">&nbsp;</th>
           </tr>
           <tr *ngFor="let ingrediente of listIngrediente">
-            <td>{{ ingrediente.id }}</td>
+            <td align="center">{{ ingrediente.id }}</td>
             <td>{{ ingrediente.nome }}</td>
-            <td><button  class="btn btn-primary" (click)="edit(ingrediente.id);">Editar</button></td>
-            <td><button  class="btn btn-danger" (click)="delete(ingrediente.id);">Excluir</button></td>
+            <td><button  class="btn btn-primary" (click)="edit(ingrediente.id);" title="Editar"><i class="fa fa-pencil"></i></button></td>
+            <td><button  class="btn btn-danger" (click)="delete(ingrediente.id);" title="Excluir"><i class="fa fa-trash"></i></button></td>
           </tr>
         </table>
       </div>

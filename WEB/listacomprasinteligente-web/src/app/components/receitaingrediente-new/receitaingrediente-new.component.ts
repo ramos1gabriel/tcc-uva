@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ResponseApi } from 'src/app/model/response-api';
 import { IngredienteService } from './../../services/ingrediente.service';
 import { ReceitaService } from './../../services/receita.service';
+import { Router } from '@angular/router';
 
 //https://bearnithi.com/2019/05/25/add-remove-multiple-input-fields-dynamically-template-driven-angular/
 
@@ -47,7 +48,8 @@ export class ReceitaingredienteNewComponent implements OnInit {
     private ReceitaIngredienteService : ReceitaIngredienteService,
     private IngredienteService : IngredienteService,
     private ReceitaService : ReceitaService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private router : Router
   ) { 
     this.shared = SharedService.getInstance();
   }
@@ -69,7 +71,7 @@ export class ReceitaingredienteNewComponent implements OnInit {
     if(idReceita != undefined){
       this.idReceita = idReceita;
       this.findByIdReceita(this.idReceita);
-      console.log('ID RECEITA = '+this.idReceita);
+      //console.log('ID RECEITA = '+this.idReceita);
     }
   }
 
@@ -242,23 +244,24 @@ export class ReceitaingredienteNewComponent implements OnInit {
       }
 
       //persiste array
-      console.log(this.arrayReceitaIngredientes);
+      //console.log(this.arrayReceitaIngredientes);
       this.save(this.arrayReceitaIngredientes);
     //}
   }
 
   save(listRecIng : Array<ReceitaIngrediente>){
-    console.log(JSON.stringify(listRecIng));
+    //console.log(JSON.stringify(listRecIng));
     //this.ReceitaIngredienteService.createOrUpdateAll(listRecIng)
     this.message = {};
     this.ReceitaIngredienteService.createOrUpdateAll(listRecIng).subscribe((responseApi : ResponseApi) => {
       let listRecIngRet : Array<ReceitaIngrediente> = responseApi.datas;
-      this.form.resetForm();
+      //this.form.resetForm();
       this.showMessage({
         type : 'success',
         text : `Total de ${listRecIngRet.length} ingredientes cadastrados com sucesso!`
       });
       this.limparTela();
+      this.router.navigate(['/modopreparo-new', this.idReceita]); //proxima tela
     }, err => {
       this.showMessage({
         type : 'error',

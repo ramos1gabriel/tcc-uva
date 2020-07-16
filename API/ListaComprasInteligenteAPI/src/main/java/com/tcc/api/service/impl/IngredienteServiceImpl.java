@@ -55,4 +55,9 @@ public class IngredienteServiceImpl implements IngredienteService {
 	public List<Ingrediente> findAll() {
 		return this.ingredienteRepository.findAll();
 	}
+
+	@Override
+	public List<String> findReceitaNomeInRecIng(Long id) {
+		return this.ingredienteRepository.findReceitaNomeInRecIng(id);
+	}
 }

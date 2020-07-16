@@ -3,7 +3,6 @@ package com.tcc.api.service;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import com.tcc.api.entity.Ingrediente;
 
@@ -22,4 +21,6 @@ public interface IngredienteService {
 	Page<Ingrediente> findByNomeIgnoreCaseContainingOrderByDesc(int page, int count, String nome);
 	
 	List<Ingrediente> findAll();
+	
+	List<String> findReceitaNomeInRecIng(Long id);
 }

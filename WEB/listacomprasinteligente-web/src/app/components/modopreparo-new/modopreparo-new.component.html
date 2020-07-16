@@ -1,3 +1,113 @@
-<p>
-  modopreparo-new works!
-</p>
+<div class="col-md-6" style="margin-left:  0%">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Modo de Preparo</h3>
+    </div>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="save()">
+
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <span>{{ message.text }}</span>
+      </div>
+
+      <div class="box-body">
+
+        <div class="col-sm-10">
+          <label for="inputDescricaoCobertura" class="control-label">Descrição do Cobertura</label>
+        </div>
+        <div [ngClass]="getFromGroupClass(descricaoCobertura.invalid, descricaoCobertura.dirty)">
+
+          <div class="col-sm-10">
+            <textarea [(ngModel)]="modopreparo.descricaoCobertura" 
+                      [disabled]="isCobertura ? true : false"
+                      class="form-control" 
+                      name="descricaoCobertura" 
+                      rows="3"
+                      id="inputDescricaoCobertura" 
+                      #descricaoCobertura="ngModel" 
+                      placeholder="Descreva aqui o passo a passo para o preparo do Cobertura"
+                      required></textarea>
+          </div>
+        </div>
+
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input type="checkbox" 
+                  [(ngModel)]="modopreparo.flagCobertura" 
+                  (change)="validaCobertura($event.target.checked);" 
+                  class="form-check-input" 
+                  name="flagCobertura" 
+                  id="inputFlagCobertura" 
+                  #flagCobertura="ngModel">&nbsp;
+            <label class="form-check-label" for="inputFlagCobertura">Não possui cobertura?</label>
+          </div>
+        </div>
+
+        <div class="col-sm-10">
+          <label for="inputDescricaoMassa" class="control-label">Descrição da Massa</label>
+        </div>
+        <div [ngClass]="getFromGroupClass(descricaoMassa.invalid, descricaoMassa.dirty)">
+
+          <div class="col-sm-10">
+            <textarea [(ngModel)]="modopreparo.descricaoMassa" 
+                      [disabled]="isMassa ? true : false" 
+                      class="form-control" 
+                      name="descricaoMassa" 
+                      rows="3"
+                      id="inputDescricaoMassa" 
+                      #descricaoMassa="ngModel" 
+                      placeholder="Descreva aqui o passo a passo para o preparo da Massa"
+                      required></textarea>
+          </div>
+        </div>
+
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input type="checkbox" 
+                  [(ngModel)]="modopreparo.flagMassa" 
+                  (change)="validaMassa($event.target.checked);" 
+                  class="form-check-input" 
+                  name="flagMassa" 
+                  id="inputFlagMassa" 
+                  #flagMassa="ngModel">&nbsp;
+            <label class="form-check-label" for="inputFlagMassa">Não possui massa?</label>
+          </div>
+        </div>
+
+        <div class="col-sm-10">
+          <label for="inputDescricaoRecheio" class="control-label">Descrição do Recheio</label>
+        </div>
+        <div [ngClass]="getFromGroupClass(descricaoRecheio.invalid, descricaoRecheio.dirty)">
+
+          <div class="col-sm-10">
+            <textarea [(ngModel)]="modopreparo.descricaoRecheio" 
+                      [disabled]="isRecheio ? true : false" 
+                      class="form-control" 
+                      name="descricaoRecheio" 
+                      rows="3"
+                      id="inputDescricaoRecheio" 
+                      #descricaoRecheio="ngModel" 
+                      placeholder="Descreva aqui o passo a passo para o preparo do Recheio"
+                      required></textarea>
+          </div>
+        </div>
+
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input type="checkbox" 
+                  [(ngModel)]="modopreparo.flagRecheio" 
+                  (change)="validaRecheio($event.target.checked);" 
+                  class="form-check-input" 
+                  name="flagRecheio" 
+                  id="inputFlagRecheio" 
+                  #flagRecheio="ngModel">&nbsp;
+            <label class="form-check-label" for="inputFlagRecheio">Não possui recheio?</label>
+          </div>
+        </div>
+
+      </div>
+      <div class="box-footer">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Gravar</button>
+      </div>
+    </form>
+  </div>
+</div>

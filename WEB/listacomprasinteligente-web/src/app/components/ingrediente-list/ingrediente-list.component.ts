@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { Router } from '@angular/router';
 import { ResponseApi } from 'src/app/model/response-api';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-ingrediente-list',
@@ -19,6 +20,8 @@ export class IngredienteListComponent implements OnInit {
   message : {};
   classCss : {};
   listIngrediente = [];
+
+  listNomesReceitas = [];
   
   constructor(
     private dialogService : DialogService,
@@ -49,22 +52,52 @@ export class IngredienteListComponent implements OnInit {
   }
 
   delete(id : string) {
-    this.dialogService.confirm('Tem certeza que deseja excluir?')
-    .then((canDelete : boolean) => {
-      if(canDelete){
-        this.message = {};
-        this.ingredienteService.delete(id).subscribe((responseApi : ResponseApi) => {
-          this.showMessage({
-            type : 'success',
-            text : 'Registro deletado'
-          });
-          this.findAll(this.page, this.count);
-        }, err => {
-          this.showMessage({
-            type : 'error',
-            text : err['error']['errors'][0]
-          });
-        });
+    swal({
+      title: "Atenção",
+      text: `Tem certeza que deseja excluir esse registro?`,
+      icon: "warning",
+      buttons: ['Cancelar', true],
+      dangerMode: true
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+
+        //verifica se tem em alguma receita
+        this.findNomeReceitaPorIngrediente(id);
+
+        //espera um pouquinho o subscribe..
+        setTimeout(() => {
+          if(this.listNomesReceitas.length > 0) {
+            let texto = '';
+            this.listNomesReceitas.forEach(nomeRec => {
+              texto += '- '+nomeRec+'\n';
+            });
+            swal({
+              title: "Não foi possível excluir!",
+              text: 'O ingrediente selecionado já se encontra na(s) receita(s):\n'+texto,
+              icon: "info",
+              dangerMode: true
+            })
+            this.listNomesReceitas = [];
+            texto = '';
+          } else {
+            //EXCLUI
+            this.message = {};
+            this.ingredienteService.delete(id).subscribe((responseApi : ResponseApi) => {
+              swal(`Registro excluido com sucesso!`, {
+                icon: "success",
+              });
+              this.findAll(this.page, this.count);
+            }, err => {
+              this.showMessage({
+                type : 'error',
+                text : err['error']['errors'][0]
+              });
+            });
+          }
+
+        }, 1000);
+
       }
     });
   }
@@ -114,5 +147,17 @@ export class IngredienteListComponent implements OnInit {
       'has-error' : isInvalid && isDirty,
       'has-success' : !isInvalid && isDirty
     };
+  }
+
+  //teste
+  findNomeReceitaPorIngrediente(id : string) {
+    this.ingredienteService.findNomeReceitaPorIngrediente(id).subscribe((responseApi : ResponseApi) => {
+      this.listNomesReceitas = responseApi['data'];
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
   }
 }

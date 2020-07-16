@@ -35,4 +35,9 @@ export class IngredienteService {
   findAllCombo() {
     return this.http.get(`${BACK_END_API}/api/ingrediente/`);
   }
+
+  //novo
+  findNomeReceitaPorIngrediente(idIng : string) {
+    return this.http.get(`${BACK_END_API}/api/ingrediente/recing/${idIng}`);
+  }
 }
