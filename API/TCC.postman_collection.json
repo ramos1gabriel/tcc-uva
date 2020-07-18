@@ -105,7 +105,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJnYWJyaWVsIiwiY3JlYXRlZCI6MTU4MTAxODgzODY3OSwiZXhwIjoxNTgxNjIzNjM4fQ.ZvLBVLuJgYSHbx7o_EOeWWQzf8f1DEPrVrZ1n5IOxUrbCsv2PcOqTJ6yKzYd2NIOC57cjNvZ91BSdhWBtfWXJw",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1OTQ4NDczMjExNDMsImV4cCI6MTU5NTQ1MjEyMX0.-kyIFLUlGhNToKBPSimIc9Nd1bIDlSSNSuIYliVLfctU_78Uy7__Bj-CML04Y4pZlCWUmx6dv8ypSuTshNkSIA",
 								"type": "text"
 							}
 						],
@@ -119,7 +119,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/tcc/api/ingrediente/5",
+							"raw": "http://localhost:8080/tcc/api/ingrediente/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -129,7 +129,7 @@
 								"tcc",
 								"api",
 								"ingrediente",
-								"5"
+								"1"
 							]
 						}
 					},
@@ -198,7 +198,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1OTQyMTMwMDgzOTcsImV4cCI6MTU5NDgxNzgwOH0.Tq4w7SbXkE0cnh0bmCWLfAIqw9Y90JsS1zthKb3Y39yIxbPM-C8ZEyCDJkAF84wCM8Mvzo4KvQv8KnYYaGf7wA"
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1OTQ4NDcyODQ0OTksImV4cCI6MTU5NTQ1MjA4NH0.5Y_8Nq6msgPewbwoLNz-wz4_zK8CgEfoAs_J8eNCYWGUM9uuZlj14ZKVRBmTgpQo49GO9LYMRTyvCKhGYeSXNw"
 							}
 						],
 						"body": {
@@ -223,6 +223,53 @@
 								"ingrediente",
 								"0",
 								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findNomeReceitaInRecIng",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1OTQ4NDcyODQ0OTksImV4cCI6MTU5NTQ1MjA4NH0.5Y_8Nq6msgPewbwoLNz-wz4_zK8CgEfoAs_J8eNCYWGUM9uuZlj14ZKVRBmTgpQo49GO9LYMRTyvCKhGYeSXNw"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/ingrediente/recing/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"ingrediente",
+								"recing",
+								"1"
 							]
 						}
 					},
@@ -472,7 +519,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODE3MDA0NjkwNDUsImV4cCI6MTU4MjMwNTI2OX0.kxnS4AMx-Fx2N5wWZqJZao_HXI1awCDi0c0jlmmIuQW0uYz7En-mGynSryEUHHyKE1EmKAgT4i32JXH5Y5cnwg"
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1OTUwMDY4MDE0ODgsImV4cCI6MTU5NTYxMTYwMX0.4IGE4pPydr3zKz_lbh53emY6IiTym32gxVDUW7J9o_tQRyz1SAew54XS9u-CSOgVrh1o_SKG53rQw90vQVOCAg"
 							}
 						],
 						"body": {
@@ -495,6 +542,54 @@
 								"tcc",
 								"api",
 								"receita",
+								"0",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllPesquisa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1OTUwMDY4MDE0ODgsImV4cCI6MTU5NTYxMTYwMX0.4IGE4pPydr3zKz_lbh53emY6IiTym32gxVDUW7J9o_tQRyz1SAew54XS9u-CSOgVrh1o_SKG53rQw90vQVOCAg"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/receita/pesquisa/0/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"receita",
+								"pesquisa",
 								"0",
 								"10"
 							]

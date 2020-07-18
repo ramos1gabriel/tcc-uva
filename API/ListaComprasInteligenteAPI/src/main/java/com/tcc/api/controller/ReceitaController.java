@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcc.api.dto.ReceitaDTO;
 import com.tcc.api.entity.Receita;
 import com.tcc.api.entity.Usuario;
-import com.tcc.api.enums.CategoriaEnum;
 import com.tcc.api.response.Response;
 import com.tcc.api.security.jwt.JwtTokenUtil;
 import com.tcc.api.service.ReceitaService;
@@ -238,5 +238,24 @@ public class ReceitaController {
 	//ROLLBACK
 	public void deleteReceitaRollback(Long id) {
 		receitaService.delete(id);
+	}
+	
+	@GetMapping(value = "pesquisa/{page}/{count}")
+	public ResponseEntity<Response<Page<ReceitaDTO>>> findAllPesquisa(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
+
+		Response<Page<ReceitaDTO>> response = new Response<Page<ReceitaDTO>>();
+		
+		Page<ReceitaDTO> receitas = null;
+		
+		receitas = receitaService.pesquisaReceita(page, count);
+		
+		if(receitas.isEmpty()) {
+			response.getErrors().add("Nenhum registro encontrado");
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		response.setData(receitas);
+		
+		return ResponseEntity.ok(response);
 	}
 }

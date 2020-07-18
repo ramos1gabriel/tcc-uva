@@ -1,8 +1,8 @@
 CRIANDO NOVA TELA:
 
 *CRIAR TUDO EM SUAS RESPECTIVAS PASTAS
-\src\app\components
-\src\app\services
+src\app\components
+src\app\services
 
 ng generate component <nome>
 ng generate service <nome>

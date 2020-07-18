@@ -1,0 +1,46 @@
+IMPLEMENTAR DELETE CASCATA | COMO VAI FUNCIONAR O EDIT DE TODAS AS TELAS EXTRAS?
+<div class="row">
+  <div class="col-md-8">
+
+    <div [ngClass]="classCss" role="alert" *ngIf="message">
+      <span>{{ message.text }}</span>
+    </div>
+
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Lista de Receitas</h3>
+      </div>
+
+      <div class="box-body">
+        <table class="table table-bordered">
+          <tr>
+            <th style="text-align: center;">ID</th>
+            <th>Nome</th>
+            <th>Qtd. Ingredientes</th>
+            <th>Categoria</th>
+            <th style="width: 40px">&nbsp;</th>
+            <th style="width: 40px">&nbsp;</th>
+          </tr>
+          <tr *ngFor="let receita of listReceita">
+            <td align="center">{{ receita.id }}</td>
+            <td>{{ receita.nome }}</td>
+            <td>{{ receita.quantidade }}</td>
+            <td>{{ receita.categoriaFormatado }}</td>
+            <td><button  class="btn btn-primary" (click)="edit(receita.id);" title="Editar"><i class="fa fa-pencil"></i></button></td>
+            <td><button  class="btn btn-danger" (click)="delete(receita.id);" title="Excluir"><i class="fa fa-trash"></i></button></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+          <li><a href="" (click)="setPreviousPage($event);">&laquo;</a></li>
+          <li *ngFor="let p of pages; let i = index">
+            <a [ngClass]="{'pagination-focus' : i == page}" href="" (click)="setPage(i, $event);">{{i+1}}</a>
+          </li>
+          <li><a href="" (click)="setNextPage($event);">&raquo;</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

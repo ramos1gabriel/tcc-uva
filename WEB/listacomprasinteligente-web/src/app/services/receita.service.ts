@@ -30,4 +30,8 @@ export class ReceitaService {
   delete(id : string) {
     return this.http.delete(`${BACK_END_API}/api/receita/${id}`);
   }
+
+  findAllPesquisa(page : number, count : number) {
+    return this.http.get(`${BACK_END_API}/api/receita/pesquisa/${page}/${count}`);
+  }
 }
