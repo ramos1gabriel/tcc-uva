@@ -1,0 +1,11 @@
+Layout AdminLTE
+https://adminlte.io/docs/2.4/main-header
+
+SweetAlert
+https://sweetalert.js.org/docs/
+
+Font Awesome
+https://fontawesome.com/icons?d=gallery
+
+Bootstrap 4
+https://getbootstrap.com/docs/4.0/components/alerts/
