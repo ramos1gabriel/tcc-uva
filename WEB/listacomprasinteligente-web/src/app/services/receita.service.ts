@@ -34,4 +34,8 @@ export class ReceitaService {
   findAllPesquisa(page : number, count : number) {
     return this.http.get(`${BACK_END_API}/api/receita/pesquisa/${page}/${count}`);
   }
+
+  deleteAll(id : string) {
+    return this.http.delete(`${BACK_END_API}/api/receita/deleteAll/${id}`);
+  }
 }

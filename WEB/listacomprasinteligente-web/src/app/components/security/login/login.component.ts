@@ -4,6 +4,8 @@ import { User } from './../../../model/user.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { currentUser } from 'src/app/model/current-user.model';
+import { finalize } from 'rxjs/operators';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-login',
@@ -18,23 +20,20 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService  : UserService,
-    private router : Router
+    private router : Router,
+    private spinner: NgxSpinnerService
   ) {
     this.shared = SharedService.getInstance();
   }
 
   ngOnInit() {
-    /*$(document).ready(function() {
-      var username = $('#inputUsername').val('admin');
-      var password = $('#inputPassword').val('admin');
-      console.log("username="+username.val()+";password="+password.val());
-      $("#botaoLogin").trigger("click");
-    });*/
+    
   }
 
   login() {
+    this.spinner.show();
     this.message = '';
-    this.userService.login(this.user).subscribe((userAuthentication : currentUser) => {
+    this.userService.login(this.user).pipe(finalize(() => this.spinner.hide())).subscribe((userAuthentication : currentUser) => {
       this.shared.token = userAuthentication.token;
       this.shared.user = userAuthentication.user;
       //this.shared.user.profile = this.shared.user.profile.substring(5);

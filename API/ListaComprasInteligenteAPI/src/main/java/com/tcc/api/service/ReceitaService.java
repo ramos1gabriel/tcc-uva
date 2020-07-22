@@ -1,8 +1,9 @@
 package com.tcc.api.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
-import com.tcc.api.dto.ReceitaDTO;
 import com.tcc.api.entity.Receita;
 
 public interface ReceitaService {
@@ -22,5 +23,9 @@ public interface ReceitaService {
 	//criar uma q traga os ingredientes e modo de preparo (DTO?)
 	//Page<ReceitaDTO> findAllPesquisa(int page, int count);
 	
-	Page<ReceitaDTO> pesquisaReceita(int page, int count);
+	/*Page<ReceitaDTO> pesquisaReceita(int page, int count);*/
+	
+	Integer countIngredientePorReceita(Long id);
+	
+	List<Receita> findAll();
 }

@@ -1,11 +1,16 @@
 package com.tcc.api.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -24,6 +29,8 @@ import com.tcc.api.entity.Receita;
 import com.tcc.api.entity.Usuario;
 import com.tcc.api.response.Response;
 import com.tcc.api.security.jwt.JwtTokenUtil;
+import com.tcc.api.service.ModoPreparoService;
+import com.tcc.api.service.ReceitaIngredienteService;
 import com.tcc.api.service.ReceitaService;
 import com.tcc.api.service.UsuarioService;
 
@@ -34,6 +41,12 @@ public class ReceitaController {
 	
 	@Autowired
 	private ReceitaService receitaService;
+	
+	@Autowired
+	private ReceitaIngredienteService receitaingredienteService;
+	
+	@Autowired
+	private ModoPreparoService modopreparoService;
 	
 	@Autowired
 	protected JwtTokenUtil jwtTokenUtil;
@@ -245,17 +258,55 @@ public class ReceitaController {
 
 		Response<Page<ReceitaDTO>> response = new Response<Page<ReceitaDTO>>();
 		
-		Page<ReceitaDTO> receitas = null;
+		Page<ReceitaDTO> dtos = null;
+		List<ReceitaDTO> dtolist = new ArrayList<ReceitaDTO>();
 		
-		receitas = receitaService.pesquisaReceita(page, count);
+		//receitas = receitaService.pesquisaReceita(page, count);
 		
-		if(receitas.isEmpty()) {
+		//PREENCHE DTO
+		List<Receita> receitas = receitaService.findAll();
+		if(receitas != null) {
+			for (Receita rec : receitas) {
+				ReceitaDTO dto = new ReceitaDTO();
+				dto.setId(rec.getId());
+				dto.setNome(rec.getNome());
+				dto.setCategoria(rec.getCategoria());
+				dto.setQuantidade(receitaService.countIngredientePorReceita(rec.getId()));
+				dtolist.add(dto);
+			}
+		}
+		
+		//CONVERT LIST TO PAGE
+		Pageable pageable = PageRequest.of(page, count);
+		dtos = new PageImpl<>(dtolist, pageable, dtolist.size());
+		
+		if(dtos.isEmpty()) {
 			response.getErrors().add("Nenhum registro encontrado");
 			return ResponseEntity.badRequest().body(response);
 		}
 		
-		response.setData(receitas);
+		response.setData(dtos);
 		
 		return ResponseEntity.ok(response);
+	}
+	
+	@DeleteMapping(value = "deleteAll/{id}")
+	public ResponseEntity<Response<String>> deleteAll(@PathVariable("id") Long id) {
+		
+		Response<String> response = new Response<String>();
+		
+		Receita receita = receitaService.findById(id);
+		
+		if(receita == null) {
+			response.getErrors().add("Registro nao encontrado id: "+id);
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		//sequencia
+		modopreparoService.deleteByReceitaId(id);
+		receitaingredienteService.deleteByReceitaId(id);
+		receitaService.delete(id);
+		
+		return ResponseEntity.ok(new Response<String>());
 	}
 }

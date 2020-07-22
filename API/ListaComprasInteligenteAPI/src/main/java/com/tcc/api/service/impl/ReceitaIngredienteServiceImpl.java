@@ -7,8 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.tcc.api.entity.ReceitaIngredientes;
+import com.tcc.api.entity.ReceitaIngrediente;
 import com.tcc.api.repository.ReceitaIngredienteRepository;
 import com.tcc.api.service.ReceitaIngredienteService;
 
@@ -19,17 +20,17 @@ public class ReceitaIngredienteServiceImpl implements ReceitaIngredienteService 
 	private ReceitaIngredienteRepository recIngRepository;
 
 	@Override
-	public ReceitaIngredientes createOrUpdate(ReceitaIngredientes recIng) {
+	public ReceitaIngrediente createOrUpdate(ReceitaIngrediente recIng) {
 		return this.recIngRepository.save(recIng);
 	}
 	
 	@Override
-	public List<ReceitaIngredientes> createOrUpdateAll(List<ReceitaIngredientes> listRecIng) {
+	public List<ReceitaIngrediente> createOrUpdateAll(List<ReceitaIngrediente> listRecIng) {
 		return this.recIngRepository.saveAll(listRecIng);
 	}
 
 	@Override
-	public ReceitaIngredientes findById(Long id) {
+	public ReceitaIngrediente findById(Long id) {
 		return this.recIngRepository.findById(id).orElse(null); //findOne nao funciona da mesma forma q antes no SPRING 2
 	}
 
@@ -39,8 +40,19 @@ public class ReceitaIngredienteServiceImpl implements ReceitaIngredienteService 
 	}
 
 	@Override
-	public Page<ReceitaIngredientes> findAll(int page, int count) {
+	public Page<ReceitaIngrediente> findAll(int page, int count) {
 		Pageable pages = PageRequest.of(page, count); //contrutor de PageRequest esta deprecated no SPRING 2, trocar por .of
 		return this.recIngRepository.findAll(pages);
+	}
+
+	@Override
+	@Transactional
+	public void deleteByReceitaId(Long id) {
+		this.recIngRepository.deleteByReceitaId(id);
+	}
+
+	@Override
+	public List<ReceitaIngrediente> findByReceitaId(Long id) {
+		return this.recIngRepository.findByReceitaId(id);
 	}
 }

@@ -41,4 +41,8 @@ export class ReceitaIngredienteService {
   delete(id : string) {
     return this.http.delete(`${BACK_END_API}/api/recIng/${id}`);
   }
+  
+  findByReceitaId(id : string) {
+    return this.http.get(`${BACK_END_API}/api/recIng/findByReceitaId/${id}`);
+  }
 }

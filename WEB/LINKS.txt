@@ -1,11 +1,16 @@
-Layout AdminLTE
+AdminLTE (layout)
 https://adminlte.io/docs/2.4/main-header
 
-SweetAlert
-https://sweetalert.js.org/docs/
-
-Font Awesome
+Font Awesome (icons)
 https://fontawesome.com/icons?d=gallery
 
 Bootstrap 4
 https://getbootstrap.com/docs/4.0/components/alerts/
+
+BIBLIOTECAS ANGULAR:
+
+SweetAlert
+https://sweetalert.js.org/docs/
+
+NgxSpinner
+https://napster2210.github.io/ngx-spinner/

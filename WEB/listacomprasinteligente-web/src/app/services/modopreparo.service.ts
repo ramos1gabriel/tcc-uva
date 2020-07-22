@@ -30,4 +30,8 @@ export class ModopreparoService {
   delete(id : string) {
     return this.http.delete(`${BACK_END_API}/api/modopreparo/${id}`);
   }
+
+  findByReceitaId(id : string) {
+    return this.http.get(`${BACK_END_API}/api/modopreparo/findByReceitaId/${id}`);
+  }
 }

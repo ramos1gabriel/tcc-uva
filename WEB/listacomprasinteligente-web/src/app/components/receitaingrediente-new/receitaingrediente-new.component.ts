@@ -10,6 +10,7 @@ import { ResponseApi } from 'src/app/model/response-api';
 import { IngredienteService } from './../../services/ingrediente.service';
 import { ReceitaService } from './../../services/receita.service';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 //https://bearnithi.com/2019/05/25/add-remove-multiple-input-fields-dynamically-template-driven-angular/
 
@@ -33,10 +34,12 @@ export class ReceitaingredienteNewComponent implements OnInit {
   classCss: {};
   idReceita : string; //receita
   listIngrediente = [];
+  modo : string;
 
   //ARRAY DA TELA
   public ingredientes: any[] = [{
     index: 1,
+    id : '',
     ingrediente : '',
     quantidade: 1,
     unidadeMedida: ''
@@ -58,14 +61,6 @@ export class ReceitaingredienteNewComponent implements OnInit {
     //popular combo ingredientes
     this.findAllComboIngredientes();
 
-    /*
-    let id : string = this.route.snapshot.params['id'];
-    if(id != undefined){
-      console.log('findById');
-      this.findById(id);
-    }
-    */
-
     //PASSAGEM DE PARAMETRO DA TELA RECEITA
     let idReceita : string = this.route.snapshot.params['idReceita'];
     if(idReceita != undefined){
@@ -73,6 +68,40 @@ export class ReceitaingredienteNewComponent implements OnInit {
       this.findByIdReceita(this.idReceita);
       //console.log('ID RECEITA = '+this.idReceita);
     }
+
+    let modo : string = this.route.snapshot.params['edit'];
+    if(modo == 'edit') {
+      this.modo = modo;
+      this.findByReceitaId(idReceita);
+
+      /*setTimeout(() => {
+        console.log(this.arrayReceitaIngredientes.length);
+      }, 1000);*/
+    }
+  }
+
+  findByReceitaId(id : string) {
+    this.ReceitaIngredienteService.findByReceitaId(id).pipe(
+      finalize(() => {
+        for (var i = 0; this.arrayReceitaIngredientes.length > i; i++) {
+          this.ingredientes.push({
+            index: i + 1,
+            id : this.arrayReceitaIngredientes[i].id,
+            ingrediente : this.arrayReceitaIngredientes[i].ingrediente.id,
+            quantidade: this.arrayReceitaIngredientes[i].quantidade,
+            unidadeMedida: (this.arrayReceitaIngredientes[i].unidadeMedida == 'UNI' ? '' : this.arrayReceitaIngredientes[i].unidadeMedida)
+          });
+        }
+        this.ingredientes.splice(0, 1);
+      })
+    ).subscribe((responseApi : ResponseApi) => {
+      this.arrayReceitaIngredientes = responseApi.datas;
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
   }
 
   //POPULA COMBO INGREDIENTES
@@ -115,6 +144,7 @@ export class ReceitaingredienteNewComponent implements OnInit {
     if(tamanhoIng <= 10){
       this.ingredientes.push({
         index: tamanhoIng + 1,
+        id : '',
         ingrediente : '',
         quantidade: 1,
         unidadeMedida: ''
@@ -131,7 +161,17 @@ export class ReceitaingredienteNewComponent implements OnInit {
   removeIngrediente(i: number) {
     let tamanhoIng = this.ingredientes.length;
     if(tamanhoIng > 1){
-      this.ingredientes.splice(i, 1);
+      if(this.modo == 'edit') {
+        let id : string = this.ingredientes[i].id;
+        //console.log(this.ingredientes[i]);
+        if(id != '' && id != 'undefined') {
+          this.delete(id);
+        }
+        this.ingredientes.splice(i, 1);
+      } else {
+        this.ingredientes.splice(i, 1);
+      }
+
     } else { //validacao
       this.showMessage({
         type : 'error',
@@ -230,6 +270,7 @@ export class ReceitaingredienteNewComponent implements OnInit {
 
       for (var i = 0; this.ingredientes.length > i; i++) {
         //seta valores
+        let id : string = this.ingredientes[i].id;
         let ingrediente : string = this.ingredientes[i].ingrediente;
         let qtde : any = this.ingredientes[i].quantidade;
         let unidade : string = this.ingredientes[i].unidadeMedida == '' ? 'UNI' : this.ingredientes[i].unidadeMedida;
@@ -237,7 +278,7 @@ export class ReceitaingredienteNewComponent implements OnInit {
         //seta externos
         //let rec = new Receita(this.idReceita, '', '', '');
         let ing = new Ingrediente(ingrediente, '');
-        let recingNovo = new ReceitaIngrediente('', '', qtde, unidade, this.receita, ing);
+        let recingNovo = new ReceitaIngrediente(id, '', qtde, unidade, this.receita, ing);
 
         //add array
         this.arrayReceitaIngredientes.push(recingNovo);
@@ -261,7 +302,7 @@ export class ReceitaingredienteNewComponent implements OnInit {
         text : `Total de ${listRecIngRet.length} ingredientes cadastrados com sucesso!`
       });
       this.limparTela();
-      this.router.navigate(['/modopreparo-new', this.idReceita]); //proxima tela
+      this.router.navigate(['/modopreparo-new', this.idReceita, 'edit']); //proxima tela
     }, err => {
       this.showMessage({
         type : 'error',
@@ -279,5 +320,17 @@ export class ReceitaingredienteNewComponent implements OnInit {
 
     //add um novo item default
     this.addIngrediente();
+  }
+
+  delete(id : string) {
+    this.message = {};
+    this.ReceitaIngredienteService.delete(id).subscribe((responseApi : ResponseApi) => {
+      //??
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
   }
 }

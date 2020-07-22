@@ -24,6 +24,8 @@ import { TicketListComponent } from './components/ticket-list/ticket-list.compon
 import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { IngredienteNewComponent } from './components/ingrediente-new/ingrediente-new.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -49,7 +51,8 @@ var AppModule = /** @class */ (function () {
                 FormsModule,
                 AppRoutingModule,
                 HttpClientModule,
-                routes
+                routes,
+                NgxSpinnerModule
             ],
             providers: [
                 UserService,

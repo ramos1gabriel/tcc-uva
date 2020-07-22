@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -42,7 +43,7 @@ public class Receita {
     
     @JsonIgnore
     @OneToMany(mappedBy = "receita", fetch=FetchType.LAZY)
-    private List<ReceitaIngredientes> receitaIngredientes;
+    private List<ReceitaIngrediente> receitaIngredientes;
     
     @JsonIgnore
     //cascade = CascadeType.ALL
@@ -83,11 +84,11 @@ public class Receita {
 		this.descricao = descricao;
 	}
 	
-	public List<ReceitaIngredientes> getReceitaIngredientes() {
+	public List<ReceitaIngrediente> getReceitaIngredientes() {
 		return receitaIngredientes;
 	}
 	
-	public void setReceitaIngredientes(List<ReceitaIngredientes> receitaIngredientes) {
+	public void setReceitaIngredientes(List<ReceitaIngrediente> receitaIngredientes) {
 		this.receitaIngredientes = receitaIngredientes;
 	}
 	

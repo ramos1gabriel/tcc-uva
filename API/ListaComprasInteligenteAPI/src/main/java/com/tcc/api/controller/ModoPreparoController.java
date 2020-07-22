@@ -1,5 +1,6 @@
 package com.tcc.api.controller;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.api.entity.ModoPreparo;
+import com.tcc.api.entity.ReceitaIngrediente;
 import com.tcc.api.entity.Usuario;
 import com.tcc.api.response.Response;
 import com.tcc.api.security.jwt.JwtTokenUtil;
@@ -232,5 +234,22 @@ public class ModoPreparoController {
 	//ROLLBACK
 	public void deleteReceitaRollback(Long id) {
 		modopreparoService.delete(id);
+	}
+	
+	@GetMapping(value = "findByReceitaId/{id}")
+	public ResponseEntity<Response<ModoPreparo>> findByReceitaId(@PathVariable("id") Long id) {
+		
+		Response<ModoPreparo> response = new Response<ModoPreparo>();
+		
+		ModoPreparo modopreparo = modopreparoService.findByReceitaId(id);
+		
+		if(modopreparo == null) {
+			response.getErrors().add("Registros nao encontrado para o receita id: "+id);
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		response.setData(modopreparo);
+		
+		return ResponseEntity.ok(response);
 	}
 }

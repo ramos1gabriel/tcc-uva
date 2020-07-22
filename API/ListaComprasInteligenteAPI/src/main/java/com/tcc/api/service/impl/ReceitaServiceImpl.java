@@ -6,12 +6,10 @@ import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.tcc.api.dto.ReceitaDTO;
 import com.tcc.api.entity.Receita;
 import com.tcc.api.repository.ReceitaRepository;
 import com.tcc.api.service.ReceitaService;
@@ -51,7 +49,17 @@ public class ReceitaServiceImpl implements ReceitaService {
 		return this.receitaRepository.findAll(pages);
 	}
 
-	//teste
+	@Override
+	public Integer countIngredientePorReceita(Long id) {
+		return this.receitaRepository.countIngredientePorReceita(id);
+	}
+
+	@Override
+	public List<Receita> findAll() {
+		return this.receitaRepository.findAll();
+	}
+	
+	/*
 	@Override
 	public Page<ReceitaDTO> pesquisaReceita(int page, int count) {
 
@@ -63,9 +71,9 @@ public class ReceitaServiceImpl implements ReceitaService {
 				+ "RECING WHERE REC.ID = RECING.RECEITA_ID "
 				+ "GROUP BY REC.ID";
 		
-		List<ReceitaDTO> list = em.createNativeQuery(queryString , ReceitaDTO.class).getResultList();
+		List<ReceitaDTO> list = em.createNativeQuery(queryString).getResultList();
 		Pageable pageable = PageRequest.of(page, count);
 		Page<ReceitaDTO> receitas = new PageImpl<>(list, pageable, list.size());
 		return receitas;
-	}
+	}*/
 }

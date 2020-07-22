@@ -28,22 +28,25 @@
             <th style="width: 30%;">Ingrediente</th>
             <th style="width: 10%;">Quantidade</th>
             <th style="width: 15%;">Unidade&nbsp;
-              <a data-toggle="tooltip" title="Unidade de Medida caso não seja informada será entendido como uma 'unidade única'. Exemplo: 2 ovos">
+              <a data-toggle="tooltip" title="Unidade de Medida caso não seja informada será entendido como uma unidade. Exemplo: 2 ovos, 1 caixa de leite, etc..">
                 <i class="fa fa-question-circle"></i>
               </a>
             </th>
             <th>&nbsp;</th>
           </tr>
           <tr *ngFor="let ing of ingredientes; let i = index;">
-            <td><h5>{{i+1}}</h5></td>
+            <td>
+              <h5>{{i+1}}</h5>
+              <input type="hidden" [(ngModel)]="ing.id" name="id_{{i}}" id="inputID_{{i}}" #id="ngModel" size="5">
+            </td>
             <td>
               <div [ngClass]="getFromGroupClass(ingrediente.invalid, ingrediente.dirty)" style="margin: 0px;">
-                <select [(ngModel)]="ingredientes[i].ingrediente" 
+                <select [(ngModel)]="ing.ingrediente" 
                         (change)="validaDuplicidade($event.target.value, i)" 
                         class="form-control" 
-                        name="ingrediente_{{ing.index}}" 
+                        name="ingrediente_{{i}}" 
                         #ingrediente="ngModel" 
-                        id="inputIngrediente"
+                        id="inputIngrediente_{{i}}"
                         required>
                       <option value="" selected>Selecione[...]</option>
                       <option *ngFor="let ingrediente of listIngrediente" value={{ingrediente.id}}>
@@ -56,11 +59,11 @@
               <div [ngClass]="getFromGroupClass(quantidade.invalid, quantidade.dirty)" style="margin: 0px;">
                 <input  type="number" 
                         min="1" max="10000" maxlength="5"
-                        [(ngModel)]="ingredientes[i].quantidade" 
+                        [(ngModel)]="ing.quantidade" 
                         (blur)="validaQtde($event.target.value, i)" 
                         class="form-control" 
-                        name="quantidade_{{ing.index}}" 
-                        id="inputQuantidade" 
+                        name="quantidade_{{i}}" 
+                        id="inputQuantidade_{{i}}" 
                         #quantidade="ngModel" 
                         placeholder="Quantidade" 
                         required>
@@ -68,11 +71,11 @@
             </td>
             <td>
               <div [ngClass]="getFromGroupClass(unidadeMedida.invalid, unidadeMedida.dirty)" style="margin: 0px;">
-                <select [(ngModel)]="ingredientes[i].unidadeMedida" 
+                <select [(ngModel)]="ing.unidadeMedida" 
                           class="form-control" 
-                          name="unidadeMedida_{{ing.index}}" 
+                          name="unidadeMedida_{{i}}" 
                           #unidadeMedida="ngModel" 
-                          id="inputUnidadeMedida">
+                          id="inputUnidadeMedida_{{i}}">
                     <option value="" selected>Selecione[...]</option>
                     <option value="XCR">Xícara(s)</option>
                     <option value="COL">Colher(es)</option>
@@ -115,7 +118,7 @@
       <div class="box-footer">
         <button type="button" class="btn btn-success" (click)="addIngrediente()">Adicionar</button>&nbsp;
         <!--<button type="button" class="btn btn-warning">Limpar</button>&nbsp;-->
-        <button type="button" [disabled]="!form.valid" class="btn btn-info pull-right" (click)="persistirArray()">Gravar</button>
+        <button type="button" [disabled]="!form.valid" class="btn btn-info pull-right" (click)="persistirArray()">Continuar</button>
       </div>
     </form>
   </div>

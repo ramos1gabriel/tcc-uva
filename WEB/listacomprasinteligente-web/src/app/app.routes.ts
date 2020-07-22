@@ -31,10 +31,12 @@ export const ROUTES : Routes = [
     { path : 'ingrediente-new/:id', component : IngredienteNewComponent, canActivate : [AuthGuard] },
     { path : 'ingrediente-list', component : IngredienteListComponent, canActivate : [AuthGuard] },
     { path : 'receita-new', component : ReceitaNewComponent, canActivate : [AuthGuard] },
-    { path : 'receita-new/:id', component : ReceitaNewComponent, canActivate : [AuthGuard] },
+    { path : 'receita-new/:id/:edit', component : ReceitaNewComponent, canActivate : [AuthGuard] },
     { path : 'receitaingrediente-new/:idReceita', component : ReceitaingredienteNewComponent, canActivate : [AuthGuard] },
     { path : 'modopreparo-new/:idReceita', component : ModopreparoNewComponent, canActivate : [AuthGuard] },
-    { path : 'receita-list', component : ReceitaListComponent, canActivate : [AuthGuard] }
+    { path : 'receita-list', component : ReceitaListComponent, canActivate : [AuthGuard] },
+    { path : 'receitaingrediente-new/:idReceita/:edit', component : ReceitaingredienteNewComponent, canActivate : [AuthGuard] },
+    { path : 'modopreparo-new/:idReceita/:edit', component : ModopreparoNewComponent, canActivate : [AuthGuard] },
 ]
 
 export const routes : ModuleWithProviders = RouterModule.forRoot(ROUTES);

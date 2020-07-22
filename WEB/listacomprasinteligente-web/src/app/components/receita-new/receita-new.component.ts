@@ -21,6 +21,7 @@ export class ReceitaNewComponent implements OnInit {
   shared : SharedService;
   message: {};
   classCss: {};
+  modo : string;
 
   constructor(
     private ReceitaService : ReceitaService,
@@ -36,6 +37,9 @@ export class ReceitaNewComponent implements OnInit {
     if(id != undefined){
       this.findById(id);
     }
+
+    //edit
+    this.modo = this.route.snapshot.params['edit'];
   }
 
   findById(id : string) {
@@ -60,8 +64,13 @@ export class ReceitaNewComponent implements OnInit {
         type : 'success',
         text : `${receitaRet.nome} cadastrado com sucesso!`
       });
-      //window.location.href = `/receitaingrediente-new/${receitaRet.id}`;
-      this.router.navigate(['/receitaingrediente-new', receitaRet.id]);
+
+      if(this.modo == 'edit') {
+        this.router.navigate(['/receitaingrediente-new', receitaRet.id, 'edit']);
+      } else {
+        this.router.navigate(['/receitaingrediente-new', receitaRet.id]);
+      }
+
     }, err => {
       this.showMessage({
         type : 'error',

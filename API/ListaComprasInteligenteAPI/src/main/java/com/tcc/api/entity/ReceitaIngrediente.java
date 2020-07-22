@@ -16,8 +16,8 @@ import com.tcc.api.enums.UnidadeMedidaEnum;
 
 
 @Entity
-@Table(name="receita_ingredientes")
-public class ReceitaIngredientes {
+@Table(name="receita_ingrediente")
+public class ReceitaIngrediente {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

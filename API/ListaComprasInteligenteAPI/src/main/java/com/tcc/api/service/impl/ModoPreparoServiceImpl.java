@@ -2,6 +2,7 @@ package com.tcc.api.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tcc.api.entity.ModoPreparo;
 import com.tcc.api.repository.ModoPreparoRepository;
@@ -31,6 +32,17 @@ public class ModoPreparoServiceImpl implements ModoPreparoService {
 	@Override
 	public void delete(Long id) {
 		this.modopreparoRepository.deleteById(id); //delete nao funciona da mesma forma q antes no SPRING 2
+	}
+
+	@Override
+	@Transactional
+	public void deleteByReceitaId(Long id) {
+		this.modopreparoRepository.deleteByReceitaId(id);
+	}
+
+	@Override
+	public ModoPreparo findByReceitaId(Long id) {
+		return this.modopreparoRepository.findByReceitaId(id);
 	}
 
 //	@Override

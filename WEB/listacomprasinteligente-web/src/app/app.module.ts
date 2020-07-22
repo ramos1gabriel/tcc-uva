@@ -29,6 +29,7 @@ import { ReceitaNewComponent } from './components/receita-new/receita-new.compon
 import { ReceitaingredienteNewComponent } from './components/receitaingrediente-new/receitaingrediente-new.component';
 import { ModopreparoNewComponent } from './components/modopreparo-new/modopreparo-new.component';
 import { ReceitaListComponent } from './components/receita-list/receita-list.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { ReceitaListComponent } from './components/receita-list/receita-list.com
     AppRoutingModule,
     HttpClientModule,
     routes,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ],
   providers: [
     UserService, 

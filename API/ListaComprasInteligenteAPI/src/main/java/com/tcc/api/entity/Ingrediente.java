@@ -29,7 +29,7 @@ public class Ingrediente {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "receita", fetch=FetchType.LAZY)
-    private List<ReceitaIngredientes> receitaIngredientes;
+    private List<ReceitaIngrediente> receitaIngredientes;
 	
 	public Long getId() {
 		return id;
@@ -47,11 +47,11 @@ public class Ingrediente {
 		this.nome = nome;
 	}
 	
-	public List<ReceitaIngredientes> getReceitaIngredientes() {
+	public List<ReceitaIngrediente> getReceitaIngredientes() {
 		return receitaIngredientes;
 	}
 	
-	public void setReceitaIngredientes(List<ReceitaIngredientes> receitaIngredientes) {
+	public void setReceitaIngredientes(List<ReceitaIngrediente> receitaIngredientes) {
 		this.receitaIngredientes = receitaIngredientes;
 	}
 }

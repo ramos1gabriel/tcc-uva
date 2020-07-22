@@ -41,18 +41,27 @@ export class ModopreparoNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    let id : string = this.route.snapshot.params['id'];
-    if(id != undefined){
-      this.findById(id);
-    }
-
-    //PASSAGEM DE PARAMETRO DA TELA RECEITA
     let idReceita : string = this.route.snapshot.params['idReceita'];
     if(idReceita != undefined){
       this.idReceita = idReceita;
       this.findByIdReceita(this.idReceita);
-      //console.log('ID RECEITA = '+this.idReceita);
     }
+
+    let modo : string = this.route.snapshot.params['edit'];
+    if(modo == 'edit'){
+      this.findByReceitaId(idReceita);
+    }
+  }
+
+  findByReceitaId(id : string) {
+    this.ModopreparoService.findByReceitaId(id).subscribe((responseApi : ResponseApi) => {
+      this.modopreparo = responseApi.data;
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
   }
 
   findByIdReceita(id : string) {

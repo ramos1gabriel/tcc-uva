@@ -4,17 +4,21 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-import com.tcc.api.entity.ReceitaIngredientes;
+import com.tcc.api.entity.ReceitaIngrediente;
 
 public interface ReceitaIngredienteService {
 	
-	ReceitaIngredientes createOrUpdate(ReceitaIngredientes recIng);
+	ReceitaIngrediente createOrUpdate(ReceitaIngrediente recIng);
 	
-	List<ReceitaIngredientes> createOrUpdateAll(List<ReceitaIngredientes> listRecIng);
+	List<ReceitaIngrediente> createOrUpdateAll(List<ReceitaIngrediente> listRecIng);
 	
-	ReceitaIngredientes findById(Long id);
+	ReceitaIngrediente findById(Long id);
 	
 	void delete(Long id);
 	
-	Page<ReceitaIngredientes> findAll(int page, int count);
+	Page<ReceitaIngrediente> findAll(int page, int count);
+	
+	void deleteByReceitaId(Long id);
+	
+	List<ReceitaIngrediente> findByReceitaId(Long id);
 }

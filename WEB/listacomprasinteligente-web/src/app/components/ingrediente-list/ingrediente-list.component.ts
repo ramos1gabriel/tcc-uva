@@ -5,6 +5,8 @@ import { SharedService } from 'src/app/services/shared.service';
 import { Router } from '@angular/router';
 import { ResponseApi } from 'src/app/model/response-api';
 import swal from 'sweetalert';
+import { finalize } from 'rxjs/operators';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-ingrediente-list',
@@ -26,7 +28,8 @@ export class IngredienteListComponent implements OnInit {
   constructor(
     private dialogService : DialogService,
     private ingredienteService : IngredienteService,
-    private router : Router
+    private router : Router,
+    private spinner: NgxSpinnerService
   ) {
     this.shared = SharedService.getInstance();
   }
@@ -61,12 +64,13 @@ export class IngredienteListComponent implements OnInit {
     })
     .then((willDelete) => {
       if (willDelete) {
-
+        this.spinner.show();
         //verifica se tem em alguma receita
         this.findNomeReceitaPorIngrediente(id);
 
         //espera um pouquinho o subscribe..
         setTimeout(() => {
+          this.spinner.hide();
           if(this.listNomesReceitas.length > 0) {
             let texto = '';
             this.listNomesReceitas.forEach(nomeRec => {
@@ -154,10 +158,10 @@ export class IngredienteListComponent implements OnInit {
     this.ingredienteService.findNomeReceitaPorIngrediente(id).subscribe((responseApi : ResponseApi) => {
       this.listNomesReceitas = responseApi['data'];
     }, err => {
-      this.showMessage({
+      /*this.showMessage({
         type : 'error',
         text : err['error']['errors'][0]
-      });
+      });*/
     });
   }
 }
