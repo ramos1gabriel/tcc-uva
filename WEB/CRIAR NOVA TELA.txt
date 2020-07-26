@@ -13,38 +13,18 @@ VERIFICAR app-module.js
 
 VERIFICAR app.routes.js
 
+ADICIONAR no menu
+
 *opcional
 GERAR .JS.MAP:
 ng build
 
+BAIXAR/ATUALIZAR modules:
+npm update
 
------------------
-REGRAS DE NEGOCIO
------------------
+SUBIR SERVIDOR:
+ng serve
 
-(RECEITA-LIST)
-SELECT
-REC.ID, 
-REC.NOME, 
-REC.CATEGORIA,
-COUNT(RECING.RECEITA_ID) AS QTD_ING
-
-FROM 
-RECEITA REC, 
-RECEITA_INGREDIENTES RECING 
-
-WHERE REC.ID = RECING.RECEITA_ID
-
-GROUP BY REC.ID
-
------------------
-
-https://forum.ionicframework.com/t/pass-ngfor-index-to-click-event/39753/5
-
-------------------------
-FormArray
-
-https://stackblitz.com/edit/angular-form-array-example
-https://www.tektutorialshub.com/angular/angular-formarray-example-in-reactive-forms/
-https://medium.com/aubergine-solutions/add-push-and-remove-form-fields-dynamically-to-formarray-with-reactive-forms-in-angular-acf61b4a2afe
-https://www.codementor.io/@vishnusiddareddy/dynamically-adding-form-fields-using-angular-formarray-kw5mn7exx
+INSTALAR/DESINSTALAR modules:
+npm install --save <nome>
+npm uninstall --save <nome>

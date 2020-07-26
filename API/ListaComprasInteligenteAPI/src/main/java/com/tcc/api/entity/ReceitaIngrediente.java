@@ -16,7 +16,7 @@ import com.tcc.api.enums.UnidadeMedidaEnum;
 
 
 @Entity
-@Table(name="receita_ingrediente")
+@Table(name="receitaingrediente")
 public class ReceitaIngrediente {
 	
 	@Id

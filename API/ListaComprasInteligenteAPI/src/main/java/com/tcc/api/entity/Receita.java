@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -107,6 +106,7 @@ public class Receita {
 	public void setCategoria(CategoriaEnum categoria) {
 		this.categoria = categoria;
 	}
+	
 	
 //	@Override
 //    public String toString() {

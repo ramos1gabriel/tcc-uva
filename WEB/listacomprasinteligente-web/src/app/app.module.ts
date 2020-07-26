@@ -30,7 +30,8 @@ import { ReceitaingredienteNewComponent } from './components/receitaingrediente-
 import { ModopreparoNewComponent } from './components/modopreparo-new/modopreparo-new.component';
 import { ReceitaListComponent } from './components/receita-list/receita-list.component';
 import { NgxSpinnerModule } from "ngx-spinner";
-
+import { CardapioNewComponent } from './components/cardapio-new/cardapio-new.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ReceitaNewComponent,
     ReceitaingredienteNewComponent,
     ModopreparoNewComponent,
-    ReceitaListComponent
+    ReceitaListComponent,
+    CardapioNewComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     HttpClientModule,
     routes,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ModalModule.forRoot()
   ],
   providers: [
     UserService, 

@@ -1,0 +1,38 @@
+<!-- MONTAR CARDAPIO SEMANAL -->
+
+
+<button type="button" class="btn btn-primary" (click)="openModal(template, 1)">Segunda Café</button>
+<button type="button" class="btn btn-primary" (click)="openModal(template, 2)">Segunda Almoço</button>
+
+<!-- MODAL -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Selecione uma receita:</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-bordered">
+      <tr>
+        <th style="text-align: center;">ID</th>
+        <th>Nome</th>
+        <th style="width: 40px">&nbsp;{{posicao}}</th>
+      </tr>
+      <tr *ngFor="let receita of listReceita">
+        <td align="center">{{ receita.id }}</td>
+        <td>{{ receita.nome }}</td>
+        <td><button  class="btn btn-info" title="Selecionar"><i class="fa fa-check"></i></button></td>
+      </tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <ul class="pagination pagination-sm no-margin pull-right">
+      <li><a href="" (click)="setPreviousPage($event);">&laquo;</a></li>
+      <li *ngFor="let p of pages; let i = index">
+        <a [ngClass]="{'pagination-focus' : i == page}" href="" (click)="setPage(i, $event);">{{i+1}}</a>
+      </li>
+      <li><a href="" (click)="setNextPage($event);">&raquo;</a></li>
+    </ul>
+  </div>
+</ng-template>
