@@ -39,6 +39,7 @@ export const ROUTES : Routes = [
     { path : 'receitaingrediente-new/:idReceita/:edit', component : ReceitaingredienteNewComponent, canActivate : [AuthGuard] },
     { path : 'modopreparo-new/:idReceita/:edit', component : ModopreparoNewComponent, canActivate : [AuthGuard] },
     { path : 'cardapio-new', component : CardapioNewComponent, canActivate : [AuthGuard] },
+    { path : 'cardapio-new/:id', component : CardapioNewComponent, canActivate : [AuthGuard] },
 ]
 
 export const routes : ModuleWithProviders = RouterModule.forRoot(ROUTES);

@@ -9,6 +9,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { CardapioService } from './../../services/cardapio.service';
 import { NgForm } from '@angular/forms';
+import { Cardapio } from './../../model/cardapio.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cardapio-new',
@@ -19,6 +21,9 @@ export class CardapioNewComponent implements OnInit {
 
   @ViewChild("form")
   form: NgForm
+  data = new Date();
+
+  cardapio = new Cardapio('', this.data, '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
 
   modalRef: BsModalRef;
   page : number = 0;
@@ -28,28 +33,80 @@ export class CardapioNewComponent implements OnInit {
   message : {};
   classCss : {};
   listReceita = [];
+  isData : any;
+
+  dataInicial = new Date();
+  dataFinal = new Date();
+
+  //globais modais
   posicao : number;
+  listLabels = [];
+  listControle = [];
+  listCampos = ['segundaCafe', 'tercaCafe', 'quartaCafe', 'quintaCafe','sextaCafe', 'segundaAlmoco', 'tercaAlmoco','quartaAlmoco', 'quintaAlmoco', 'sextaAlmoco', 'segundaLanche', 'tercaLanche', 'quartaLanche', 'quintaLanche', 'sextaLanche', 'segundaJantar', 'tercaJantar', 'quartaJantar', 'quintaJantar', 'sextaJantar'];
 
   constructor(
     private modalService: BsModalService,
     private ReceitaService : ReceitaService,
     private CardapioService : CardapioService,
-    private router : Router
-    ) {
-      this.shared = SharedService.getInstance();
-    }
-
-  ngOnInit() {
-    this.findAllReceita(this.page, this.count);
+    private router : Router,
+    private route : ActivatedRoute
+  ) {
+    this.shared = SharedService.getInstance();
   }
 
+  ngOnInit() {
+    this.findAllReceita(this.page, this.count); //model
+
+    let id : string = this.route.snapshot.params['id'];
+    if(id != undefined){
+      this.findById(id);
+    } else {
+      this.findByData(this.data);
+    }
+  }
+
+  /*calculaSemana() {
+    //pega dia da semana
+    var options = {  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+    let dataAtual = new Date(this.dataFinal).toLocaleTimeString('en-us', options);
+    let datas = dataAtual.split(',');
+    
+    let diaSemana = datas[0];
+    //console.log('dia da semana='+diaSemana);
+
+    //em caso de ser final de semana
+    if(diaSemana == 'Saturday') {
+      this.dataInicial.setDate(this.dataInicial.getDate() + 2);
+    } else if(diaSemana == 'Sunday') {
+      this.dataInicial.setDate(this.dataInicial.getDate() + 1);
+    }
+
+    this.dataFinal.setDate(this.dataInicial.getDate() + 5);
+
+    console.log('data inicial='+this.formataData(this.dataInicial));
+  }*/
+
+  //MODAL
   openModal(template: TemplateRef<any>, id : number) {
     this.modalRef = this.modalService.show(template);
     this.posicao = id; 
-    console.log(this.modalRef);
+    //console.log(this.modalRef);
   }
 
-  //MODAL
+  selecionaReceita(id : string, nome : string, posicao : number) {
+    this.listLabels[posicao] = nome; //label
+    this.listControle[posicao] = true; //mostra label e disabilita button
+    this.form.controls[this.listCampos[posicao]].setValue(id); //seta id receita hidden
+    this.modalRef.hide(); //fecha modal
+  }
+
+  removeReceita(posicao : number) {
+    this.listLabels[posicao] = ''; //label
+    this.listControle[posicao] = false; //mostra label e disabilita button
+    this.form.controls[this.listCampos[posicao]].setValue(''); //seta id receita hidden
+  }
+
+  //PESQUISA RECEITA
   findAllReceita(page : number, count : number) {
     this.ReceitaService.findAllPesquisa(page, count).pipe(
       //finalize(() => this.spinner.hide())
@@ -109,5 +166,81 @@ export class CardapioNewComponent implements OnInit {
       'has-error' : isInvalid && isDirty,
       'has-success' : !isInvalid && isDirty
     };
+  }
+
+  formataData(data : Date) {
+    let dataAtual = new Date(data);
+    let dia = dataAtual.getDate();
+    let mes = (dataAtual.getMonth()+1);
+    let ano = dataAtual.getFullYear();
+    let dataCompleta;
+
+    if(dia < 10) {
+      dataCompleta = "0" + dia + "/";
+    } else {
+      dataCompleta = dia + "/";
+    }
+
+    if(mes < 10) {
+      dataCompleta += "0" + mes;
+    }
+    
+    dataCompleta += "/" + ano;
+
+    return  dataCompleta;
+  }
+
+  limparCardapio() {
+    for (let i = 0; i < 20; i++) {
+      this.listLabels[i] = '';
+      this.listControle[i] = false;
+      this.form.controls[this.listCampos[i]].setValue('');
+    }
+  }
+
+  //
+  save(){
+    this.message = {};
+    this.CardapioService.createOrUpdate(this.cardapio).subscribe((responseApi : ResponseApi) => {
+      this.cardapio = new Cardapio('', this.data, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
+      let cardapioRet : Cardapio = responseApi.data;
+      this.limparCardapio();
+      this.form.resetForm();
+      this.showMessage({
+        type : 'success',
+        text : `Cardápio do dia ${this.formataData(cardapioRet.dataCriacao)} cadastrado com sucesso!`
+      });
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
+  }
+
+  findByData(data : Date) {
+    this.CardapioService.findByData(data).pipe(
+      /*finalize(() => 
+        console.log(this.isData)
+      )*/
+    ).subscribe((responseApi : ResponseApi) => {
+      this.isData = responseApi.data;
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
+  }
+
+  findById(id : string) {
+    this.CardapioService.findById(id).subscribe((responseApi : ResponseApi) => {
+      this.cardapio = responseApi.data;
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
   }
 }

@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,6 +27,7 @@ public class CardapioSemanal {
 	@Column(name="ID")
 	private Long id;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_CRIACAO", nullable = false)
 	private Date dataCriacao;
 	

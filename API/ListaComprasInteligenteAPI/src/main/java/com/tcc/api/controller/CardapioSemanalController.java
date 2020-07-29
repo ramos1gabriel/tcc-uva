@@ -184,7 +184,7 @@ public class CardapioSemanalController {
 		return ResponseEntity.ok(new Response<String>());
 	}
 	
-	//TESTE
+	//EDIT
 	@GetMapping(value = "recuperaReceitas/{id}")
 	public ResponseEntity<Response<List<Receita>>> recuperaReceitas(@PathVariable("id") Long id) {
 		
@@ -209,6 +209,24 @@ public class CardapioSemanalController {
 		}
 		
 		response.setData(receitas);
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping(value = "findByData/{data}")
+	public ResponseEntity<Response<Boolean>> findByDataCriacao(@PathVariable("data") java.util.Date dataCriacao) {
+		
+		Response<Boolean> response = new Response<Boolean>();
+		Boolean isExist = true;
+		
+		CardapioSemanal cardapiosemanal = cardapiosemanalService.findByDataCriacao(dataCriacao);
+		if(cardapiosemanal == null) {
+			//response.getErrors().add("Registro nao encontrado id: "+id);
+			//return ResponseEntity.badRequest().body(response);
+			isExist = false;
+		}
+		
+		response.setData(isExist);
 		
 		return ResponseEntity.ok(response);
 	}
