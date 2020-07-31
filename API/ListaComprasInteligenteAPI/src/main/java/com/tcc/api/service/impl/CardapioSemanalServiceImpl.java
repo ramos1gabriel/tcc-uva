@@ -1,6 +1,9 @@
 package com.tcc.api.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.tcc.api.entity.CardapioSemanal;
@@ -31,5 +34,11 @@ public class CardapioSemanalServiceImpl implements CardapioSemanalService {
 	@Override
 	public void delete(Long id) {
 		this.cardapiosemanalRepository.deleteById(id); //delete nao funciona da mesma forma q antes no SPRING 2
+	}
+
+	@Override
+	public Page<CardapioSemanal> findAll(int page, int count) {
+		Pageable pages = PageRequest.of(page, count);
+		return this.cardapiosemanalRepository.findAll(pages);
 	}
 }

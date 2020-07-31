@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -24,11 +21,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tcc.api.dto.ReceitaDTO;
 import com.tcc.api.entity.CardapioSemanal;
+import com.tcc.api.entity.Ingrediente;
 import com.tcc.api.entity.Receita;
 import com.tcc.api.entity.Usuario;
-import com.tcc.api.enums.CategoriaEnum;
 import com.tcc.api.response.Response;
 import com.tcc.api.security.jwt.JwtTokenUtil;
 import com.tcc.api.service.CardapioSemanalService;
@@ -227,6 +223,24 @@ public class CardapioSemanalController {
 		}
 		
 		response.setData(isExist);
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping(value = "{page}/{count}")
+	public ResponseEntity<Response<Page<CardapioSemanal>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
+
+		Response<Page<CardapioSemanal>> response = new Response<Page<CardapioSemanal>>();
+		Page<CardapioSemanal> cardapios = null;
+		
+		cardapios = cardapiosemanalService.findAll(page, count);
+		
+		if(cardapios.isEmpty()) {
+			response.getErrors().add("Nenhum registro encontrado");
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		response.setData(cardapios);
 		
 		return ResponseEntity.ok(response);
 	}

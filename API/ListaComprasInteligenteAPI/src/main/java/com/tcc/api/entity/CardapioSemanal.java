@@ -27,7 +27,7 @@ public class CardapioSemanal {
 	@Column(name="ID")
 	private Long id;
 
-	@Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_CRIACAO", nullable = false)
 	private Date dataCriacao;
 	
@@ -277,69 +277,72 @@ public class CardapioSemanal {
 	public List<Long> getRefeicoes() {
 		List<Long> refeicoes = new ArrayList<Long>();
 		
+		//cafe
 		if(getSegundaCafe() != null) {
 			refeicoes.add(getSegundaCafe());
 		} else {
 			refeicoes.add(Long.valueOf(0));
 		}
-		refeicoes.add(getSegundaAlmoco());
-		if(getSegundaLanche() != null) {
-			refeicoes.add(getSegundaLanche());
-		} else {
-			refeicoes.add(Long.valueOf(0));
-		}
-		refeicoes.add(getSegundaJantar());
-		
 		if(getTercaCafe() != null) {
 			refeicoes.add(getTercaCafe());
 		} else {
 			refeicoes.add(Long.valueOf(0));
 		}
-		refeicoes.add(getTercaAlmoco());
-		if(getTercaLanche() != null) {
-			refeicoes.add(getTercaLanche());
-		} else {
-			refeicoes.add(Long.valueOf(0));
-		}
-		refeicoes.add(getTercaJantar());
-
 		if(getQuartaCafe() != null) {
 			refeicoes.add(getQuartaCafe());
 		} else {
 			refeicoes.add(Long.valueOf(0));
 		}
-		refeicoes.add(getQuartaAlmoco());
-		if(getQuartaLanche() != null) {
-			refeicoes.add(getQuartaLanche());
-		} else {
-			refeicoes.add(Long.valueOf(0));
-		}
-		refeicoes.add(getQuartaJantar());
-		
 		if(getQuintaCafe() != null) {
 			refeicoes.add(getQuintaCafe());
 		} else {
 			refeicoes.add(Long.valueOf(0));
 		}
-		refeicoes.add(getQuintaAlmoco());
-		if(getQuintaLanche() != null) {
-			refeicoes.add(getQuintaLanche());
-		} else {
-			refeicoes.add(Long.valueOf(0));
-		}
-		refeicoes.add(getQuintaJantar());
-		
 		if(getSextaCafe() != null) {
 			refeicoes.add(getSextaCafe());
 		} else {
 			refeicoes.add(Long.valueOf(0));
 		}
+		
+		//almoco
+		refeicoes.add(getSegundaAlmoco());
+		refeicoes.add(getTercaAlmoco());
+		refeicoes.add(getQuartaAlmoco());
+		refeicoes.add(getQuintaAlmoco());
 		refeicoes.add(getSextaAlmoco());
+		
+		//lanche
+		if(getSegundaLanche() != null) {
+			refeicoes.add(getSegundaLanche());
+		} else {
+			refeicoes.add(Long.valueOf(0));
+		}
+		if(getTercaLanche() != null) {
+			refeicoes.add(getTercaLanche());
+		} else {
+			refeicoes.add(Long.valueOf(0));
+		}
+		if(getQuartaLanche() != null) {
+			refeicoes.add(getQuartaLanche());
+		} else {
+			refeicoes.add(Long.valueOf(0));
+		}
+		if(getQuintaLanche() != null) {
+			refeicoes.add(getQuintaLanche());
+		} else {
+			refeicoes.add(Long.valueOf(0));
+		}
 		if(getSextaLanche() != null) {
 			refeicoes.add(getSextaLanche());
 		} else {
 			refeicoes.add(Long.valueOf(0));
 		}
+		
+		//jantar
+		refeicoes.add(getSegundaJantar());
+		refeicoes.add(getTercaJantar());
+		refeicoes.add(getQuartaJantar());
+		refeicoes.add(getQuintaJantar());
 		refeicoes.add(getSextaJantar());
 		
 		return refeicoes;

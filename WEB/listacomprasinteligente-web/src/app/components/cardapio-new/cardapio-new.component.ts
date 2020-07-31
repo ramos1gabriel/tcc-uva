@@ -23,7 +23,8 @@ export class CardapioNewComponent implements OnInit {
   form: NgForm
   data = new Date();
 
-  cardapio = new Cardapio('', this.data, '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
+  //cardapio = new Cardapio('', this.data, '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
+  cardapio = new Cardapio('', this.data, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
 
   modalRef: BsModalRef;
   page : number = 0;
@@ -44,12 +45,16 @@ export class CardapioNewComponent implements OnInit {
   listControle = [];
   listCampos = ['segundaCafe', 'tercaCafe', 'quartaCafe', 'quintaCafe','sextaCafe', 'segundaAlmoco', 'tercaAlmoco','quartaAlmoco', 'quintaAlmoco', 'sextaAlmoco', 'segundaLanche', 'tercaLanche', 'quartaLanche', 'quintaLanche', 'sextaLanche', 'segundaJantar', 'tercaJantar', 'quartaJantar', 'quintaJantar', 'sextaJantar'];
 
+  //edit
+  listReceitaEdit = [];
+
   constructor(
     private modalService: BsModalService,
     private ReceitaService : ReceitaService,
     private CardapioService : CardapioService,
     private router : Router,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {
     this.shared = SharedService.getInstance();
   }
@@ -59,7 +64,9 @@ export class CardapioNewComponent implements OnInit {
 
     let id : string = this.route.snapshot.params['id'];
     if(id != undefined){
+      this.spinner.show();
       this.findById(id);
+      this.recuperaReceitas(id);
     } else {
       this.findByData(this.data);
     }
@@ -234,7 +241,9 @@ export class CardapioNewComponent implements OnInit {
   }
 
   findById(id : string) {
-    this.CardapioService.findById(id).subscribe((responseApi : ResponseApi) => {
+    this.CardapioService.findById(id).pipe(
+      finalize(() => this.data = this.cardapio.dataCriacao)
+    ).subscribe((responseApi : ResponseApi) => {
       this.cardapio = responseApi.data;
     }, err => {
       this.showMessage({
@@ -243,4 +252,34 @@ export class CardapioNewComponent implements OnInit {
       });
     });
   }
+
+  recuperaReceitas(id : string) {
+    this.CardapioService.recuperaReceitas(id).pipe(
+      finalize(() => 
+        this.preencheCardapioEdit()
+      )
+    ).subscribe((responseApi : ResponseApi) => {
+      this.listReceitaEdit = responseApi.data;
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
+  }
+
+  preencheCardapioEdit() {
+    for (let i = 0; i < this.listReceitaEdit.length; i++) {
+      if(this.listReceitaEdit[i].id != '' && this.listReceitaEdit[i].id != null) {
+        this.listLabels[i] = this.listReceitaEdit[i].nome;
+        this.listControle[i] = true;
+      } else {
+        this.listLabels[i] = '';
+        this.listControle[i] = false;
+      }
+    }
+
+    this.spinner.hide();
+  }
+
 }

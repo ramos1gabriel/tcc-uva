@@ -34,4 +34,8 @@ export class CardapioService {
   findByData(data : Date) {
     return this.http.get(`${BACK_END_API}/api/cardapio/findByData/${data}`);
   }
+
+  recuperaReceitas(id : string) {
+    return this.http.get(`${BACK_END_API}/api/cardapio/recuperaReceitas/${id}`);
+  }
 }

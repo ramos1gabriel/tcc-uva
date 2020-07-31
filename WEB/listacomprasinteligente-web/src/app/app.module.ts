@@ -32,6 +32,7 @@ import { ReceitaListComponent } from './components/receita-list/receita-list.com
 import { NgxSpinnerModule } from "ngx-spinner";
 import { CardapioNewComponent } from './components/cardapio-new/cardapio-new.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CardapioListComponent } from './components/cardapio-list/cardapio-list.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ReceitaingredienteNewComponent,
     ModopreparoNewComponent,
     ReceitaListComponent,
-    CardapioNewComponent
+    CardapioNewComponent,
+    CardapioListComponent
   ],
   imports: [
     BrowserModule,
