@@ -1,0 +1,11 @@
+ERROS POSSIVEIS NO ANGULAR:
+ERRO: Could not find module “@angular-devkit/build-angular”
+TRATAMENTO: deletar pasta node_modules e usar comando "npm update"
+
+TRATAR PROBLEMAS COM MODULES:
+
+SWEETALERT (erro ao compilar):
+NO sweetalert.d.ts COMENTAR TRECHO "const swal: SweetAlert;"
+
+NGX-BOOTSTRAP (caga o layout do projeto TODO):
+CHECAR SE OS "styles" SÓ POSSUEM "src/styles.css" (se tiver +outro apagar)
