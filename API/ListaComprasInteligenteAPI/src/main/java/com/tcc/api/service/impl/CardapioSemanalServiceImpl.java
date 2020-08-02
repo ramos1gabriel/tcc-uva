@@ -1,5 +1,7 @@
 package com.tcc.api.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,8 +19,8 @@ public class CardapioSemanalServiceImpl implements CardapioSemanalService {
 	private CardapioSemanalRepository cardapiosemanalRepository;
 
 	@Override
-	public CardapioSemanal findByDataCriacao(java.util.Date data) {
-		return this.cardapiosemanalRepository.findByDataCriacao(data);
+	public List<CardapioSemanal> findAllByDataCriacao(String data) {
+		return this.cardapiosemanalRepository.findAllByDataCriacao(data);
 	}
 
 	@Override

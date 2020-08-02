@@ -1,12 +1,14 @@
 package com.tcc.api.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import com.tcc.api.entity.CardapioSemanal;
 
 public interface CardapioSemanalService {
 	
-	CardapioSemanal findByDataCriacao(java.util.Date data);
+	List<CardapioSemanal> findAllByDataCriacao(String data);
 	
 	CardapioSemanal createOrUpdate(CardapioSemanal cardapiosemanal);
 	

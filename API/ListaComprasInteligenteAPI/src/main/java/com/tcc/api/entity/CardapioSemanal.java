@@ -1,8 +1,10 @@
 package com.tcc.api.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +31,7 @@ public class CardapioSemanal {
 
 	//@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_CRIACAO", nullable = false)
-	private Date dataCriacao;
+	private String dataCriacao;
 	
 	//SEGUNDA-FEIRA
 	@Column(name = "SEGUNDA_CAFE", nullable = true)
@@ -104,11 +106,11 @@ public class CardapioSemanal {
 		this.id = id;
 	}
 
-	public Date getDataCriacao() {
+	public String getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(Date dataCriacao) {
+	public void setDataCriacao(String dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 
@@ -270,6 +272,11 @@ public class CardapioSemanal {
 
 	public void setSextaJantar(Long sextaJantar) {
 		this.sextaJantar = sextaJantar;
+	}
+	
+	public String getDataFormatada() {
+		String datas[] = getDataCriacao().split("-");
+	    return  datas[2] + "/" + datas[1] + "/" + datas[0];
 	}
 	
 	//teste

@@ -1,5 +1,7 @@
 package com.tcc.api.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -209,14 +211,13 @@ public class CardapioSemanalController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping(value = "findByData/{data}")
-	public ResponseEntity<Response<Boolean>> findByDataCriacao(@PathVariable("data") java.util.Date dataCriacao) {
+	@GetMapping(value = "findAllByDataCriacao/{data}")
+	public ResponseEntity<Response<Boolean>> findAllByDataCriacao(@PathVariable("data") String dataCriacao) {
 		
 		Response<Boolean> response = new Response<Boolean>();
 		Boolean isExist = true;
-		
-		CardapioSemanal cardapiosemanal = cardapiosemanalService.findByDataCriacao(dataCriacao);
-		if(cardapiosemanal == null) {
+		List<CardapioSemanal> cardapios = cardapiosemanalService.findAllByDataCriacao(dataCriacao);
+		if(cardapios.isEmpty()) {
 			//response.getErrors().add("Registro nao encontrado id: "+id);
 			//return ResponseEntity.badRequest().body(response);
 			isExist = false;
