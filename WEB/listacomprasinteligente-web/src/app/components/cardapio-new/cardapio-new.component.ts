@@ -23,8 +23,8 @@ export class CardapioNewComponent implements OnInit {
   form: NgForm
   data = new Date();
 
-  //cardapio = new Cardapio('', this.data, '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
-  cardapio = new Cardapio('', this.data, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
+  cardapio = new Cardapio('', '', '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
+  //cardapio = new Cardapio('', this.data, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
 
   modalRef: BsModalRef;
   page : number = 0;
@@ -68,7 +68,7 @@ export class CardapioNewComponent implements OnInit {
       this.findById(id);
       this.recuperaReceitas(id);
     } else {
-      this.findByData(this.data);
+      this.findByData(this.formataData(this.data, 'db'));
     }
   }
 
@@ -175,24 +175,29 @@ export class CardapioNewComponent implements OnInit {
     };
   }
 
-  formataData(data : Date) {
+  formataData(data : Date, tipo : string) {
     let dataAtual = new Date(data);
-    let dia = dataAtual.getDate();
-    let mes = (dataAtual.getMonth()+1);
-    let ano = dataAtual.getFullYear();
+    let dia = "";
+    let mes = "";
     let dataCompleta;
 
-    if(dia < 10) {
-      dataCompleta = "0" + dia + "/";
+    if(dataAtual.getDate() < 10) {
+      dia = "0" + dataAtual.getDate();
     } else {
-      dataCompleta = dia + "/";
+      dia = ""+dataAtual.getDate();
     }
 
-    if(mes < 10) {
-      dataCompleta += "0" + mes;
+    if((dataAtual.getMonth()+1) < 10) {
+      mes = "0" + (dataAtual.getMonth()+1);
+    } else {
+      dia = ""+(dataAtual.getMonth()+1);
     }
     
-    dataCompleta += "/" + ano;
+    if(tipo == 'db') {
+      dataCompleta = dataAtual.getFullYear() + '-' + mes + '-' + dia;
+    } else {
+      dataCompleta = dia + '/' + mes + '/' + dataAtual.getFullYear();
+    }
 
     return  dataCompleta;
   }
@@ -208,14 +213,15 @@ export class CardapioNewComponent implements OnInit {
   //
   save(){
     this.message = {};
+    this.cardapio.dataCriacao = this.formataData(this.data, 'db');
     this.CardapioService.createOrUpdate(this.cardapio).subscribe((responseApi : ResponseApi) => {
-      this.cardapio = new Cardapio('', this.data, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
+      this.cardapio = new Cardapio('', '', '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
       let cardapioRet : Cardapio = responseApi.data;
       this.limparCardapio();
       this.form.resetForm();
       this.showMessage({
         type : 'success',
-        text : `Cardápio do dia ${this.formataData(cardapioRet.dataCriacao)} cadastrado com sucesso!`
+        text : `Cardápio do dia ${this.formataData(new Date(cardapioRet.dataCriacao), 'F')} cadastrado com sucesso!`
       });
     }, err => {
       this.showMessage({
@@ -225,12 +231,13 @@ export class CardapioNewComponent implements OnInit {
     });
   }
 
-  findByData(data : Date) {
-    this.CardapioService.findByData(data).pipe(
+  findByData(datastr : string) {
+    this.CardapioService.findByData(datastr).pipe(
       /*finalize(() => 
         console.log(this.isData)
       )*/
     ).subscribe((responseApi : ResponseApi) => {
+      console.log(responseApi.data);
       this.isData = responseApi.data;
     }, err => {
       this.showMessage({
@@ -242,7 +249,7 @@ export class CardapioNewComponent implements OnInit {
 
   findById(id : string) {
     this.CardapioService.findById(id).pipe(
-      finalize(() => this.data = this.cardapio.dataCriacao)
+      finalize(() => this.data = new Date(this.cardapio.dataCriacao))
     ).subscribe((responseApi : ResponseApi) => {
       this.cardapio = responseApi.data;
     }, err => {
@@ -281,5 +288,4 @@ export class CardapioNewComponent implements OnInit {
 
     this.spinner.hide();
   }
-
 }

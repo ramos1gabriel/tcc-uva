@@ -22,7 +22,7 @@ CORRIGIR ERRO DE PERIST DE DATA (ESTA DIMINUINDO 1 DIA)
           </tr>
           <tr *ngFor="let cardapio of listCardapio">
             <td align="center">{{ cardapio.id }}</td>
-            <td>{{ cardapio.dataCriacao  | date: 'dd/MM/yyyy' : 'UTC' }}</td>
+            <td>{{ cardapio.dataFormatada }}</td>
             <td>
               <div class="progress">
                 <div class="progress-bar bg-primary" id="qtdreceitas" name="qtdreceitas" role="progressbar" [style.width]="progress + '%'" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">

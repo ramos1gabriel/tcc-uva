@@ -31,8 +31,8 @@ export class CardapioService {
     return this.http.delete(`${BACK_END_API}/api/cardapio/${id}`);
   }
 
-  findByData(data : Date) {
-    return this.http.get(`${BACK_END_API}/api/cardapio/findByData/${data}`);
+  findByData(data : string) {
+    return this.http.get(`${BACK_END_API}/api/cardapio/findAllByDataCriacao/${data}`);
   }
 
   recuperaReceitas(id : string) {
