@@ -31,7 +31,7 @@ export class CardapioService {
     return this.http.delete(`${BACK_END_API}/api/cardapio/${id}`);
   }
 
-  findByData(data : string) {
+  findByData(data : Date) {
     return this.http.get(`${BACK_END_API}/api/cardapio/findAllByDataCriacao/${data}`);
   }
 

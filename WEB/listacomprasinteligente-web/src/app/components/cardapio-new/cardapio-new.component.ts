@@ -3,7 +3,6 @@ import { ReceitaService } from './../../services/receita.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { Router } from '@angular/router';
 import { ResponseApi } from 'src/app/model/response-api';
-import swal from 'sweetalert';
 import { finalize } from 'rxjs/operators';
 import { NgxSpinnerService } from "ngx-spinner";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -23,7 +22,7 @@ export class CardapioNewComponent implements OnInit {
   form: NgForm
   data = new Date();
 
-  cardapio = new Cardapio('', '', '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
+  cardapio = new Cardapio('', null, '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
   //cardapio = new Cardapio('', this.data, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
 
   modalRef: BsModalRef;
@@ -68,7 +67,7 @@ export class CardapioNewComponent implements OnInit {
       this.findById(id);
       this.recuperaReceitas(id);
     } else {
-      this.findByData(this.formataData(this.data, 'db'));
+      this.findByData(this.data);
     }
   }
 
@@ -182,9 +181,9 @@ export class CardapioNewComponent implements OnInit {
     let dataCompleta;
 
     if(dataAtual.getDate() < 10) {
-      dia = "0" + dataAtual.getDate();
+      dia = "0" + (dataAtual.getDate()+1);
     } else {
-      dia = ""+dataAtual.getDate();
+      dia = "" + (dataAtual.getDate()+1);
     }
 
     if((dataAtual.getMonth()+1) < 10) {
@@ -213,16 +212,20 @@ export class CardapioNewComponent implements OnInit {
   //
   save(){
     this.message = {};
-    this.cardapio.dataCriacao = this.formataData(this.data, 'db');
+    this.cardapio.dataCriacao = this.data;//this.formataData(this.data, 'db');
     this.CardapioService.createOrUpdate(this.cardapio).subscribe((responseApi : ResponseApi) => {
-      this.cardapio = new Cardapio('', '', '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
+      this.cardapio = new Cardapio('', null, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
       let cardapioRet : Cardapio = responseApi.data;
       this.limparCardapio();
       this.form.resetForm();
       this.showMessage({
         type : 'success',
-        text : `Cardápio do dia ${this.formataData(new Date(cardapioRet.dataCriacao), 'F')} cadastrado com sucesso!`
+        text : `Cardápio do dia ${this.formataData(cardapioRet.dataCriacao, 'F')} cadastrado com sucesso!`
       });
+      let id : string = this.route.snapshot.params['id'];
+      if(id != undefined){
+        this.router.navigate(['/cardapio-list']);
+      }
     }, err => {
       this.showMessage({
         type : 'error',
@@ -231,7 +234,7 @@ export class CardapioNewComponent implements OnInit {
     });
   }
 
-  findByData(datastr : string) {
+  findByData(datastr : Date) {
     this.CardapioService.findByData(datastr).pipe(
       /*finalize(() => 
         console.log(this.isData)
@@ -249,7 +252,7 @@ export class CardapioNewComponent implements OnInit {
 
   findById(id : string) {
     this.CardapioService.findById(id).pipe(
-      finalize(() => this.data = new Date(this.cardapio.dataCriacao))
+      finalize(() => this.data = this.cardapio.dataCriacao)
     ).subscribe((responseApi : ResponseApi) => {
       this.cardapio = responseApi.data;
     }, err => {

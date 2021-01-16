@@ -1,7 +1,7 @@
 export class Cardapio {
     constructor(
         public id: string,
-        public dataCriacao : string,
+        public dataCriacao : Date,
         
         public segundaCafe : string,
         public segundaAlmoco : string,

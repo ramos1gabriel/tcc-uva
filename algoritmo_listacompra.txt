@@ -1,0 +1,23 @@
+listacompra
+id
+item
+cardapio_id
+
+pega id do cardapio e ai consulta ele e vai gerando varios registros no listacompra com aquele id pai (usando saveall?)
+
+
+COMPLEXIDADE:
+
+pegar TODOS os tipos de unidade_medida e criar uma classe CONVERSORA de unidades exemplos:
+
+EXEMPLO:
+segunda/terca/quarta e quinta ele tem uma receita q usa 250 gramas de chocolate em po soma tudo(1000gramas) q vira 1kg NA LISTA DE COMPRAS 
+
+
+
+PESQUISAR UNIDADES DE MEDIDA
+https://brasilescola.uol.com.br/matematica/medidas-de-massa.htm?aff_source=56d95533a8284936a374e3a6da3d7996
+
+usar calculadora de unidade do google
+
+pesquisar tbm unidade "indefinidas" TIPO => xicara, colher...

@@ -1,24 +1,19 @@
 package com.tcc.api.entity;
 
 import java.util.ArrayList;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-//REGRAS SO PODE CRIAR UMA CARDAPIO POR DIA
-//so o almoco e janta sao obrigatorios o resto e opicional
 
 @Entity
 @Table(name="cardapiosemanal")
@@ -31,7 +26,7 @@ public class CardapioSemanal {
 
 	//@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_CRIACAO", nullable = false)
-	private String dataCriacao;
+	private Date dataCriacao;
 	
 	//SEGUNDA-FEIRA
 	@Column(name = "SEGUNDA_CAFE", nullable = true)
@@ -97,6 +92,10 @@ public class CardapioSemanal {
 	
     @Column(name = "SEXTA_JANTAR", nullable = false)
 	private Long sextaJantar;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "cardapio", fetch=FetchType.LAZY)
+    private List<ListaCompra> listacompra;
 
 	public Long getId() {
 		return id;
@@ -106,11 +105,11 @@ public class CardapioSemanal {
 		this.id = id;
 	}
 
-	public String getDataCriacao() {
+	public Date getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(String dataCriacao) {
+	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 
@@ -274,10 +273,10 @@ public class CardapioSemanal {
 		this.sextaJantar = sextaJantar;
 	}
 	
-	public String getDataFormatada() {
-		String datas[] = getDataCriacao().split("-");
-	    return  datas[2] + "/" + datas[1] + "/" + datas[0];
-	}
+//	public String getDataFormatada() {
+//		String datas[] = getDataCriacao().split("-");
+//	    return  datas[2] + "/" + datas[1] + "/" + datas[0];
+//	}
 	
 	//teste
 	@JsonIgnore
@@ -353,5 +352,13 @@ public class CardapioSemanal {
 		refeicoes.add(getSextaJantar());
 		
 		return refeicoes;
+	}
+	
+	public List<ListaCompra> getListacompra() {
+		return listacompra;
+	}
+	
+	public void setListacompra(List<ListaCompra> listacompra) {
+		this.listacompra = listacompra;
 	}
 }

@@ -107,7 +107,6 @@ public class Receita {
 		this.categoria = categoria;
 	}
 	
-	
 //	@Override
 //    public String toString() {
 //        return "Categoria [id=" + getId() + ", nome=" + getNome() + ", descricao=" + getDescricao() + "]";

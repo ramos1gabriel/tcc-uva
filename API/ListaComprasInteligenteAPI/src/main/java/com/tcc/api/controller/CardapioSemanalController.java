@@ -1,7 +1,5 @@
 package com.tcc.api.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.api.entity.CardapioSemanal;
-import com.tcc.api.entity.Ingrediente;
 import com.tcc.api.entity.Receita;
 import com.tcc.api.entity.Usuario;
 import com.tcc.api.response.Response;
@@ -212,11 +209,11 @@ public class CardapioSemanalController {
 	}
 	
 	@GetMapping(value = "findAllByDataCriacao/{data}")
-	public ResponseEntity<Response<Boolean>> findAllByDataCriacao(@PathVariable("data") String dataCriacao) {
+	public ResponseEntity<Response<Boolean>> findAllByDataCriacao(@PathVariable("data") java.util.Date dataCriacao) {
 		
 		Response<Boolean> response = new Response<Boolean>();
 		Boolean isExist = true;
-		List<CardapioSemanal> cardapios = cardapiosemanalService.findAllByDataCriacao(dataCriacao);
+		List<CardapioSemanal> cardapios = cardapiosemanalService.findAllByDataCriacao(new java.sql.Date(dataCriacao.getTime()));
 		if(cardapios.isEmpty()) {
 			//response.getErrors().add("Registro nao encontrado id: "+id);
 			//return ResponseEntity.badRequest().body(response);

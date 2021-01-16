@@ -19,7 +19,7 @@ public class CardapioSemanalServiceImpl implements CardapioSemanalService {
 	private CardapioSemanalRepository cardapiosemanalRepository;
 
 	@Override
-	public List<CardapioSemanal> findAllByDataCriacao(String data) {
+	public List<CardapioSemanal> findAllByDataCriacao(java.sql.Date data) {
 		return this.cardapiosemanalRepository.findAllByDataCriacao(data);
 	}
 

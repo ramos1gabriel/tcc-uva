@@ -89,4 +89,8 @@ public class ReceitaIngrediente {
 	public void setIngrediente(Ingrediente ingrediente) {
 		this.ingrediente = ingrediente;
 	}
+	
+	public Long getIngredienteId() {
+		return ingrediente.getId();
+	}
 }

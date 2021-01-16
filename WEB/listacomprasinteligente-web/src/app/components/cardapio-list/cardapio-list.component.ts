@@ -22,8 +22,7 @@ export class CardapioListComponent implements OnInit {
   message : {};
   classCss : {};
   listCardapio = [];
-
-  progress : number = 0;
+  listProgress = [];
   
   constructor(
     private dialogService : DialogService,
@@ -130,73 +129,74 @@ export class CardapioListComponent implements OnInit {
     };
   }
 
-  listProgress = [];
   preencheProgressBar() {
     for (let i = 0; i < this.listCardapio.length; i++) {
+      let progress : number = 0;
       if(this.listCardapio[i].segundaCafe != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].segundaAlmoco != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].segundaLanche != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].segundaJantar != null) {
-        this.progress += 5;
+        progress += 5;
       }
 
       if(this.listCardapio[i].tercaCafe != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].tercaAlmoco != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].tercaLanche != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].tercaJantar != null) {
-        this.progress += 5;
+        progress += 5;
       }
 
       if(this.listCardapio[i].quartaCafe != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].quartaAlmoco != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].quartaLanche != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].quartaJantar != null) {
-        this.progress += 5;
+        progress += 5;
       }
 
       if(this.listCardapio[i].quintaCafe != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].quintaAlmoco != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].quintaLanche != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].quintaJantar != null) {
-        this.progress += 5;
+        progress += 5;
       }
 
       if(this.listCardapio[i].sextaCafe != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].sextaAlmoco != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].sextaLanche != null) {
-        this.progress += 5;
+        progress += 5;
       }
       if(this.listCardapio[i].sextaJantar != null) {
-        this.progress += 5;
+        progress += 5;
       }
+      this.listProgress[i] = progress;
     }
   }
 }

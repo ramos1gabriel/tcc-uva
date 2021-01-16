@@ -8,7 +8,7 @@ import com.tcc.api.entity.CardapioSemanal;
 
 public interface CardapioSemanalService {
 	
-	List<CardapioSemanal> findAllByDataCriacao(String data);
+	List<CardapioSemanal> findAllByDataCriacao(java.sql.Date data);
 	
 	CardapioSemanal createOrUpdate(CardapioSemanal cardapiosemanal);
 	

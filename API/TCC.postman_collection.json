@@ -323,8 +323,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "receita",
@@ -641,8 +640,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "modopreparo",
@@ -820,8 +818,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "cardapiosemanal",
@@ -1063,7 +1060,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1OTU2NDg5OTgxODEsImV4cCI6MTU5NjI1Mzc5OH0.K-ftmNh3Pqs_2MYpfeKOCK181PVBU8zuIQbIYx778t7wQGkB9AHDmUVGSZZoxyTQ_66HZawM7XBAdtsgijX_pQ"
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE2MTA3MzAzODAwMDAsImV4cCI6MTYxMTMzNTE4MH0.eNq0dauo8Pn4adGCwl2fS2SOeUBdFmn1AZuQtvhoXjHEltBj4UtIcvdmi4C2KNWfF_FFZoX6NtNWQboq8-RPjA"
 							}
 						],
 						"body": {
@@ -1076,7 +1073,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/tcc/api/cardapio/findByData/",
+							"raw": "http://localhost:8080/tcc/api/cardapio/findAllByDataCriacao/Sat Jan 08 2021 12:55:40 GMT-0300 (Horário Padrão de Brasília)",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1086,8 +1083,8 @@
 								"tcc",
 								"api",
 								"cardapio",
-								"findByData",
-								""
+								"findAllByDataCriacao",
+								"Sat Jan 08 2021 12:55:40 GMT-0300 (Horário Padrão de Brasília)"
 							]
 						}
 					},
@@ -1123,7 +1120,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/tcc/api/cardapio/findByData/",
+							"raw": "http://localhost:8080/tcc/api/cardapio/0/10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1133,8 +1130,8 @@
 								"tcc",
 								"api",
 								"cardapio",
-								"findByData",
-								""
+								"0",
+								"10"
 							]
 						}
 					},
@@ -1145,7 +1142,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "e2b93b02-8eba-4be5-a8a6-9f683c971e87",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -1155,15 +1151,85 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4e14db35-1e2f-4f0c-9bf7-7d3b2d69adaf",
 						"type": "text/javascript",
 						"exec": [
 							""
 						]
 					}
 				}
+			]
+		},
+		{
+			"name": "listacompra",
+			"item": [
+				{
+					"name": "gerarLista",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE2MTA3MzAzODAwMDAsImV4cCI6MTYxMTMzNTE4MH0.eNq0dauo8Pn4adGCwl2fS2SOeUBdFmn1AZuQtvhoXjHEltBj4UtIcvdmi4C2KNWfF_FFZoX6NtNWQboq8-RPjA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/lista/gerar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"lista",
+								"gerar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
 			],
-			"protocolProfileBehavior": {}
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		},
 		{
 			"name": "recIng",
@@ -1435,8 +1501,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "gerar token",
@@ -1554,6 +1619,5 @@
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

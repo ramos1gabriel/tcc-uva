@@ -10,5 +10,5 @@ public interface CardapioSemanalRepository extends JpaRepository<CardapioSemanal
 	
 	List<CardapioSemanal> findAll();
 	
-	List<CardapioSemanal> findAllByDataCriacao(String data);
+	List<CardapioSemanal> findAllByDataCriacao(java.sql.Date data);
 }
