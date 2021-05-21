@@ -18,6 +18,7 @@ CORRIGIR ERRO DE PERIST DE DATA (ESTA DIMINUINDO 1 DIA)
             <th style="text-align: center;">ID</th>
             <th>Data da Criação</th>
             <th>Refeições (%)</th>
+            <th>Lista de Compras</th>
             <th style="width: 40px">&nbsp;</th>
             <th style="width: 40px">&nbsp;</th>
           </tr>
@@ -31,6 +32,7 @@ CORRIGIR ERRO DE PERIST DE DATA (ESTA DIMINUINDO 1 DIA)
                 </div>
               </div>
             </td>
+            <td><button  class="btn btn-warning" (click)="exportListaCompraToPdf(cardapio.id);" title="Gerar lista de compras"><i class="fa fa-file"></i></button></td>
             <td><button  class="btn btn-primary" (click)="edit(cardapio.id);" title="Editar"><i class="fa fa-pencil"></i></button></td>
             <td><button  class="btn btn-danger" (click)="delete(cardapio.id);" title="Excluir"><i class="fa fa-trash"></i></button></td>
           </tr>

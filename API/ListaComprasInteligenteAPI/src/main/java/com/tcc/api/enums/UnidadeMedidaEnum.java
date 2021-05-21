@@ -1,11 +1,11 @@
 package com.tcc.api.enums;
 
-import javax.measure.MetricPrefix;
-import javax.measure.Unit;
-import javax.measure.quantity.Length;
-import javax.measure.quantity.Volume;
-
-import tec.units.ri.unit.Units;
+//import javax.measure.MetricPrefix;
+//import javax.measure.Unit;
+//import javax.measure.quantity.Length;
+//import javax.measure.quantity.Volume;
+//
+//import tec.units.ri.unit.Units;
 
 public enum UnidadeMedidaEnum {
 	

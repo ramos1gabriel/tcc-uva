@@ -1,0 +1,186 @@
+<h2 class="page-header">Perfil</h2>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <i class="fa fa-text-width"></i>
+
+        <h3 class="box-title">Avatar</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="timeline-body">
+          <img src="http://placehold.it/150x100" alt="..." class="margin">
+          <img src="http://placehold.it/150x100" alt="..." class="margin">
+          <img src="http://placehold.it/150x100" alt="..." class="margin">
+          <img src="http://placehold.it/150x100" alt="..." class="margin">
+        </div>
+
+        <div class="iradio_minimal-blue checked" aria-checked="true" aria-disabled="false" style="position: relative;">
+          <input type="radio" name="r1" class="minimal" style="position: absolute; opacity: 0;">Avatar1
+          <input type="radio" name="r1" class="minimal" style="position: absolute; opacity: 0;">Avatar2
+          <input type="radio" name="r1" class="minimal" style="position: absolute; opacity: 0;">Avatar3
+          <input type="radio" name="r1" class="minimal" style="position: absolute; opacity: 0;">Avatar4
+        </div>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<div class="row">
+  <!-- ./col -->
+  <div class="col-md-6">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <i class="fa fa-text-width"></i>
+
+        <h3 class="box-title">Dados Pessoais</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <p class="lead">Lead to emphasize importance</p>
+
+        <p class="text-green">Text green to emphasize success</p>
+
+        <p class="text-aqua">Text aqua to emphasize info</p>
+
+        <p class="text-light-blue">Text light blue to emphasize info (2)</p>
+
+        <p class="text-red">Text red to emphasize danger</p>
+
+        <p class="text-yellow">Text yellow to emphasize warning</p>
+
+        <p class="text-muted">Text muted to emphasize general</p>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- ./col -->
+</div>
+
+<div class="row">
+  <!-- ./col -->
+  <div class="col-md-6">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <i class="fa fa-text-width"></i>
+
+        <h3 class="box-title">Alterar senha</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <p class="lead">Lead to emphasize importance</p>
+
+        <p class="text-muted">BOTAO SALVAR AQUI!</p>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- ./col -->
+</div>
+
+<!--
+<div class="col-md-10" style="margin-left:  0%">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Novo Ingrediente</h3>
+    </div>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="save()">
+
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <span>{{ message.text }}</span>
+      </div>
+
+      <div class="box-body">
+
+        <h4>Imagem de Perfil</h4>
+
+        
+
+        <h4>Dados Pessoais</h4>
+
+        <div [ngClass]="getFromGroupClass(nome.invalid, nome.dirty)">
+          <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+
+          <div class="col-sm-10">
+            <input type="text" 
+            [(ngModel)]="user.nome" 
+            class="form-control" 
+            name="nome" 
+            id="inputNome" 
+            #nome="ngModel" 
+            placeholder="Nome"
+            required>
+
+            <span class="help-block" *ngIf="nome.invalid && nome.dirty">Nome é necessário</span>
+          </div>
+
+        </div>
+
+        <div [ngClass]="getFromGroupClass(email.invalid, email.dirty)">
+          <label for="inputEmail" class="col-sm-2 control-label">E-mail</label>
+
+          <div class="col-sm-10">
+            <input type="email" 
+            [(ngModel)]="user.email" 
+            class="form-control" 
+            name="email" 
+            id="inputEmail" 
+            #email="ngModel" 
+            placeholder="Email"
+            email>
+
+            <span class="help-block" *ngIf="email.invalid && email.dirty">Email é inválido</span>
+          </div>
+
+        </div>
+
+        <div [ngClass]="getFromGroupClass(username.invalid, username.dirty)">
+          <label for="inputUsername" class="col-sm-2 control-label">Nome de Usuário</label>
+
+          <div class="col-sm-10">
+            <input type="text" 
+            [(ngModel)]="user.username" 
+            class="form-control" 
+            name="username" 
+            id="inputUsername" 
+            #username="ngModel" 
+            placeholder="Nome de Usuário"
+            required>
+
+            <span class="help-block" *ngIf="username.invalid && username.dirty">Nome de Usuário é necessário</span>
+          </div>
+
+        </div>
+
+        <h4>Alterar Senha</h4>
+
+        <div [ngClass]="getFromGroupClass(senha.invalid, senha.dirty)">
+          <label for="inputSenha" class="col-sm-2 control-label">Senha</label>
+
+          <div class="col-sm-2">
+            <input type="password" 
+            [(ngModel)]="user.senha" 
+            class="form-control" 
+            name="senha" 
+            id="inputSenha" 
+            #senha="ngModel" 
+            placeholder="Senha"
+            required>
+            <span class="help-block" *ngIf="senha.invalid && senha.dirty">Senha é necessária</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="box-footer">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Gravar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+-->

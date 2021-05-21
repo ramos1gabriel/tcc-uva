@@ -1,5 +1,7 @@
 package com.tcc.api.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -36,7 +38,8 @@ public class ReceitaIngrediente {
     private Ingrediente ingrediente;
     
     @Column(name = "QTD", nullable = false)
-    private Double quantidade;
+    //private Double quantidade;
+    private BigDecimal quantidade; 
     
     @Enumerated(value = EnumType.STRING)
     @Column(columnDefinition="CHAR(5)", name = "UNIDADE_MEDIDA", nullable = false)
@@ -66,11 +69,19 @@ public class ReceitaIngrediente {
 		this.receita = receita;
 	}
 
-	public Double getQuantidade() {
+	/*public Double getQuantidade() {
 		return quantidade;
 	}
 
 	public void setQuantidade(Double quantidade) {
+		this.quantidade = quantidade;
+	}*/
+	
+	public BigDecimal getQuantidade() {
+		return quantidade;
+	}
+	
+	public void setQuantidade(BigDecimal quantidade) {
 		this.quantidade = quantidade;
 	}
 

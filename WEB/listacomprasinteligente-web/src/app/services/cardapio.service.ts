@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cardapio } from './../model/cardapio.model';
 import { BACK_END_API } from './listacomprasinteligente.api';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +39,23 @@ export class CardapioService {
 
   recuperaReceitas(id : string) {
     return this.http.get(`${BACK_END_API}/api/cardapio/recuperaReceitas/${id}`);
+  }
+
+  generateDocumentReport(id: string): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Accept', 'application/pdf');
+    
+    let requestOptions: any = { 
+      headers: headers, 
+      responseType: 'blob' 
+    };
+    
+    return this.http.post(`${BACK_END_API}/api/lista/gerarteste/${id}`, '', requestOptions)
+      .pipe(map((response)=> {
+        return {
+          filename: 'listaCompra_'+id+'.pdf',
+          data: new Blob([response], {type: 'application/pdf'})
+        };
+    }));
   }
 }
