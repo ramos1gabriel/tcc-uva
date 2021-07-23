@@ -5,7 +5,7 @@ SELECT 	REC.NOME AS RECEITA,
 		
 FROM 	receita REC, 
 		ingrediente ING, 
-		receita_ingredientes RECING 
+		receitaingrediente RECING 
 		
 WHERE 	REC.ID = RECING.RECEITA_ID 
 		AND ING.ID = RECING.INGREDIENTE_ID

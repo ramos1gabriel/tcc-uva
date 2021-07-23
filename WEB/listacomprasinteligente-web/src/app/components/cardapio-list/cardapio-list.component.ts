@@ -71,6 +71,7 @@ export class CardapioListComponent implements OnInit {
           swal(`Registro excluido com sucesso!`, {
             icon: "success",
           });
+          this.listCardapio = [];
           this.findAll(this.page, this.count);
         }, err => {
           this.showMessage({
@@ -129,6 +130,7 @@ export class CardapioListComponent implements OnInit {
     };
   }
 
+  //RUDIMENTAR
   preencheProgressBar() {
     for (let i = 0; i < this.listCardapio.length; i++) {
       let progress : number = 0;
@@ -201,8 +203,9 @@ export class CardapioListComponent implements OnInit {
   }
 
   exportListaCompraToPdf(id : string) {
-    this.CardapioService.generateDocumentReport(id).subscribe(response => {
-      console.log(response);
+    this.spinner.show();
+    this.CardapioService.generateDocumentReport(id).pipe(finalize(() => this.spinner.hide())).subscribe(response => {
+      //console.log(response);
       let url = window.URL.createObjectURL(response.data);
       //window.open(url,'_blank');
       let a = document.createElement('a');

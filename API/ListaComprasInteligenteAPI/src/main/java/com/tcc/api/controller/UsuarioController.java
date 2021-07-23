@@ -53,6 +53,8 @@ public class UsuarioController {
 				return ResponseEntity.badRequest().body(response);
 			}
 			
+			usuario.setImagem(1);
+			
 			usuario.setSenha(passwordEncoder.encode(usuario.getSenha())); //CRIPTOGRAFAR SENHA
 			usuario.setUsername(usuario.getUsername().toLowerCase());
 			

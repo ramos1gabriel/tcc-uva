@@ -49,11 +49,15 @@ export class CardapioService {
       headers: headers, 
       responseType: 'blob' 
     };
+
     
-    return this.http.post(`${BACK_END_API}/api/lista/gerarteste/${id}`, '', requestOptions)
+    return this.http.post(`${BACK_END_API}/api/lista/gerar/${id}`, '', requestOptions)
       .pipe(map((response)=> {
+
+        let randomNumber : number = Math.floor(1000000 + Math.random() * 9000000);
+
         return {
-          filename: 'listaCompra_'+id+'.pdf',
+          filename: 'listaCompra_'+randomNumber+id+'.pdf',
           data: new Blob([response], {type: 'application/pdf'})
         };
     }));

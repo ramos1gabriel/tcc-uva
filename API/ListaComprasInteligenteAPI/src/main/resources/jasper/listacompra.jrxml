@@ -6,7 +6,9 @@
 	<parameter name="ID" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
 	</parameter>
-	<parameter name="LOGO" class="java.net.URL"/>
+	<parameter name="LOGO" class="java.io.InputStream" isForPrompting="false">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT
 	tcc.listacompra.`ITEM`, 
@@ -35,36 +37,31 @@ AND
 		<band/>
 	</background>
 	<title>
-		<band height="72">
-			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="52242ed0-098a-4e42-b58d-33bc95210910">
-					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+		<band height="91">
+			<image onErrorType="Blank">
+				<reportElement x="0" y="0" width="556" height="91" uuid="4a59ae89-ba85-4eb0-b72a-3b4a8dca1524"/>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement mode="Transparent" x="272" y="71" width="284" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="26730f3c-6194-4b09-87e8-29ae9de22839">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<image>
-					<reportElement x="0" y="0" width="595" height="92" uuid="1767ef67-c577-48ef-b1a8-d25feb8466e8"/>
-					<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
-				</image>
-				<staticText>
-					<reportElement x="20" y="20" width="570" height="43" forecolor="#000000" uuid="b5aa6c08-13da-452b-8275-fac081b47b9c"/>
-					<textElement>
-						<font size="34" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Lista de Compras]]></text>
-				</staticText>
-				<textField>
-					<reportElement mode="Transparent" x="360" y="105" width="234" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="cd106350-d7fc-4960-9968-9f867f6ac090">
-						<property name="com.jaspersoft.studio.unit.x" value="px"/>
-						<property name="com.jaspersoft.studio.unit.y" value="px"/>
-						<property name="com.jaspersoft.studio.unit.width" value="px"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="13" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Cardapio criado na data: " + new SimpleDateFormat("dd/MM/yyyy").format($F{DATA_CRIACAO})]]></textFieldExpression>
-				</textField>
-			</frame>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cardapio criado na data: " + new SimpleDateFormat("dd/MM/yyyy").format($F{DATA_CRIACAO})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="20" width="476" height="43" forecolor="#000000" uuid="ba458783-30bb-45b0-b768-b5b3a0a85ac7"/>
+				<textElement>
+					<font size="34" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lista de Compras]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>

@@ -14,7 +14,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class LoginComponent implements OnInit {
 
-  user = new User('', '', '', '', '');
+  user = new User('', '', '', '', '', '1');
   shared : SharedService;
   message : string;
 
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   cancelLogin() {
     this.message = '';
-    this.user = new User('', '', '', '', '');
+    this.user = new User('', '', '', '', '', '1');
     window.location.href = '/login';
     window.location.reload();
   }

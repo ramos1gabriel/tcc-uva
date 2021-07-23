@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -48,6 +51,10 @@ public class Receita {
     //cascade = CascadeType.ALL
     @OneToMany(mappedBy = "receita", fetch=FetchType.LAZY)
     private List<ModoPreparo> modopreparo;
+    
+    @ManyToOne
+    @JoinColumn(name = "USUARIO_ID", foreignKey = @ForeignKey(name = "FK_RECEITA_USUARIO"), nullable = false)
+    private Usuario usuario;
     
     public Receita() {}
     
@@ -105,6 +112,14 @@ public class Receita {
 	
 	public void setCategoria(CategoriaEnum categoria) {
 		this.categoria = categoria;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 //	@Override

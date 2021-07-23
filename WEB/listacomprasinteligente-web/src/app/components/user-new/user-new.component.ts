@@ -16,7 +16,7 @@ export class UserNewComponent implements OnInit {
   @ViewChild("form")
   form: NgForm
 
-  user = new User('', '', '', '', '');
+  user = new User('', '', '', '', '', '1');
   shared : SharedService;
   message: {};
   classCss: {};
@@ -51,7 +51,7 @@ export class UserNewComponent implements OnInit {
   register(){
     this.message = {};
     this.UserService.createOrUpdate(this.user).subscribe((responseApi : ResponseApi) => {
-      this.user = new User('', '', '', '', '');
+      this.user = new User('', '', '', '', '', '1');
       let userRet : User = responseApi.data;
       this.form.resetForm();
       this.showMessage({

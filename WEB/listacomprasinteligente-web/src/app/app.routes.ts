@@ -43,7 +43,7 @@ export const ROUTES : Routes = [
     { path : 'cardapio-new', component : CardapioNewComponent, canActivate : [AuthGuard] },
     { path : 'cardapio-new/:id', component : CardapioNewComponent, canActivate : [AuthGuard] },
     { path : 'cardapio-list', component : CardapioListComponent, canActivate : [AuthGuard] },
-    { path : 'user-edit', component : UserEditComponent, canActivate : [AuthGuard] }
+    { path : 'user-edit/:id', component : UserEditComponent, canActivate : [AuthGuard] }
 ]
 
 export const routes : ModuleWithProviders = RouterModule.forRoot(ROUTES);

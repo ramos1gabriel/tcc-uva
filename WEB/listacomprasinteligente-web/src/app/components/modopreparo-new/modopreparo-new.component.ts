@@ -8,6 +8,7 @@ import { ResponseApi } from 'src/app/model/response-api';
 import { Router } from '@angular/router';
 import { ModopreparoService } from './../../services/modopreparo.service';
 import { ModoPreparo } from './../../model/modopreparo.model';
+import { User } from './../../model/user.model';
 
 @Component({
   selector: 'app-modopreparo-new',
@@ -19,7 +20,8 @@ export class ModopreparoNewComponent implements OnInit {
   @ViewChild("form")
   form: NgForm
 
-  receita = new Receita('', '', '', '');
+  usuario = new User('', '', '', '', '', '');
+  receita = new Receita('', '', '', '', this.usuario);
   modopreparo = new ModoPreparo('', false, false, false, '', '', '', this.receita);
   shared : SharedService;
   message: {};
@@ -98,7 +100,7 @@ export class ModopreparoNewComponent implements OnInit {
           type : 'success',
           text : `Modo de Preparo cadastrado com sucesso!`
         });
-        this.router.navigate(['/receita-new']); //manda pra nova receita
+        this.router.navigate(['/receita-list']); //manda pra nova receita
       }, err => {
         this.showMessage({
           type : 'error',

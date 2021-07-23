@@ -5,6 +5,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ResponseApi } from 'src/app/model/response-api';
+import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-edit',
@@ -16,14 +18,16 @@ export class UserEditComponent implements OnInit {
   @ViewChild("form")
   form: NgForm
 
-  user = new User('', '', '', '', '');
+  user = new User('', '', '', '', '', '1');
   shared : SharedService;
   message: {};
   classCss: {};
+  idImagem: string;
 
   constructor(
       private UserService : UserService,
-      private route : ActivatedRoute
+      private route : ActivatedRoute,
+      private router : Router
     ) {
 
     this.shared = SharedService.getInstance();
@@ -37,9 +41,12 @@ export class UserEditComponent implements OnInit {
   }
 
   findById(id : string) {
-    this.UserService.findById(id).subscribe((responseApi : ResponseApi) => {
+    this.UserService.findById(id).pipe(
+      finalize(() => document.getElementById('img'+this.user.imagem).className = 'margin img-selecionada')
+      ).subscribe((responseApi : ResponseApi) => {
       this.user = responseApi.data;
       this.user.senha = '';
+      this.idImagem = this.user.imagem;
     }, err => {
       this.showMessage({
         type : 'error',
@@ -50,15 +57,18 @@ export class UserEditComponent implements OnInit {
 
   register(){
     this.message = {};
+    this.user.imagem = this.idImagem;
     this.UserService.createOrUpdate(this.user).subscribe((responseApi : ResponseApi) => {
-      this.user = new User('', '', '', '', '');
+      this.user = new User('', '', '', '', '', '1');
       let userRet : User = responseApi.data;
-      this.form.resetForm();
+      //this.form.resetForm();
       this.showMessage({
         type : 'success',
-        text : `${userRet.username} cadastrado com sucesso`
+        text : `Dados atualizados com sucesso`
       });
-      window.location.href = '/login';
+      this.shared.user = userRet; //atualizar imagens em outros componentes
+      //window.location.href = '/login';
+      this.router.navigate(['/']);
     }, err => {
       this.showMessage({
         type : 'error',
@@ -88,5 +98,22 @@ export class UserEditComponent implements OnInit {
       'has-error' : isInvalid && isDirty,
       'has-success' : !isInvalid && isDirty
     };
+  }
+
+  selecionaImagem(id: any) {
+    this.idImagem = id;
+    if(id == 1) {
+      document.getElementById('img1').className = 'margin img-selecionada';
+      document.getElementById('img2').className = 'margin';
+      document.getElementById('img3').className = 'margin';
+    } else if(id == 2) {
+      document.getElementById('img1').className = 'margin';
+      document.getElementById('img2').className = 'margin img-selecionada';
+      document.getElementById('img3').className = 'margin';
+    } else if(id == 3) {
+      document.getElementById('img1').className = 'margin';
+      document.getElementById('img2').className = 'margin';
+      document.getElementById('img3').className = 'margin img-selecionada';
+    }
   }
 }

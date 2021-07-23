@@ -10,6 +10,7 @@ import { CardapioService } from './../../services/cardapio.service';
 import { NgForm } from '@angular/forms';
 import { Cardapio } from './../../model/cardapio.model';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cardapio-new',
@@ -24,7 +25,7 @@ export class CardapioNewComponent implements OnInit {
 
   cardapio = new Cardapio('', null, '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
   //cardapio = new Cardapio('', this.data, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
-
+  dtpipe: DatePipe = new DatePipe('en-US');
   modalRef: BsModalRef;
   page : number = 0;
   count : number = 5;
@@ -174,7 +175,7 @@ export class CardapioNewComponent implements OnInit {
     };
   }
 
-  formataData(data : Date, tipo : string) {
+  /*formataData(data : Date, tipo : string) {
     let dataAtual = new Date(data);
     let dia = "";
     let mes = "";
@@ -199,7 +200,7 @@ export class CardapioNewComponent implements OnInit {
     }
 
     return  dataCompleta;
-  }
+  }*/
 
   limparCardapio() {
     for (let i = 0; i < 20; i++) {
@@ -212,20 +213,22 @@ export class CardapioNewComponent implements OnInit {
   //
   save(){
     this.message = {};
-    this.cardapio.dataCriacao = this.data;//this.formataData(this.data, 'db');
+    //this.cardapio.dataCriacao = this.data;//this.formataData(this.data, 'db');
     this.CardapioService.createOrUpdate(this.cardapio).subscribe((responseApi : ResponseApi) => {
       this.cardapio = new Cardapio('', null, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
       let cardapioRet : Cardapio = responseApi.data;
       this.limparCardapio();
       this.form.resetForm();
+      let formattedDate = this.dtpipe.transform(cardapioRet.dataCriacao, 'dd/MM/yyyy');
       this.showMessage({
         type : 'success',
-        text : `Cardápio do dia ${this.formataData(cardapioRet.dataCriacao, 'F')} cadastrado com sucesso!`
+        text : `Cardápio do dia ${formattedDate} cadastrado com sucesso!`
       });
-      let id : string = this.route.snapshot.params['id'];
+      this.router.navigate(['/cardapio-list']);
+      /*let id : string = this.route.snapshot.params['id'];
       if(id != undefined){
         this.router.navigate(['/cardapio-list']);
-      }
+      }*/
     }, err => {
       this.showMessage({
         type : 'error',

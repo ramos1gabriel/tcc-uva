@@ -1,7 +1,7 @@
 package com.tcc.api.entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ public class CardapioSemanal {
 
 	//@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_CRIACAO", nullable = false)
-	private Date dataCriacao;
+	private LocalDate dataCriacao;
 	
 	//SEGUNDA-FEIRA
 	@Column(name = "SEGUNDA_CAFE", nullable = true)
@@ -105,11 +105,19 @@ public class CardapioSemanal {
 		this.id = id;
 	}
 
-	public Date getDataCriacao() {
+//	public Date getDataCriacao() {
+//		return dataCriacao;
+//	}
+//
+//	public void setDataCriacao(Date dataCriacao) {
+//		this.dataCriacao = dataCriacao;
+//	}
+	
+	public LocalDate getDataCriacao() {
 		return dataCriacao;
 	}
-
-	public void setDataCriacao(Date dataCriacao) {
+	
+	public void setDataCriacao(LocalDate dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
 

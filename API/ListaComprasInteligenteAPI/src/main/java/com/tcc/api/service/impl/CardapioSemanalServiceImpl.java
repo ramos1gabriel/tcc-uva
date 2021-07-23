@@ -1,5 +1,6 @@
 package com.tcc.api.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class CardapioSemanalServiceImpl implements CardapioSemanalService {
 	private CardapioSemanalRepository cardapiosemanalRepository;
 
 	@Override
-	public List<CardapioSemanal> findAllByDataCriacao(java.sql.Date data) {
+	public List<CardapioSemanal> findAllByDataCriacao(LocalDate data) {
 		return this.cardapiosemanalRepository.findAllByDataCriacao(data);
 	}
 

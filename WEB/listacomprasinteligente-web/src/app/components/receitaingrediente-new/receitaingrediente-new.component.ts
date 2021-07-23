@@ -11,6 +11,7 @@ import { IngredienteService } from './../../services/ingrediente.service';
 import { ReceitaService } from './../../services/receita.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { User } from './../../model/user.model';
 
 //https://bearnithi.com/2019/05/25/add-remove-multiple-input-fields-dynamically-template-driven-angular/
 
@@ -25,7 +26,8 @@ export class ReceitaingredienteNewComponent implements OnInit {
   form: NgForm
 
   //novo
-  receita = new Receita('', '', '', '');
+  usuario = new User('', '', '', '', '', '');
+  receita = new Receita('', '', '', '', this.usuario);
   ingrediente = new Ingrediente('', '');
   //recing = new ReceitaIngrediente('', '', 0, '', this.receita, this.ingrediente);
 
@@ -152,7 +154,7 @@ export class ReceitaingredienteNewComponent implements OnInit {
     } else { //validacao
       this.showMessage({
         type : 'error',
-        text : 'A Receita pode possuir até no máximo 10 igrendientes!'
+        text : 'A Receita pode possuir até no máximo 10 ingredientes!'
       });
     }
   }
@@ -175,7 +177,7 @@ export class ReceitaingredienteNewComponent implements OnInit {
     } else { //validacao
       this.showMessage({
         type : 'error',
-        text : 'A Receita deve possuir ao menos 1 igrendiente!'
+        text : 'A Receita deve possuir ao menos 1 ingredientes!'
       });
     }
   }

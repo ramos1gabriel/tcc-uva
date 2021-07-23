@@ -32,6 +32,7 @@ public class APIApplication {
 		
 		admin.setUsername("admin");
 		admin.setSenha(passwordEncoder.encode("admin@123"));
+		admin.setImagem(1);
 		//admin.setProfile(ProfileEnum.ROLE_ADMIN);
 		
 		Usuario usuario = usuarioRepository.findByUsername(admin.getUsername());

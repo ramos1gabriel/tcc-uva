@@ -1,5 +1,6 @@
 package com.tcc.api.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,5 +11,5 @@ public interface CardapioSemanalRepository extends JpaRepository<CardapioSemanal
 	
 	List<CardapioSemanal> findAll();
 	
-	List<CardapioSemanal> findAllByDataCriacao(java.sql.Date data);
+	List<CardapioSemanal> findAllByDataCriacao(LocalDate data);
 }

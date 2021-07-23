@@ -1,6 +1,7 @@
 import { ReceitaService } from './../../services/receita.service';
 import { SharedService } from './../../services/shared.service';
 import { Receita } from './../../model/receita.model';
+import { User } from './../../model/user.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +18,8 @@ export class ReceitaNewComponent implements OnInit {
   @ViewChild("form")
   form: NgForm
 
-  receita = new Receita('', '', '', '');
+  usuario = new User('', '', '', '', '', '');
+  receita = new Receita('', '', '', '', this.usuario);
   shared : SharedService;
   message: {};
   classCss: {};
@@ -56,8 +58,11 @@ export class ReceitaNewComponent implements OnInit {
 
   save(){
     this.message = {};
+    this.usuario = new User(this.shared.user.id, '', '', '', '', '');
+    this.receita.usuario = this.usuario;
     this.ReceitaService.createOrUpdate(this.receita).subscribe((responseApi : ResponseApi) => {
-      this.receita = new Receita('', '', '', '');
+      //this.usuario = new User(this.shared.user.id, '', '', '', '', '');
+      this.receita = new Receita('', '', '', '', this.usuario);
       let receitaRet : Receita = responseApi.data;
       this.form.resetForm();
       this.showMessage({

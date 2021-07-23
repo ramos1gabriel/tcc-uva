@@ -1,11 +1,17 @@
 package com.tcc.api.controller;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +35,8 @@ import com.tcc.api.security.jwt.JwtTokenUtil;
 import com.tcc.api.service.CardapioSemanalService;
 import com.tcc.api.service.ReceitaService;
 import com.tcc.api.service.UsuarioService;
+import com.tcc.api.util.DataUtils;
+import com.tcc.api.util.Util;
 
 @RestController
 @RequestMapping(value="/api/cardapio")
@@ -61,6 +69,10 @@ public class CardapioSemanalController {
 			if(result.hasErrors()) {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 				return ResponseEntity.badRequest().body(response);
+			}
+			
+			if(cardapiosemanal.getDataCriacao() == null) {
+				cardapiosemanal.setDataCriacao(LocalDate.now());
 			}
 			
 			CardapioSemanal cardapioSemanalPersitido = (CardapioSemanal) cardapiosemanalService.createOrUpdate(cardapiosemanal);
@@ -213,7 +225,8 @@ public class CardapioSemanalController {
 		
 		Response<Boolean> response = new Response<Boolean>();
 		Boolean isExist = true;
-		List<CardapioSemanal> cardapios = cardapiosemanalService.findAllByDataCriacao(new java.sql.Date(dataCriacao.getTime()));
+		
+		List<CardapioSemanal> cardapios = cardapiosemanalService.findAllByDataCriacao(DataUtils.utilDateToLocalDate(dataCriacao));
 		if(cardapios.isEmpty()) {
 			//response.getErrors().add("Registro nao encontrado id: "+id);
 			//return ResponseEntity.badRequest().body(response);

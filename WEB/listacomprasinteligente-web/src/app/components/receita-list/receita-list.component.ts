@@ -68,6 +68,7 @@ export class ReceitaListComponent implements OnInit {
           swal(`Registro excluido com sucesso!`, {
             icon: "success",
           });
+          this.listReceita = [];
           this.findAll(this.page, this.count);
         }, err => {
           this.showMessage({

@@ -91,6 +91,7 @@ export class IngredienteListComponent implements OnInit {
               swal(`Registro excluido com sucesso!`, {
                 icon: "success",
               });
+              this.listIngrediente = [];
               this.findAll(this.page, this.count);
             }, err => {
               this.showMessage({
