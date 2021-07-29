@@ -123,9 +123,9 @@ export class IngredienteListComponent implements OnInit {
     }
   }
 
-  setPage(i, event : any) {
+  setPage(i: number, event : any) {
     event.preventDefault();
-    if(this.page > 0) {
+    if(i >= 0) {
       this.page = i;
       this.findAll(this.page, this.count);
     }
@@ -146,7 +146,7 @@ export class IngredienteListComponent implements OnInit {
     this.classCss['alert-'+type] = true;
   }
 
-  getFromGroupClass(isInvalid : boolean, isDirty): {} {
+  getFromGroupClass(isInvalid : boolean, isDirty: any): {} {
     return {
       'form-group' : true,
       'has-error' : isInvalid && isDirty,

@@ -1,8 +1,0 @@
-TCC-METAS:
-
-<<<APORTUGUESAR O CODIGO>>>
-
-API:
-- IMPLEMENTAR CRIACAO DO BD NO DEPLOY
-- converter para MySQL o JWT (login)
-- converter MySQL o cadastro Usuario

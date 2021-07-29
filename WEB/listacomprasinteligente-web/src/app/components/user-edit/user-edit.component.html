@@ -20,106 +20,112 @@
   </div>
 </div>
 -->
-
-<div class="col-md-6" style="margin-left:  0%">
-  <div class="box box-info">
-    <div class="box-header with-border">
-      <h3 class="box-title">Editar Perfil</h3>
-    </div>
-    <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()">
-
-      <div [ngClass]="classCss" role="alert" *ngIf="message">
-        <span>{{ message.text }}</span>
+<div class="row">
+  <div class="col-md-6" style="margin-left:  0%">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Editar Perfil</h3>
       </div>
+      <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()">
 
-      <div class="box-body">
+        <div [ngClass]="classCss" role="alert" *ngIf="message">
+          <span>{{ message.text }}</span>
+        </div>
 
-        <div class="form-group">
-          <div class="col-sm-10">
-            <span>Selecione uma imagem para seu perfil</span>
-            <div class="timeline-body">
-              <img src="assets/img/chef1.png" width="150" height="150" alt="" id="img1" class="margin" on-click="selecionaImagem('1')">
-              <img src="assets/img/chef2.png" width="150" height="150" alt="" id="img2" class="margin" on-click="selecionaImagem('2')">
-              <img src="assets/img/chef3.png" width="150" height="150" alt="" id="img3" class="margin" on-click="selecionaImagem('3')">
+        <div class="box-body">
+
+          <div class="form-group">
+            <div class="col-sm-10">
+              <span>Selecione uma imagem para seu perfil</span>
+              <div class="timeline-body">
+                <img src="assets/img/chef1.png" width="150" height="150" alt="" id="img1" class="margin" on-click="selecionaImagem('1')">
+                <img src="assets/img/chef2.png" width="150" height="150" alt="" id="img2" class="margin" on-click="selecionaImagem('2')">
+                <img src="assets/img/chef3.png" width="150" height="150" alt="" id="img3" class="margin" on-click="selecionaImagem('3')">
+              </div>
             </div>
           </div>
-        </div>
 
-        <div [ngClass]="getFromGroupClass(nome.invalid, nome.dirty)">
-          <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+          <div [ngClass]="getFromGroupClass(nome.invalid, nome.dirty)">
+            <label for="inputNome" class="col-sm-2 control-label">Nome</label>
 
-          <div class="col-sm-10">
-            <input type="text" 
-            [(ngModel)]="user.nome" 
-            class="form-control" 
-            name="nome" 
-            id="inputNome" 
-            #nome="ngModel" 
-            placeholder="Nome"
-            required>
+            <div class="col-sm-10">
+              <input type="text" 
+              [(ngModel)]="user.nome" 
+              class="form-control" 
+              name="nome" 
+              id="inputNome" 
+              #nome="ngModel" 
+              placeholder="Nome"
+              required>
 
-            <span class="help-block" *ngIf="nome.invalid && nome.dirty">Nome é necessário</span>
+              <span class="help-block" *ngIf="nome.invalid && nome.dirty">Nome é necessário</span>
+            </div>
+
+          </div>
+
+          <div [ngClass]="getFromGroupClass(email.invalid, email.dirty)">
+            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+            <div class="col-sm-10">
+              <input type="email" 
+              [(ngModel)]="user.email" 
+              class="form-control" 
+              name="email" 
+              id="inputEmail" 
+              #email="ngModel" 
+              placeholder="Email"
+              email>
+
+              <span class="help-block" *ngIf="email.invalid && email.dirty">Email é inválido</span>
+            </div>
+
+          </div>
+
+          <div [ngClass]="getFromGroupClass(username.invalid, username.dirty)">
+            <label for="inputUsername" class="col-sm-2 control-label">Username</label>
+
+            <div class="col-sm-10">
+              <input type="text" 
+              [(ngModel)]="user.username" 
+              class="form-control" 
+              name="username" 
+              id="inputUsername" 
+              #username="ngModel" 
+              placeholder="Nome de Usuário"
+              required>
+
+              <span class="help-block" *ngIf="username.invalid && username.dirty">Nome de Usuário é necessário</span>
+            </div>
+
+          </div>
+
+          <div [ngClass]="getFromGroupClass(senha.invalid, senha.dirty)">
+            <label for="inputSenha" class="col-sm-2 control-label">Senha</label>
+
+            <div class="col-sm-10">
+              <input type="password" 
+              [(ngModel)]="user.senha" 
+              class="form-control" 
+              name="senha" 
+              id="inputSenha" 
+              #senha="ngModel" 
+              placeholder="Senha"
+              required>
+            </div>
+
+            <span class="help-block" *ngIf="senha.invalid && senha.dirty">Senha é necessária</span>
           </div>
 
         </div>
-
-        <div [ngClass]="getFromGroupClass(email.invalid, email.dirty)">
-          <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-          <div class="col-sm-10">
-            <input type="email" 
-            [(ngModel)]="user.email" 
-            class="form-control" 
-            name="email" 
-            id="inputEmail" 
-            #email="ngModel" 
-            placeholder="Email"
-            email>
-
-            <span class="help-block" *ngIf="email.invalid && email.dirty">Email é inválido</span>
-          </div>
-
+        <div class="box-footer">
+          <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Salvar</button>
         </div>
-
-        <div [ngClass]="getFromGroupClass(username.invalid, username.dirty)">
-          <label for="inputUsername" class="col-sm-2 control-label">Username</label>
-
-          <div class="col-sm-10">
-            <input type="text" 
-            [(ngModel)]="user.username" 
-            class="form-control" 
-            name="username" 
-            id="inputUsername" 
-            #username="ngModel" 
-            placeholder="Nome de Usuário"
-            required>
-
-            <span class="help-block" *ngIf="username.invalid && username.dirty">Nome de Usuário é necessário</span>
-          </div>
-
-        </div>
-
-        <div [ngClass]="getFromGroupClass(senha.invalid, senha.dirty)">
-          <label for="inputSenha" class="col-sm-2 control-label">Senha</label>
-
-          <div class="col-sm-10">
-            <input type="password" 
-            [(ngModel)]="user.senha" 
-            class="form-control" 
-            name="senha" 
-            id="inputSenha" 
-            #senha="ngModel" 
-            placeholder="Senha"
-            required>
-          </div>
-
-          <span class="help-block" *ngIf="senha.invalid && senha.dirty">Senha é necessária</span>
-        </div>
-
-      </div>
-      <div class="box-footer">
-        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Salvar</button>
-      </div>
-    </form>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    &nbsp;
   </div>
 </div>

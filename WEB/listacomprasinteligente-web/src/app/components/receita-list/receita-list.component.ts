@@ -96,9 +96,9 @@ export class ReceitaListComponent implements OnInit {
     }
   }
 
-  setPage(i, event : any) {
+  setPage(i: number, event : any) {
     event.preventDefault();
-    if(this.page > 0) {
+    if(i >= 0) {
       this.page = i;
       this.findAll(this.page, this.count);
     }

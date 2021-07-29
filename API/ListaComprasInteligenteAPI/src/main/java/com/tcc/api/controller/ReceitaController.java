@@ -267,12 +267,18 @@ public class ReceitaController {
 		List<Receita> receitas = receitaService.findAll();
 		if(receitas != null) {
 			for (Receita rec : receitas) {
-				ReceitaDTO dto = new ReceitaDTO();
-				dto.setId(rec.getId());
-				dto.setNome(rec.getNome());
-				dto.setCategoria(rec.getCategoria());
-				dto.setQuantidade(receitaService.countIngredientePorReceita(rec.getId()));
-				dtolist.add(dto);
+				Integer qtdIng = receitaService.countIngredientePorReceita(rec.getId());
+				if(qtdIng >= 1) {
+					ReceitaDTO dto = new ReceitaDTO();
+					dto.setId(rec.getId());
+					dto.setNome(rec.getNome());
+					dto.setCategoria(rec.getCategoria());
+					dto.setQuantidade(qtdIng);
+					dto.setUsuario(rec.getUsuario().getNome());
+					dtolist.add(dto);
+				} else { //lentidao?
+					deleteAll(rec.getId());
+				}
 			}
 		}
 		

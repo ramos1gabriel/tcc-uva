@@ -304,7 +304,11 @@ export class ReceitaingredienteNewComponent implements OnInit {
         text : `Total de ${listRecIngRet.length} ingredientes cadastrados com sucesso!`
       });
       this.limparTela();
-      this.router.navigate(['/modopreparo-new', this.idReceita, 'edit']); //proxima tela
+      if(this.modo == 'edit') {
+        this.router.navigate(['/modopreparo-new', this.idReceita, 'edit']);
+      } else {
+        this.router.navigate(['/modopreparo-new', this.idReceita]);
+      }
     }, err => {
       this.showMessage({
         type : 'error',

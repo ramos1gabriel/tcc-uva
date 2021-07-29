@@ -144,9 +144,9 @@ export class CardapioNewComponent implements OnInit {
     }
   }
 
-  setPage(i, event : any) {
+  setPage(i : number, event : any) {
     event.preventDefault();
-    if(this.page > 0) {
+    if(i >= 0) {
       this.page = i;
       this.findAllReceita(this.page, this.count);
     }

@@ -1,5 +1,11 @@
-AdminLTE (layout)
+AdminLTE v2.4.5 (Colorlib)
 https://adminlte.io/docs/2.4/main-header
+https://adminlte.io/themes/AdminLTE/pages/UI/general.html
+
+AdminLTE v2.4.5
+Author: Almsaeed Studio
+Website: Almsaeed Studio <https://adminlte.io>
+License: Open source - MIT
 
 Font Awesome (icons)
 https://fontawesome.com/icons?d=gallery

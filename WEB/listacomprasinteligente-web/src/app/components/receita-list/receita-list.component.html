@@ -1,4 +1,3 @@
-rollback caso nao complete todas 3 tabelas??
 <div class="row">
   <div class="col-md-8">
 
@@ -14,7 +13,7 @@ rollback caso nao complete todas 3 tabelas??
       <div class="box-body">
         <table class="table table-bordered">
           <tr>
-            <th style="text-align: center;">ID</th>
+            <th>Criado por</th>
             <th>Nome</th>
             <th>Qtd. Ingredientes</th>
             <th>Categoria</th>
@@ -22,7 +21,7 @@ rollback caso nao complete todas 3 tabelas??
             <th style="width: 40px">&nbsp;</th>
           </tr>
           <tr *ngFor="let receita of listReceita">
-            <td align="center">{{ receita.id }}</td>
+            <td>{{ receita.usuario }}</td>
             <td>{{ receita.nome }}</td>
             <td>{{ receita.quantidade }}</td>
             <td>{{ receita.categoriaFormatado }}</td>

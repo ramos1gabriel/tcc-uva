@@ -18,11 +18,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './components/security/auth.interceptor';
 import { UserNewComponent } from './components/user-new/user-new.component';
 import { UserListComponent } from './components/user-list/user-list.component';
-import { TicketNewComponent } from './components/ticket-new/ticket-new.component';
-import { TicketService } from './services/ticket.service';
-import { TicketListComponent } from './components/ticket-list/ticket-list.component';
-import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
-import { SummaryComponent } from './components/summary/summary.component';
 import { IngredienteNewComponent } from './components/ingrediente-new/ingrediente-new.component';
 import { IngredienteListComponent } from './components/ingrediente-list/ingrediente-list.component';
 import { ReceitaNewComponent } from './components/receita-new/receita-new.component';
@@ -45,10 +40,6 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
     LoginComponent,
     UserNewComponent,
     UserListComponent,
-    TicketNewComponent,
-    TicketListComponent,
-    TicketDetailComponent,
-    SummaryComponent,
     IngredienteNewComponent,
     IngredienteListComponent,
     ReceitaNewComponent,
@@ -73,7 +64,6 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
     UserService, 
     SharedService,
     DialogService,
-    TicketService,
     AuthGuard,
     {
       provide : HTTP_INTERCEPTORS,

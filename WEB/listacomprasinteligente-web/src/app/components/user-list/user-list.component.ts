@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { Router } from '@angular/router';
 import { ResponseApi } from 'src/app/model/response-api';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-user-list',
@@ -49,15 +50,21 @@ export class UserListComponent implements OnInit {
   }
 
   delete(id : string) {
-    this.dialogService.confirm('Tem certeza que deseja excluir?')
-    .then((canDelete : boolean) => {
-      if(canDelete){
+    swal({
+      title: "Atenção",
+      text: `Tem certeza que deseja excluir esse registro?`,
+      icon: "warning",
+      buttons: ['Cancelar', true],
+      dangerMode: true
+    })
+    .then((willDelete) => {
+      if (willDelete) {
         this.message = {};
         this.userService.delete(id).subscribe((responseApi : ResponseApi) => {
-          this.showMessage({
-            type : 'success',
-            text : 'Registro deletado'
+          swal(`Registro excluido com sucesso!`, {
+            icon: "success",
           });
+          this.listUser = [];
           this.findAll(this.page, this.count);
         }, err => {
           this.showMessage({
@@ -85,9 +92,9 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  setPage(i, event : any) {
+  setPage(i: number, event : any) {
     event.preventDefault();
-    if(this.page > 0) {
+    if(i >= 0) {
       this.page = i;
       this.findAll(this.page, this.count);
     }

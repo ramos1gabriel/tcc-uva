@@ -8,6 +8,11 @@ TA TUDO MOCKADO ALMOCO/JANTA NA RECEITA 10!
         <span>{{ message.text }}</span>
       </div>
 
+      <div class="alert alert-info alert-dismissible">
+        <h4><i class="icon fa fa-info"></i>Atenção</h4>
+        As refeições almoço e jantar são de preenchimento obrigatório.
+      </div>
+
       <div class="box box-info" *ngIf="isData">
         <div class="box-body">
           <table class="table table-bordered">
@@ -381,7 +386,7 @@ TA TUDO MOCKADO ALMOCO/JANTA NA RECEITA 10!
         </div>
 
         <div class="box-footer">
-          <h4 style="color: red;">*As refeições almoço e jantar são de preenchimento obrigatório.</h4>
+          <!--<h4 style="color: red;">*As refeições almoço e jantar são de preenchimento obrigatório.</h4>-->
           <button type="submit" [disabled]="!form.valid" class="btn btn-primary pull-right">Gravar</button>
         </div>
      </div>

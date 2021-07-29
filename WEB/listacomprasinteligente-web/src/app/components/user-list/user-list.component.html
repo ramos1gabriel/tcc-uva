@@ -6,7 +6,7 @@
     </div>
 
     <div class="callout callout-danger">
-      <h4>Atenção</h4>
+      <h4><i class="icon fa fa-ban"></i>&nbsp;Atenção!</h4>
       <p>Essa tela existe apenas para o usuário <b>ADMIN</b> para auxiliar no <b>DESENVOLVIMENTO</b></p>
     </div>
 
@@ -30,8 +30,8 @@
             <td>{{ user.email }}</td>
             <td>{{ user.username }}</td>
             <td>{{ user.senha }}</td>
-            <td><button *ngIf="user.username != 'admin'" class="btn btn-primary" (click)="edit(user.id);">Editar</button></td>
-            <td><button *ngIf="user.username != 'admin'" class="btn btn-danger" (click)="delete(user.id);">Excluir</button></td>
+            <td><button *ngIf="user.username != 'admin'" class="btn btn-primary" (click)="edit(user.id);" title="Editar"><i class="fa fa-pencil"></i></button></td>
+            <td><button *ngIf="user.username != 'admin'" class="btn btn-danger" (click)="delete(user.id);" title="Excluir"><i class="fa fa-trash"></i></button></td>
           </tr>
         </table>
       </div>

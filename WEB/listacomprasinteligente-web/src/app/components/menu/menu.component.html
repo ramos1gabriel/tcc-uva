@@ -1,10 +1,10 @@
 <aside class="main-sidebar">
-    <section class="sidebar">
+    <section class="sidebar" style="height: auto;">
 
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="assets/img/chef{{ shared.user.imagem }}.png" class="img-circle" alt="User Image">
+        <img src="assets/img/chef{{ shared.user.imagem }}.png" class="img-circle" alt="Perfil">
       </div>
       <div class="pull-left info">
         <p>{{ shared.user.nome }}</p>
@@ -89,8 +89,6 @@
               <ul class="treeview-menu">
                 <li><a [routerLink]="['/user-list']"><i class="fa fa-circle-o"></i>Lista</a></li>
                 <li><a [routerLink]="['/user-new']"><i class="fa fa-circle-o"></i>Novo Usuário</a></li>
-                <li><a [routerLink]="['/ticket-list']"><i class="fa fa-circle-o"></i>Lista Ticket</a></li>
-                <li><a [routerLink]="['/ticket-new']"><i class="fa fa-circle-o"></i>Novo Ticket</a></li>
               </ul>
             </li>
 

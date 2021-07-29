@@ -129,7 +129,7 @@ public class ListaCompraController {
 		    parametros.put("ID", id.intValue());
 		    parametros.put("logo", logo);
 		    String nomeRelatorio = "listacompra";
-		    LOGGER.info("exportListaCompra() - id="+id+"\nlogo="+logo+"\nrelatorio="+nomeRelatorio);
+		    //LOGGER.info("exportListaCompra() - id="+id+"\nlogo="+logo+"\nrelatorio="+nomeRelatorio);
 			
 		    byte[] relatorio = jasperService.gerarPDF(connection, nomeRelatorio, parametros);
 		    ByteArrayOutputStream out = new ByteArrayOutputStream(relatorio.length);

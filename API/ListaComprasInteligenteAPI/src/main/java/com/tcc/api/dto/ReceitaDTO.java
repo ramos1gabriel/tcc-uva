@@ -17,6 +17,8 @@ public class ReceitaDTO {
 	//@Column(name = "quantidade")
 	private Integer quantidade;
 	
+	private String usuario;
+	
 	public ReceitaDTO() {}
 	
 	public Long getId() {
@@ -49,6 +51,14 @@ public class ReceitaDTO {
 	
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+	
+	public String getUsuario() {
+		return usuario;
+	}
+	
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 	
 	public String getCategoriaFormatado() {
