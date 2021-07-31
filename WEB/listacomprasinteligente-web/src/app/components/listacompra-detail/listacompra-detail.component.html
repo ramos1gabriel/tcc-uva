@@ -1,0 +1,22 @@
+fazer lista arrastavel
+
+<table>
+  <tr>
+    <th style="text-align: center;">ID</th>
+    <th>Item</th>
+    <th>Cardápio ID</th>
+    <th>Cardápio Data</th>
+  </tr>
+  <tr *ngFor="let compra of listCompras">
+    <td align="center">{{ compra.id }}</td>
+    <td>{{ compra.item }}</td>
+    <td>{{ compra.cardapio.id }}</td>
+    <td>{{ compra.cardapio.dataCriacao  | date: 'dd/MM/yyyy' }}</td>
+  </tr>
+</table>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-spin" [fullScreen]="true"></ngx-spinner>
+
+<div class="col-md-6">
+  <button type="button" class="btn btn-block btn-primary btn-lg noPrint" onclick="window.print();" title="Imprimir"><i class="fa fa-print"></i>&nbsp;Imprimir</button>
+</div>

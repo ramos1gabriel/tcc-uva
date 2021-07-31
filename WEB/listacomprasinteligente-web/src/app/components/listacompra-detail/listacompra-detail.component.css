@@ -1,5 +1,5 @@
 @media print {
-    .main-footer{
+    .noPrint{
         display: none;
     }
 }

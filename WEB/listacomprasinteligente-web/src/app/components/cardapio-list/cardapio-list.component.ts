@@ -203,7 +203,8 @@ export class CardapioListComponent implements OnInit {
   }
 
   exportListaCompraToPdf(id : string) {
-    this.spinner.show();
+    this.router.navigate(['/listacompra-detail', id]);
+    /*this.spinner.show();
     this.CardapioService.generateDocumentReport(id).pipe(finalize(() => this.spinner.hide())).subscribe(response => {
       //console.log(response);
       let url = window.URL.createObjectURL(response.data);
@@ -220,5 +221,6 @@ export class CardapioListComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+    */
   }
 }

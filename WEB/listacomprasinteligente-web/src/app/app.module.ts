@@ -29,6 +29,7 @@ import { CardapioNewComponent } from './components/cardapio-new/cardapio-new.com
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CardapioListComponent } from './components/cardapio-list/cardapio-list.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { ListacompraDetailComponent } from './components/listacompra-detail/listacompra-detail.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
     ReceitaListComponent,
     CardapioNewComponent,
     CardapioListComponent,
-    UserEditComponent
+    UserEditComponent,
+    ListacompraDetailComponent
   ],
   imports: [
     BrowserModule,

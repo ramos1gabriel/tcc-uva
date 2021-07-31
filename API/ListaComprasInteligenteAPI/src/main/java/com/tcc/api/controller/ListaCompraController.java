@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 //import javax.measure.MetricPrefix;
@@ -26,6 +27,10 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,6 +110,27 @@ public class ListaCompraController {
 	//da um findall pelo id do cardapio
 	//nao retornou nada: CREATE, retornou: UPDATE
 	
+	//HTML
+	@GetMapping(value = "gerarLista/{id}")
+	public ResponseEntity<Response<ListaCompra>> gerarLista(@PathVariable("id") Long id) {
+		
+		Response<ListaCompra> response = new Response<ListaCompra>();
+		
+		List<ListaCompra> listaCompra = montaLista(id); //gerar a lista
+		
+		if(listaCompra.isEmpty()) {
+			response.getErrors().add("Nao foi possivel gerar lista para cardapio id: "+id);
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		for (int i = 0; i < listaCompra.size(); i++) { //transformar em lambda
+			response.getDatas().add(listaCompra.get(i));
+		}
+		
+		return ResponseEntity.ok(response);
+	}
+	
+	//JASPER
 	@PostMapping(value = "/gerar/{id}")
 	public void exportListaCompra(@PathVariable("id") Long id, HttpServletResponse httpServletResponse) throws IOException, JRException {
 		
@@ -112,34 +138,34 @@ public class ListaCompraController {
 		
 		try {
 			
-			List<ListaCompra> listas = montaLista(id);
+			List<ListaCompra> listaCompra = montaLista(id); //gerar a lista
 			
-			if(!listas.isEmpty()) {
-				List<ListaCompra> listaPersistida = (List<ListaCompra>) listacompraService.saveAll(listas);
+			if(!listaCompra.isEmpty()) {
+			
+				Connection connection = dataSource.getConnection();
+				LOGGER.info("exportListaCompra() - acessando conexao com bd");
+				
+				InputStream logo = this.getClass().getResourceAsStream("/jasper/img/logo.png");
+				//File logoFile = new File(this.getClass().getClassLoader().getResource("jasper/img/logo.png").getPath());
+				//String logo = logoFile.getPath();
+				
+				Map parametros = new HashMap(); 
+			    parametros.put("ID", id.intValue());
+			    parametros.put("logo", logo);
+			    String nomeRelatorio = "listacompra";
+			    //LOGGER.info("exportListaCompra() - id="+id+"\nlogo="+logo+"\nrelatorio="+nomeRelatorio);
+				
+			    byte[] relatorio = jasperService.gerarPDF(connection, nomeRelatorio, parametros);
+			    ByteArrayOutputStream out = new ByteArrayOutputStream(relatorio.length);
+			    out.write(relatorio, 0, relatorio.length);
+	
+			    httpServletResponse.setContentType("application/pdf");
+			    httpServletResponse.addHeader("Content-Disposition", "inline; filename=dailyOrdersReport.pdf");
+			    
+		        out.writeTo(os);
+		        os.flush();
+	        
 			}
-			
-			Connection connection = dataSource.getConnection();
-			LOGGER.info("exportListaCompra() - acessando conexao com bd");
-			
-			InputStream logo = this.getClass().getResourceAsStream("/jasper/img/logo.png");
-			//File logoFile = new File(this.getClass().getClassLoader().getResource("jasper/img/logo.png").getPath());
-			//String logo = logoFile.getPath();
-			
-			Map parametros = new HashMap(); 
-		    parametros.put("ID", id.intValue());
-		    parametros.put("logo", logo);
-		    String nomeRelatorio = "listacompra";
-		    //LOGGER.info("exportListaCompra() - id="+id+"\nlogo="+logo+"\nrelatorio="+nomeRelatorio);
-			
-		    byte[] relatorio = jasperService.gerarPDF(connection, nomeRelatorio, parametros);
-		    ByteArrayOutputStream out = new ByteArrayOutputStream(relatorio.length);
-		    out.write(relatorio, 0, relatorio.length);
-
-		    httpServletResponse.setContentType("application/pdf");
-		    httpServletResponse.addHeader("Content-Disposition", "inline; filename=dailyOrdersReport.pdf");
-		    
-	        out.writeTo(os);
-	        os.flush();
 		} catch (Exception e) {
 			LOGGER.error("Erro no metodo exportListaCompra:", e);
 		} finally {
@@ -156,6 +182,7 @@ public class ListaCompraController {
 		//se existir limpa tabela
 		if(!listas.isEmpty()) {
 			listacompraService.deleteByCardapioId(id);
+			listas.clear();
 		}
 		
 		//pega o cardapio
@@ -188,6 +215,7 @@ public class ListaCompraController {
 			String unidadeMedida = "";
 			BigDecimal qtdeTotal = BigDecimal.ZERO;
 			
+			//mudar para lambda
 			for (ReceitaIngrediente rc : lista) {
 				//qtdeTotal += rc.getQuantidade();
 				qtdeTotal = qtdeTotal.add(rc.getQuantidade());
@@ -211,7 +239,7 @@ public class ListaCompraController {
 			listas.add(lc);
 		}
 		
-		return listas;
+		return listacompraService.saveAll(listas);
 	}
 	
 	private String tratarUnidadeMedida(String unidade) {
@@ -386,14 +414,6 @@ public class ListaCompraController {
 //
 //		Response<Page<ReceitaIngrediente>> response = new Response<Page<ReceitaIngrediente>>();
 //		Page<ReceitaIngrediente> recIngs = null;
-//		
-////		Usuario userRequest = userFromRequest(request);
-////		if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECHNICIAN)) {
-////			tickets = ticketService.listTicket(page, count);
-////		}
-////		if(userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTOMER)) {
-////			tickets = ticketService.findByCurrentUser(page, count, userRequest.getId());
-////		}
 //		
 //		recIngs = recIngService.findAll(page, count);
 //		
