@@ -283,8 +283,15 @@ public class ReceitaController {
 		}
 		
 		//CONVERT LIST TO PAGE
+		//https://stackoverflow.com/questions/37749559/conversion-of-list-to-page-in-spring
 		Pageable pageable = PageRequest.of(page, count);
-		dtos = new PageImpl<>(dtolist, pageable, dtolist.size());
+		
+		int start = Math.min((int)pageable.getOffset(), dtolist.size());
+		int end = Math.min((start + pageable.getPageSize()), dtolist.size());
+
+		dtos = new PageImpl<>(dtolist.subList(start, end), pageable, dtolist.size());
+		
+		//dtos = new PageImpl<>(dtolist, pageable, dtolist.size());
 		
 		if(dtos.isEmpty()) {
 			response.getErrors().add("Nenhum registro encontrado");

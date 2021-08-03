@@ -1,6 +1,5 @@
 package com.tcc.api.controller;
 
-import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.api.entity.ModoPreparo;
-import com.tcc.api.entity.ReceitaIngrediente;
 import com.tcc.api.entity.Usuario;
 import com.tcc.api.response.Response;
 import com.tcc.api.security.jwt.JwtTokenUtil;
@@ -142,7 +140,6 @@ public class ModoPreparoController {
 	}
 	
 	@GetMapping(value = "{id}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
 	public ResponseEntity<Response<ModoPreparo>> findById(@PathVariable("id") Long id) {
 		
 		Response<ModoPreparo> response = new Response<ModoPreparo>();
@@ -152,23 +149,12 @@ public class ModoPreparoController {
 			response.getErrors().add("Registro nao encontrado id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
-		
-//		List<ChangeStatus> changes = new ArrayList<ChangeStatus>();
-//		Iterable<ChangeStatus> changesCurrent = ticketService.listChangeStatus(ticket.getId());
-//		for (Iterator<ChangeStatus> iterator = changesCurrent.iterator(); iterator.hasNext();) {
-//			ChangeStatus changeStatus = (ChangeStatus) iterator.next();
-//			changeStatus.setTicket(null);
-//			changes.add(changeStatus);
-//		}
-//		
-//		ticket.setChanges(changes);
 		response.setData(modopreparo);
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	@DeleteMapping(value = "{id}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<String>> delete(@PathVariable("id") Long id) {
 		
 		Response<String> response = new Response<String>();
@@ -184,52 +170,6 @@ public class ModoPreparoController {
 		
 		return ResponseEntity.ok(new Response<String>());
 	}
-	
-//	@GetMapping(value = "{page}/{count}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
-//	public ResponseEntity<Response<Page<Receita>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
-
-//		Response<Page<Receita>> response = new Response<Page<Receita>>();
-//		Page<Receita> receitas = null;
-		
-//		Usuario userRequest = userFromRequest(request);
-//		if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECHNICIAN)) {
-//			tickets = ticketService.listTicket(page, count);
-//		}
-//		if(userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTOMER)) {
-//			tickets = ticketService.findByCurrentUser(page, count, userRequest.getId());
-//		}
-		
-//		receitas = receitaService.findAll(page, count);
-//		
-//		if(receitas.isEmpty()) {
-//			response.getErrors().add("Nenhum registro encontrado");
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//		
-//		response.setData(receitas);
-//		
-//		return ResponseEntity.ok(response);
-//	}
-	
-	
-//	@GetMapping(value = "{page}/{count}/{nome}")
-//	public ResponseEntity<Response<Page<Receita>>> findByNome(HttpServletRequest request, @PathVariable("page") int page, 
-//			@PathVariable("count") int count, @PathVariable("nome") String nome) {
-//		
-//		Response<Page<Receita>> response = new Response<Page<Receita>>();
-//		Page<Receita> receitas = null;
-//		
-//		receitas = receitaService.findByNomeIgnoreCaseContainingOrderByNomeDesc(page, count, nome);
-//		
-//		if(receitas.isEmpty()) {
-//			response.getErrors().add("Nenhum registro encontrado com o nome: "+nome);
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//		
-//		response.setData(receitas);
-//		return ResponseEntity.ok(response);
-//	}
 	
 	//ROLLBACK
 	public void deleteReceitaRollback(Long id) {

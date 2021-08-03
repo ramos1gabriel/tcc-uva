@@ -16,7 +16,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class IngredienteListComponent implements OnInit {
 
   page : number = 0;
-  count : number = 5;
+  count : number = 10;
   pages : Array<number>;
   shared : SharedService;
   message : {};
@@ -35,11 +35,14 @@ export class IngredienteListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.findAll(this.page, this.count);
   }
 
   findAll(page : number, count : number) {
-    this.ingredienteService.findAll(page, count).subscribe((responseApi : ResponseApi) => {
+    this.ingredienteService.findAll(page, count).pipe(
+      finalize(() => this.spinner.hide())
+    ).subscribe((responseApi : ResponseApi) => {
       this.listIngrediente = responseApi['data']['content'];
       this.pages = new Array(responseApi['data']['totalPages']);
     }, err => {

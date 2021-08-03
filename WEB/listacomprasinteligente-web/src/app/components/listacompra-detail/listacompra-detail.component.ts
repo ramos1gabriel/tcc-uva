@@ -8,6 +8,7 @@ import { ResponseApi } from 'src/app/model/response-api';
 import swal from 'sweetalert';
 import { finalize } from 'rxjs/operators';
 import { NgxSpinnerService } from "ngx-spinner";
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-listacompra-detail',
@@ -16,10 +17,13 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class ListacompraDetailComponent implements OnInit {
 
+  //LISTA DRAG & DROP = https://www.thirdrocktechkno.com/blog/building-interactive-lists-with-the-new-angular-7-drag-and-drop-tool/
+
   shared : SharedService;
   message : {};
   classCss : {};
   listCompras = [];
+  dataCriacao : Date;
 
   constructor(
     private ListacompraService : ListacompraService,
@@ -36,7 +40,6 @@ export class ListacompraDetailComponent implements OnInit {
       this.gerarLista(idCardapio);
     }
   }
-
   gerarLista(id : string) {
     this.ListacompraService.gerarLista(id).pipe(
       finalize(() => this.spinner.hide())
@@ -48,6 +51,11 @@ export class ListacompraDetailComponent implements OnInit {
         text : err['error']['errors'][0]
       });
     });
+  }
+
+  //TESTE DRAG & DROP 
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.listCompras, event.previousIndex, event.currentIndex);
   }
 
   //DEFAULT
@@ -72,5 +80,13 @@ export class ListacompraDetailComponent implements OnInit {
       'has-error' : isInvalid && isDirty,
       'has-success' : !isInvalid && isDirty
     };
+  }
+
+  riscaItem(evento : any, i : any) {
+    if(evento) {
+      document.getElementById('item'+i).className = 'strike';
+    } else {
+      document.getElementById('item'+i).className = 'normal';
+    }
   }
 }

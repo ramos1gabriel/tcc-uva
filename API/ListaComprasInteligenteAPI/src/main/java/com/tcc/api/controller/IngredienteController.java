@@ -5,6 +5,8 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +43,8 @@ public class IngredienteController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ListaCompraController.class);
+	
 	@PostMapping()
 //	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<Ingrediente>> create(HttpServletRequest request, @RequestBody Ingrediente ingrediente,
@@ -52,6 +56,8 @@ public class IngredienteController {
 			validaIngredienteCriado(ingrediente, result);
 			validaDuplicidade(ingrediente, result);
 			
+			ingrediente.setNome(ingrediente.getNome().trim()); //evitar unique
+			
 			if(result.hasErrors()) {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 				return ResponseEntity.badRequest().body(response);
@@ -61,8 +67,15 @@ public class IngredienteController {
 			response.setData(ingredientePersitido);
 		
 		} catch (Exception e) {
-			response.getErrors().add(e.getMessage());
-			return ResponseEntity.badRequest().body(response);
+			if(e.getMessage().contains("NonUniqueResultException")) {
+				LOGGER.info("Erro de unique no ingrediente");
+				response.getErrors().add("Nome de ingrediente ja cadastrado!");
+				return ResponseEntity.badRequest().body(response);
+			} else {
+				LOGGER.info("Erro no create Ingrediente: "+e);
+				response.getErrors().add(e.getMessage());
+				return ResponseEntity.badRequest().body(response);
+			}
 		}
 		
 		return ResponseEntity.ok(response);
@@ -70,14 +83,14 @@ public class IngredienteController {
 
 	private void validaIngredienteCriado(Ingrediente ingrediente, BindingResult result) {
 		if(ingrediente.getNome() == null) {
-			result.addError(new ObjectError("Ticket", "Nome do ingrediente nao informado!"));
+			result.addError(new ObjectError("Ingrediente", "Nome do ingrediente nao informado!"));
 			return;
 		}
 	}
 	
 	private void validaDuplicidade(Ingrediente ingrediente, BindingResult result) {
 		
-		Ingrediente ingredientePesquisa = ingredienteService.findByNome(ingrediente.getNome());
+		Ingrediente ingredientePesquisa = ingredienteService.findByNome(ingrediente.getNome().trim());
 		
 		if(ingredientePesquisa != null) {
 			result.addError(new ObjectError("Ingrediente", "Nome de ingrediente ja cadastrado!"));
@@ -113,6 +126,7 @@ public class IngredienteController {
 			response.setData(ingredientePersistido);
 			
 		} catch (Exception e) {
+			LOGGER.info("Erro no update Ingrediente: "+e);
 			response.getErrors().add(e.getMessage());
 			return ResponseEntity.badRequest().body(response);
 		}

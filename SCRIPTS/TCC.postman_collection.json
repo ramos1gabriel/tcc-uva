@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "96234d16-47e9-407e-be94-792c62d1c8bd",
+		"_postman_id": "9b5a7a6e-aa09-4d02-b47b-a536444d9962",
 		"name": "TCC",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -27,12 +27,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\" : \"agua\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"nome\" : \"agua\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/ingrediente",
@@ -69,12 +64,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\" : \"5\",\n\t\"nome\" : \"Farinha de Trigo\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"id\" : \"5\",\n\t\"nome\" : \"Farinha de Trigo\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/ingrediente",
@@ -111,12 +101,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\" : \"5\",\n\t\"nome\" : \"Farinha de Trigo\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"id\" : \"5\",\n\t\"nome\" : \"Farinha de Trigo\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/ingrediente/1",
@@ -157,12 +142,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/ingrediente/5",
@@ -198,20 +178,15 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1OTQ4NDcyODQ0OTksImV4cCI6MTU5NTQ1MjA4NH0.5Y_8Nq6msgPewbwoLNz-wz4_zK8CgEfoAs_J8eNCYWGUM9uuZlj14ZKVRBmTgpQo49GO9LYMRTyvCKhGYeSXNw"
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE2Mjc5NDA3MzIwODgsImV4cCI6MTYyODU0NTUzMn0.CtF9kFvLk1ozeNUpWQb_u771t7wCx112eEd62wux3V_Z3yJxKhC3ARO4MvIB-8q1L_QccGwVNrtuRMod9Kp7Tg"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/tcc/api/ingrediente/0/10",
+							"raw": "http://localhost:8080/tcc/api/ingrediente/0/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -222,7 +197,7 @@
 								"api",
 								"ingrediente",
 								"0",
-								"10"
+								"5"
 							]
 						}
 					},
@@ -250,12 +225,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/ingrediente/recing/1",
@@ -297,12 +267,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/ingrediente/0/10/farinha",
@@ -342,17 +307,12 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1ODExMDE5OTY3ODEsImV4cCI6MTU4MTcwNjc5Nn0.jmfJCyfPaVRWs5OYdQq0XeqViX3ihqOXAE4Fg4PE8z2DtKhATYYcAfLrIIs-PZ-z-vKWD-_MuKUDFYp6Z0dt3w"
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE2MjY5OTY2NzgxMDIsImV4cCI6MTYyNzYwMTQ3OH0.Zapx-jkWySc7xauRXOmoe8iysATE5S_fpATQ6WOCGU9zrepdNo7vq36XnUQMMUlJjA-SpEy0ZtfWurne6VV0Cg"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\" : \"Sopa de alho poro\",\n\t\"descricao\" : \"\",\n\t\"categoria\" : \"Sopas\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"nome\" : \"Sopa de alho poro\",\n\t\"descricao\" : \"\",\n\t\"categoria\" : \"sopas\",\n\t\"usuario\" : {\n\t\t\"id\" : \"1\"\n\t}\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/receita",
@@ -389,12 +349,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\" : \"1\",\n\t\"nome\" : \"Bolo de Limão\",\n\t\"descricao\" : \"Bolo bonzão\",\n\t\"categoria\" : \"Sopas\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"id\" : \"1\",\n\t\"nome\" : \"Bolo de Limão\",\n\t\"descricao\" : \"Bolo bonzão\",\n\t\"categoria\" : \"Sopas\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/receita",
@@ -431,12 +386,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/receita/11",
@@ -477,12 +427,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/receita/10",
@@ -523,12 +468,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/receita/0/10",
@@ -570,12 +510,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/receita/pesquisa/0/10",
@@ -615,12 +550,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/receita/deleteAll/11",
@@ -664,12 +594,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"flagCobertura\" : false,\n\t\"flagMassa\" : false,\n\t\"flagRecheio\" : false,\n\t\"descricaoCobertura\" : \"teste1\",\n\t\"descricaoMassa\" : \"teste2\",\n\t\"descricaoRecheio\" : \"teste3\",\n\t\"receita\": {\n\t\t\"id\": 10,\n\t\t\"nome\": \"Bolo de Cenoura de Liquidificador\",\n\t\t\"descricao\": \"Esse bolo de cenoura de liquidificador fica pronto em menos de 1 hora leva apenas 20 minutos para a \",\n\t\t\"categoria\": \"bolos_tortas_doces\"\n\t}\n}\n\n\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"flagCobertura\" : false,\n\t\"flagMassa\" : false,\n\t\"flagRecheio\" : false,\n\t\"descricaoCobertura\" : \"teste1\",\n\t\"descricaoMassa\" : \"teste2\",\n\t\"descricaoRecheio\" : \"teste3\",\n\t\"receita\": {\n\t\t\"id\": 10,\n\t\t\"nome\": \"Bolo de Cenoura de Liquidificador\",\n\t\t\"descricao\": \"Esse bolo de cenoura de liquidificador fica pronto em menos de 1 hora leva apenas 20 minutos para a \",\n\t\t\"categoria\": \"bolos_tortas_doces\"\n\t}\n}\n\n\n"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/modopreparo",
@@ -706,12 +631,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"flagCobertura\" : false,\n\t\"flagMassa\" : false,\n\t\"flagRecheio\" : false,\n\t\"descricaoCobertura\" : \"teste1\",\n\t\"descricaoMassa\" : \"teste2\",\n\t\"descricaoRecheio\" : \"teste3\",\n\t\"receita\": {\n\t\t\"id\": 10,\n\t\t\"nome\": \"Bolo de Cenoura de Liquidificador\",\n\t\t\"descricao\": \"Esse bolo de cenoura de liquidificador fica pronto em menos de 1 hora leva apenas 20 minutos para a \",\n\t\t\"categoria\": \"bolos_tortas_doces\"\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"flagCobertura\" : false,\n\t\"flagMassa\" : false,\n\t\"flagRecheio\" : false,\n\t\"descricaoCobertura\" : \"teste1\",\n\t\"descricaoMassa\" : \"teste2\",\n\t\"descricaoRecheio\" : \"teste3\",\n\t\"receita\": {\n\t\t\"id\": 10,\n\t\t\"nome\": \"Bolo de Cenoura de Liquidificador\",\n\t\t\"descricao\": \"Esse bolo de cenoura de liquidificador fica pronto em menos de 1 hora leva apenas 20 minutos para a \",\n\t\t\"categoria\": \"bolos_tortas_doces\"\n\t}\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/modopreparo",
@@ -748,12 +668,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/modopreparo/1",
@@ -794,12 +709,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/modopreparo/10",
@@ -842,12 +752,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"dataCriacao\" : \"2020-07-25\",\n\n\t\"segundaCafe\" : \"\",\n\t\"segundaAlmoco\" : \"10\",\n    \"segundaLanche\" : \"\",\n    \"segundaJantar\" : \"10\",\n\n    \"tercaCafe\" : \"\",\n\t\"tercaAlmoco\" : \"10\",\n    \"tercaLanche\" : \"\",\n    \"tercaJantar\" : \"10\",\n\n    \"quartaCafe\" : \"\",\n\t\"quartaAlmoco\" : \"10\",\n    \"quartaLanche\" : \"\",\n    \"quartaJantar\" : \"10\",\n\n    \"quintaCafe\" : \"\",\n\t\"quintaAlmoco\" : \"10\",\n    \"quintaLanche\" : \"\",\n    \"quintaJantar\" : \"10\",\n\n    \"sextaCafe\" : \"\",\n\t\"sextaAlmoco\" : \"10\",\n    \"sextaLanche\" : \"\",\n    \"sextaJantar\" : \"10\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"dataCriacao\" : \"2020-07-25\",\n\n\t\"segundaCafe\" : \"\",\n\t\"segundaAlmoco\" : \"10\",\n    \"segundaLanche\" : \"\",\n    \"segundaJantar\" : \"10\",\n\n    \"tercaCafe\" : \"\",\n\t\"tercaAlmoco\" : \"10\",\n    \"tercaLanche\" : \"\",\n    \"tercaJantar\" : \"10\",\n\n    \"quartaCafe\" : \"\",\n\t\"quartaAlmoco\" : \"10\",\n    \"quartaLanche\" : \"\",\n    \"quartaJantar\" : \"10\",\n\n    \"quintaCafe\" : \"\",\n\t\"quintaAlmoco\" : \"10\",\n    \"quintaLanche\" : \"\",\n    \"quintaJantar\" : \"10\",\n\n    \"sextaCafe\" : \"\",\n\t\"sextaAlmoco\" : \"10\",\n    \"sextaLanche\" : \"\",\n    \"sextaJantar\" : \"10\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/cardapio",
@@ -884,12 +789,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"flagCobertura\" : false,\n\t\"flagMassa\" : false,\n\t\"flagRecheio\" : false,\n\t\"descricaoCobertura\" : \"teste1\",\n\t\"descricaoMassa\" : \"teste2\",\n\t\"descricaoRecheio\" : \"teste3\",\n\t\"receita\": {\n\t\t\"id\": 10,\n\t\t\"nome\": \"Bolo de Cenoura de Liquidificador\",\n\t\t\"descricao\": \"Esse bolo de cenoura de liquidificador fica pronto em menos de 1 hora leva apenas 20 minutos para a \",\n\t\t\"categoria\": \"bolos_tortas_doces\"\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"flagCobertura\" : false,\n\t\"flagMassa\" : false,\n\t\"flagRecheio\" : false,\n\t\"descricaoCobertura\" : \"teste1\",\n\t\"descricaoMassa\" : \"teste2\",\n\t\"descricaoRecheio\" : \"teste3\",\n\t\"receita\": {\n\t\t\"id\": 10,\n\t\t\"nome\": \"Bolo de Cenoura de Liquidificador\",\n\t\t\"descricao\": \"Esse bolo de cenoura de liquidificador fica pronto em menos de 1 hora leva apenas 20 minutos para a \",\n\t\t\"categoria\": \"bolos_tortas_doces\"\n\t}\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/cardapio",
@@ -926,12 +826,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/cardapio/1",
@@ -972,12 +867,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/cardapio/1",
@@ -1018,12 +908,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/cardapio/recuperaReceitas/1",
@@ -1065,12 +950,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/cardapio/findAllByDataCriacao/Sat Jan 08 2021 12:55:40 GMT-0300 (Horário Padrão de Brasília)",
@@ -1112,12 +992,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/cardapio/0/10",
@@ -1184,12 +1059,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/lista/gerar/1",
@@ -1203,6 +1073,48 @@
 								"api",
 								"lista",
 								"gerar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gerarLista2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE2Mjc1OTkxNjYzNzEsImV4cCI6MTYyODIwMzk2Nn0.LH0eM6oEcZY-J3FkTvS7eiTmoR1aZrSRIsZP1lA3VIV_3yJESQGXZ5xB0QbDGZajKmhcub2JbgpCm35RUJgZcA"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/tcc/api/lista/gerarLista/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tcc",
+								"api",
+								"lista",
+								"gerarLista",
 								"1"
 							]
 						}
@@ -1253,12 +1165,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n\t{\n\t\t\"observacao\" : \"testesaveall-1\",\n\t\t\"receita\" : {\n\t\t\t\"id\" : \"10\"\n\t\t},\n\t\t\"ingrediente\" : {\n\t\t\t\"id\" : \"3\"\n\t\t},\n\t\t\"quantidade\" : \"100\",\n\t\t\"unidadeMedida\" : \"ML\"\n\t}, \n\t{\n\t\t\"observacao\" : \"testesaveall-2\",\n\t\t\"receita\" : {\n\t\t\t\"id\" : \"10\"\n\t\t},\n\t\t\"ingrediente\" : {\n\t\t\t\"id\" : \"1\"\n\t\t},\n\t\t\"quantidade\" : \"20\",\n\t\t\"unidadeMedida\" : \"KG\"\n\t}\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "[\n\t{\n\t\t\"observacao\" : \"testesaveall-1\",\n\t\t\"receita\" : {\n\t\t\t\"id\" : \"10\"\n\t\t},\n\t\t\"ingrediente\" : {\n\t\t\t\"id\" : \"3\"\n\t\t},\n\t\t\"quantidade\" : \"100\",\n\t\t\"unidadeMedida\" : \"ML\"\n\t}, \n\t{\n\t\t\"observacao\" : \"testesaveall-2\",\n\t\t\"receita\" : {\n\t\t\t\"id\" : \"10\"\n\t\t},\n\t\t\"ingrediente\" : {\n\t\t\t\"id\" : \"1\"\n\t\t},\n\t\t\"quantidade\" : \"20\",\n\t\t\"unidadeMedida\" : \"KG\"\n\t}\n]"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/recIng",
@@ -1295,12 +1202,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\" : \"1\",\n\t\"observacao\" : \"\",\n\t\"receita\" : {\n\t\t\"id\" : \"1\"\n\t},\n\t\"ingrediente\" : {\n\t\t\"id\" : \"2\"\n\t},\n\t\"quantidade\" : \"100\",\n\t\"unidadeMedida\" : \"KG\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"id\" : \"1\",\n\t\"observacao\" : \"\",\n\t\"receita\" : {\n\t\t\"id\" : \"1\"\n\t},\n\t\"ingrediente\" : {\n\t\t\"id\" : \"2\"\n\t},\n\t\"quantidade\" : \"100\",\n\t\"unidadeMedida\" : \"KG\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/recIng",
@@ -1337,12 +1239,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id\" : \"5\",\n\t\"nome\" : \"Farinha de Trigo\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n\t\"id\" : \"5\",\n\t\"nome\" : \"Farinha de Trigo\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/recIng/1",
@@ -1383,12 +1280,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/recIng/2",
@@ -1429,12 +1321,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/recIng/findByReceitaId/10",
@@ -1476,12 +1363,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8080/tcc/api/recIng/0/10",
@@ -1517,12 +1399,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin@123\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin@123\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/tcc/api/auth",
@@ -1554,12 +1431,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nome\" : \"nelio santos\",\n\t\"email\" : \"nelio.santos@gmail.com.br\",\n\t\"username\" : \"nelio\",\n\t\"senha\" : \"123456\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"nome\" : \"nelio santos\",\n\t\"email\" : \"nelio.santos@gmail.com.br\",\n\t\"username\" : \"nelio\",\n\t\"senha\" : \"123456\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/tcc/api/usuario",
@@ -1594,12 +1466,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nome\" : \"nelio santos\",\n\t\"email\" : \"nelio.santos@gmail.com.br\",\n\t\"username\" : \"nelio\",\n\t\"senha\" : \"123456\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\n\t\"nome\" : \"nelio santos\",\n\t\"email\" : \"nelio.santos@gmail.com.br\",\n\t\"username\" : \"nelio\",\n\t\"senha\" : \"123456\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/tcc/api/usuario/0/10",

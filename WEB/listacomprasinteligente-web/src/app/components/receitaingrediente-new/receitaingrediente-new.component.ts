@@ -177,7 +177,7 @@ export class ReceitaingredienteNewComponent implements OnInit {
     } else { //validacao
       this.showMessage({
         type : 'error',
-        text : 'A Receita deve possuir ao menos 1 ingredientes!'
+        text : 'A Receita deve possuir ao menos 1 ingrediente!'
       });
     }
   }

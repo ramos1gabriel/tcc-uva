@@ -30,6 +30,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CardapioListComponent } from './components/cardapio-list/cardapio-list.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { ListacompraDetailComponent } from './components/listacompra-detail/listacompra-detail.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ListacompraDetailComponent } from './components/listacompra-detail/list
     routes,
     ReactiveFormsModule,
     NgxSpinnerModule,
+    DragDropModule,
     ModalModule.forRoot()
   ],
   providers: [

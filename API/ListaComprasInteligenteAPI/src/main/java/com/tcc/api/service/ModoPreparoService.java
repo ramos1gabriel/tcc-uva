@@ -16,8 +16,6 @@ public interface ModoPreparoService {
 	
 	//Page<Receita> findByNomeIgnoreCaseContainingOrderByNomeDesc(int page, int count, String nome);
 	
-	//criar uma q traga os ingredientes e modo de preparo (DTO?)
-	
 	void deleteByReceitaId(Long id);
 	
 	ModoPreparo findByReceitaId(Long id);

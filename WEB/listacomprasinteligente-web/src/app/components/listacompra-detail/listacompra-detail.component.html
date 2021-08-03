@@ -1,5 +1,4 @@
-fazer lista arrastavel
-
+<!--
 <table>
   <tr>
     <th style="text-align: center;">ID</th>
@@ -14,9 +13,68 @@ fazer lista arrastavel
     <td>{{ compra.cardapio.dataCriacao  | date: 'dd/MM/yyyy' }}</td>
   </tr>
 </table>
+-->
+<!--
+<div class="row">
+  <div class="col-md-4">
+    <h1>{{ listCompras[0].cardapio.dataCriacao  | date: 'dd/MM/yyyy' }}</h1>
+    
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let compra of listCompras" cdkDrag>
+        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+        <input type="checkbox">&nbsp;{{compra.item}}
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-block btn-primary btn-lg noPrint" onclick="window.print();" title="Imprimir"><i class="fa fa-print"></i>&nbsp;Imprimir</button>
+  </div>
+</div>
+-->
+
+<section class="invoice">
+	<!-- title row -->
+	<div class="row">
+		<div class="col-xs-12">
+			<h2 class="page-header">
+				<!--<i class="fa fa-globe"></i> AdminLTE, Inc.-->
+        <img src="assets/img/logo.png" height="160" alt="" id="logo" class="margin"><br>
+				<h4 class="pull-left">Cardápio criado em: <b>{{ listCompras[0].cardapio.dataCriacao  | date: 'dd/MM/yyyy' }}</b></h4>
+        <a data-toggle="tooltip" title="ELABORAR TEXTO: arrastavel e riscar texto" class="no-print">
+          <i class="fa fa-question-circle"></i>
+        </a>
+			</h2>
+		</div>
+	<!-- /.col -->
+	</div>
+
+	<!-- Table row -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let compra of listCompras; let i = index" cdkDrag>
+          <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+          <input type="checkbox" (change)="riscaItem($event.target.checked, i);" class="form-check-input" id="checkbox{{i}}">
+          &nbsp;<span id="item{{i}}">{{compra.item}}</span>
+        </div>
+      </div>
+		</div>
+		<!-- /.col -->
+	</div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      &nbsp;
+    </div>
+  </div>
+
+	<!-- /.row -->
+	<div class="row no-print">
+		<div class="col-xs-4">
+			<button type="button" class="btn btn-block btn-primary btn-lg noPrint" onclick="window.print();" title="Imprimir">
+        <i class="fa fa-print"></i>&nbsp;Imprimir
+      </button>
+		</div>
+	</div>
+</section>
 
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-spin" [fullScreen]="true"></ngx-spinner>
-
-<div class="col-md-6">
-  <button type="button" class="btn btn-block btn-primary btn-lg noPrint" onclick="window.print();" title="Imprimir"><i class="fa fa-print"></i>&nbsp;Imprimir</button>
-</div>

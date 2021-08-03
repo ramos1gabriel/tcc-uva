@@ -22,7 +22,8 @@ export class ModopreparoNewComponent implements OnInit {
 
   usuario = new User('', '', '', '', '', '');
   receita = new Receita('', '', '', '', this.usuario);
-  modopreparo = new ModoPreparo('', false, false, false, '', '', '', this.receita);
+  //modopreparo = new ModoPreparo('', false, false, false, '', '', '', this.receita);
+  modopreparo = new ModoPreparo('', '', this.receita);
   shared : SharedService;
   message: {};
   classCss: {};
@@ -32,6 +33,9 @@ export class ModopreparoNewComponent implements OnInit {
   isCobertura : boolean;
   isMassa : boolean;
   isRecheio : boolean;
+
+  //caracteres restantes
+  caracteres : number;
 
   constructor(
     private ReceitaService : ReceitaService,
@@ -43,6 +47,7 @@ export class ModopreparoNewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.calculaCaracteresRestantes(0);
     let idReceita : string = this.route.snapshot.params['idReceita'];
     if(idReceita != undefined){
       this.idReceita = idReceita;
@@ -58,6 +63,7 @@ export class ModopreparoNewComponent implements OnInit {
   findByReceitaId(id : string) {
     this.ModopreparoService.findByReceitaId(id).subscribe((responseApi : ResponseApi) => {
       this.modopreparo = responseApi.data;
+      this.calculaCaracteresRestantes(this.modopreparo.descricao.length);
     }, err => {
       this.showMessage({
         type : 'error',
@@ -162,4 +168,10 @@ export class ModopreparoNewComponent implements OnInit {
     return valid;
   }
   //validar se todos estao checked, pelo menos 1 deve ser preenchido
+
+  calculaCaracteresRestantes(valor : number) {
+    //console.log(evento.target.value.length);
+    let maximo : number = 500;
+    this.caracteres = maximo - valor;
+  }
 }

@@ -23,8 +23,8 @@ export class CardapioNewComponent implements OnInit {
   form: NgForm
   data = new Date();
 
-  cardapio = new Cardapio('', null, '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
-  //cardapio = new Cardapio('', this.data, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
+  //cardapio = new Cardapio('', null, '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
+  cardapio = new Cardapio('', this.data, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
   dtpipe: DatePipe = new DatePipe('en-US');
   modalRef: BsModalRef;
   page : number = 0;
@@ -43,7 +43,10 @@ export class CardapioNewComponent implements OnInit {
   posicao : number;
   listLabels = [];
   listControle = [];
-  listCampos = ['segundaCafe', 'tercaCafe', 'quartaCafe', 'quintaCafe','sextaCafe', 'segundaAlmoco', 'tercaAlmoco','quartaAlmoco', 'quintaAlmoco', 'sextaAlmoco', 'segundaLanche', 'tercaLanche', 'quartaLanche', 'quintaLanche', 'sextaLanche', 'segundaJantar', 'tercaJantar', 'quartaJantar', 'quintaJantar', 'sextaJantar'];
+  listCampos = ['segundaCafe', 'tercaCafe', 'quartaCafe', 'quintaCafe','sextaCafe', 
+                'segundaAlmoco', 'tercaAlmoco','quartaAlmoco', 'quintaAlmoco', 'sextaAlmoco', 
+                'segundaLanche', 'tercaLanche', 'quartaLanche', 'quintaLanche', 'sextaLanche', 
+                'segundaJantar', 'tercaJantar', 'quartaJantar', 'quintaJantar', 'sextaJantar'];
 
   //edit
   listReceitaEdit = [];
@@ -254,10 +257,11 @@ export class CardapioNewComponent implements OnInit {
   }
 
   findById(id : string) {
-    this.CardapioService.findById(id).pipe(
+    this.CardapioService.findById(id)/*.pipe(
       finalize(() => this.data = this.cardapio.dataCriacao)
-    ).subscribe((responseApi : ResponseApi) => {
+    )*/.subscribe((responseApi : ResponseApi) => {
       this.cardapio = responseApi.data;
+      this.data = this.cardapio.dataCriacao;
     }, err => {
       this.showMessage({
         type : 'error',

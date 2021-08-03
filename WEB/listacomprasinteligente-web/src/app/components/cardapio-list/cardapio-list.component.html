@@ -22,7 +22,7 @@
           </tr>
           <tr *ngFor="let cardapio of listCardapio; let i = index;">
             <td align="center">{{ cardapio.id }}</td>
-            <td>{{ cardapio.dataCriacao | date : 'dd/MM/yyyy' }}</td>
+            <td>{{ cardapio.dataCriacao }}</td>
             <td>
               <div class="progress">
                 <div class="progress-bar bg-primary" id="qtdreceitas" name="qtdreceitas" role="progressbar" [style.width]="listProgress[i] + '%'" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">

@@ -80,6 +80,7 @@ export class ReceitaListComponent implements OnInit {
     });
   }
 
+
   setNextPage(event : any) {
     event.preventDefault();
     if(this.page+1 < this.pages.length) {
@@ -103,7 +104,7 @@ export class ReceitaListComponent implements OnInit {
       this.findAll(this.page, this.count);
     }
   }
-
+  
   private showMessage(message : {type : string, text : string}) : void {
     this.message = message;
     this.buildClasses(message.type);
@@ -127,18 +128,3 @@ export class ReceitaListComponent implements OnInit {
     };
   }
 }
-
-/*
-RECEITA:
-Brigadeiro de panela
-Rapído e delecioso!
-
-RECEITA INGREDIENTE:
-1 lata de leite condensado
-4 colheres de Nescau
-2 colheres de mateiga
-
-MODO PREPARO:
-Junte esses ingredientes numa panela. Adicione o achocolatado e a mateiga, e mexe até criar consistência, ou seja, até começar a engrossar.
-Despeje tudo numa vasilha de vidro e leve a geladeira. Espere aproximadamente uma hora e meia, e está pronto, é só se deliciar!
-*/

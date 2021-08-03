@@ -262,12 +262,12 @@ public class ListaCompraController {
 		String uniMed = "";
 		
 		if(unidade.contains("XCR")) { //250ml
-			uniMed = unidadeMedida.multiply(new BigDecimal(250)).toString() + "ml";
+			uniMed = unidadeMedida.multiply(new BigDecimal(250)).toString() + " ml";
 			//Quantity<Volume> l6 = Quantities.getQuantity(6, Units.LITRE);
 		} else if(unidade.contains("COL")) {//15ml
-			uniMed = unidadeMedida.multiply(new BigDecimal(15)).toString() + "ml";
+			uniMed = unidadeMedida.multiply(new BigDecimal(15)).toString() + " ml";
 		} else if(unidade.contains("KG")) {
-			uniMed = unidadeMedida.toString() + "kg";
+			uniMed = unidadeMedida.toString() + " kg";
 		} else if(unidade.contains("G")) {
 			//Quantity<Mass> kg = Quantities.getQuantity(unidadeMedida, Units.KILOGRAM);
 			
@@ -287,11 +287,11 @@ public class ListaCompraController {
 			}
 			
 		} else if(unidade.contains("L")) {
-			uniMed = unidadeMedida.toString() + "litros";
+			uniMed = unidadeMedida.toString() + " litro(s)";
 		} else if(unidade.contains("ML")) {
 			if(unidadeMedida.compareTo(new BigDecimal(1000)) >= 0) {
 				unidadeMedida = unidadeMedida.divide(new BigDecimal(1000));
-				uniMed = unidadeMedida.toString() +" litros";
+				uniMed = unidadeMedida.toString() +" litro(s)";
 			} else {
 				uniMed = unidadeMedida.toString() +" ml";
 			}

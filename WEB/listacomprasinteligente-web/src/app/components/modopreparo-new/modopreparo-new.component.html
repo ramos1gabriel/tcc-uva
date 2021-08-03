@@ -10,7 +10,26 @@
       </div>
 
       <div class="box-body">
+        
+        <label for="inputDescricao" class="control-label">Descrição do Modo de Preparo da Receita {{modopreparo.receita.nome}}</label>
+        <br><small>Caracteres restantes: {{caracteres}}</small>
+        
+        <div [ngClass]="getFromGroupClass(descricao.invalid, descricao.dirty)">
 
+          <div class="col-sm-10">
+            <textarea [(ngModel)]="modopreparo.descricao"
+                      (keyup)="calculaCaracteresRestantes($event.target.value.length)"
+                      class="form-control" 
+                      name="descricao" 
+                      rows="10"
+                      id="inputDescricao" 
+                      #descricao="ngModel" 
+                      placeholder="Descreva aqui o passo a passo para o preparo da receita" 
+                      maxlength="500"
+                      required></textarea>
+          </div>
+        </div>
+        <!--
         <div class="col-sm-10">
           <label for="inputDescricaoCobertura" class="control-label">Descrição do Cobertura</label>
         </div>
@@ -103,7 +122,7 @@
             <label class="form-check-label" for="inputFlagRecheio">Não possui recheio?</label>
           </div>
         </div>
-
+        -->
       </div>
       <div class="box-footer">
         <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Gravar</button>
