@@ -39,8 +39,6 @@ export class ListacompraDetailComponent implements OnInit {
     if(idCardapio != undefined){
       this.spinner.show();
       this.gerarLista(idCardapio);
-      //document.getElementById("sidebar-aux").style.minHeight = "926px";
-      //console.log(document.getElementById("cdk-drop-list-0").clientHeight);
     } else {
       this.mensagem = "Nenhum cardápio encontrado para gerar a lista de compras!";
     }
