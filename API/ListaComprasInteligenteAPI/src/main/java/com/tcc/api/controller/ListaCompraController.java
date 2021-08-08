@@ -1,19 +1,16 @@
 package com.tcc.api.controller;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 //import javax.measure.MetricPrefix;
@@ -27,10 +24,6 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,29 +32,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcc.api.dto.ListaCompra;
 import com.tcc.api.entity.CardapioSemanal;
-import com.tcc.api.entity.ListaCompra;
 import com.tcc.api.entity.ReceitaIngrediente;
 import com.tcc.api.entity.Usuario;
-import com.tcc.api.enums.UnidadeMedidaEnum;
 import com.tcc.api.response.Response;
 import com.tcc.api.security.jwt.JwtTokenUtil;
 import com.tcc.api.service.CardapioSemanalService;
 import com.tcc.api.service.JasperService;
-import com.tcc.api.service.ListaCompraService;
 import com.tcc.api.service.ReceitaIngredienteService;
 import com.tcc.api.service.UsuarioService;
 
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 //import tec.units.ri.quantity.Quantities;
 //import tec.units.ri.unit.Units;
@@ -74,8 +56,8 @@ public class ListaCompraController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ListaCompraController.class);
 	
-	@Autowired
-	private ListaCompraService listacompraService;
+//	@Autowired
+//	private ListaCompraService listacompraService;
 	
 	@Autowired
 	protected JwtTokenUtil jwtTokenUtil;
@@ -117,6 +99,8 @@ public class ListaCompraController {
 		Response<ListaCompra> response = new Response<ListaCompra>();
 		
 		List<ListaCompra> listaCompra = montaLista(id); //gerar a lista
+		
+		Collections.sort(listaCompra); //ordem alfabetica
 		
 		if(listaCompra.isEmpty()) {
 			response.getErrors().add("Nao foi possivel gerar lista para cardapio id: "+id);
@@ -173,8 +157,76 @@ public class ListaCompraController {
 		}
 	}
 	
-	//MONTA LISTA COMPRA
 	private List<ListaCompra> montaLista(Long id) {
+		
+		//busca listcompra por id
+//		List<ListaCompra> listas = listacompraService.findAllByCardapio(id);
+		List<ListaCompra> listas = new ArrayList<ListaCompra>();
+//		//se existir limpa tabela
+//		if(!listas.isEmpty()) {
+//			listacompraService.deleteByCardapioId(id);
+//			listas.clear();
+//		}
+		
+		//pega o cardapio
+		CardapioSemanal cardapio = cardapioService.findById(id);
+		
+		//pega todos id das receitas do cardapio
+		List<Long> listaRefeicoes = cardapio.getRefeicoes();
+		
+		//recupera todos ingredienteXreceita utilizados no cardapio
+		List<ReceitaIngrediente> listaIngredientes = new ArrayList<ReceitaIngrediente>();
+		
+		for (Long idRec : listaRefeicoes) {
+			if(idRec > 0) {
+				recingService.findByReceitaId(idRec).forEach(recing -> listaIngredientes.add(recing));
+			}
+		}
+		
+		//AGRUPAR = https://emmanuelneri.com.br/2017/06/20/transformando-collections-em-map-stream-do-java-8/
+		//CONVERSAO UNIDADES DE MEDIDA = https://www.baeldung.com/javax-measure
+		
+		//agrupa ingredientes pelo id
+		Map<Long, List<ReceitaIngrediente>> ingredienteAgrupado = listaIngredientes.stream().collect(Collectors.groupingBy(ReceitaIngrediente::getIngredienteId));
+		
+		Map<String, String> listaAux = new HashMap<String, String>();
+		
+		for (Long valor : ingredienteAgrupado.keySet()) {
+			List<ReceitaIngrediente> lista = ingredienteAgrupado.get(valor);
+			
+			String ingrediente = "";
+			String unidadeMedida = "";
+			BigDecimal qtdeTotal = BigDecimal.ZERO;
+			
+			//mudar para lambda
+			for (ReceitaIngrediente rc : lista) {
+				//qtdeTotal += rc.getQuantidade();
+				qtdeTotal = qtdeTotal.add(rc.getQuantidade());
+				ingrediente = rc.getIngrediente().getNome();
+				unidadeMedida = String.valueOf(rc.getUnidadeMedida());
+				//System.out.println(rc.getIngrediente().getNome()+": "+qtdeTotal+""+rc.getUnidadeMedida());
+			}
+			if("UNI".equals(unidadeMedida)) {
+				listaAux.put(ingrediente, qtdeTotal.intValue()+""+unidadeMedida);
+			} else {
+				listaAux.put(ingrediente, qtdeTotal+""+unidadeMedida);
+			}
+			
+		}
+		
+		for (String key: listaAux.keySet()) {
+			//System.out.println(key +": "+tratarUnidadeMedida(listaAux.get(key)));
+			ListaCompra lc = new ListaCompra();
+			lc.setItem(key +": "+tratarUnidadeMedida(listaAux.get(key)));
+			lc.setCardapio(cardapio);
+			listas.add(lc);
+		}
+		
+		return listas;//listacompraService.saveAll(listas);
+	}
+	
+	//MONTA LISTA COMPRA
+/*	private List<ListaCompra> montaLista(Long id) {
 		
 		//busca listcompra por id
 		List<ListaCompra> listas = listacompraService.findAllByCardapio(id);
@@ -240,7 +292,7 @@ public class ListaCompraController {
 		}
 		
 		return listacompraService.saveAll(listas);
-	}
+	}*/
 	
 	private String tratarUnidadeMedida(String unidade) {
 		

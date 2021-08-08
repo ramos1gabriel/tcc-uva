@@ -24,6 +24,7 @@ export class ListacompraDetailComponent implements OnInit {
   classCss : {};
   listCompras = [];
   dataCriacao : Date;
+  mensagem : string = "";
 
   constructor(
     private ListacompraService : ListacompraService,
@@ -34,10 +35,14 @@ export class ListacompraDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spinner.show();
     let idCardapio : string = this.route.snapshot.params['idCardapio'];
     if(idCardapio != undefined){
+      this.spinner.show();
       this.gerarLista(idCardapio);
+      //document.getElementById("sidebar-aux").style.minHeight = "926px";
+      //console.log(document.getElementById("cdk-drop-list-0").clientHeight);
+    } else {
+      this.mensagem = "Nenhum cardápio encontrado para gerar a lista de compras!";
     }
   }
   gerarLista(id : string) {

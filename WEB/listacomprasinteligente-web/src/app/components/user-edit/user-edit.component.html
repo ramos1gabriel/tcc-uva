@@ -55,7 +55,8 @@
               name="nome" 
               id="inputNome" 
               #nome="ngModel" 
-              placeholder="Nome"
+              placeholder="Nome" 
+              maxlength="50"
               required>
 
               <span class="help-block" *ngIf="nome.invalid && nome.dirty">Nome é necessário</span>
@@ -73,7 +74,8 @@
               name="email" 
               id="inputEmail" 
               #email="ngModel" 
-              placeholder="Email"
+              placeholder="Email" 
+              maxlength="50"
               email>
 
               <span class="help-block" *ngIf="email.invalid && email.dirty">Email é inválido</span>
@@ -91,7 +93,8 @@
               name="username" 
               id="inputUsername" 
               #username="ngModel" 
-              placeholder="Nome de Usuário"
+              placeholder="Nome de Usuário" 
+              maxlength="50"
               required>
 
               <span class="help-block" *ngIf="username.invalid && username.dirty">Nome de Usuário é necessário</span>
@@ -109,7 +112,8 @@
               name="senha" 
               id="inputSenha" 
               #senha="ngModel" 
-              placeholder="Senha"
+              placeholder="Senha" 
+              maxlength="12"
               required>
             </div>
 

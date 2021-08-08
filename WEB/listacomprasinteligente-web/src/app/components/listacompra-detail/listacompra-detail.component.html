@@ -31,7 +31,12 @@
 </div>
 -->
 
-<section class="invoice">
+<div class="callout callout-danger" *ngIf="mensagem">
+  <h4><i class="icon fa fa-ban"></i>&nbsp;Atenção!</h4>
+  <p>{{ mensagem }}</p>
+</div>
+
+<section class="invoice" *ngIf="!mensagem">
 	<!-- title row -->
 	<div class="row">
 		<div class="col-xs-12">
@@ -39,7 +44,7 @@
 				<!--<i class="fa fa-globe"></i> AdminLTE, Inc.-->
         <img src="assets/img/logo.png" height="160" alt="" id="logo" class="margin"><br>
 				<h4 class="pull-left">Cardápio criado em: <b>{{ listCompras[0].cardapio.dataCriacao  | date: 'dd/MM/yyyy' }}</b></h4>
-        <a data-toggle="tooltip" title="ELABORAR TEXTO: arrastavel e riscar texto" class="no-print">
+        <a data-toggle="tooltip" title="É possivel alterar a ordem dos itens arrastando e soltando. Também é possivel riscar um item da lista clicando na checkbox ao lado do mesmo." class="no-print">
           <i class="fa fa-question-circle"></i>
         </a>
 			</h2>
@@ -51,9 +56,9 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let compra of listCompras; let i = index" cdkDrag>
+        <div class="example-box" *ngFor="let compra of listCompras; let i = index" cdkDrag title="Segure e arraste para mudar ordem desse item">
           <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-          <input type="checkbox" (change)="riscaItem($event.target.checked, i);" class="form-check-input" id="checkbox{{i}}">
+          <input type="checkbox" (change)="riscaItem($event.target.checked, i);" class="form-check-input" id="checkbox{{i}}" title="Riscar item da lista">
           &nbsp;<span id="item{{i}}">{{compra.item}}</span>
         </div>
       </div>

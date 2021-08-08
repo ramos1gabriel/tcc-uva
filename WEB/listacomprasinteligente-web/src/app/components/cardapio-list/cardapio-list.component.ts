@@ -23,6 +23,10 @@ export class CardapioListComponent implements OnInit {
   classCss : {};
   listCardapio = [];
   listProgress = [];
+  listCampos = ['segundaCafe', 'tercaCafe', 'quartaCafe', 'quintaCafe','sextaCafe', 
+                'segundaAlmoco', 'tercaAlmoco','quartaAlmoco', 'quintaAlmoco', 'sextaAlmoco', 
+                'segundaLanche', 'tercaLanche', 'quartaLanche', 'quintaLanche', 'sextaLanche', 
+                'segundaJantar', 'tercaJantar', 'quartaJantar', 'quintaJantar', 'sextaJantar'];
   
   constructor(
     private dialogService : DialogService,
@@ -34,6 +38,7 @@ export class CardapioListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.show();
     this.findAll(this.page, this.count);
   }
 
@@ -134,6 +139,7 @@ export class CardapioListComponent implements OnInit {
   preencheProgressBar() {
     for (let i = 0; i < this.listCardapio.length; i++) {
       let progress : number = 0;
+
       if(this.listCardapio[i].segundaCafe != null) {
         progress += 5;
       }
@@ -198,8 +204,10 @@ export class CardapioListComponent implements OnInit {
       if(this.listCardapio[i].sextaJantar != null) {
         progress += 5;
       }
+      
       this.listProgress[i] = progress;
     }
+    this.spinner.hide();
   }
 
   exportListaCompraToPdf(id : string) {

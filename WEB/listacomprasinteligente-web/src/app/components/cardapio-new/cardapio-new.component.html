@@ -7,7 +7,7 @@
         <span>{{ message.text }}</span>
       </div>
 
-      <div class="alert alert-info alert-dismissible">
+      <div class="alert alert-info alert-dismissible" *ngIf="!isData">
         <h4><i class="icon fa fa-info"></i>Atenção</h4>
         As refeições almoço e jantar são de preenchimento obrigatório.
       </div>
@@ -26,7 +26,6 @@
 
       <div class="box box-info" *ngIf="!isData">
         <div class="box-header with-border">
-          {{cardapio.dataCriacao}}
           <h3 class="box-title">Cardápio Semanal - Dia: {{ data  | date: 'dd/MM/yyyy' }}</h3>
           <!--
           <input type="hidden" 

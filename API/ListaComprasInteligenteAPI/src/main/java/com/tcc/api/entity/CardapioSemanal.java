@@ -6,11 +6,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -93,9 +91,9 @@ public class CardapioSemanal {
     @Column(name = "SEXTA_JANTAR", nullable = false)
 	private Long sextaJantar;
     
-    @JsonIgnore
-    @OneToMany(mappedBy = "cardapio", fetch=FetchType.LAZY)
-    private List<ListaCompra> listacompra;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "cardapio", fetch=FetchType.LAZY)
+//    private List<ListaCompra> listacompra;
 
 	public Long getId() {
 		return id;
@@ -362,11 +360,11 @@ public class CardapioSemanal {
 		return refeicoes;
 	}
 	
-	public List<ListaCompra> getListacompra() {
-		return listacompra;
-	}
-	
-	public void setListacompra(List<ListaCompra> listacompra) {
-		this.listacompra = listacompra;
-	}
+//	public List<ListaCompra> getListacompra() {
+//		return listacompra;
+//	}
+//	
+//	public void setListacompra(List<ListaCompra> listacompra) {
+//		this.listacompra = listacompra;
+//	}
 }
