@@ -1,0 +1,40 @@
+Banco de dados: MySQL
+- Usar o XAMPP para para simular o MySQL
+- Usar o HeidiSQL como SGBD
+
+Massa de teste BD:
+SCRIPTS\SCRIPT_CARDAPIO_FIT_COMPLETO.sql
+
+Requests do serviços (Postman):
+SCRIPTS\TCC.postman_collection.json
+
+
+Back-end: Java 8
+- Usar STS4(Spring Tool Suite 4)
+
+Front-end: Angular 7
+- Usar VSCode(Visual Studio Code) usar comando "ng serve" para subir
+
+
+*TODOS ARQUIVOS ESTÃO NO GITHUB "tcc-uva"
+
+PROGRAMAS NECESSARIOS:
+
+Documentação:
+Word - Microsoft Office
+Astah Community (UML)
+
+IDE:
+STS4 - Java
+VSCode - Angular
+
+Arquivos fonte:
+Git
+GitHub Desktop
+
+Database: (melhor usar o banco?)
+XAMPP
+HeidiSQL
+
+Testes:
+Postman - testar serviços
