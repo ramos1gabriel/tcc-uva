@@ -1,0 +1,26 @@
+BANCADA:
+
+Carlos Sicsú
+caugusto.sicsu@uva.br
+
+Andre Lucio
+andre.oliveira@uva.br
+
+ORIENTADORA(?)
+Adriana Aparicio Sicsú Ayres do Nascimento
+
+---LAYOUT EMAIL
+
+Assunto:
+Documentação Monografia 1 (Sistemas de Informação) - Apresentação 05/12
+
+Mensagem:
+Professor, bom dia.
+
+Segue em anexo a documentação do meu trabalho da disciplina de Monografia 1 da professora Adriana.
+
+Atenciosamente,
+Gabriel Sousa
+
+Anexo:
+TCC.docx

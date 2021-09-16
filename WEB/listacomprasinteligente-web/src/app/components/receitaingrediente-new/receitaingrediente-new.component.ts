@@ -183,11 +183,14 @@ export class ReceitaingredienteNewComponent implements OnInit {
   }
 
   private showMessage(message : {type : string, text : string}) : void {
-    this.message = message;
-    this.buildClasses(message.type);
-    setTimeout(() => { //LIMPA MENSAGEM
-      this.message = undefined;
-    }, 3000);
+    console.log('type='+message.type+' text='+message.text);
+    if(message != undefined) {
+      this.message = message;
+      this.buildClasses(message.type);
+      setTimeout(() => { //LIMPA MENSAGEM
+        this.message = undefined;
+      }, 3000);
+    }
   }
 
   private buildClasses(type : string) : void {
@@ -295,14 +298,14 @@ export class ReceitaingredienteNewComponent implements OnInit {
   save(listRecIng : Array<ReceitaIngrediente>){
     //console.log(JSON.stringify(listRecIng));
     //this.ReceitaIngredienteService.createOrUpdateAll(listRecIng)
-    this.message = {};
+    this.message = null; //tratar bug mensagem vermelha vazia
     this.ReceitaIngredienteService.createOrUpdateAll(listRecIng).subscribe((responseApi : ResponseApi) => {
       let listRecIngRet : Array<ReceitaIngrediente> = responseApi.datas;
       //this.form.resetForm();
-      this.showMessage({
+      /*this.showMessage({
         type : 'success',
         text : `Total de ${listRecIngRet.length} ingredientes cadastrados com sucesso!`
-      });
+      });*/
       this.limparTela();
       if(this.modo == 'edit') {
         this.router.navigate(['/modopreparo-new', this.idReceita, 'edit']);

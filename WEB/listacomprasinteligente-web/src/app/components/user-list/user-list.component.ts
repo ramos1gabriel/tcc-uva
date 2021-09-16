@@ -65,7 +65,7 @@ export class UserListComponent implements OnInit {
             icon: "success",
           });
           this.listUser = [];
-          this.findAll(this.page, this.count);
+          this.findAll(0, this.count);
         }, err => {
           this.showMessage({
             type : 'error',

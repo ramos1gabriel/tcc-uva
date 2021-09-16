@@ -1,47 +1,12 @@
-<!--
-<table>
-  <tr>
-    <th style="text-align: center;">ID</th>
-    <th>Item</th>
-    <th>Cardápio ID</th>
-    <th>Cardápio Data</th>
-  </tr>
-  <tr *ngFor="let compra of listCompras">
-    <td align="center">{{ compra.id }}</td>
-    <td>{{ compra.item }}</td>
-    <td>{{ compra.cardapio.id }}</td>
-    <td>{{ compra.cardapio.dataCriacao  | date: 'dd/MM/yyyy' }}</td>
-  </tr>
-</table>
--->
-<!--
-<div class="row">
-  <div class="col-md-4">
-    <h1>{{ listCompras[0].cardapio.dataCriacao  | date: 'dd/MM/yyyy' }}</h1>
-    
-    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let compra of listCompras" cdkDrag>
-        <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        <input type="checkbox">&nbsp;{{compra.item}}
-      </div>
-    </div>
-
-    <button type="button" class="btn btn-block btn-primary btn-lg noPrint" onclick="window.print();" title="Imprimir"><i class="fa fa-print"></i>&nbsp;Imprimir</button>
-  </div>
-</div>
--->
-
 <div class="callout callout-danger" *ngIf="mensagem">
   <h4><i class="icon fa fa-ban"></i>&nbsp;Atenção!</h4>
   <p>{{ mensagem }}</p>
 </div>
 
 <section class="invoice" *ngIf="!mensagem">
-	<!-- title row -->
 	<div class="row">
 		<div class="col-xs-12">
 			<h2 class="page-header">
-				<!--<i class="fa fa-globe"></i> AdminLTE, Inc.-->
         <img src="assets/img/logo.png" height="160" alt="" id="logo" class="margin"><br>
 				<h4 class="pull-left">Cardápio criado em: <b>{{ listCompras[0].cardapio.dataCriacao  | date: 'dd/MM/yyyy' }}</b></h4>
         <a data-toggle="tooltip" title="É possivel alterar a ordem dos itens arrastando e soltando. Também é possivel riscar um item da lista clicando na checkbox ao lado do mesmo." class="no-print">
@@ -49,10 +14,22 @@
         </a>
 			</h2>
 		</div>
-	<!-- /.col -->
 	</div>
 
-	<!-- Table row -->
+	<div class="row no-print">
+		<div class="col-xs-4">
+			<button type="button" class="btn btn-block btn-primary btn-lg noPrint" onclick="window.print();" title="Imprimir">
+        <i class="fa fa-print"></i>&nbsp;Imprimir
+      </button>
+		</div>
+	</div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      &nbsp;
+    </div>
+  </div>
+
 	<div class="row">
 		<div class="col-xs-12">
 			<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
@@ -62,22 +39,6 @@
           &nbsp;<span id="item{{i}}">{{compra.item}}</span>
         </div>
       </div>
-		</div>
-		<!-- /.col -->
-	</div>
-
-  <div class="row">
-    <div class="col-xs-12">
-      &nbsp;
-    </div>
-  </div>
-
-	<!-- /.row -->
-	<div class="row no-print">
-		<div class="col-xs-4">
-			<button type="button" class="btn btn-block btn-primary btn-lg noPrint" onclick="window.print();" title="Imprimir">
-        <i class="fa fa-print"></i>&nbsp;Imprimir
-      </button>
 		</div>
 	</div>
 </section>

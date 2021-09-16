@@ -22,7 +22,7 @@
             <th>Email</th>
             <th>Nome de Usuário</th>
             <th>Senha</th>
-            <th style="width: 40px">&nbsp;</th>
+            <!--<th style="width: 40px">&nbsp;</th>-->
             <th style="width: 40px">&nbsp;</th>
           </tr>
           <tr *ngFor="let user of listUser">
@@ -30,7 +30,7 @@
             <td>{{ user.email }}</td>
             <td>{{ user.username }}</td>
             <td>{{ user.senha }}</td>
-            <td><button *ngIf="user.username != 'admin'" class="btn btn-primary" (click)="edit(user.id);" title="Editar"><i class="fa fa-pencil"></i></button></td>
+            <!--<td><button *ngIf="user.username != 'admin'" class="btn btn-primary" (click)="edit(user.id);" title="Editar"><i class="fa fa-pencil"></i></button></td>-->
             <td><button *ngIf="user.username != 'admin'" class="btn btn-danger" (click)="delete(user.id);" title="Excluir"><i class="fa fa-trash"></i></button></td>
           </tr>
         </table>

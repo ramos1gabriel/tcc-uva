@@ -9,7 +9,7 @@
 
       <div class="alert alert-info alert-dismissible" *ngIf="!isData">
         <h4><i class="icon fa fa-info"></i>Atenção</h4>
-        As refeições almoço e jantar são de preenchimento obrigatório.
+        As refeições <b>almoço</b> e <b>jantar</b> são de preenchimento obrigatório.
       </div>
 
       <div class="box box-info" *ngIf="isData">
@@ -51,7 +51,7 @@
             <!-- INICIO CAFE -->
             <tr>
               <th>
-                <img src="assets\img\cafe.png" class="icon-cardapio"/>
+                <img src="assets\img\cafe.png" class="icon-cardapio" title="Café da Manhã"/>
                 &nbsp;Café da Manhã
               </th>
               <td [ngClass]="getFromGroupClass(segundaCafe.invalid, segundaCafe.dirty)">
@@ -134,7 +134,7 @@
             <!-- INICIO ALMOCO -->
             <tr>
               <th>
-                <img src="assets\img\almoco.png" class="icon-cardapio"/>
+                <img src="assets\img\almoco.png" class="icon-cardapio" title="Almoço"/>
                 &nbsp;Almoço
               </th>
               <td [ngClass]="getFromGroupClass(segundaAlmoco.invalid, segundaAlmoco.dirty)">
@@ -222,7 +222,7 @@
             <!-- INICIO LANCHE -->
             <tr>
               <th>
-                <img src="assets\img\lanche.png" class="icon-cardapio"/>
+                <img src="assets\img\lanche.png" class="icon-cardapio" title="Lanche"/>
                 &nbsp;Lanche
               </th>
               <td [ngClass]="getFromGroupClass(segundaLanche.invalid, segundaLanche.dirty)">
@@ -305,7 +305,7 @@
             <!-- INICIO JANTAR -->
             <tr>
               <th>
-                <img src="assets\img\jantar.png" class="icon-cardapio"/>
+                <img src="assets\img\jantar.png" class="icon-cardapio" title="Jantar"/>
                 &nbsp;Jantar
               </th>
               <td [ngClass]="getFromGroupClass(segundaJantar.invalid, segundaJantar.dirty)">
@@ -427,11 +427,11 @@
   </div>
   <div class="modal-footer">
     <ul class="pagination pagination-sm no-margin pull-right">
-      <li><a href="" (click)="setPreviousPage($event);">&laquo;</a></li>
+      <li><a href="" (click)="setFirstPage($event);" title="Ir para primeira página">&laquo;</a></li>
       <li *ngFor="let p of pages; let i = index">
         <a [ngClass]="{'pagination-focus' : i == page}" href="" (click)="setPage(i, $event);">{{i+1}}</a>
       </li>
-      <li><a href="" (click)="setNextPage($event);">&raquo;</a></li>
+      <li><a href="" (click)="setLastPage($event);" title="Ir para última página">&raquo;</a></li>
     </ul>
   </div>
 </ng-template>

@@ -29,11 +29,11 @@
 
       <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-          <li><a href="" (click)="setPreviousPage($event);">&laquo;</a></li>
+          <li><a href="" (click)="setFirstPage($event);" title="Ir para primeira página">&laquo;</a></li>
           <li *ngFor="let p of pages; let i = index">
             <a [ngClass]="{'pagination-focus' : i == page}" href="" (click)="setPage(i, $event);">{{i+1}}</a>
           </li>
-          <li><a href="" (click)="setNextPage($event);">&raquo;</a></li>
+          <li><a href="" (click)="setLastPage($event);" title="Ir para última página">&raquo;</a></li>
         </ul>
       </div>
     </div>

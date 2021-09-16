@@ -24,12 +24,14 @@ export class CardapioNewComponent implements OnInit {
   data = new Date();
 
   //cardapio = new Cardapio('', null, '', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10','', '10', '', '10');
-  cardapio = new Cardapio('', this.data, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
+  cardapio = new Cardapio('', null, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
   dtpipe: DatePipe = new DatePipe('en-US');
   modalRef: BsModalRef;
   page : number = 0;
   count : number = 5;
   pages : Array<number>;
+  firstPage : number = 0;
+  lastPage : number;
   shared : SharedService;
   message : {};
   classCss : {};
@@ -123,11 +125,13 @@ export class CardapioNewComponent implements OnInit {
     ).subscribe((responseApi : ResponseApi) => {
       this.listReceita = responseApi['data']['content'];
       this.pages = new Array(responseApi['data']['totalPages']);
+      this.lastPage = this.pages.length-1;
     }, err => {
-      this.showMessage({
+      /*this.showMessage({
         type : 'error',
         text : err['error']['errors'][0]
-      });
+      });*/
+      console.log('Modal receitas: '+err['error']['errors'][0]);
     });
   }
 
@@ -152,6 +156,20 @@ export class CardapioNewComponent implements OnInit {
     if(i >= 0) {
       this.page = i;
       this.findAllReceita(this.page, this.count);
+    }
+  }
+
+  setFirstPage(event : any) {
+    event.preventDefault();
+    if(this.listReceita.length > 0) {
+      this.findAllReceita(this.firstPage, this.count);
+    }
+  }
+
+  setLastPage(event : any) {
+    event.preventDefault();
+    if(this.listReceita.length > 0) {
+      this.findAllReceita(this.lastPage, this.count);
     }
   }
 

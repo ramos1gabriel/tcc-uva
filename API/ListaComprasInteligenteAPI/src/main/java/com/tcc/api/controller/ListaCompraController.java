@@ -100,6 +100,8 @@ public class ListaCompraController {
 		
 		List<ListaCompra> listaCompra = montaLista(id); //gerar a lista
 		
+		//segunda lista auxiliar
+		
 		Collections.sort(listaCompra); //ordem alfabetica
 		
 		if(listaCompra.isEmpty()) {
@@ -214,6 +216,11 @@ public class ListaCompraController {
 			
 		}
 		
+//		Map<String, String> listaAux2 = new HashMap<String, String>();
+//		for (String key: listaAux.keySet()) {
+//			listaAux2.put(key, tratarUnidadeMedida(listaAux.get(key)));
+//		}
+		
 		for (String key: listaAux.keySet()) {
 			//System.out.println(key +": "+tratarUnidadeMedida(listaAux.get(key)));
 			ListaCompra lc = new ListaCompra();
@@ -314,10 +321,22 @@ public class ListaCompraController {
 		String uniMed = "";
 		
 		if(unidade.contains("XCR")) { //250ml
-			uniMed = unidadeMedida.multiply(new BigDecimal(250)).toString() + " ml";
+			BigDecimal uniMedAux = unidadeMedida.multiply(new BigDecimal(250));
+			if(uniMedAux.compareTo(new BigDecimal(1000)) >= 0) {
+				uniMedAux = uniMedAux.divide(new BigDecimal(1000));
+				uniMed = uniMedAux.toString() +" litro(s)";
+			} else {
+				uniMed = uniMedAux.toString() +" mL";
+			}
 			//Quantity<Volume> l6 = Quantities.getQuantity(6, Units.LITRE);
 		} else if(unidade.contains("COL")) {//15ml
-			uniMed = unidadeMedida.multiply(new BigDecimal(15)).toString() + " ml";
+			BigDecimal uniMedAux = unidadeMedida.multiply(new BigDecimal(15));
+			if(uniMedAux.compareTo(new BigDecimal(1000)) >= 0) {
+				uniMedAux = uniMedAux.divide(new BigDecimal(1000));
+				uniMed = uniMedAux.toString() +" litro(s)";
+			} else {
+				uniMed = uniMedAux.toString() +" mL";
+			}
 		} else if(unidade.contains("KG")) {
 			uniMed = unidadeMedida.toString() + " kg";
 		} else if(unidade.contains("G")) {
@@ -345,7 +364,7 @@ public class ListaCompraController {
 				unidadeMedida = unidadeMedida.divide(new BigDecimal(1000));
 				uniMed = unidadeMedida.toString() +" litro(s)";
 			} else {
-				uniMed = unidadeMedida.toString() +" ml";
+				uniMed = unidadeMedida.toString() +" mL";
 			}
 		} else if(unidade.contains("M")) {
 			uniMed = unidadeMedida.toString() +" metros";

@@ -97,7 +97,7 @@ export class ModopreparoNewComponent implements OnInit {
   save(){
     this.modopreparo.receita = this.receita;
     if(this.validacaoFlags()) {
-      this.message = {};
+      this.message = null; //tratar bug mensagem vermelha vazia
       this.ModopreparoService.createOrUpdate(this.modopreparo).subscribe((responseApi : ResponseApi) => {
         //this.modopreparo = new ModoPreparo('', false, false, false, '', '', '', this.receita);
         //let modopreparoRet : ModoPreparo = responseApi.data;

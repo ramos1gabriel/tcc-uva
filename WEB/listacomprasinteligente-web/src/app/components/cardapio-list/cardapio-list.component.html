@@ -25,7 +25,7 @@
             <td>{{ cardapio.dataCriacao  | date: 'dd/MM/yyyy' }}</td>
             <td>
               <div class="progress">
-                <div class="progress-bar bg-primary" id="qtdreceitas" name="qtdreceitas" role="progressbar" [style.width]="listProgress[i] + '%'" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar progress-bar-primary progress-bar-striped" id="qtdreceitas" name="qtdreceitas" role="progressbar" [style.width]="listProgress[i] + '%'" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                   {{ listProgress[i] }}%
                 </div>
               </div>
@@ -39,11 +39,11 @@
 
       <div class="box-footer clearfix">
         <ul class="pagination pagination-sm no-margin pull-right">
-          <li><a href="" (click)="setPreviousPage($event);">&laquo;</a></li>
+          <li><a href="" (click)="setFirstPage($event);" title="Ir para primeira página">&laquo;</a></li>
           <li *ngFor="let p of pages; let i = index">
             <a [ngClass]="{'pagination-focus' : i == page}" href="" (click)="setPage(i, $event);">{{i+1}}</a>
           </li>
-          <li><a href="" (click)="setNextPage($event);">&raquo;</a></li>
+          <li><a href="" (click)="setLastPage($event);" title="Ir para última página">&raquo;</a></li>
         </ul>
       </div>
     </div>

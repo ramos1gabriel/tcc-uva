@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.api.dto.ReceitaDTO;
+import com.tcc.api.entity.ModoPreparo;
 import com.tcc.api.entity.Receita;
 import com.tcc.api.entity.Usuario;
 import com.tcc.api.response.Response;
@@ -268,7 +269,8 @@ public class ReceitaController {
 		if(receitas != null) {
 			for (Receita rec : receitas) {
 				Integer qtdIng = receitaService.countIngredientePorReceita(rec.getId());
-				if(qtdIng >= 1) {
+				ModoPreparo mp = modopreparoService.findByReceitaId(rec.getId());
+				if(qtdIng >= 1 && mp != null) {
 					ReceitaDTO dto = new ReceitaDTO();
 					dto.setId(rec.getId());
 					dto.setNome(rec.getNome());
@@ -277,7 +279,7 @@ public class ReceitaController {
 					dto.setUsuario(rec.getUsuario().getNome());
 					dtolist.add(dto);
 				} else { //lentidao?
-					deleteAll(rec.getId());
+					deleteAll(rec.getId()); //deleta todas receitas incompletas
 				}
 			}
 		}

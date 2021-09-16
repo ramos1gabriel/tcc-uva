@@ -18,6 +18,8 @@ export class IngredienteListComponent implements OnInit {
   page : number = 0;
   count : number = 10;
   pages : Array<number>;
+  firstPage : number = 0;
+  lastPage : number;
   shared : SharedService;
   message : {};
   classCss : {};
@@ -45,6 +47,7 @@ export class IngredienteListComponent implements OnInit {
     ).subscribe((responseApi : ResponseApi) => {
       this.listIngrediente = responseApi['data']['content'];
       this.pages = new Array(responseApi['data']['totalPages']);
+      this.lastPage = this.pages.length-1;
     }, err => {
       this.showMessage({
         type : 'error',
@@ -95,7 +98,7 @@ export class IngredienteListComponent implements OnInit {
                 icon: "success",
               });
               this.listIngrediente = [];
-              this.findAll(this.page, this.count);
+              this.findAll(0, this.count);
             }, err => {
               this.showMessage({
                 type : 'error',
@@ -131,6 +134,20 @@ export class IngredienteListComponent implements OnInit {
     if(i >= 0) {
       this.page = i;
       this.findAll(this.page, this.count);
+    }
+  }
+
+  setFirstPage(event : any) {
+    event.preventDefault();
+    if(this.listIngrediente.length > 0) {
+      this.findAll(this.firstPage, this.count);
+    }
+  }
+
+  setLastPage(event : any) {
+    event.preventDefault();
+    if(this.listIngrediente.length > 0) {
+      this.findAll(this.lastPage, this.count);
     }
   }
 
