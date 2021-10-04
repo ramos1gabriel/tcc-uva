@@ -1,0 +1,11 @@
+Alterar nome dos avaliadores (só sabe antes da apresentação?)
+SUMÁRIO (atualizar no final)
+LISTA DE FIGURAS (atualizar no final)
+LISTA DE TABELAS (atualizar no final)
+
+CAPÍTULO I - INTRODUÇÃO
+JUSTIFICATIVA [x]
+OBJETIVO [x]
+Descrição do minimundo do Sistema [x]
+1.5.2	Detalhamento dos processos de negócio (ATUALIZAR DIAGRAMA DE ATIVIDADES)
+1.5.3	Requisitos do sistema (ATUALIZAR/ADICIONAR/REVISAR VALIDAÇÕES, mais infos no doc "OVERVIEW_SISTEMA_ATUAL.txt")

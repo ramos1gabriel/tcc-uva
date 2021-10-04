@@ -1,0 +1,39 @@
+Proxima conferencia quinzenal - documentação (15 minutos)
+
+
+---
+documentação
+dividia em sprint (scrum)
+
+--PF1 -
+
+exemplos de apresentação PF2 (no drive do professor)
+
+
+DRIVE:
+https://drive.google.com/drive/folders/1xjFFPrXNcCilnnATpayfp-9LFoX_T-hj
+
+MODELO DA DOCUMENTAÇÃO = MODELO_TCC_PF2.docx
+
+--
+cenario atual = oq era antes
+especificações dos requisitos nao funcionais = usabilidade
+
+GESTÃO DE PROJETO
+Trello
+MODELO DE DADOS
+arquitetura
+banco
+linguagem backend
+linguagem front-end
+git - controle de gerenciamento de versão
+-----
+caso de testes
+scripts de testes
+teste manual
+---
+conclusões em trabalho futuro
+---
+utilizar referencias no meio do texto
+---
+DOCUMENTAÇÃO

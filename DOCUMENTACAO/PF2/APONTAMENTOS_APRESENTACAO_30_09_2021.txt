@@ -1,0 +1,46 @@
+====================================
+COMENTARIOS/DUVIDAS APRESENTACAO PF2
+====================================
+1.2 JUSTIFICATIVA = relacionar com dieta, alimentacao saudavel e tal
+
+1.4 ANÁLISE DO AMBIENTE ORGANIZACIONAL (1.4 - 1.4.4)(precisa??)
+1.6 CONTAGEM DE PONTOS DE FUNÇÃO (precisa??)
+1.7 METODOLOGIA DO DESENVOLVIMENTO (precisa??)
+1.9 ORÇAMENTO DO PROJETO PARA O DESENVOLVIMENTO (precisa??)
+
+2.4 DESCRIÇÃO TEXTUAL DOS CASOS DE USO (precisa?)
+5.1 DIAGRAMA DE TRANSIÇÃO DE ESTADO (precisa?)
+
+ANEXO - DOCUMENTO DE VISÃO (9paginas) (só comentar sobre ele)
+
+====================================
+REFAZER *fiz anotacoes em toda documentação do que deve ser alterado
+====================================
+OBJETIVO (atualizar com TUDO que o sistema faz realmente)
+LEVANTAMENTO DO SISTEMA (revisar texto)
+diagramas
+====================================
+Apontamentos do prof André Lucio (30/09/2021):
+
+tirar 1.4
+tirar 1.6
+ficiticio
+1.7 
+1.9
+19.2
+1.9.3
+1.9.4
+5.1
+
+15/dias
+cronograma/funciionalidade
+
+bibliografia
+modelos da URL
+lituratura
+citar no texto
+"a seguir sera apresrentado um diagrama de modelo de classes (faluer,. 1209)"
+
+descricao textual
+linkar regra de negocio
+

@@ -1,0 +1,53 @@
+Trocar Adriana por
+André Lucio de Oliveira
+
+============================================================
+LEVANTAMENTO DAS REGRAS DE NEGOCIO E VALIDAÇÕES DO SISTEMA
+DATA: 25/09/2021
+============================================================
+CRIAR CONTA
+obrigatorios: nome, email. username e senha
+senha criptografada SHA-1
+validação do campo email;
+
+LOGIN
+campos obrigatorios username e senha
+
+INGREDIENTE
+nome é obrigatorio;
+não pode ter ignredientes com nomes iguias
+não pode excluir um ingrediente que esta associado ha alguma receita, sendo necessario primeiro excluir as receitas com aquele ingrediente;
+
+RECEITA
+nome, categoria são obrigatorios;
+o sistema pega automaticamente o usuario que criou a receita;
+caso todas as etapas da receita (receita, ingredientes e modo preparo) não sejam feitas a receita é deletada automaticamente;
+
+INGREDIENTE X RECEITA
+ingrediente e qunatidade são obrigatorios;
+não pode duplicidade de ingrediente;
+ao menos 1 ingrediente deve ser informado;
+e no maximo 10 ingredientes;
+caso unidade de medida não seja selecionada, o sistema considera como uma "uniddade", por exemplo: 1 ovo;
+
+MODO DE PREPARO
+descricao é obrigatorio
+deve possuir no maximo 500 caracteres;
+
+CARDAPIO SEMANAL
+é obrigatorio informar o almoço e janta de todos os dias (segunda a sexta);
+pega a data atual da criação do cardapio;
+ao lista os cardapios é exibido uma porcentagem do total de receitas preenchidas no cardapio, sendo 100% o maximo;
+ao lista os cardapios será possivel gerar uma lista de compras clicando no botão ao lado do cardapio desejado;
+
+LISTA COMPRAS
+gerada automaticamente pelo sistema;
+possivel mudar a ordem arrastando e soltando;
+checkbox ao lado dos itens para risca-los;
+botão imprimir;
+
+CONFIGURAÇÕES
+campo obrigatorios: nome, email, username, senha;
+O usuario podera editar seus dados (nome, email, nome de usuario(username) e senha);
+também será possivel escolher entre três imagens predefinidas uma figura para o perfil do usuario;
+
