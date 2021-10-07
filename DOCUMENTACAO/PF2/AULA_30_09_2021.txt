@@ -24,13 +24,9 @@ Apontamentos do prof André Lucio (30/09/2021):
 
 tirar 1.4
 tirar 1.6
-ficiticio
-1.7 
-1.9
-19.2
-1.9.3
-1.9.4
-5.1
+tirar 1.7 (ficiticio)
+tirar 1.9
+tirar 5.1 e 5.2 (CAPÍTULO V - MODELO DE TRANSIÇÃO DE ESTADO)
 
 15/dias
 cronograma/funciionalidade

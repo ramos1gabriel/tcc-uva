@@ -1,4 +1,3 @@
-
 brainstorm logo:
 
 livro de receitas
@@ -11,6 +10,7 @@ calendario
 https://www.flaticon.com/free-icon/calendar_3176395
 
 ---
+
 dicas de fontes: (Helvica)
 https://freefontsfamily.com/helvetica-font-family/
 
@@ -20,13 +20,8 @@ CORES:
 Azul claro (#3C8DBC)
 
 ---
-
-fazer 2 slides ARTIGO RTOS
-
 NOME: ListaComprasInteligente
 Nome fantacia: Lista de Compras Inteligente
 Slogan: Alimentação saudável e praticidade em um só lugar
-
-
 ---
 

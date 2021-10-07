@@ -4,8 +4,72 @@ LISTA DE FIGURAS (atualizar no final)
 LISTA DE TABELAS (atualizar no final)
 
 CAPÍTULO I - INTRODUÇÃO
-JUSTIFICATIVA [x]
-OBJETIVO [x]
-Descrição do minimundo do Sistema [x]
-1.5.2	Detalhamento dos processos de negócio (ATUALIZAR DIAGRAMA DE ATIVIDADES)
-1.5.3	Requisitos do sistema (ATUALIZAR/ADICIONAR/REVISAR VALIDAÇÕES, mais infos no doc "OVERVIEW_SISTEMA_ATUAL.txt")
+ 1.2 JUSTIFICATIVA [x]
+ 1.3 OBJETIVO [x]
+ 1.4 LEVANTAMENTO DO SISTEMA
+  1.5.1 Descrição do minimundo do Sistema [x]
+  1.5.2	Detalhamento dos processos de negócio (ATUALIZAR DIAGRAMA DE ATIVIDADES)
+  1.5.3	Requisitos do sistema (ATUALIZAR/ADICIONAR/REVISAR)
+  1.5.4	Descrição das regras de negócio (ATUALIZAR/ADICIONAR/REVISAR)
+ 1.8 CRONOGRAMA DE EXECUÇÃO (atualizar ou manter?)
+
+CAPÍTULO II – MODELO DE CASOS DE USO (tem bastante alteração!!)
+ 2.1 MAPEAMENTO DOS REQUISITOS FUNCIONAIS EM CASO DE USO
+ 2.2 DESCRIÇÃO TEXTUAL DOS ATORES (complexo, linkar com regras de negocio)
+ 2.3 DIAGRAMA DE CASO DE USO (atualizar)
+
+CAPÍTULO III – MODELO DE CLASSE
+ 3.1 DIAGRAMA DE CLASSES (atualizar diagrama)
+ 3.2 DICIONÁRIO DAS CLASSES
+
+CAPÍTULO IV - MODELO DE INTERAÇÕES
+ 4.1 DIAGRAMA DE SEQUENCIA (atualizar/revisar/adicionar)
+
+BIBLIOGRAFIA *ta fraquinha*
+
+ANEXO – DOCUMENTO DE VISÃO (apenas revisar)
+ 
+-----------
+--NOVO
+------------
+- sempre que for apresentar uma figura(diagrama) colocar um texto com alguma referencia (ex.: "a seguir sera apresrentado um diagrama de modelo de classes (fulano, 1999)")
+- cronograma/funciionalidade (entregas de 15 em 15 dias)
+
+-----------
+--REMOVIDOS
+------------
+
+TOTAL = (+/- 10 paginas)
+
+1.4 ANÁLISE DO AMBIENTE ORGANIZACIONAL
+ 1.4.1 Identificação da empresa
+ 1.4.2 Ramo de atividade
+ 1.4.3 Organograma da empresa
+ 1.4.4 Plataforma tecnológica
+
+1.6 CONTAGEM DE PONTOS DE FUNÇÃO NÃO AJUSTADOS
+ 1.6.1 Contagem de funções de dados
+ 1.6.2 Contagem de funções transacionais
+ 1.6.3 Contagem de pontos de função não ajustados
+
+1.7 METODOLOGIA DO DESENVOLVIMENTO
+ 1.7.1 Tipo de pesquisa
+ 1.7.2 Método de abordagem
+ 1.7.3 Instrumentos de medidas utilizados
+ 1.7.4 Coleta de dados
+ 1.7.5 Recursos tecnológicos
+
+1.9 ORÇAMENTO DO PROJETO PARA O DESENVOLVIMENTO
+ 1.9.1 Conversão de PF para homem-hora
+ 1.9.2 Hardware
+
+CAPÍTULO V - MODELO DE TRANSIÇÃO DE ESTADO
+ 5.1 DIAGRAMA DE TRANSIÇÃO DE ESTADO
+ 5.2 TABELA DE TRANSIÇÃO DE ESTADO
+
+
+
+
+
+  
+
