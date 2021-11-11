@@ -1,4 +1,6 @@
 Alterar nome dos avaliadores (só sabe antes da apresentação?)
+
+--ATUALIZAR NO FINAL
 SUMÁRIO (atualizar no final)
 LISTA DE FIGURAS (atualizar no final)
 LISTA DE TABELAS (atualizar no final)
@@ -7,16 +9,17 @@ CAPÍTULO I - INTRODUÇÃO
  1.2 JUSTIFICATIVA [x]
  1.3 OBJETIVO [x]
  1.4 LEVANTAMENTO DO SISTEMA
-  1.5.1 Descrição do minimundo do Sistema [x]
-  1.5.2	Detalhamento dos processos de negócio (ATUALIZAR DIAGRAMA DE ATIVIDADES)
-  1.5.3	Requisitos do sistema (ATUALIZAR/ADICIONAR/REVISAR)
-  1.5.4	Descrição das regras de negócio (ATUALIZAR/ADICIONAR/REVISAR)
+  1.5.1 Descrição do minimundo do Sistema [x] *termo "minimundo" mudado para "geral"
+  1.5.2	Detalhamento dos processos de negócio [x] *adicionado referencia bibliografica
+  1.5.3	Requisitos do sistema [x]
+  1.5.4	Descrição das regras de negócio [x] *(de 10 foi pra 19 regras)
  1.8 CRONOGRAMA DE EXECUÇÃO (atualizar ou manter?)
 
-CAPÍTULO II – MODELO DE CASOS DE USO (tem bastante alteração!!)
- 2.1 MAPEAMENTO DOS REQUISITOS FUNCIONAIS EM CASO DE USO
- 2.2 DESCRIÇÃO TEXTUAL DOS ATORES (complexo, linkar com regras de negocio)
- 2.3 DIAGRAMA DE CASO DE USO (atualizar)
+CAPÍTULO II – MODELO DE CASOS DE USO [x]
+ 2.1 MAPEAMENTO DOS REQUISITOS FUNCIONAIS EM CASO DE USO [x]
+ 2.2 DESCRIÇÃO TEXTUAL DOS ATORES [x]
+ 2.3 DIAGRAMA DE CASO DE USO [x]
+ 2.4 DESCRIÇÃO TEXTUAL DOS CASOS DE USO [x] *revisar com o professor
 
 CAPÍTULO III – MODELO DE CLASSE
  3.1 DIAGRAMA DE CLASSES (atualizar diagrama)

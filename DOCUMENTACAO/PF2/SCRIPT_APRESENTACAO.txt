@@ -1,0 +1,39 @@
+1 - Criar usuário
+Nome: Gabriel Sousa
+Email: gabriel.sousa@uva.br
+Nome de Usuário: gabrielsousa
+Senha: 123456
+------------------------
+2 - 
+Nome: queijo muçarela 
+Nome: queijo minas
+Nome:  sachê de tempero pronto de carne
+Nome: pimenta-do-reino
+------------------------
+3 - Receita
+Nome: Omelete de queijo com presunto
+Categoria: Lanches
+Descrição: Receita de omelete rápido e prático que leva ingredientes simples no recheio: queijo, presunto, tomate e cebola
+------------------------
+ 3.1 - Receita Ingrediente:
+	6 ovos
+	200 gramas de presunto
+	100 gramas de queijo muçarela
+	100 gramas de queijo minas
+	1 tomate
+	1 cebola
+	1 sachê de tempero pronto de carne
+	3,5 gramas de sal
+	1 pimenta-do-reino
+	1 coentro
+
+ 3.2 - Modo de Preparo
+	1 - Bata os ovos em uma vasilha e acrescente todos os ingredientes picados.
+	2 - Use a quantidade de sal e pimenta-do-reino que achar necessária.
+	3 - Em uma panela quente, acrescente um fio de óleo e coloque um pouco da mistura, espalhando por toda a frigideira.
+	4 - Frite os dois lados e boa apetite.
+
+	FONTE: https://receitas.globo.com/omelete-de-queijo-com-presunto-511d55154d09381f8d000044.ghtml
+
+------------------------
+4 - Cardapio Semanal

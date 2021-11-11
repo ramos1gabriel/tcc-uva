@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ import com.tcc.api.service.CardapioSemanalService;
 import com.tcc.api.service.JasperService;
 import com.tcc.api.service.ReceitaIngredienteService;
 import com.tcc.api.service.UsuarioService;
+import com.tcc.api.util.Util;
 
 import net.sf.jasperreports.engine.JRException;
 
@@ -94,18 +96,18 @@ public class ListaCompraController {
 	
 	//HTML
 	@GetMapping(value = "gerarLista/{id}")
-	public ResponseEntity<Response<ListaCompra>> gerarLista(@PathVariable("id") Long id) {
+	public ResponseEntity<Response<ListaCompra>> gerarLista(@PathVariable("id") String data) {
 		
 		Response<ListaCompra> response = new Response<ListaCompra>();
 		
-		List<ListaCompra> listaCompra = montaLista(id); //gerar a lista
+		List<ListaCompra> listaCompra = montaLista(data); //gerar a lista
 		
 		//segunda lista auxiliar
 		
 		Collections.sort(listaCompra); //ordem alfabetica
 		
 		if(listaCompra.isEmpty()) {
-			response.getErrors().add("Nao foi possivel gerar lista para cardapio id: "+id);
+			response.getErrors().add("Nao foi possivel gerar lista para cardapio do dia: "+data);
 			return ResponseEntity.badRequest().body(response);
 		}
 		
@@ -116,50 +118,7 @@ public class ListaCompraController {
 		return ResponseEntity.ok(response);
 	}
 	
-	//JASPER
-	@PostMapping(value = "/gerar/{id}")
-	public void exportListaCompra(@PathVariable("id") Long id, HttpServletResponse httpServletResponse) throws IOException, JRException {
-		
-		OutputStream os = httpServletResponse.getOutputStream();
-		
-		try {
-			
-			List<ListaCompra> listaCompra = montaLista(id); //gerar a lista
-			
-			if(!listaCompra.isEmpty()) {
-			
-				Connection connection = dataSource.getConnection();
-				LOGGER.info("exportListaCompra() - acessando conexao com bd");
-				
-				InputStream logo = this.getClass().getResourceAsStream("/jasper/img/logo.png");
-				//File logoFile = new File(this.getClass().getClassLoader().getResource("jasper/img/logo.png").getPath());
-				//String logo = logoFile.getPath();
-				
-				Map parametros = new HashMap(); 
-			    parametros.put("ID", id.intValue());
-			    parametros.put("logo", logo);
-			    String nomeRelatorio = "listacompra";
-			    //LOGGER.info("exportListaCompra() - id="+id+"\nlogo="+logo+"\nrelatorio="+nomeRelatorio);
-				
-			    byte[] relatorio = jasperService.gerarPDF(connection, nomeRelatorio, parametros);
-			    ByteArrayOutputStream out = new ByteArrayOutputStream(relatorio.length);
-			    out.write(relatorio, 0, relatorio.length);
-	
-			    httpServletResponse.setContentType("application/pdf");
-			    httpServletResponse.addHeader("Content-Disposition", "inline; filename=dailyOrdersReport.pdf");
-			    
-		        out.writeTo(os);
-		        os.flush();
-	        
-			}
-		} catch (Exception e) {
-			LOGGER.error("Erro no metodo exportListaCompra:", e);
-		} finally {
-			os.close();
-		}
-	}
-	
-	private List<ListaCompra> montaLista(Long id) {
+	private List<ListaCompra> montaLista(String data) {
 		
 		//busca listcompra por id
 //		List<ListaCompra> listas = listacompraService.findAllByCardapio(id);
@@ -171,18 +130,20 @@ public class ListaCompraController {
 //		}
 		
 		//pega o cardapio
-		CardapioSemanal cardapio = cardapioService.findById(id);
+		java.time.LocalDate dataLocalDate = Util.stringToLocalDate(data);
+		List<CardapioSemanal> cardapios = cardapioService.findAllByDataCriacao(dataLocalDate);//findById(id);
 		
 		//pega todos id das receitas do cardapio
-		List<Long> listaRefeicoes = cardapio.getRefeicoes();
+		//List<Long> listaRefeicoes = cardapio.getRefeicoes();
 		
 		//recupera todos ingredienteXreceita utilizados no cardapio
 		List<ReceitaIngrediente> listaIngredientes = new ArrayList<ReceitaIngrediente>();
 		
-		for (Long idRec : listaRefeicoes) {
-			if(idRec > 0) {
-				recingService.findByReceitaId(idRec).forEach(recing -> listaIngredientes.add(recing));
-			}
+		for (CardapioSemanal idRec : cardapios) {
+			//if(idRec > 0) {
+				recingService.findByReceitaId(idRec.getReceita().getId()).forEach(
+						recing -> listaIngredientes.add(recing));
+			//}
 		}
 		
 		//AGRUPAR = https://emmanuelneri.com.br/2017/06/20/transformando-collections-em-map-stream-do-java-8/
@@ -225,81 +186,13 @@ public class ListaCompraController {
 			//System.out.println(key +": "+tratarUnidadeMedida(listaAux.get(key)));
 			ListaCompra lc = new ListaCompra();
 			lc.setItem(key +": "+tratarUnidadeMedida(listaAux.get(key)));
-			lc.setCardapio(cardapio);
+			//lc.setCardapio(cardapios.get(0));
+			lc.setDataCriacao(dataLocalDate);
 			listas.add(lc);
 		}
 		
 		return listas;//listacompraService.saveAll(listas);
 	}
-	
-	//MONTA LISTA COMPRA
-/*	private List<ListaCompra> montaLista(Long id) {
-		
-		//busca listcompra por id
-		List<ListaCompra> listas = listacompraService.findAllByCardapio(id);
-		
-		//se existir limpa tabela
-		if(!listas.isEmpty()) {
-			listacompraService.deleteByCardapioId(id);
-			listas.clear();
-		}
-		
-		//pega o cardapio
-		CardapioSemanal cardapio = cardapioService.findById(id);
-		
-		//pega todos id das receitas do cardapio
-		List<Long> listaRefeicoes = cardapio.getRefeicoes();
-		
-		//recupera todos ingredienteXreceita utilizados no cardapio
-		List<ReceitaIngrediente> listaIngredientes = new ArrayList<ReceitaIngrediente>();
-		
-		for (Long idRec : listaRefeicoes) {
-			if(idRec > 0) {
-				recingService.findByReceitaId(idRec).forEach(recing -> listaIngredientes.add(recing));
-			}
-		}
-		
-		//AGRUPAR = https://emmanuelneri.com.br/2017/06/20/transformando-collections-em-map-stream-do-java-8/
-		//CONVERSAO UNIDADES DE MEDIDA = https://www.baeldung.com/javax-measure
-		
-		//agrupa ingredientes pelo id
-		Map<Long, List<ReceitaIngrediente>> ingredienteAgrupado = listaIngredientes.stream().collect(Collectors.groupingBy(ReceitaIngrediente::getIngredienteId));
-		
-		Map<String, String> listaAux = new HashMap<String, String>();
-		
-		for (Long valor : ingredienteAgrupado.keySet()) {
-			List<ReceitaIngrediente> lista = ingredienteAgrupado.get(valor);
-			
-			String ingrediente = "";
-			String unidadeMedida = "";
-			BigDecimal qtdeTotal = BigDecimal.ZERO;
-			
-			//mudar para lambda
-			for (ReceitaIngrediente rc : lista) {
-				//qtdeTotal += rc.getQuantidade();
-				qtdeTotal = qtdeTotal.add(rc.getQuantidade());
-				ingrediente = rc.getIngrediente().getNome();
-				unidadeMedida = String.valueOf(rc.getUnidadeMedida());
-				//System.out.println(rc.getIngrediente().getNome()+": "+qtdeTotal+""+rc.getUnidadeMedida());
-			}
-			if("UNI".equals(unidadeMedida)) {
-				listaAux.put(ingrediente, qtdeTotal.intValue()+""+unidadeMedida);
-			} else {
-				listaAux.put(ingrediente, qtdeTotal+""+unidadeMedida);
-			}
-			
-		}
-		
-		for (String key: listaAux.keySet()) {
-			//System.out.println(key +": "+tratarUnidadeMedida(listaAux.get(key)));
-			ListaCompra lc = new ListaCompra();
-			lc.setItem(key +": "+tratarUnidadeMedida(listaAux.get(key)));
-			lc.setCardapio(cardapio);
-			listas.add(lc);
-		}
-		
-		return listacompraService.saveAll(listas);
-	}*/
 	
 	private String tratarUnidadeMedida(String unidade) {
 		
@@ -395,125 +288,46 @@ public class ListaCompraController {
 		return usuarioService.findByUsername(username);
 	}
 	
-//	@PutMapping()
-//	public ResponseEntity<Response<ReceitaIngrediente>> update(HttpServletRequest request, @RequestBody List<ReceitaIngrediente> listRecIng,
-//			BindingResult result) {
+	//JASPER
+//	@PostMapping(value = "/gerar/{id}")
+//	public void exportListaCompra(@PathVariable("id") Long id, HttpServletResponse httpServletResponse) throws IOException, JRException {
 //		
-//		Response<ReceitaIngrediente> response = new Response<ReceitaIngrediente>();
+//		OutputStream os = httpServletResponse.getOutputStream();
 //		
 //		try {
-//			validaUpdate(listRecIng, result);
-//			if(result.hasErrors()) {
-//				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
-//				return ResponseEntity.badRequest().body(response);
-//			}
 //			
-//			List<ReceitaIngrediente>  listRecIngPersitido = (List<ReceitaIngrediente>) recIngService.createOrUpdateAll(listRecIng);
-//			for (int i = 0; i < listRecIngPersitido.size(); i++) {
-//				response.getDatas().add(listRecIngPersitido.get(i));
-//			}
+//			List<ListaCompra> listaCompra = montaLista(id); //gerar a lista
 //			
+//			if(!listaCompra.isEmpty()) {
+//			
+//				Connection connection = dataSource.getConnection();
+//				LOGGER.info("exportListaCompra() - acessando conexao com bd");
+//				
+//				InputStream logo = this.getClass().getResourceAsStream("/jasper/img/logo.png");
+//				//File logoFile = new File(this.getClass().getClassLoader().getResource("jasper/img/logo.png").getPath());
+//				//String logo = logoFile.getPath();
+//				
+//				Map parametros = new HashMap(); 
+//			    parametros.put("ID", id.intValue());
+//			    parametros.put("logo", logo);
+//			    String nomeRelatorio = "listacompra";
+//			    //LOGGER.info("exportListaCompra() - id="+id+"\nlogo="+logo+"\nrelatorio="+nomeRelatorio);
+//				
+//			    byte[] relatorio = jasperService.gerarPDF(connection, nomeRelatorio, parametros);
+//			    ByteArrayOutputStream out = new ByteArrayOutputStream(relatorio.length);
+//			    out.write(relatorio, 0, relatorio.length);
+//	
+//			    httpServletResponse.setContentType("application/pdf");
+//			    httpServletResponse.addHeader("Content-Disposition", "inline; filename=dailyOrdersReport.pdf");
+//			    
+//		        out.writeTo(os);
+//		        os.flush();
+//	        
+//			}
 //		} catch (Exception e) {
-//			response.getErrors().add(e.getMessage());
-//			return ResponseEntity.badRequest().body(response);
+//			LOGGER.error("Erro no metodo exportListaCompra:", e);
+//		} finally {
+//			os.close();
 //		}
-//		
-//		return ResponseEntity.ok(response);
-//	}
-//	
-//	private void validaUpdate(List<ReceitaIngrediente> listRecIng, BindingResult result) {
-//		listRecIng.forEach(recing -> {
-//			/*if(recing.getId() == null) {
-//				result.addError(new ObjectError("ReceitaIngrediente", "ID nao informado!"));
-//				return;
-//			}*/
-//			if(recing.getIngrediente().getId() == null) {
-//				result.addError(new ObjectError("ReceitaIngrediente", "Ingrediente nao informado!"));
-//				return;
-//			}
-//			if(recing.getReceita().getId() == null) {
-//				result.addError(new ObjectError("ReceitaIngrediente", "Receita nao informada!"));
-//				return;
-//			}
-//		});
-//	}
-//	
-//	@GetMapping(value = "{id}")
-//	public ResponseEntity<Response<ReceitaIngrediente>> findById(@PathVariable("id") Long id) {
-//		
-//		Response<ReceitaIngrediente> response = new Response<ReceitaIngrediente>();
-//		
-//		ReceitaIngrediente recIng = recIngService.findById(id);
-//		if(recIng == null) {
-//			response.getErrors().add("Registro nao encontrado id: "+id);
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//		
-////		List<ChangeStatus> changes = new ArrayList<ChangeStatus>();
-////		Iterable<ChangeStatus> changesCurrent = ticketService.listChangeStatus(ticket.getId());
-////		for (Iterator<ChangeStatus> iterator = changesCurrent.iterator(); iterator.hasNext();) {
-////			ChangeStatus changeStatus = (ChangeStatus) iterator.next();
-////			changeStatus.setTicket(null);
-////			changes.add(changeStatus);
-////		}
-////		
-////		ticket.setChanges(changes);
-//		response.setData(recIng);
-//		
-//		return ResponseEntity.ok(response);
-//	}
-//	
-//	@DeleteMapping(value = "{id}")
-//	public ResponseEntity<Response<String>> delete(@PathVariable("id") Long id) {
-//		
-//		Response<String> response = new Response<String>();
-//		
-//		ReceitaIngrediente recIng = recIngService.findById(id);
-//		
-//		if(recIng == null) {
-//			response.getErrors().add("Registro nao encontrado id: "+id);
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//		
-//		recIngService.delete(id);
-//		
-//		return ResponseEntity.ok(new Response<String>());
-//	}
-//	
-//	@GetMapping(value = "{page}/{count}")
-//	public ResponseEntity<Response<Page<ReceitaIngrediente>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
-//
-//		Response<Page<ReceitaIngrediente>> response = new Response<Page<ReceitaIngrediente>>();
-//		Page<ReceitaIngrediente> recIngs = null;
-//		
-//		recIngs = recIngService.findAll(page, count);
-//		
-//		if(recIngs.isEmpty()) {
-//			response.getErrors().add("Nenhum registro encontrado");
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//		
-//		response.setData(recIngs);
-//		
-//		return ResponseEntity.ok(response);
-//	}
-//	
-//	@GetMapping(value = "findByReceitaId/{id}")
-//	public ResponseEntity<Response<ReceitaIngrediente>> findByReceitaId(@PathVariable("id") Long id) {
-//		
-//		Response<ReceitaIngrediente> response = new Response<ReceitaIngrediente>();
-//		
-//		List<ReceitaIngrediente> recings = recIngService.findByReceitaId(id);
-//		
-//		if(recings.isEmpty()) {
-//			response.getErrors().add("Registros nao encontrado para o receita id: "+id);
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//		
-//		for (int i = 0; i < recings.size(); i++) {
-//			response.getDatas().add(recings.get(i));
-//		}
-//		
-//		return ResponseEntity.ok(response);
 //	}
 }

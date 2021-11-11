@@ -1,6 +1,11 @@
 Banco de dados: MySQL
-- Usar o XAMPP para para simular o MySQL (ou instalar o MySQL)
+- Usar o XAMPP para para simular o MySQL (TEMPORARIO)
 - Usar o HeidiSQL como SGBD
+- Instalar o MySQL Server Community
+https://dev.mysql.com/downloads/windows/installer/8.0.html
+
+- Instalar o MySQL Workbench (*opcional para gerar o MER)
+https://dev.mysql.com/downloads/workbench/
 
 Massa de teste BD:
 SCRIPTS\SCRIPT_CARDAPIO_FIT_COMPLETO.sql

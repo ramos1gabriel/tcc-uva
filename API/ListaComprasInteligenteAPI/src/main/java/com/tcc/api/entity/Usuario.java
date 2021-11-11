@@ -55,8 +55,13 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", fetch=FetchType.LAZY)
     private List<Receita> receita;
 	 
-	public Usuario() {};
+	public Usuario() {}
 	
+	public Usuario(String nome) {
+		super();
+		this.nome = nome;
+	}
+
 	public Usuario(Long id, String nome, String email, String username, String senha, int imagem) {
 		super();
 		this.id = id;

@@ -1,3 +1,5 @@
+import { CardapioSemanalDTO } from './../../model/cardapio.semanal.dto.model';
+import { CardapioSemanal } from './../../model/cardapio.semanal.model';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ReceitaService } from './../../services/receita.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -11,6 +13,10 @@ import { NgForm } from '@angular/forms';
 import { Cardapio } from './../../model/cardapio.model';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { Receita } from 'src/app/model/receita.model';
+import { User } from 'src/app/model/user.model';
+import * as moment from 'moment'
+
 
 @Component({
   selector: 'app-cardapio-new',
@@ -41,6 +47,16 @@ export class CardapioNewComponent implements OnInit {
   dataInicial = new Date();
   dataFinal = new Date();
 
+  //NOVO
+  arrayCardapioSemanal: Array<CardapioSemanal> = [];
+
+  usuario = new User('', '', '', '', '', '');
+  receitaVazia = new Receita('', '', '', '', this.usuario);
+  cardapiosDTO = new CardapioSemanalDTO(this.receitaVazia, this.receitaVazia, this.receitaVazia, this.receitaVazia, 
+                                        this.receitaVazia, this.receitaVazia, this.receitaVazia, this.receitaVazia, 
+                                        this.receitaVazia, this.receitaVazia, this.receitaVazia, this.receitaVazia, 
+                                        this.receitaVazia, this.receitaVazia, this.receitaVazia, this.receitaVazia, 
+                                        this.receitaVazia, this.receitaVazia, this.receitaVazia, this.receitaVazia);
   //globais modais
   posicao : number;
   listLabels = [];
@@ -65,15 +81,20 @@ export class CardapioNewComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('data sistema='+this.dtpipe.transform(this.data, 'yyyy-MM-dd'));
+    
     this.findAllReceita(this.page, this.count); //model
 
     let id : string = this.route.snapshot.params['id'];
     if(id != undefined){
       this.spinner.show();
-      this.findById(id);
-      this.recuperaReceitas(id);
+      this.findAllByDataCriacao(id);
+      
+      this.data = new Date(moment(id).toDate());
+      console.log('data update='+this.dtpipe.transform(this.data, 'yyyy-MM-dd'));
     } else {
-      this.findByData(this.data);
+      let formattedDate = this.dtpipe.transform(this.data, 'yyyy-MM-dd');
+      this.countDataCriacao(formattedDate);
     }
   }
 
@@ -98,27 +119,53 @@ export class CardapioNewComponent implements OnInit {
     console.log('data inicial='+this.formataData(this.dataInicial));
   }*/
 
-  //MODAL
+  //INICIO MODAL
   openModal(template: TemplateRef<any>, id : number) {
     this.modalRef = this.modalService.show(template);
     this.posicao = id; 
     //console.log(this.modalRef);
   }
 
-  selecionaReceita(id : string, nome : string, posicao : number) {
-    this.listLabels[posicao] = nome; //label
-    this.listControle[posicao] = true; //mostra label e disabilita button
-    this.form.controls[this.listCampos[posicao]].setValue(id); //seta id receita hidden
+  selecionaReceita(receita : Receita, posicao : string) {
+    this.setarCardapioDTO(receita, posicao);
     this.modalRef.hide(); //fecha modal
   }
 
-  removeReceita(posicao : number) {
-    this.listLabels[posicao] = ''; //label
-    this.listControle[posicao] = false; //mostra label e disabilita button
-    this.form.controls[this.listCampos[posicao]].setValue(''); //seta id receita hidden
+  removeReceita(posicao : string) {
+    this.setarCardapioDTO(this.receitaVazia, posicao); //deleta do DTO
+
+    //deleta do array
+    for (var i = 0; this.arrayCardapioSemanal.length > i; i++) {
+      let dr = this.arrayCardapioSemanal[i].diaSemana + '-' + this.arrayCardapioSemanal[i].tipoRefeicao;
+        if(posicao == dr) {
+          this.arrayCardapioSemanal.splice(i, 1);
+        }
+    }
+
+    //deleta do banco
+    let id : string = this.route.snapshot.params['id'];
+    if(id != '' && id != 'undefined') {
+      var diaRef = posicao.split('-');
+      let formattedDate = this.dtpipe.transform(this.data, 'yyyy-MM-dd');
+      console.log('remove registro: dia='+diaRef[0]+'&refeicao='+diaRef[1]+'&data='+formattedDate);
+      this.deleteByDiaSemanaAndTipoRefeicaoAndDataCriacao(diaRef[0], diaRef[1], formattedDate);
+    }
   }
 
-  //PESQUISA RECEITA
+  deleteByDiaSemanaAndTipoRefeicaoAndDataCriacao(dia : string, refeicao : string, data : string) {
+    this.message = {};
+    this.CardapioService.deleteByDiaSemanaAndTipoRefeicaoAndDataCriacao(dia, refeicao, data)
+    .subscribe((responseApi : ResponseApi) => {
+      //
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
+  }
+  
+  //PESQUISA RECEITAS
   findAllReceita(page : number, count : number) {
     this.ReceitaService.findAllPesquisa(page, count).pipe(
       //finalize(() => this.spinner.hide())
@@ -172,7 +219,9 @@ export class CardapioNewComponent implements OnInit {
       this.findAllReceita(this.lastPage, this.count);
     }
   }
+  //FIM MODAL
 
+  //INICIO DEFAULT
   private showMessage(message : {type : string, text : string}) : void {
     this.message = message;
     this.buildClasses(message.type);
@@ -195,61 +244,137 @@ export class CardapioNewComponent implements OnInit {
       'has-success' : !isInvalid && isDirty
     };
   }
-
-  /*formataData(data : Date, tipo : string) {
-    let dataAtual = new Date(data);
-    let dia = "";
-    let mes = "";
-    let dataCompleta;
-
-    if(dataAtual.getDate() < 10) {
-      dia = "0" + (dataAtual.getDate()+1);
-    } else {
-      dia = "" + (dataAtual.getDate()+1);
-    }
-
-    if((dataAtual.getMonth()+1) < 10) {
-      mes = "0" + (dataAtual.getMonth()+1);
-    } else {
-      dia = ""+(dataAtual.getMonth()+1);
-    }
-    
-    if(tipo == 'db') {
-      dataCompleta = dataAtual.getFullYear() + '-' + mes + '-' + dia;
-    } else {
-      dataCompleta = dia + '/' + mes + '/' + dataAtual.getFullYear();
-    }
-
-    return  dataCompleta;
-  }*/
+  //FIM DEFAULT
 
   limparCardapio() {
-    for (let i = 0; i < 20; i++) {
-      this.listLabels[i] = '';
-      this.listControle[i] = false;
-      this.form.controls[this.listCampos[i]].setValue('');
+    this.arrayCardapioSemanal = []; //limpa array
+    this.cardapiosDTO = new CardapioSemanalDTO(this.receitaVazia, this.receitaVazia, this.receitaVazia, this.receitaVazia, 
+                                              this.receitaVazia, this.receitaVazia, this.receitaVazia, this.receitaVazia, 
+                                              this.receitaVazia, this.receitaVazia, this.receitaVazia, this.receitaVazia, 
+                                              this.receitaVazia, this.receitaVazia, this.receitaVazia, this.receitaVazia, 
+                                              this.receitaVazia, this.receitaVazia, this.receitaVazia, this.receitaVazia);
+  }
+
+  //CRUD
+  insertDtoToArray(diaRefeicao : string, rec: Receita) {
+    var diaRef = diaRefeicao.split('-');
+    let id : string = this.route.snapshot.params['id'];
+    //console.log(diaRef);
+    //console.log('id='+id);
+    if(id != undefined) {
+      //console.log('entrou update!');
+      let novoRegistro : boolean = true;
+      for (var i = 0; this.arrayCardapioSemanal.length > i; i++) {
+        let dr = this.arrayCardapioSemanal[i].diaSemana + '-' + this.arrayCardapioSemanal[i].tipoRefeicao;
+        if(diaRefeicao == dr) {
+          this.arrayCardapioSemanal[i].receita = rec;
+          novoRegistro = false;
+        }
+      }
+      if(novoRegistro) {
+        this.arrayCardapioSemanal.push(new CardapioSemanal('', this.data, diaRef[1], diaRef[0], rec));
+      }
+    } else {
+      //console.log('entrou new!');
+      this.arrayCardapioSemanal.push(new CardapioSemanal('', null, diaRef[1], diaRef[0], rec));
     }
   }
 
-  //
-  save(){
-    this.message = {};
-    //this.cardapio.dataCriacao = this.data;//this.formataData(this.data, 'db');
-    this.CardapioService.createOrUpdate(this.cardapio).subscribe((responseApi : ResponseApi) => {
-      this.cardapio = new Cardapio('', null, '', '', '', '','', '', '', '','', '', '', '','', '', '', '','', '', '', '');
-      let cardapioRet : Cardapio = responseApi.data;
+
+  persistirArray() {
+
+    //let tipoRefeicao = ['cafe', 'almoco', 'lanche', 'jantar'];
+    //let diaSemana = ['segunda', 'terca', 'quarta', 'quinta', 'sexta'];
+
+    //cafe
+    if(this.cardapiosDTO.segundaCafe.id != '') {
+      this.insertDtoToArray('segunda-cafe', this.cardapiosDTO.segundaCafe);
+    }
+    if(this.cardapiosDTO.tercaCafe.id != '') {
+      this.insertDtoToArray('terca-cafe', this.cardapiosDTO.tercaCafe);
+    }
+    if(this.cardapiosDTO.quartaCafe.id != '') {
+      this.insertDtoToArray('quarta-cafe', this.cardapiosDTO.quartaCafe);
+    }
+    if(this.cardapiosDTO.quintaCafe.id != '') {
+      this.insertDtoToArray('quinta-cafe', this.cardapiosDTO.quintaCafe);
+    }
+    
+    if(this.cardapiosDTO.sextaCafe.id != '') {
+      this.insertDtoToArray('sexta-cafe', this.cardapiosDTO.sextaCafe);
+    }
+
+    //almoco
+    if(this.cardapiosDTO.segundaAlmoco.id != '') {
+      this.insertDtoToArray('segunda-almoco', this.cardapiosDTO.segundaAlmoco);
+    }
+    if(this.cardapiosDTO.tercaAlmoco.id != '') {
+      this.insertDtoToArray('terca-almoco', this.cardapiosDTO.tercaAlmoco);
+    }
+    if(this.cardapiosDTO.quartaAlmoco.id != '') {
+      this.insertDtoToArray('quarta-almoco', this.cardapiosDTO.quartaAlmoco);
+    }
+    if(this.cardapiosDTO.quintaAlmoco.id != '') {
+      this.insertDtoToArray('quinta-almoco', this.cardapiosDTO.quintaAlmoco);
+    }
+    if(this.cardapiosDTO.sextaAlmoco.id != '') {
+      this.insertDtoToArray('sexta-almoco', this.cardapiosDTO.sextaAlmoco);
+    }
+
+    //lanche
+    if(this.cardapiosDTO.segundaLanche.id != '') {
+      this.insertDtoToArray('segunda-lanche', this.cardapiosDTO.segundaLanche);
+    }
+    if(this.cardapiosDTO.tercaLanche.id != '') {
+      this.insertDtoToArray('terca-lanche', this.cardapiosDTO.tercaLanche);
+    }
+    if(this.cardapiosDTO.quartaLanche.id != '') {
+      this.insertDtoToArray('quarta-lanche', this.cardapiosDTO.quartaLanche);
+    }
+    if(this.cardapiosDTO.quintaLanche.id != '') {
+      this.insertDtoToArray('quinta-lanche', this.cardapiosDTO.quintaLanche);
+    }
+    if(this.cardapiosDTO.sextaLanche.id != '') {
+      this.insertDtoToArray('sexta-lanche', this.cardapiosDTO.sextaLanche);
+    }
+
+    //jantar
+    if(this.cardapiosDTO.segundaJantar.id != '') {
+      this.insertDtoToArray('segunda-jantar', this.cardapiosDTO.segundaJantar);
+    }
+    if(this.cardapiosDTO.tercaJantar.id != '') {
+      this.insertDtoToArray('terca-jantar', this.cardapiosDTO.tercaJantar);
+    }
+    if(this.cardapiosDTO.quartaJantar.id != '') {
+      this.insertDtoToArray('quarta-jantar', this.cardapiosDTO.quartaJantar);
+    }
+    if(this.cardapiosDTO.quintaJantar.id != '') {
+      this.insertDtoToArray('quinta-jantar', this.cardapiosDTO.quintaJantar);
+    }
+    if(this.cardapiosDTO.sextaJantar.id != '') {
+      this.insertDtoToArray('sexta-jantar', this.cardapiosDTO.sextaJantar);
+    }
+
+    //console.log(this.arrayCardapioSemanal);
+
+    //persiste array
+    this.save(this.arrayCardapioSemanal);
+  }
+
+  save(listCardapioSemanal : Array<CardapioSemanal>){
+    console.log(this.arrayCardapioSemanal);
+    this.message = null; //tratar bug mensagem vermelha vazia
+    this.CardapioService.createOrUpdateAll(listCardapioSemanal).subscribe((responseApi : ResponseApi) => {
+      let listCardapioSemanalRet : Array<CardapioSemanal> = responseApi.datas;
       this.limparCardapio();
       this.form.resetForm();
-      let formattedDate = this.dtpipe.transform(cardapioRet.dataCriacao, 'dd/MM/yyyy');
+      let formattedDate = this.dtpipe.transform(this.data, 'dd/MM/yyyy');
       this.showMessage({
         type : 'success',
         text : `Cardápio do dia ${formattedDate} cadastrado com sucesso!`
       });
+      this.arrayCardapioSemanal = []; //limpa array
       this.router.navigate(['/cardapio-list']);
-      /*let id : string = this.route.snapshot.params['id'];
-      if(id != undefined){
-        this.router.navigate(['/cardapio-list']);
-      }*/
     }, err => {
       this.showMessage({
         type : 'error',
@@ -258,11 +383,30 @@ export class CardapioNewComponent implements OnInit {
     });
   }
 
-  findByData(datastr : Date) {
-    this.CardapioService.findByData(datastr).pipe(
-      /*finalize(() => 
-        console.log(this.isData)
-      )*/
+  findAllByDataCriacao(datastr : string) {
+    this.CardapioService.findAllByDataCriacao(datastr).pipe(
+      finalize(() => {
+        for (var i = 0; this.arrayCardapioSemanal.length > i; i++) {
+          let receita = this.arrayCardapioSemanal[i].receita;
+          let diaRefeicao = this.arrayCardapioSemanal[i].diaSemana + '-' + this.arrayCardapioSemanal[i].tipoRefeicao;
+          this.setarCardapioDTO(receita, diaRefeicao);
+        }
+      })
+    ).subscribe((responseApi : ResponseApi) => {
+      this.arrayCardapioSemanal = responseApi.datas;
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
+    this.spinner.hide();
+  }
+
+  countDataCriacao(datastr : string) {
+    this.CardapioService.count(datastr).pipe(
+      /*finalize(() => {
+      })*/
     ).subscribe((responseApi : ResponseApi) => {
       console.log(responseApi.data);
       this.isData = responseApi.data;
@@ -274,6 +418,7 @@ export class CardapioNewComponent implements OnInit {
     });
   }
 
+  //legado
   findById(id : string) {
     this.CardapioService.findById(id)/*.pipe(
       finalize(() => this.data = this.cardapio.dataCriacao)
@@ -288,6 +433,7 @@ export class CardapioNewComponent implements OnInit {
     });
   }
 
+  //legado
   recuperaReceitas(id : string) {
     this.CardapioService.recuperaReceitas(id).pipe(
       finalize(() => 
@@ -303,6 +449,7 @@ export class CardapioNewComponent implements OnInit {
     });
   }
 
+  //legado
   preencheCardapioEdit() {
     for (let i = 0; i < this.listReceitaEdit.length; i++) {
       if(this.listReceitaEdit[i].id != '' && this.listReceitaEdit[i].id != null) {
@@ -315,5 +462,115 @@ export class CardapioNewComponent implements OnInit {
     }
 
     this.spinner.hide();
+  }
+  
+  //GAMBIARRA
+  setarCardapioDTO(receita : Receita, posicao : string) {
+    var diaRefeicao = posicao.split('-');
+    //console.log(this.cardapiosDTO);
+
+    //CAFE
+    if(diaRefeicao[1] == 'cafe') {
+      switch(diaRefeicao[0]) {
+        case 'segunda': {
+          this.cardapiosDTO.segundaCafe = receita;
+          break; 
+        }
+        case 'terca': {
+          this.cardapiosDTO.tercaCafe = receita;
+          break; 
+        }
+        case 'quarta': {
+          this.cardapiosDTO.quartaCafe = receita;
+          break; 
+        }
+        case 'quinta': {
+          this.cardapiosDTO.quintaCafe = receita;
+          break; 
+        }
+        case 'sexta': {
+          this.cardapiosDTO.sextaCafe = receita;
+          break; 
+        }
+      }
+    }
+
+    //ALMOCO
+    if(diaRefeicao[1] == 'almoco') {
+      switch(diaRefeicao[0]) {
+        case 'segunda': {
+          this.cardapiosDTO.segundaAlmoco = receita;
+          break; 
+        }
+        case 'terca': {
+          this.cardapiosDTO.tercaAlmoco = receita;
+          break; 
+        }
+        case 'quarta': {
+          this.cardapiosDTO.quartaAlmoco = receita;
+          break; 
+        }
+        case 'quinta': {
+          this.cardapiosDTO.quintaAlmoco = receita;
+          break; 
+        }
+        case 'sexta': {
+          this.cardapiosDTO.sextaAlmoco = receita;
+          break; 
+        }
+      }
+    }
+
+    //LANCHE
+    if(diaRefeicao[1] == 'lanche') {
+      switch(diaRefeicao[0]) {
+        case 'segunda': {
+          this.cardapiosDTO.segundaLanche = receita;
+          break; 
+        }
+        case 'terca': {
+          this.cardapiosDTO.tercaLanche = receita;
+          break; 
+        }
+        case 'quarta': {
+          this.cardapiosDTO.quartaLanche = receita;
+          break; 
+        }
+        case 'quinta': {
+          this.cardapiosDTO.quintaLanche = receita;
+          break; 
+        }
+        case 'sexta': {
+          this.cardapiosDTO.sextaLanche = receita;
+          break; 
+        }
+      }
+    }
+
+    //JANTAR
+    if(diaRefeicao[1] == 'jantar') {
+      switch(diaRefeicao[0]) {
+        case 'segunda': {
+          this.cardapiosDTO.segundaJantar = receita;
+          break; 
+        }
+        case 'terca': {
+          this.cardapiosDTO.tercaJantar = receita;
+          break; 
+        }
+        case 'quarta': {
+          this.cardapiosDTO.quartaJantar = receita;
+          break; 
+        }
+        case 'quinta': {
+          this.cardapiosDTO.quintaJantar = receita;
+          break; 
+        }
+        case 'sexta': {
+          this.cardapiosDTO.sextaJantar = receita;
+          break; 
+        }
+      }
+    }
   }
 }

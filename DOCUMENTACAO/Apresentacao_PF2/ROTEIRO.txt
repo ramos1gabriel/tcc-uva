@@ -1,0 +1,95 @@
+
+-----SLIDE 1
+O que é o produto?
+
+-----SLIDE 2
+Motivação
+
+-----SLIDE 3
+Vantagens
+
+-----SLIDE 4
+Soluções Tecnologicas
+
+Backend:
+Java
+Umas das linguagens mais utilizadas no mundo.
+
+Springboot
+Se diferencia dos conjuntos de softwares concorrentes devido ao seu tamanho, contendo inúmeros módulos prontos para se integrar aos diferentes tipos de serviços e plataformas a serem utilizados.
+
+spring data
+spring security
+
+Frontend:
+Angular
+Lançado pelo Google em 2012, inicialmente na sua versão JavaScript, tornou-se rapidamente umdos mais populares por facilitar o desenvolvimento de aplicações, alinhando componentes a padrões de projeto,como injeção de dependências, e arquitetura MVC.
+
+Bootstrap
+Framework para o desenvolvimento de sites responsivos e mobile, criado originalmente no Twitter em 2010.
+
+typescript (javascript)
+
+MySQL
+[descrição]
+
+---------------
+-----SLIDE
+---------------
+Arquitetura do Sistema
+Para esta aplicação, o processo considerado Cliente será o navegador do usuário, que troca mensagens com o processo Servidor sendo executado no servidor Web.
+---------------
+-----SLIDE
+---------------
+Principais Funcionalidades
+
+Layout:
+Layout simples e responsivo para maximizar a experiência do usuário
+
+Usuario:
+Somente dados básicos para identificação do usuário
+
+Ingrediente
+Receita
+Cardapio Semanal
+Lista de Compras
+---------------
+-----SLIDE
+---------------
+Modelo de Dados
+descrever entidades
+mysql (banco de dados relacional)
+---------------
+-----SLIDE
+---------------
+Gestão do Projeto
+logo github
+logo trello
+
+---------------
+-----SLIDE
+---------------
+Trabalhos Futuros
+Usabilidade
+Combobox com pesquisa ingrediente
+Visualização da receita (ingredientes, quantidades e modo preparo)
+Lembrar senha
+Recuperar senha
+Compartilhar PDF no WhatsApp
+
+Smartphone (Android e iOS)
+Testes Unitarios JUnit
+
+
+---------------
+-----SLIDE
+--------------
+Desafios e Aprendizados
+apredendo angular (rotas/componentização/vscode/typescript)
+relembrando coisas do java/springboot/spring security/spring data jpa
+
+---------------
+-----SLIDE FINAL
+--------------
+
+Obrigado !!

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Cardapio } from './../model/cardapio.model';
+import { CardapioSemanal } from './../model/cardapio.semanal.model';
 import { BACK_END_API } from './listacomprasinteligente.api';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -21,6 +22,22 @@ export class CardapioService {
     }
   }
 
+  //NOVO
+  createOrUpdateAll(listCardapio : Array<CardapioSemanal>) {
+    if(listCardapio[0].id != null && listCardapio[0].id != ''){
+      return this.http.put(`${BACK_END_API}/api/cardapio`, listCardapio); //UPDATE
+    } else {
+      for (let i = 0; i < listCardapio.length; i++) {
+        listCardapio[i].id = null;
+      }
+      return this.http.post(`${BACK_END_API}/api/cardapio`, listCardapio); //CREATE
+    }
+  }
+
+  findAllPesquisa(page : number, count : number) {
+    return this.http.get(`${BACK_END_API}/api/cardapio/pesquisa/${page}/${count}`);
+  }
+
   findAll(page : number, count : number) {
     return this.http.get(`${BACK_END_API}/api/cardapio/${page}/${count}`);
   }
@@ -33,8 +50,20 @@ export class CardapioService {
     return this.http.delete(`${BACK_END_API}/api/cardapio/${id}`);
   }
 
-  findByData(data : Date) {
+  deleteByDiaSemanaAndTipoRefeicaoAndDataCriacao(dia : string, refeicao : string, data : string) {
+    return this.http.delete(`${BACK_END_API}/api/cardapio/deleteByDiaSemanaAndTipoRefeicaoAndDataCriacao/${dia}/${refeicao}/${data}`);
+  }
+
+  deleteByDataCriacao(data : Date) {
+    return this.http.delete(`${BACK_END_API}/api/cardapio/deleteByDataCriacao/${data}`);
+  }
+
+  findAllByDataCriacao(data : string) {
     return this.http.get(`${BACK_END_API}/api/cardapio/findAllByDataCriacao/${data}`);
+  }
+
+  count(data : string) {
+    return this.http.get(`${BACK_END_API}/api/cardapio/count/${data}`);
   }
 
   recuperaReceitas(id : string) {

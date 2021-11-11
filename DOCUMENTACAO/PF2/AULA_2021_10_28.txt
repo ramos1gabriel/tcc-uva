@@ -1,0 +1,28 @@
+passar documentacao pro modelo do professor (aos poucos)
+montar grafico de defeitos (bugs)
+mostrar trello (ou jira)
+
+duvida
+FAZER DIAGRAMA DE ARQUITETURA
+solução tecnologica
+mostrar como foi feito (trello)
+erros
+conclusões e aprendizados
+15 min (maximo: 20 min)
+
+arquitetura de software
+MVC
+frontend (angular)
+backend (java)
+
+diagrama de sequencia?
+
+11/11 documentação
+18/11 entregar documentação para banca
+25/11 defesa
+
+===
+duvidas:
+
+Resumo
+Palavras-Chave 

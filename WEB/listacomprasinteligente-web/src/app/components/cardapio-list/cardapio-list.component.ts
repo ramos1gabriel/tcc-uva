@@ -41,7 +41,26 @@ export class CardapioListComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.findAll(this.page, this.count);
+    //this.findAll(this.page, this.count);
+    this.findAllPesquisa(this.page, this.count);
+  }
+
+  findAllPesquisa(page : number, count : number) {
+    this.CardapioService.findAllPesquisa(page, count).pipe(
+      finalize(() => 
+        this.preencheProgressBar()
+      )
+    ).subscribe((responseApi : ResponseApi) => {
+      this.listCardapio = responseApi['data']['content'];
+      this.pages = new Array(responseApi['data']['totalPages']);
+      this.lastPage = this.pages.length-1;
+      //this.spinner.hide();
+    }, err => {
+      this.showMessage({
+        type : 'error',
+        text : err['error']['errors'][0]
+      });
+    });
   }
 
   findAll(page : number, count : number) {
@@ -65,7 +84,7 @@ export class CardapioListComponent implements OnInit {
     this.router.navigate(['/cardapio-new', id]);
   }
 
-  delete(id : string) {
+  delete(data : Date) {
     swal({
       title: "Atenção",
       text: `Tem certeza que deseja excluir esse registro?`,
@@ -75,12 +94,12 @@ export class CardapioListComponent implements OnInit {
     }).then((willDelete) => {
       if (willDelete) {
         this.message = {};
-        this.CardapioService.delete(id).subscribe((responseApi : ResponseApi) => {
+        this.CardapioService.deleteByDataCriacao(data).subscribe((responseApi : ResponseApi) => {
           swal(`Registro excluido com sucesso!`, {
             icon: "success",
           });
           this.listCardapio = [];
-          this.findAll(0, this.count);
+          this.findAllPesquisa(0, this.count);
         }, err => {
           this.showMessage({
             type : 'error',
@@ -95,7 +114,7 @@ export class CardapioListComponent implements OnInit {
     event.preventDefault();
     if(this.page+1 < this.pages.length) {
       this.page = this.page + 1;
-      this.findAll(this.page, this.count);
+      this.findAllPesquisa(this.page, this.count);
     }
   }
 
@@ -103,7 +122,7 @@ export class CardapioListComponent implements OnInit {
     event.preventDefault();
     if(this.page > 0) {
       this.page = this.page - 1;
-      this.findAll(this.page, this.count);
+      this.findAllPesquisa(this.page, this.count);
     }
   }
 
@@ -111,21 +130,21 @@ export class CardapioListComponent implements OnInit {
     event.preventDefault();
     if(i >= 0) {
       this.page = i;
-      this.findAll(this.page, this.count);
+      this.findAllPesquisa(this.page, this.count);
     }
   }
 
   setFirstPage(event : any) {
     event.preventDefault();
     if(this.listCardapio.length > 0) {
-      this.findAll(this.firstPage, this.count);
+      this.findAllPesquisa(this.firstPage, this.count);
     }
   }
 
   setLastPage(event : any) {
     event.preventDefault();
     if(this.listCardapio.length > 0) {
-      this.findAll(this.lastPage, this.count);
+      this.findAllPesquisa(this.lastPage, this.count);
     }
   }
 
@@ -156,72 +175,9 @@ export class CardapioListComponent implements OnInit {
   preencheProgressBar() {
     for (let i = 0; i < this.listCardapio.length; i++) {
       let progress : number = 0;
-
-      if(this.listCardapio[i].segundaCafe != null) {
+      for(let j = 0; j < this.listCardapio[i].qtdRefeicoes; j++) {
         progress += 5;
       }
-      if(this.listCardapio[i].segundaAlmoco != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].segundaLanche != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].segundaJantar != null) {
-        progress += 5;
-      }
-
-      if(this.listCardapio[i].tercaCafe != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].tercaAlmoco != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].tercaLanche != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].tercaJantar != null) {
-        progress += 5;
-      }
-
-      if(this.listCardapio[i].quartaCafe != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].quartaAlmoco != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].quartaLanche != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].quartaJantar != null) {
-        progress += 5;
-      }
-
-      if(this.listCardapio[i].quintaCafe != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].quintaAlmoco != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].quintaLanche != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].quintaJantar != null) {
-        progress += 5;
-      }
-
-      if(this.listCardapio[i].sextaCafe != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].sextaAlmoco != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].sextaLanche != null) {
-        progress += 5;
-      }
-      if(this.listCardapio[i].sextaJantar != null) {
-        progress += 5;
-      }
-      
       this.listProgress[i] = progress;
     }
     this.spinner.hide();

@@ -1,0 +1,43 @@
+CSU01 - Realizar cadastro [x]
+CSU02 - Efetuar login [x]
+CSU03 - Alterar dados cadastrais [x]
+CSU04 - Manter ingrediente [x]
+CSU05 - Manter receita [x]
+CSU06 - Manter receita ingrediente
+CSU07 - Manter modo preparo
+CSU08 - Planejar cardápio semanal
+CSU09 - Gerar lista de compras
+==============
+RF01 - Realizar cadastro
+RF02 - Efetuar login
+RF03 – Alterar dados cadastrais 
+RF04 – Manter ingrediente
+RF05 – Manter receita
+RF06 – Manter receita ingrediente
+RF07 – Manter modo de preparo
+RF08 – Planejar cardápio semanal
+RF09 – Gerar lista de compras
+==============
+RNF01 – Desenvolvimento
+RNF02 – Segurança de acesso
+RNF03 – Metodologia
+==============
+RN01 – Validações na tela de criar conta de usuário
+RN02 – Validações na tela de login
+RN03 – Editar perfil de usuário
+RN04 – Validações na tela de ingrediente
+RN05 – Exclusão ingrediente
+RN06 – Categoria de receita
+RN07 – Validações na tela de receita
+RN08 – Validação do cadastro de receita completo
+RN09 – Validações na tela de receita ingrediente
+RN10 – Unidade de medida
+RN11 – Tipos de unidade de medida
+RN12 – Quantidade de ingredientes por receita
+RN13 – Duplicidade de ingredientes na receita
+RN14 – Validações na tela de modo de preparo
+RN15 – Validações na tela cardápio semanal
+RN16 – Listagem dos cardápios semanais
+RN17 – Calculo de conversão de unidade de medida
+RN18 – Lista de compras
+RN19 - Duplicidade cardápio semanal

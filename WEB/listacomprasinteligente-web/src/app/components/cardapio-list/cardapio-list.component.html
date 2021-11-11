@@ -13,7 +13,7 @@
       <div class="box-body">
         <table class="table table-bordered">
           <tr>
-            <th style="text-align: center;">ID</th>
+            <th style="text-align: center;">Nº</th>
             <th>Data da Criação</th>
             <th>Refeições (%)</th>
             <th style="width: 40px">&nbsp;</th>
@@ -21,7 +21,7 @@
             <th style="width: 40px">&nbsp;</th>
           </tr>
           <tr *ngFor="let cardapio of listCardapio; let i = index;">
-            <td align="center">{{ cardapio.id }}</td>
+            <td align="center">{{ i+1 }}</td>
             <td>{{ cardapio.dataCriacao  | date: 'dd/MM/yyyy' }}</td>
             <td>
               <div class="progress">
@@ -30,9 +30,9 @@
                 </div>
               </div>
             </td>
-            <td><button class="btn btn-warning" (click)="exportListaCompraToPdf(cardapio.id);" title="Gerar lista de compras"><i class="fa fa-file"></i></button></td>
-            <td><button class="btn btn-primary" (click)="edit(cardapio.id);" title="Editar"><i class="fa fa-pencil"></i></button></td>
-            <td><button class="btn btn-danger" (click)="delete(cardapio.id);" title="Excluir"><i class="fa fa-trash"></i></button></td>
+            <td><button class="btn btn-warning" (click)="exportListaCompraToPdf(cardapio.dataCriacao);" title="Gerar lista de compras"><i class="fa fa-file"></i></button></td>
+            <td><button class="btn btn-primary" (click)="edit(cardapio.dataCriacao);" title="Editar"><i class="fa fa-pencil"></i></button></td>
+            <td><button class="btn btn-danger" (click)="delete(cardapio.dataCriacao);" title="Excluir"><i class="fa fa-trash"></i></button></td>
           </tr>
         </table>
       </div>

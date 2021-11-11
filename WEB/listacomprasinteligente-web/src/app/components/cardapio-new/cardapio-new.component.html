@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-10">
 
-    <form class="form-horizontal" #form="ngForm" (ngSubmit)="save()">
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="persistirArray()">
 
       <div [ngClass]="classCss" role="alert" *ngIf="message">
         <span>{{ message.text }}</span>
@@ -33,7 +33,7 @@
                 class="form-control" 
                 name="dataCriacao" 
                 id="inputDataCriacao" 
-                #sextaJantar="ngModel" 
+                #dataCriacao="ngModel" 
                 required>
           -->
         </div>
@@ -55,14 +55,14 @@
                 &nbsp;Café da Manhã
               </th>
               <td [ngClass]="getFromGroupClass(segundaCafe.invalid, segundaCafe.dirty)">
-                <div *ngIf="listControle[0]">
-                  <span class="text-wrap">{{ listLabels[0] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(0);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.segundaCafe.id">
+                  <span class="text-wrap">{{ cardapiosDTO.segundaCafe.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('segunda-cafe');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[0]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 0);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.segundaCafe.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'segunda-cafe');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.segundaCafe" 
+                      [(ngModel)]="cardapiosDTO.segundaCafe.id" 
                       class="form-control" 
                       name="segundaCafe" 
                       id="inputSegundaCafe" 
@@ -70,14 +70,14 @@
                       size="2">
               </td>
               <td [ngClass]="getFromGroupClass(tercaCafe.invalid, tercaCafe.dirty)">
-                <div *ngIf="listControle[1]">
-                  <span class="text-wrap">{{ listLabels[1] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(1);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.tercaCafe.id">
+                  <span class="text-wrap">{{ cardapiosDTO.tercaCafe.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('terca-cafe');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[1]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 1);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.tercaCafe.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'terca-cafe');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.tercaCafe" 
+                      [(ngModel)]="cardapiosDTO.tercaCafe.id" 
                       class="form-control" 
                       name="tercaCafe" 
                       id="inputTercaCafe" 
@@ -85,14 +85,14 @@
                       size="2">
               </td>
               <td [ngClass]="getFromGroupClass(quartaCafe.invalid, quartaCafe.dirty)">
-                <div *ngIf="listControle[2]">
-                  <span class="text-wrap">{{ listLabels[2] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(2);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.quartaCafe.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quartaCafe.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('quarta-cafe');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[2]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 2);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.quartaCafe.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quarta-cafe');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.quartaCafe" 
+                      [(ngModel)]="cardapiosDTO.quartaCafe.id" 
                       class="form-control" 
                       name="quartaCafe" 
                       id="inputQuartaCafe" 
@@ -100,14 +100,14 @@
                       size="2">
               </td>
               <td [ngClass]="getFromGroupClass(quintaCafe.invalid, quintaCafe.dirty)">
-                <div *ngIf="listControle[3]">
-                  <span class="text-wrap">{{ listLabels[3] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(3);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.quintaCafe.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quintaCafe.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('quinta-cafe');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[3]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 3);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.quintaCafe.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quinta-cafe');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.quintaCafe" 
+                      [(ngModel)]="cardapiosDTO.quintaCafe.id" 
                       class="form-control" 
                       name="quintaCafe" 
                       id="inputQuintaCafe" 
@@ -115,14 +115,14 @@
                       size="2">
               </td>
               <td [ngClass]="getFromGroupClass(sextaCafe.invalid, sextaCafe.dirty)">
-                <div *ngIf="listControle[4]">
-                  <span class="text-wrap">{{ listLabels[4] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(4);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.sextaCafe.id">
+                  <span class="text-wrap">{{ cardapiosDTO.sextaCafe.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('sexta-cafe');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[4]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 4);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.sextaCafe.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'sexta-cafe');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.sextaCafe" 
+                      [(ngModel)]="cardapiosDTO.sextaCafe.id" 
                       class="form-control" 
                       name="sextaCafe" 
                       id="inputSextaCafe" 
@@ -138,14 +138,14 @@
                 &nbsp;Almoço
               </th>
               <td [ngClass]="getFromGroupClass(segundaAlmoco.invalid, segundaAlmoco.dirty)">
-                <div *ngIf="listControle[5]">
-                  <span class="text-wrap">{{ listLabels[5] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(5);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.segundaAlmoco.id">
+                  <span class="text-wrap">{{ cardapiosDTO.segundaAlmoco.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('segunda-almoco');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[5]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 5);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.segundaAlmoco.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'segunda-almoco');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.segundaAlmoco" 
+                      [(ngModel)]="cardapiosDTO.segundaAlmoco.id" 
                       class="form-control" 
                       name="segundaAlmoco" 
                       id="inputSegundaAlmoco" 
@@ -154,14 +154,14 @@
                       required>
               </td>
               <td [ngClass]="getFromGroupClass(tercaAlmoco.invalid, tercaAlmoco.dirty)">
-                <div *ngIf="listControle[6]">
-                  <span class="text-wrap">{{ listLabels[6] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(6);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.tercaAlmoco.id">
+                  <span class="text-wrap">{{ cardapiosDTO.tercaAlmoco.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('terca-almoco');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[6]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 6);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.tercaAlmoco.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'terca-almoco');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.tercaAlmoco" 
+                      [(ngModel)]="cardapiosDTO.tercaAlmoco.id" 
                       class="form-control" 
                       name="tercaAlmoco" 
                       id="inputTercaAlmoco" 
@@ -170,14 +170,14 @@
                       required>
               </td>
               <td [ngClass]="getFromGroupClass(quartaAlmoco.invalid, quartaAlmoco.dirty)">
-                <div *ngIf="listControle[7]">
-                  <span class="text-wrap">{{ listLabels[7] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(7);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.quartaAlmoco.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quartaAlmoco.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('quarta-almoco');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[7]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 7);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.quartaAlmoco.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quarta-almoco');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.quartaAlmoco" 
+                      [(ngModel)]="cardapiosDTO.quartaAlmoco.id" 
                       class="form-control" 
                       name="quartaAlmoco" 
                       id="inputQuartaAlmoco" 
@@ -186,14 +186,14 @@
                       required>
               </td>
               <td [ngClass]="getFromGroupClass(quintaAlmoco.invalid, quintaAlmoco.dirty)">
-                <div *ngIf="listControle[8]">
-                  <span class="text-wrap">{{ listLabels[8] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(8);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.quintaAlmoco.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quintaAlmoco.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('quinta-almoco');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[8]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 8);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.quintaAlmoco.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quinta-almoco');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.quintaAlmoco" 
+                      [(ngModel)]="cardapiosDTO.quintaAlmoco.id" 
                       class="form-control" 
                       name="quintaAlmoco" 
                       id="inputQuintaAlmoco" 
@@ -202,14 +202,14 @@
                       required>
               </td>
               <td [ngClass]="getFromGroupClass(sextaAlmoco.invalid, sextaAlmoco.dirty)">
-                <div *ngIf="listControle[9]">
-                  <span class="text-wrap">{{ listLabels[9] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(9);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.sextaAlmoco.id">
+                  <span class="text-wrap">{{ cardapiosDTO.sextaAlmoco.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('sexta-almoco');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[9]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 9);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.sextaAlmoco.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'sexta-almoco');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.sextaAlmoco" 
+                      [(ngModel)]="cardapiosDTO.sextaAlmoco.id" 
                       class="form-control" 
                       name="sextaAlmoco" 
                       id="inputSextaAlmoco" 
@@ -226,14 +226,14 @@
                 &nbsp;Lanche
               </th>
               <td [ngClass]="getFromGroupClass(segundaLanche.invalid, segundaLanche.dirty)">
-                <div *ngIf="listControle[10]">
-                  <span class="text-wrap">{{ listLabels[10] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(10);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.segundaLanche.id">
+                  <span class="text-wrap">{{ cardapiosDTO.segundaLanche.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('segunda-lanche');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[10]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 10);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.segundaLanche.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'segunda-lanche');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.segundaLanche" 
+                      [(ngModel)]="cardapiosDTO.segundaLanche.id" 
                       class="form-control" 
                       name="segundaLanche" 
                       id="inputSegundaLanche" 
@@ -241,14 +241,14 @@
                       size="2">
               </td>
               <td [ngClass]="getFromGroupClass(tercaLanche.invalid, tercaLanche.dirty)">
-                <div *ngIf="listControle[11]">
-                  <span class="text-wrap">{{ listLabels[11] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(11);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.tercaLanche.id">
+                  <span class="text-wrap">{{ cardapiosDTO.tercaLanche.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('terca-lanche');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[11]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 11);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.tercaLanche.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'terca-lanche');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.tercaLanche" 
+                      [(ngModel)]="cardapiosDTO.tercaLanche.id" 
                       class="form-control" 
                       name="tercaLanche" 
                       id="inputTercaLanche" 
@@ -256,14 +256,14 @@
                       size="2">
               </td>
               <td [ngClass]="getFromGroupClass(quartaLanche.invalid, quartaLanche.dirty)">
-                <div *ngIf="listControle[12]">
-                  <span class="text-wrap">{{ listLabels[12] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(12);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.quartaLanche.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quartaLanche.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('quarta-lanche');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[12]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 12);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.quartaLanche.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quarta-lanche');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.quartaLanche" 
+                      [(ngModel)]="cardapiosDTO.quartaLanche.id" 
                       class="form-control" 
                       name="quartaLanche" 
                       id="inputQuartaLanche" 
@@ -271,14 +271,14 @@
                       size="2">
               </td>
               <td [ngClass]="getFromGroupClass(quintaLanche.invalid, quintaLanche.dirty)">
-                <div *ngIf="listControle[13]">
-                  <span class="text-wrap">{{ listLabels[13] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(13);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.quintaLanche.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quintaLanche.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('quinta-lanche');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[13]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 13);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.quintaLanche.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quinta-lanche');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.quintaLanche" 
+                      [(ngModel)]="cardapiosDTO.quintaLanche.id" 
                       class="form-control" 
                       name="quintaLanche" 
                       id="inputQuintaLanche" 
@@ -286,14 +286,14 @@
                       size="2">
               </td>
               <td [ngClass]="getFromGroupClass(sextaLanche.invalid, sextaLanche.dirty)">
-                <div *ngIf="listControle[14]">
-                  <span class="text-wrap">{{ listLabels[14] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(14);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.sextaLanche.id">
+                  <span class="text-wrap">{{ cardapiosDTO.sextaLanche.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('sexta-lanche');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[14]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 14);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.sextaLanche.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'sexta-lanche');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.sextaLanche" 
+                      [(ngModel)]="cardapiosDTO.sextaLanche.id" 
                       class="form-control" 
                       name="sextaLanche" 
                       id="inputSextaLanche" 
@@ -309,14 +309,14 @@
                 &nbsp;Jantar
               </th>
               <td [ngClass]="getFromGroupClass(segundaJantar.invalid, segundaJantar.dirty)">
-                <div *ngIf="listControle[15]">
-                  <span class="text-wrap">{{ listLabels[15] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(15);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.segundaJantar.id">
+                  <span class="text-wrap">{{ cardapiosDTO.segundaJantar.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('segunda-jantar');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[15]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 15);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.segundaJantar.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'segunda-jantar');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.segundaJantar" 
+                      [(ngModel)]="cardapiosDTO.segundaJantar.id" 
                       class="form-control" 
                       name="segundaJantar" 
                       id="inputSegundaJantar" 
@@ -325,14 +325,14 @@
                       required>
               </td>
               <td [ngClass]="getFromGroupClass(tercaJantar.invalid, tercaJantar.dirty)">
-                <div *ngIf="listControle[16]">
-                  <span class="text-wrap">{{ listLabels[16] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(16);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.tercaJantar.id">
+                  <span class="text-wrap">{{ cardapiosDTO.tercaJantar.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('terca-jantar');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[16]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 16);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.tercaJantar.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'terca-jantar');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.tercaJantar" 
+                      [(ngModel)]="cardapiosDTO.tercaJantar.id" 
                       class="form-control" 
                       name="tercaJantar" 
                       id="inputTercaJantar" 
@@ -341,14 +341,14 @@
                       required>
               </td>
               <td [ngClass]="getFromGroupClass(quartaJantar.invalid, quartaJantar.dirty)">
-                <div *ngIf="listControle[17]">
-                  <span class="text-wrap">{{ listLabels[17] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(17);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.quartaJantar.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quartaJantar.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('quarta-jantar');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[17]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 17);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.quartaJantar.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quarta-jantar');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.quartaJantar" 
+                      [(ngModel)]="cardapiosDTO.quartaJantar.id" 
                       class="form-control" 
                       name="quartaJantar" 
                       id="inputQuartaJantar" 
@@ -357,14 +357,14 @@
                       required>
               </td>
               <td [ngClass]="getFromGroupClass(quintaJantar.invalid, quintaJantar.dirty)">
-                <div *ngIf="listControle[18]">
-                  <span class="text-wrap">{{ listLabels[18] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(18);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.quintaJantar.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quintaJantar.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('quinta-jantar');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[18]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 18);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.quintaJantar.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quinta-jantar');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.quintaJantar" 
+                      [(ngModel)]="cardapiosDTO.quintaJantar.id" 
                       class="form-control" 
                       name="quintaJantar" 
                       id="inputQuintaJantar" 
@@ -373,14 +373,14 @@
                       required>
               </td>
               <td [ngClass]="getFromGroupClass(sextaJantar.invalid, sextaJantar.dirty)">
-                <div *ngIf="listControle[19]">
-                  <span class="text-wrap">{{ listLabels[19] }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(19);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                <div *ngIf="cardapiosDTO.sextaJantar.id">
+                  <span class="text-wrap">{{ cardapiosDTO.sextaJantar.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita('sexta-jantar');" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
                 </div>
-                <div *ngIf="!listControle[19]">
-                  <a href="javascript:void(0);" (click)="openModal(template, 19);" title="Adicionar Receita">Adicionar Receita</a>
+                <div *ngIf="!cardapiosDTO.sextaJantar.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'sexta-jantar');" title="Adicionar Receita">Adicionar Receita</a>
                 </div>
                 <input type="hidden" 
-                      [(ngModel)]="cardapio.sextaJantar" 
+                      [(ngModel)]="cardapiosDTO.sextaJantar.id" 
                       class="form-control" 
                       name="sextaJantar" 
                       id="inputSextaJantar" 
@@ -416,12 +416,12 @@
       <tr>
         <th style="text-align: center;">ID</th>
         <th>Nome</th>
-        <th *ngIf="shared.user.username == 'admin'" style="width: 40px">pos: {{posicao}}</th>
+        <th *ngIf="shared.user.username == 'admin'" style="width: 40px">{{posicao}}</th>
       </tr>
       <tr *ngFor="let receita of listReceita">
         <td align="center">{{ receita.id }}</td>
         <td>{{ receita.nome }}</td>
-        <td><button class="btn btn-info" title="Selecionar" (click)="selecionaReceita(receita.id, receita.nome, posicao);"><i class="fa fa-check"></i></button></td>
+        <td><button class="btn btn-info" title="Selecionar" (click)="selecionaReceita(receita, posicao);"><i class="fa fa-check"></i></button></td>
       </tr>
     </table>
   </div>

@@ -1,0 +1,439 @@
+<div class="row">
+  <div class="col-md-10">
+
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="persistirArray()">
+
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <span>{{ message.text }}</span>
+      </div>
+
+      <div class="alert alert-info alert-dismissible" *ngIf="!isData">
+        <h4><i class="icon fa fa-info"></i>Atenção</h4>
+        As refeições <b>almoço</b> e <b>jantar</b> são de preenchimento obrigatório.
+      </div>
+
+      <div class="box box-info" *ngIf="isData">
+        <div class="box-body">
+          <table class="table table-bordered">
+            <tr>
+              <td>
+                <h3>O cardápio do dia {{ data  | date: 'dd/MM/yyyy' }} já foi cadastro <a [routerLink]="['/cardapio-list']">clique aqui</a> para editar!</h3>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="box box-info" *ngIf="!isData">
+        <div class="box-header with-border">
+          <h3 class="box-title">Cardápio Semanal - Dia: {{ data  | date: 'dd/MM/yyyy' }}</h3>
+          <!--
+          <input type="hidden" 
+                [(ngModel)]="cardapio.dataCriacao" 
+                class="form-control" 
+                name="dataCriacao" 
+                id="inputDataCriacao" 
+                #dataCriacao="ngModel" 
+                required>
+          -->
+        </div>
+
+        <div class="box-body">
+          <table class="table table-bordered">
+            <tr>
+              <th>Refeição/Dia</th>
+              <th>Segunda-feira</th>
+              <th>Terça-feira</th>
+              <th>Quarta-feira</th>
+              <th>Quinta-feira</th>
+              <th>Sexta-feira</th>
+            </tr>
+            <!-- INICIO CAFE -->
+            <tr>
+              <th>
+                <img src="assets\img\cafe.png" class="icon-cardapio" title="Café da Manhã"/>
+                &nbsp;Café da Manhã
+              </th>
+              <td [ngClass]="getFromGroupClass(segundaCafe.invalid, segundaCafe.dirty)">
+                <div *ngIf="cardapiosDTO.segundaCafe.id">
+                  <span class="text-wrap">{{ cardapiosDTO.segundaCafe.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(0);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.segundaCafe.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'segunda-cafe');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.segundaCafe.id" 
+                      class="form-control" 
+                      name="segundaCafe" 
+                      id="inputSegundaCafe" 
+                      #segundaCafe="ngModel" 
+                      size="2">
+              </td>
+              <td [ngClass]="getFromGroupClass(tercaCafe.invalid, tercaCafe.dirty)">
+                <div *ngIf="cardapiosDTO.tercaCafe.id">
+                  <span class="text-wrap">{{ cardapiosDTO.tercaCafe.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(1);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.tercaCafe.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'terca-cafe');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.tercaCafe.id" 
+                      class="form-control" 
+                      name="tercaCafe" 
+                      id="inputTercaCafe" 
+                      #tercaCafe="ngModel" 
+                      size="2">
+              </td>
+              <td [ngClass]="getFromGroupClass(quartaCafe.invalid, quartaCafe.dirty)">
+                <div *ngIf="cardapiosDTO.quartaCafe.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quartaCafe.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(2);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.quartaCafe.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quarta-cafe');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.quartaCafe.id" 
+                      class="form-control" 
+                      name="quartaCafe" 
+                      id="inputQuartaCafe" 
+                      #quartaCafe="ngModel" 
+                      size="2">
+              </td>
+              <td [ngClass]="getFromGroupClass(quintaCafe.invalid, quintaCafe.dirty)">
+                <div *ngIf="cardapiosDTO.quintaCafe.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quintaCafe.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(3);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.quintaCafe.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quinta-cafe');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.quintaCafe.id" 
+                      class="form-control" 
+                      name="quintaCafe" 
+                      id="inputQuintaCafe" 
+                      #quintaCafe="ngModel" 
+                      size="2">
+              </td>
+              <td [ngClass]="getFromGroupClass(sextaCafe.invalid, sextaCafe.dirty)">
+                <div *ngIf="cardapiosDTO.sextaCafe.id">
+                  <span class="text-wrap">{{ cardapiosDTO.sextaCafe.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(4);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.sextaCafe.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'sexta-cafe');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.sextaCafe.id" 
+                      class="form-control" 
+                      name="sextaCafe" 
+                      id="inputSextaCafe" 
+                      #sextaCafe="ngModel" 
+                      size="2">
+              </td>
+            </tr>
+            <!-- FIM CAFE -->
+            <!-- INICIO ALMOCO -->
+            <tr>
+              <th>
+                <img src="assets\img\almoco.png" class="icon-cardapio" title="Almoço"/>
+                &nbsp;Almoço
+              </th>
+              <td [ngClass]="getFromGroupClass(segundaAlmoco.invalid, segundaAlmoco.dirty)">
+                <div *ngIf="cardapiosDTO.segundaAlmoco.id">
+                  <span class="text-wrap">{{ cardapiosDTO.segundaAlmoco.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(5);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.segundaAlmoco.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'segunda-almoco');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.segundaAlmoco.id" 
+                      class="form-control" 
+                      name="segundaAlmoco" 
+                      id="inputSegundaAlmoco" 
+                      #segundaAlmoco="ngModel" 
+                      size="2"
+                      required>
+              </td>
+              <td [ngClass]="getFromGroupClass(tercaAlmoco.invalid, tercaAlmoco.dirty)">
+                <div *ngIf="cardapiosDTO.tercaAlmoco.id">
+                  <span class="text-wrap">{{ cardapiosDTO.tercaAlmoco.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(6);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.tercaAlmoco.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'terca-almoco');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.tercaAlmoco.id" 
+                      class="form-control" 
+                      name="tercaAlmoco" 
+                      id="inputTercaAlmoco" 
+                      #tercaAlmoco="ngModel" 
+                      size="2"
+                      required>
+              </td>
+              <td [ngClass]="getFromGroupClass(quartaAlmoco.invalid, quartaAlmoco.dirty)">
+                <div *ngIf="cardapiosDTO.quartaAlmoco.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quartaAlmoco.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(7);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.quartaAlmoco.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quarta-almoco');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.quartaAlmoco.id" 
+                      class="form-control" 
+                      name="quartaAlmoco" 
+                      id="inputQuartaAlmoco" 
+                      #quartaAlmoco="ngModel" 
+                      size="2"
+                      required>
+              </td>
+              <td [ngClass]="getFromGroupClass(quintaAlmoco.invalid, quintaAlmoco.dirty)">
+                <div *ngIf="cardapiosDTO.quintaAlmoco.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quintaAlmoco.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(8);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.quintaAlmoco.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quinta-almoco');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.quintaAlmoco.id" 
+                      class="form-control" 
+                      name="quintaAlmoco" 
+                      id="inputQuintaAlmoco" 
+                      #quintaAlmoco="ngModel" 
+                      size="2"
+                      required>
+              </td>
+              <td [ngClass]="getFromGroupClass(sextaAlmoco.invalid, sextaAlmoco.dirty)">
+                <div *ngIf="cardapiosDTO.sextaAlmoco.id">
+                  <span class="text-wrap">{{ cardapiosDTO.sextaAlmoco.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(9);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.sextaAlmoco.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'sexta-almoco');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.sextaAlmoco.id" 
+                      class="form-control" 
+                      name="sextaAlmoco" 
+                      id="inputSextaAlmoco" 
+                      #sextaAlmoco="ngModel" 
+                      size="2"
+                      required>
+              </td>
+            </tr>
+            <!-- FIM ALMOCO -->
+            <!-- INICIO LANCHE -->
+            <tr>
+              <th>
+                <img src="assets\img\lanche.png" class="icon-cardapio" title="Lanche"/>
+                &nbsp;Lanche
+              </th>
+              <td [ngClass]="getFromGroupClass(segundaLanche.invalid, segundaLanche.dirty)">
+                <div *ngIf="cardapiosDTO.segundaLanche.id">
+                  <span class="text-wrap">{{ cardapiosDTO.segundaLanche.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(10);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.segundaLanche.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'segunda-lanche');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.segundaLanche.id" 
+                      class="form-control" 
+                      name="segundaLanche" 
+                      id="inputSegundaLanche" 
+                      #segundaLanche="ngModel" 
+                      size="2">
+              </td>
+              <td [ngClass]="getFromGroupClass(tercaLanche.invalid, tercaLanche.dirty)">
+                <div *ngIf="cardapiosDTO.tercaLanche.id">
+                  <span class="text-wrap">{{ cardapiosDTO.tercaLanche.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(11);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.tercaLanche.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'terca-lanche');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.tercaLanche.id" 
+                      class="form-control" 
+                      name="tercaLanche" 
+                      id="inputTercaLanche" 
+                      #tercaLanche="ngModel" 
+                      size="2">
+              </td>
+              <td [ngClass]="getFromGroupClass(quartaLanche.invalid, quartaLanche.dirty)">
+                <div *ngIf="cardapiosDTO.quartaLanche.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quartaLanche.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(12);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.quartaLanche.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quarta-lanche');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.quartaLanche.id" 
+                      class="form-control" 
+                      name="quartaLanche" 
+                      id="inputQuartaLanche" 
+                      #quartaLanche="ngModel" 
+                      size="2">
+              </td>
+              <td [ngClass]="getFromGroupClass(quintaLanche.invalid, quintaLanche.dirty)">
+                <div *ngIf="cardapiosDTO.quintaLanche.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quintaLanche.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(13);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.quintaLanche.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quinta-lanche');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.quintaLanche.id" 
+                      class="form-control" 
+                      name="quintaLanche" 
+                      id="inputQuintaLanche" 
+                      #quintaLanche="ngModel" 
+                      size="2">
+              </td>
+              <td [ngClass]="getFromGroupClass(sextaLanche.invalid, sextaLanche.dirty)">
+                <div *ngIf="cardapiosDTO.sextaLanche.id">
+                  <span class="text-wrap">{{ cardapiosDTO.sextaLanche.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(14);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.sextaLanche.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'sexta-lanche');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.sextaLanche.id" 
+                      class="form-control" 
+                      name="sextaLanche" 
+                      id="inputSextaLanche" 
+                      #sextaLanche="ngModel" 
+                      size="2">
+              </td>
+            </tr>
+            <!-- FIM LANCHE -->
+            <!-- INICIO JANTAR -->
+            <tr>
+              <th>
+                <img src="assets\img\jantar.png" class="icon-cardapio" title="Jantar"/>
+                &nbsp;Jantar
+              </th>
+              <td [ngClass]="getFromGroupClass(segundaJantar.invalid, segundaJantar.dirty)">
+                <div *ngIf="cardapiosDTO.segundaJantar.id">
+                  <span class="text-wrap">{{ cardapiosDTO.segundaJantar.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(15);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.segundaJantar.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'segunda-jantar');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.segundaJantar.id" 
+                      class="form-control" 
+                      name="segundaJantar" 
+                      id="inputSegundaJantar" 
+                      #segundaJantar="ngModel" 
+                      size="2"
+                      required>
+              </td>
+              <td [ngClass]="getFromGroupClass(tercaJantar.invalid, tercaJantar.dirty)">
+                <div *ngIf="cardapiosDTO.tercaJantar.id">
+                  <span class="text-wrap">{{ cardapiosDTO.tercaJantar.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(16);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.tercaJantar.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'terca-jantar');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.tercaJantar.id" 
+                      class="form-control" 
+                      name="tercaJantar" 
+                      id="inputTercaJantar" 
+                      #tercaJantar="ngModel" 
+                      size="2"
+                      required>
+              </td>
+              <td [ngClass]="getFromGroupClass(quartaJantar.invalid, quartaJantar.dirty)">
+                <div *ngIf="cardapiosDTO.quartaJantar.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quartaJantar.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(17);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.quartaJantar.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quarta-jantar');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.quartaJantar.id" 
+                      class="form-control" 
+                      name="quartaJantar" 
+                      id="inputQuartaJantar" 
+                      #quartaJantar="ngModel" 
+                      size="2"
+                      required>
+              </td>
+              <td [ngClass]="getFromGroupClass(quintaJantar.invalid, quintaJantar.dirty)">
+                <div *ngIf="cardapiosDTO.quintaJantar.id">
+                  <span class="text-wrap">{{ cardapiosDTO.quintaJantar.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(18);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.quintaJantar.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'quinta-jantar');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.quintaJantar.id" 
+                      class="form-control" 
+                      name="quintaJantar" 
+                      id="inputQuintaJantar" 
+                      #quintaJantar="ngModel" 
+                      size="2"
+                      required>
+              </td>
+              <td [ngClass]="getFromGroupClass(sextaJantar.invalid, sextaJantar.dirty)">
+                <div *ngIf="cardapiosDTO.sextaJantar.id">
+                  <span class="text-wrap">{{ cardapiosDTO.sextaJantar.nome }}</span>&nbsp;<a href="javascript:void(0);" (click)="removeReceita(19);" title="Remover"><i class="fa fa-times" style="color : red"></i></a><br>
+                </div>
+                <div *ngIf="!cardapiosDTO.sextaJantar.id">
+                  <a href="javascript:void(0);" (click)="openModal(template, 'sexta-jantar');" title="Adicionar Receita">Adicionar Receita</a>
+                </div>
+                <input type="hidden" 
+                      [(ngModel)]="cardapiosDTO.sextaJantar.id" 
+                      class="form-control" 
+                      name="sextaJantar" 
+                      id="inputSextaJantar" 
+                      #sextaJantar="ngModel" 
+                      size="2"
+                      required>
+              </td>
+            </tr>
+            <!-- FIM JANTAR -->
+          </table>
+        </div>
+
+        <div class="box-footer">
+          <!--<h4 style="color: red;">*As refeições almoço e jantar são de preenchimento obrigatório.</h4>-->
+          <button type="submit" [disabled]="!form.valid" class="btn btn-primary pull-right">Gravar</button>
+        </div>
+     </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- MODAL -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Selecione uma receita:</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-bordered">
+      <tr>
+        <th style="text-align: center;">ID</th>
+        <th>Nome</th>
+        <th *ngIf="shared.user.username == 'admin'" style="width: 40px">{{posicao}}</th>
+      </tr>
+      <tr *ngFor="let receita of listReceita">
+        <td align="center">{{ receita.id }}</td>
+        <td>{{ receita.nome }}</td>
+        <td><button class="btn btn-info" title="Selecionar" (click)="selecionaReceitaNovo(receita, posicao);"><i class="fa fa-check"></i></button></td>
+      </tr>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <ul class="pagination pagination-sm no-margin pull-right">
+      <li><a href="" (click)="setFirstPage($event);" title="Ir para primeira página">&laquo;</a></li>
+      <li *ngFor="let p of pages; let i = index">
+        <a [ngClass]="{'pagination-focus' : i == page}" href="" (click)="setPage(i, $event);">{{i+1}}</a>
+      </li>
+      <li><a href="" (click)="setLastPage($event);" title="Ir para última página">&raquo;</a></li>
+    </ul>
+  </div>
+</ng-template>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="ball-spin" [fullScreen]="true"></ngx-spinner>

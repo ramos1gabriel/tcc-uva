@@ -56,6 +56,11 @@ public class Receita {
     @JoinColumn(name = "USUARIO_ID", foreignKey = @ForeignKey(name = "FK_RECEITA_USUARIO"), nullable = false)
     private Usuario usuario;
     
+    @JsonIgnore
+    //cascade = CascadeType.ALL
+    @OneToMany(mappedBy = "receita", fetch=FetchType.LAZY)
+    private List<CardapioSemanal> cardapiosemanal;
+    
     public Receita() {}
     
     public Receita(Long id, String nome, String descricao, CategoriaEnum categoria) {
@@ -120,6 +125,14 @@ public class Receita {
 	
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public List<CardapioSemanal> getCardapiosemanal() {
+		return cardapiosemanal;
+	}
+	
+	public void setCardapiosemanal(List<CardapioSemanal> cardapiosemanal) {
+		this.cardapiosemanal = cardapiosemanal;
 	}
 	
 //	@Override
