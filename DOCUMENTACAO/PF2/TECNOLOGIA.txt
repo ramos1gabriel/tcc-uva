@@ -1,0 +1,17 @@
+*node.js* = interpretador de js (utilizar fora do browser)
+*angular* = framework
+*typescript* =  linguagem de programação (superset de JavaScript)
+================
+
+spring boot = framework (utiliza o spring)
+
+O Spring Boot é um framework Java reduzir o tempo gasto com as configurações iniciais
+
+
+Spring Security: uma biblioteca que ajuda a proteger, por exemplo, seu aplicativo da web com OAuth2 ou Basic Auth.
+
+O SpringData é um projeto da SpringSource com proposta de unificar e facilitar o acesso a diferentes tecnologias de armazenamento de dados, como bancos de dados relacionais e os NoSQL.
+
+Java Persistence API é uma API padrão da linguagem Java que descreve uma interface comum para frameworks de persistência de dados.
+
+OAuth 2 é um protocolo de autorização que permite que uma aplicação se autentique em outra. 

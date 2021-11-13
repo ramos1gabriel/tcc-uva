@@ -1,0 +1,37 @@
+Controle de versão
+
+git e github
+
+--Testes de Sistemas
+
+Teste é o processo de executar um programa com o intuito específico de encontrar erros, antes de sua entrega ao cliente ou usuário final (MYERS, 1979).
+
+Na elaboração dos testes do Projeto Alexandria, adotamos dois métodos de avaliação e ajuste. Testes ao longo do desenvolvimento que quando encontravam alguma inconsistência ou erro, o mesmo era prontamente ajustados e reparados, evitando desta forma um retrabalho e respeitando o desenvolvimento ágil proposto. A outra etapa de testes funcionais ocorrendo na versão final do projeto.
+
+--Teste de integridade 
+
+Foram realizados teste de algumas classes de acesso a dados (DAO) para simular a parametrização de valores nulos quando na verdade eram para ser valores inteiros. 
+
+Para a realização de testes unitários, foi feito o uso da ferramenta JUnit com o intuito de se testar as classes DAO e garantir a integridade da parametrização do método que irá buscar dados na base. 
+
+Foram feitos os testes passando valores esperados (inteiros) e testes passando valores nulos (null), onde o programa se comportou como esperado, apontando 100% de efetividade com a parametrização de valores inteiros e apontando erros com a passagem de valores nulos.
+
+--Teste de compatibilidade 
+
+Segundo PRESMAM (2006), aplicações Web precisam operar em ambientes que diferem uns dos outros. Diferentes computadores, dispositivos de exibição, sistemas operacionais e navegadores, têm uma influência significativa na operação. 
+
+Desta forma, para garantir que o sistema opera em multiplataforma como proposto, foram realizados alguns testes utilizando diferentes navegadores e computadores, bem como dispositivos móveis.
+
+--Teste de Funcionalidade 
+
+Um dos métodos mais práticos de teste de funcionalidade de sistemas é a utilização de ferramentas para acessar os endpoints. 
+
+Foi feito o uso da ferramenta Postman para acesso de toda a API executando os métodos GET, PUT, POST e DELETE. 
+
+Outro teste realizado foi a simulação da utilização do sistema, executando as funcionalidade desde cadastrar um usuário até gerar a lista de compras.
+
+
+===
+versão final
+18/11
+25/11
