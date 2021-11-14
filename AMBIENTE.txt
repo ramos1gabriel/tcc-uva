@@ -1,31 +1,17 @@
-Banco de dados: MySQL
-- Usar o XAMPP para para simular o MySQL (TEMPORARIO)
-- Usar o HeidiSQL como SGBD
-- Instalar o MySQL Server Community
-https://dev.mysql.com/downloads/windows/installer/8.0.html
-
-- Instalar o MySQL Workbench (*opcional para gerar o MER)
-https://dev.mysql.com/downloads/workbench/
-
 Massa de teste BD:
 SCRIPTS\SCRIPT_CARDAPIO_FIT_COMPLETO.sql
-
+-----------------------------------------
 Requests do serviços (Postman):
 SCRIPTS\TCC.postman_collection.json
-
------
+-----------------------------------------
 Back-end: Java 8
 - Usar STS4(Spring Tool Suite 4)
-
+-----------------------------------------
 Front-end: Angular 7
 - Usar VSCode(Visual Studio Code) usar comando "ng serve" para subir
-
------
-*TODOS ARQUIVOS ESTÃO NO GITHUB "tcc-uva"
------
-
+-----------------------------------------
 PROGRAMAS NECESSARIOS:
-
+-----------------------------------------
 Documentação:
 Word - Microsoft Office 2013
 Astah Community (UML)
@@ -34,13 +20,16 @@ IDE:
 STS4 - Java
 VSCode - Angular
 
-Arquivos fonte:
+Controle de Versão:
 Git
 GitHub Desktop
 
-Database: (melhor usar o banco?)
-XAMPP
-HeidiSQL
+Database:
+MySQL
+MySQL Workbench (para gerar o MER)
 
 Testes:
-Postman - testar serviços
+Postman
+
+---
+*TODOS ARQUIVOS DEVEM ESTAR NO GITHUB "tcc-uva"

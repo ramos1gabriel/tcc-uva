@@ -1,6 +1,13 @@
 
 -----SLIDE 1
-O que é o produto?
+O que é a Lista de Compras Inteligente?
+
+Diversas pessoas já se encontram na situação de ir ao mercado comprar os ingredientes para o preparo de alguma refeição que iria preparar para o almoço, janta ou até mesmo um lanche e quando chega em casa lembra que faltou comprar algo ou até mesmo não comprou porque não sabia que precisa do ingrediente para a receita e com as diversas responsabilidade diárias temos cada vez menos tempo de ficar indo ao mercado diversas vezes, até mesmo pelo gasto exagerado quando acabamos não comprando algo ou compramos em excesso e acabamos tendo que jogar os alimentos fora, seja por serem perecíveis como frutas, legumes ou por data de validade vencida.
+
+Atualmente no mercado existem diversas aplicações e sites que disponibilizam receitas, porém sua grande maioria não possui nenhuma forma de exportar os ingredientes das receitas para uma lista de compras.
+
+
+
 
 -----SLIDE 2
 Motivação
@@ -38,6 +45,9 @@ MySQL
 ---------------
 Arquitetura do Sistema
 Para esta aplicação, o processo considerado Cliente será o navegador do usuário, que troca mensagens com o processo Servidor sendo executado no servidor Web.
+
+<pegar da documentação>
+
 ---------------
 -----SLIDE
 ---------------
