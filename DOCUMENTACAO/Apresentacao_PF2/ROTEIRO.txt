@@ -1,19 +1,29 @@
-
 -----SLIDE 1
 O que é a Lista de Compras Inteligente?
 
-Diversas pessoas já se encontram na situação de ir ao mercado comprar os ingredientes para o preparo de alguma refeição que iria preparar para o almoço, janta ou até mesmo um lanche e quando chega em casa lembra que faltou comprar algo ou até mesmo não comprou porque não sabia que precisa do ingrediente para a receita e com as diversas responsabilidade diárias temos cada vez menos tempo de ficar indo ao mercado diversas vezes, até mesmo pelo gasto exagerado quando acabamos não comprando algo ou compramos em excesso e acabamos tendo que jogar os alimentos fora, seja por serem perecíveis como frutas, legumes ou por data de validade vencida.
+Pois bem, trata-se de um serviço que possibilita ao usuário cadastrar suas receitas, planejar um cardápio semanal e ao final gerar uma lista de compras com todos os ingredientes que serão necessários para o preparo das receitas contidas no cardápio semanal.
 
-Atualmente no mercado existem diversas aplicações e sites que disponibilizam receitas, porém sua grande maioria não possui nenhuma forma de exportar os ingredientes das receitas para uma lista de compras.
-
-
-
+Nesse sistema o usuario devera criar uma conta para ter acesso ao mesmo;
+Com a conta criada ele pode registrar os ingredientes seus ingredientes;
+Cadastrar as suas receitas (informando quais ingredientes ela vai utilizar e sua devida quantidade e por fim o seu modo de preparo)
+Poderá planejar um cardápio semanal com essas receitas  previamente cadastradas;
+E claro gerar um lista de compras do seu cardápio semanal desejado;
 
 -----SLIDE 2
 Motivação
 
+Diversas pessoas já se encontram na situação de ir ao mercado comprar os ingredientes para o preparo de alguma refeição que iria preparar para o almoço, janta ou até mesmo um lanche e quando chega em casa lembra que faltou comprar algo ou até mesmo não comprou porque não sabia que precisa do ingrediente para a receita e com as diversas responsabilidade diárias temos cada vez menos tempo de ficar indo ao mercado diversas vezes, até mesmo pelo gasto exagerado quando acabamos não comprando algo ou compramos em excesso e acabamos tendo que jogar os alimentos fora, seja por serem perecíveis como frutas, legumes ou por data de validade vencida.
+
+[ESCRITO NO PPT]
+Atualmente no mercado existem diversas aplicações e sites que disponibilizam receitas, porém sua grande maioria não possui nenhuma forma de exportar os ingredientes das receitas para uma lista de compras.
+
+Muito menos otimizar todas as receitas em uma única lista de compras.
+
 -----SLIDE 3
 Vantagens
+
+COMO MENCIONADO ACIMA:
+otimizando gastos com compras, diminuir o desperdício de alimentos, poupar o tempo com compras diárias e planejar um cardápio de refeições mais saudáveis.
 
 -----SLIDE 4
 Soluções Tecnologicas

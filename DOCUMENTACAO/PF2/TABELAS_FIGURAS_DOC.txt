@@ -1,0 +1,52 @@
+Tabela 1 – Visão do produto 13
+Tabela 2 – Partes interessadas 14
+Tabela 3 – Atores 14
+Tabela 4 – RF01 – Realizar cadastro 16
+Tabela 5 – RF02– Efetuar login 16
+Tabela 6 – RF03 – Alterar dados cadastrais 16
+Tabela 7 – RF04 – Manter ingrediente 16
+Tabela 8 – RF05 – Manter receita 16
+Tabela 9 – RF06 – Manter receita ingrediente 16
+Tabela 10 – RF07 – Manter modo de preparo 17
+Tabela 11 – RF08 – Planejar cardápio semanal 17
+Tabela 12 – RF09 – Gerar lista de compras 17
+Tabela 13 – Descrição de caso de uso – Realizar cadastro 18
+Tabela 14 – Descrição de caso de uso – Efetuar login 19
+Tabela 15 – Descrição de caso de uso – Alterar dados cadastrais 20
+Tabela 16 – Descrição de caso de uso – Manter ingrediente 21
+Tabela 17 – Descrição de caso de uso – Manter receita 23
+Tabela 18 – Descrição de caso de uso – Manter receita ingrediente 24
+Tabela 19 – Descrição de caso de uso – Manter modo preparo 25
+Tabela 20 – Descrição de caso de uso – Manter cardápio semanal 26
+Tabela 21 – Descrição de caso de uso – Gerar lista de compras 27
+
+Tabela 22 – RN01 – Validações na tela de criar conta de usuário 27
+Tabela 23 – RN02 – Validações na tela de login 27
+Tabela 24 – RN03 – Editar perfil de usuário 28
+Tabela 25 – RN04 – Validações na tela de ingrediente 28
+Tabela 26 – RN05 – Exclusão ingrediente 28
+Tabela 27 – RN06 – Categoria de receita 28
+Tabela 28 – RN07 – Validações na tela de receita 28
+Tabela 29 – RN08 – Validação do cadastro de receita completo 28
+Tabela 30 – RN09 – Validações na tela de receita ingrediente 29
+Tabela 31 – RN10 – Unidade de medida 29
+Tabela 32 – RN11 – Tipos de unidade de medida 29
+Tabela 33 – RN12 – Quantidade de ingredientes por receita 29
+Tabela 34 – RN13 – Duplicidade de ingredientes na receita 29
+Tabela 35 – RN14 – Validações na tela de modo de preparo 29
+Tabela 36 – RN15 – Validações na tela cardápio semanal 30
+Tabela 37 – RN16 – Listagem dos cardápios semanais 30
+Tabela 38 – RN17 – Calculo de conversão de unidade de medida 30
+Tabela 39 – RN18 – Lista de compras 30
+Tabela 40 – RN19 – Duplicidade cardápio semanal 30
+
+Tabela 41 – RNF01 – Usabilidade 31
+Tabela 42 – RNF02 – Tecnologia 31
+Tabela 43 – RNF03 – Segurança de acesso 31
+Tabela 44 – RNF04 – Ambiente 31
+Tabela 45 - Dicionário de dados 34
+Tabela 46 – Gráfico das demandas no Trello 36
+
+Figura 1 – Diagrama de caso de uso 15
+Figura 2 – Modelo de dados 32
+Figura 3 – Quadro Kanban no Trello 36
