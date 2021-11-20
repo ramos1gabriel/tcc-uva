@@ -1,32 +1,72 @@
------SLIDE 1
+---------------
+-----SLIDE [REVISAR]
+---------------
 O que é a Lista de Compras Inteligente?
 
-Pois bem, trata-se de um serviço que possibilita ao usuário cadastrar suas receitas, planejar um cardápio semanal e ao final gerar uma lista de compras com todos os ingredientes que serão necessários para o preparo das receitas contidas no cardápio semanal.
+Pois bem, de forma resumida, trata-se de um serviço que possibilita ao usuário cadastrar suas receitas, e com essas receitas planejar um cardápio semanal e ao final gerar uma lista de compras com todos os ingredientes que serão necessários para o preparo das receitas contidas no cardápio semanal.
 
 Nesse sistema o usuario devera criar uma conta para ter acesso ao mesmo;
-Com a conta criada ele pode registrar os ingredientes seus ingredientes;
-Cadastrar as suas receitas (informando quais ingredientes ela vai utilizar e sua devida quantidade e por fim o seu modo de preparo)
+
+Com a conta criada ele pode registrar os ingredientes os ingredientes que precisará utilizar nas futuras receitas;
+
+Cadastrar as suas receitas (informando quais dos ingredientes já cadastrados irá utilizar e sua devida quantidade e também o modo de preparo da receita)
+
 Poderá planejar um cardápio semanal com essas receitas  previamente cadastradas;
+
 E claro gerar um lista de compras do seu cardápio semanal desejado;
 
------SLIDE 2
+---------------
+-----SLIDE [REVISAR]
+---------------
 Motivação
 
-Diversas pessoas já se encontram na situação de ir ao mercado comprar os ingredientes para o preparo de alguma refeição que iria preparar para o almoço, janta ou até mesmo um lanche e quando chega em casa lembra que faltou comprar algo ou até mesmo não comprou porque não sabia que precisa do ingrediente para a receita e com as diversas responsabilidade diárias temos cada vez menos tempo de ficar indo ao mercado diversas vezes, até mesmo pelo gasto exagerado quando acabamos não comprando algo ou compramos em excesso e acabamos tendo que jogar os alimentos fora, seja por serem perecíveis como frutas, legumes ou por data de validade vencida.
+Diversas pessoas já se encontram na situação de ir ao mercado comprar os ingredientes para o preparo de alguma refeição seja almoço, jantar, até mesmo um lanche ou sobremesa e quando chega em casa lembra que faltou comprar algo ou até mesmo não comprou porque não sabia que precisa do ingrediente para a receita e sabemos que com as diversas responsabilidade diárias temos cada vez menos tempo de ficar indo ao mercado diversas vezes, até mesmo pelo gasto exagerado quando acabamos não comprando algo ou pior compramos em excesso e acabamos tendo que jogar os alimentos fora, seja por serem perecíveis como frutas, legumes ou por data de validade vencida.
 
-[ESCRITO NO PPT]
-Atualmente no mercado existem diversas aplicações e sites que disponibilizam receitas, porém sua grande maioria não possui nenhuma forma de exportar os ingredientes das receitas para uma lista de compras.
+Conforme descrevi no slide
+Atualmente  existem diversas aplicações e sites no mercado que disponibilizam receitas, porém sua grande maioria não possui nenhuma forma de exportar os ingredientes das receitas para uma lista de compras. Em outros casos, as receitas estão vinculadas a marca como, por exemplo só é possivel pegar uma lista de compras de receitas exclusivas da Nestle, entre outras marcas.
 
-Muito menos otimizar todas as receitas em uma única lista de compras.
+E durante toda minha pesquisa entre aplicativos de smartphone que ajudam a montar cardapios semanais para uma dieta balanciada ou lista de compras, não me deparei com nenhum que possua a proposta de otimizar todas as receitas em uma única lista de compras.
 
------SLIDE 3
+---------------
+-----SLIDE [FINALIZADO]
+---------------
 Vantagens
 
-COMO MENCIONADO ACIMA:
-otimizando gastos com compras, diminuir o desperdício de alimentos, poupar o tempo com compras diárias e planejar um cardápio de refeições mais saudáveis.
+[Otimizar seu tempo no supermercado]
+Hoje em dia o tempo é algo extremamente valioso. Então, economizá-lo com a ida ao mercado virou prioridade. Ir às compras sem saber exatamnete o que precisa comprar e o que tem na sua despensa tornasse um grande problema. Com a lista de compras inteligente além de sabermos exatamente o que comprar também, vai evitar futuras idas desnecessárias ao mercado, caso tenha esquecido de comprar tal produto ou até mesmo porque não sabia que para faz tal receita precisava desse ingrediente e tantos outros casos...
 
------SLIDE 4
-Soluções Tecnologicas
+[Evitar gastos extras]
+E além do desperdicio de tempo, temos também o financeiro, pois com a lista em mãos, você consegue fazer uma pesquisa de preços e comprar o que está mais em conta. Também é possivel aproveite as ofertas de diversos estabelecimentos e reduza o valor final da sua fatura. E também quando a gente não sabe exatamente o que comprar acabamos levando alguma besteira, uma barra de chocolate ou um pote de sorvete que você viu que tava na promoção e etc...
+
+[Evitar desperdício de alimentos]
+Por fim, mais não menos importante temos que pensar no consumo sustentável. Quando se tem uma lista de compras, consegue visualizar melhor a quantidade que vai precisar de cada produto, evitando assim o desperdício e aproveitando melhor tudo que foi comprado que é um dos objetivos dessa aplicação otimizar ao maximo todas as refeições que vão ser feitas durante a semana e gerar uma lista de compras precisa de todos os ingredientes.
+
+(Mencionar??)
+Também é legal comentar que ao montar um cardápio facilita e qualifica a sua lista de compras, pois você irá considerar o que precisa para um determinado período e terá a oportunidade de realizar as escolhas de alimentações mais saudaveis.
+
+---------------
+-----SLIDE
+---------------
+*salientar que o node.js não é front-end!!!
+Tecnologias
+
+*node.js* = interpretador de js (utilizar fora do browser)
+*angular* = framework
+*typescript* =  linguagem de programação (superset de JavaScript)
+================
+
+spring boot = framework (utiliza o spring)
+
+O Spring Boot é um framework Java reduzir o tempo gasto com as configurações iniciais
+
+
+Spring Security: uma biblioteca que ajuda a proteger, por exemplo, seu aplicativo da web com OAuth2 ou Basic Auth.
+
+O SpringData é um projeto da SpringSource com proposta de unificar e facilitar o acesso a diferentes tecnologias de armazenamento de dados, como bancos de dados relacionais e os NoSQL.
+
+Java Persistence API é uma API padrão da linguagem Java que descreve uma interface comum para frameworks de persistência de dados.
+
+OAuth 2 é um protocolo de autorização que permite que uma aplicação se autentique em outra. 
 
 Backend:
 Java
@@ -51,65 +91,157 @@ MySQL
 [descrição]
 
 ---------------
------SLIDE
+-----SLIDE [FINALIZADO]
 ---------------
 Arquitetura do Sistema
-Para esta aplicação, o processo considerado Cliente será o navegador do usuário, que troca mensagens com o processo Servidor sendo executado no servidor Web.
 
-<pegar da documentação>
+O modelo de arquitetural usado no sistema é do tipo cliente-servidor. O conceito por trás desse modelo é a comunicação por mensagem transportadas através de uma rede. Cada etapa de comunicação possui um membro rotulado como Cliente, e outro rotulado como Servidor. Se o usuário acessa uma aplicação pela Web, por exemplo, o navegador do qual ele acessa o sistema seria o processo Cliente, e o servidor no qual a aplicação está rodando seria o processo Servidor. 
+
+Eu utilizei os modelos baseados no livro Redes de Computadores e a Internet: Uma Abordagem Top-Down escrito pelo James F. Kurose (MAIS DETALHES ESTÃO NA DOCUMENTAÇÃO) 
+
+Para esta aplicação, o processo considerado Cliente será o navegador do usuário, que troca mensagens com o processo Servidor sendo executado no servidor Web (NO MEU CASO SERÁ O AMBIENTE LOCAL). Quando uma página é carregada no lado do Cliente, o navegador as chamadas de cada um dos serviços através da aplicação principal, acionando o controlador de cada um dos serviços. No processo Servidor, que devolve o código requisitado, juntamente com os dados, para ser exibido pelo navegador do Cliente. 
+
+Para exemplificar a arquitetura descrita, utilizou-se o modelo C4, no nível 2, o Modelo C4 foi criado pelo consultor independente especializado em arquitetura de software e autor do livro "Arquitetura de Software para Desenvolvedores", Simon Brown. "O modelo C4 é uma maneira simples de comunicar a arquitetura de um software em diferentes níveis de abstração, para que possar ser apresetados para diferentes públicos.
+
 
 ---------------
------SLIDE
----------------
-Principais Funcionalidades
-
-Layout:
-Layout simples e responsivo para maximizar a experiência do usuário
-
-Usuario:
-Somente dados básicos para identificação do usuário
-
-Ingrediente
-Receita
-Cardapio Semanal
-Lista de Compras
----------------
------SLIDE
+-----SLIDE [FINALIZADO]
 ---------------
 Modelo de Dados
-descrever entidades
-mysql (banco de dados relacional)
+
+Aqui temos uma representação de Modelo de Relacionamento de Entidade  (ou MER) utilizando a anotação Martin ou notação do pé de galinha como é mais conhecida, proposta por James Martin
+
+[MySQL]
+Conforme eu comentei anteriormente o banco de dados que eu utilizei foi  o MySQL que é um sistema gerenciador de banco de dados relacional de código aberto usado na maioria das aplicações gratuitas para gerir suas bases de dados. Eu já possui familiaridade com o banco porque foi um dos primeiros que eu utilizei de forma academica e também devido a sua facilidade de configuração e sintaxe.
+
+
+[Tabela Associativa de Receita e Ingrediente]
+Uma tabela associativa (ou junção) mapeia a associação entres as tabelas Receita e Ingrediente, onde eu defino os ingredientes, sua quantidade e unidade de medida dessa quantidade que será utilizada na receita. 
+Ele referencia as chaves primárias de cada uma dessas tabela e possui um um relacionamento muitos-para-um da tabela de junção para as tabelas individuais.
+
+[Tabela central Receita]
+Também é possivel perceber pela imagem que a tabela central no meu sistema é a de Receita que se relaciona com todas as outras de alguma maneira.
+
 ---------------
------SLIDE
+-----SLIDE [REVISAR]
 ---------------
 Gestão do Projeto
-logo github
-logo trello
+
+Primeiramente utilizei o git como controle de versão não apenas do código-fonte do meu projeto como também de toda a documentação que gerei ao longo de todo o processo de desenvolvimento, inclusive essa apresentação também esta lá commitada (risadas).. Conforme apresentado no slide tudo esta disponivel na plataforma de hospedagem que é o GitHub e num futuro bem proximo vou organizar melhor a descrição do projeto lá também (risos)...
+
+Seguindo a ferramenta que escolhi para gerenciar o trabalho foi o Trello que é uma ferramenta flexível de gerenciamento de trabalho em que os times podem criar planos, colaborar em projetos, organizar fluxos de trabalho e acompanhar o progresso com visualização e produtividade. A ferramenta é muito utilizada para trabalhos em equipe, mas pode ser usada também por um só individuo, como foi meu caso.
+
+No Trello montei um quadro Kanban que se trata de um método visual para gerenciar e conduzir o trabalho, nele é utilizado um quadro (físico ou digital) para planejar e acompanhar as tarefas. As tarefas foram organizadas por funcionalidades na ordem em que o sistema seria utilizado, ou seja, começando pela funcionalidade de login e terminando na funcionalidade de gerar lista de compras e claro ao longo de todos os testes quando havia algum bug e/ou necessidade de alteração no codigo fui adicionando novos cards na lista de backlog.
+
+---------------
+-----SLIDE [FINALIZADO]
+---------------
+
+Pois bem, agora que já expliquei do que se trata o sistema, suas tecnologias, como foi desenvolvido e tal
+Vou rodar o sistema aqui para gente ver ele funcionando...
+
+[SCRIPT DE APRESENTACAO]
+
+*USAR MICROSOFT EDGE
+*LINK: http://localhost:4200/login
+
+1 - Criar usuário
+Nome: Gabriel Sousa
+Email: gabriel.sousa@uva.br
+Nome de Usuário: gabrielsousa
+Senha: 123456
+------------------------
+2 - Cadastrar ingredientes
+Nome: Queijo Muçarela
+Nome: Queijo Minas
+Nome: Sachê de tempero pronto de carne
+(tentar cadastrar ovo para aparecer duplicidade)
+------------------------
+3 - Criar receita
+Nome: Omelete de queijo com presunto
+Categoria: Lanches
+Descrição: Receita de omelete rápido e prático que leva ingredientes simples no recheio: queijo, presunto, tomate e cebola.
+------------------------
+3.1 - Receita Ingrediente:
+6 ovos
+200 gramas de presunto
+100 gramas de queijo muçarela
+100 gramas de queijo minas
+1 tomate
+1 cebola
+1 sachê de tempero pronto de carne
+3,5 gramas de sal
+1 pimenta-do-reino
+1 coentro
+
+3.2 - Modo de Preparo
+1 - Bata os ovos em uma vasilha e acrescente todos os ingredientes picados.
+2 - Use a quantidade de sal e pimenta-do-reino que achar necessária.
+3 - Em uma panela quente, acrescente um fio de óleo e coloque um pouco da mistura, espalhando por toda a frigideira.
+4 - Frite os dois lados e boa apetite.
+
+FONTE: https://receitas.globo.com/omelete-de-queijo-com-presunto-511d55154d09381f8d000044.ghtml
+
+------------------------
+4 - Cardapio Semanal
+(quais receitas selecionar?)
+(selecionar uma receita secundaria spaghetti/frango?)
+------------------------
+5 - gerar lista de compras
 
 ---------------
 -----SLIDE
 ---------------
 Trabalhos Futuros
-Usabilidade
-Combobox com pesquisa ingrediente
-Visualização da receita (ingredientes, quantidades e modo preparo)
-Lembrar senha
-Recuperar senha
-Compartilhar PDF no WhatsApp
 
-Smartphone (Android e iOS)
-Testes Unitarios JUnit
+[USABILIDADE]
 
+1- Combobox com pesquisa de ingrediente
+Implementar na combobox de ingredientes a função de pesquisar e ao ir digitando o nome do ingrediente encurtando a lista da combobox para assim agilizar a procura dos ingredientes para receita.
+
+2 - Tela de visualização da receita completa
+Adicionar uma tela de visualização da receita completa contendo além das informações da receita, seus ingredientes e quantidades e seu modo de preparo para melhor experiência do usuário;
+
+3 - Compartilhar a lista de compras no WhatsApp
+Implementar feature de compartilhar o PDF da lista de compras gerada para aplicativos como: WhatsApp, E-mail, Facebook e etc;
+
+[MELHORIAS]
+
+1- Controle de edição
+Desenvolver e implementar regras de negócios de permissão no que diz respeito a edição e exclusão das receitas, permitindo somente ao criador das mesmas executar tais funções. Estando disponível aos outros usuários apenas a visualização da receita.
+
+2 - Conversão das unidades de medida
+[[[[[[[[[ escrever aqui!!!!!!!! ]]]]]]]]]
+
+3 - Utilizar JUnit
+Implementar testes unitários usando JUnit para garantir um código mais limpo e confiável;
+
+[Disponibilizar Plataformas]
+Disponibilizar a aplicação para outras plataformas no caso os sistemas android e iOS dos smartphones.
+
+(*opcional comentar)
+Adicionar novas features referentes a tela de login, como: Recurso de lembrar senha (mantendo o usuário logado mesmo se fechar o navegador) e recuperar senha (uma forma de recuperar a senha utilizando o e-mail de cadastro);
 
 ---------------
------SLIDE
+-----SLIDE [REVISAR]
 --------------
 Desafios e Aprendizados
+<pegar da documentacao MAIS RESUMIR>
 apredendo angular (rotas/componentização/vscode/typescript)
 relembrando coisas do java/springboot/spring security/spring data jpa
+
+Desenvolver esse sistema me possibilitou a oportunidade de reconsiderar o desenvolvimento tradicional (que muitas vezes se torna automatico, seja em um trabalho academico ou até mesmo na criação de um software no trabalho), eu pude trasformar esse meu produto final em algo que gostaria de usar diariamente para facilitar as minhas compras como é o caso desse sistema. Com certeza há inúmeras funcionalidades e melhorias além das apresentadas anterioremente que eu gostaria de desenvolver para o sistema futuramente, mas o aprendizado possibilitado tornou a minha experiência em algo muito valioso e crescente. 
+
+Com certaza eu posso dizer que alcancei o resultado que esperava, iniciei o projeto do zero e entreguei um produto. Uma das grandes dificuldades encontradas logo de início foi devido a estar realizando o trabalho de forma individual, portanto tive que assumir diversos papéis possíveis em uma equipe de desenvolvimento, ou seja, a função de analista de requisitos, analista de produto, analista de testes, arquiteto de sistema, designer, DBA e claro a minha favorita que é desenvolvedor.
+
+Também tive a oportunidade de trabalhar com o framework Angular que nunca tinha utilizado, e com isso fui capaz de aprender bastante sobre o funcionamento do framework que utiliza o Node.js como interpretador de JavaScript possibilitando assim utilizar JavaScript fora de um browser e em conjunto usa a linguagem de programação TypeScript (superset do JavaScript) para criar a interface com o usuário, no caso o front-end do sistema.
+
+Na parte do desenvolvimento back-end pude também relembrar diversos conceitos de programação orientada a objetos ao usar a linguagem de programação Java em conjunto com o framework excelente SpringBoot que reduziu bastante o tempo gasto com as configurações iniciais do Spring, além de utilizar a biblioteca Spring Security que ajuda a proteger o sistema web utilizando o protocolo de autorização OAuth2 e criptografia, também utilizei o Spring Data JPA para facilitar a comunicação e a persistência de dados com banco de dados, no caso MySQL que não tive grandes dificuldades com o banco devido já utilizar ele profissionalmente. Mas enfim fui capaz relembrar e consolidar diversos aprendizados ensinados durante todo período acadêmico na universidade, como gestão de projeto de software, arquitetura, modelagem do banco de dados e de UML.
 
 ---------------
 -----SLIDE FINAL
 --------------
+
+É isso, muito obrigado á todos!
 
 Obrigado !!

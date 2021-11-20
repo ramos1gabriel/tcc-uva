@@ -37,3 +37,5 @@ Descrição: Receita de omelete rápido e prático que leva ingredientes simples
 
 ------------------------
 4 - Cardapio Semanal
+(quais receitas selecionar?)
+(selecionar uma receita secundaria spaghetti/frango?)

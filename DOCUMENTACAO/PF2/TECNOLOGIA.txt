@@ -15,3 +15,11 @@ O SpringData é um projeto da SpringSource com proposta de unificar e facilitar 
 Java Persistence API é uma API padrão da linguagem Java que descreve uma interface comum para frameworks de persistência de dados.
 
 OAuth 2 é um protocolo de autorização que permite que uma aplicação se autentique em outra. 
+
+===========
+DEFESA
+===========
+fechado dia 06/12 (segunda-feira)
+de 18:30 às 20:20 (horario)
+20 min de apresentação para cada um (tempo de duração)
+mais 10 min banca
