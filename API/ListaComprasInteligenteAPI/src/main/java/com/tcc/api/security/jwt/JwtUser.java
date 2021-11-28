@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class JwtUser implements UserDetails {
 
 	/**
-	 * 
+	 * minha "entidade" do jwt
 	 */
 	private static final long serialVersionUID = 1L;
 	

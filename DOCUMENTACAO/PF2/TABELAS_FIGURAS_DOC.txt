@@ -1,6 +1,5 @@
-Tabela 1 – Visão do produto 13
-Tabela 2 – Partes interessadas 14
-Tabela 3 – Atores 14
+Tabela 1 – Visão do produto 12
+Tabela 3 – Atores 13
 Tabela 4 – RF01 – Realizar cadastro 16
 Tabela 5 – RF02– Efetuar login 16
 Tabela 6 – RF03 – Alterar dados cadastrais 16
@@ -40,12 +39,12 @@ Tabela 38 – RN17 – Calculo de conversão de unidade de medida 30
 Tabela 39 – RN18 – Lista de compras 30
 Tabela 40 – RN19 – Duplicidade cardápio semanal 30
 
-Tabela 41 – RNF01 – Usabilidade 31
-Tabela 42 – RNF02 – Tecnologia 31
-Tabela 43 – RNF03 – Segurança de acesso 31
-Tabela 44 – RNF04 – Ambiente 31
-Tabela 45 - Dicionário de dados 34
-Tabela 46 – Gráfico das demandas no Trello 36
+Tabela 40 – RNF01 – Usabilidade 31
+Tabela 41 – RNF02 – Tecnologia 31
+Tabela 42 – RNF03 – Segurança de acesso 31
+Tabela 43 – RNF04 – Ambiente 31
+Tabela 44 - Dicionário de dados 34
+Tabela 45 – Gráfico das demandas no Trello 36
 
 Figura 1 – Diagrama de caso de uso 15
 Figura 2 – Modelo de dados 32

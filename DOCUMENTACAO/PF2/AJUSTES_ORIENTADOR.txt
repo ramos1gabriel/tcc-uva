@@ -1,0 +1,71 @@
+REFAZER MODELO ARQUTITETURA
+
+- Spring Boot exporta REST Apis usando Spring Web MVC e interage com o banco de dados MySQL usando Spring Data JPA.
+- O Angular Client envia solicitações HTTP e recupera respostas HTTP usando o módulo HttpClient, mostra dados sobre os componentes. Também usamos o Roteador Angular para navegar nas páginas.
+--
+front-end - com Angular 11 como a estrutura principal, com modelos, componentes e cliente HTTP para comunicação com o servidor de aplicativos completo REST,
+back-end - lado do servidor com Spring Boot, Spring REST Controllers e Spring Data JPA para comunicação com o banco de dados,
+banco de dados - os dados enviados serão armazenados no banco de dados PostgreSQL.
+===
+Angular:
+Templates
+O Template (a parte da visualização que contém as ligações e a lógica de apresentação) atua como um modelo de como nossos dados devem ser organizados e apresentados ao usuário. O controlador fornece o contexto no qual as ligações são avaliadas e aplica o comportamento e a lógica ao nosso modelo.
+
+Components
+Como essa combinação (template + controlador) é um padrão comum e recorrente, o AngularJS oferece uma maneira fácil e concisa de combiná-los em entidades reutilizáveis ​​e isoladas, conhecidas como componentes . Além disso, o AngularJS criará um chamado escopo isolado para cada instância de nosso componente, o que significa nenhuma herança prototípica e nenhum risco de nosso componente afetar outras partes do aplicativo ou vice-versa.
+
+Sevices
+Service é o objeto usado para organizar e/ou compartilhar estados de objetos e as regras de negócio da aplicação. Ele é singleton, ou seja, há apenas uma instância disponível durante a vida útil da aplicação. Outra característica importante é a inicialização tardia (lazily instantiated), que só é efetuada quando o AngularJS identifica que tem algum componente dependente.
+
+HTTP Client = 
+
+Spring Boot:
+Spring REST Controller
+Anotação Spring RestController é usada para criar serviços da web RESTful usando Spring MVC. Spring RestController se encarrega de mapear os dados da solicitação para o método de manipulador de solicitação definido. Depois que o corpo da resposta é gerado a partir do método do manipulador, ele o converte em resposta JSON ou XML.
+
+Services
+Os Services são responsáveis pela lógica de negócio da sua aplicação, além de ser responsável por se comunicar com as camadas mais internas do Software, como por exemplo, uma camada de Dados.
+
+Model
+A camada Model (modelo) representa a parte de sua aplicação que implementa a lógica do negócio. Isto significa que ela é responsável por obter os dados convertendo-os em conceitos significativos para sua aplicação, assim como, processar, validar, associar e qualquer outra tarefa relativa ao tratamento dos dados.
+
+Spring Data JPA
+
+Database
+MySQL
+
+
+--FONTES
+https://frontbackend.com/spring-boot/angular-11-spring-boot-2-postgresql
+https://www.bezkoder.com/angular-11-spring-boot-crud/
+
+(não usar)
+https://frontbackend.com/spring-boot/spring-boot-2-angular-11-download-file
+https://dev.to/ozenero/angular-11-spring-boot-postgresql-crud-example-3bhn
+
+
+
+----------------------------
+TESTES
+(usar cenarios de testes???) *SE BASEAR NA DOCUMENTACAO gestao_espacos_coletivos
+
+cadastro de novo usuario x
+efetuar login usuário x
+efetuar logout usuário x
+alterar dados cadastrais x
+
+cadastrar ingredientes x
+listar ingredientes x
+
+cadastrar receitas x
+cadastrar receita ingrediente x
+cadastrar modo preparo x
+listar receitas x
+
+planejar cardapio semanal x
+listar cardapio semanal x
+
+gerar lista de compras
+
+
+–

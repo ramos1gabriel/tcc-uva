@@ -1,12 +1,12 @@
 CSU01 - Realizar cadastro [x]
 CSU02 - Efetuar login [x]
 CSU03 - Alterar dados cadastrais [x]
-CSU04 - Manter ingrediente [x]
-CSU05 - Manter receita [x]
-CSU06 - Manter receita ingrediente
-CSU07 - Manter modo preparo
-CSU08 - Planejar cardápio semanal
-CSU09 - Gerar lista de compras
+CSU04 - Manter ingrediente [xx]
+CSU05 - Manter receita [xx]
+CSU06 - Manter receita ingrediente [x]
+CSU07 - Manter modo preparo [x]
+CSU08 - Planejar cardápio semanal [xx]
+CSU09 - Gerar lista de compras [] *precisa centralizar o botão imprimir
 ==============
 RF01 - Realizar cadastro
 RF02 - Efetuar login

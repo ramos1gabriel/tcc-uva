@@ -4,23 +4,31 @@
 </div>
 
 <section class="invoice" *ngIf="!mensagem">
-	<div class="row">
+
+	<div class="row" style="text-align:center">
 		<div class="col-xs-12">
 			<h2 class="page-header">
         <img src="assets/img/logo-lista.png" height="250" alt="Logo" id="logo" title="Logo" class="margin"><br>
-				<h4 class="pull-left">Cardápio criado em: <b>{{ listCompras[0].dataCriacao  | date: 'dd/MM/yyyy' }}</b></h4>
-        <a data-toggle="tooltip" title="É possivel alterar a ordem dos itens arrastando e soltando e risca-los clicando na checkbox ao lado do mesmo." class="no-print">
-          <i class="fa fa-question-circle"></i>
-        </a>
+				<h4>Cardápio criado em: <b>{{ listCompras[0].dataCriacao  | date: 'dd/MM/yyyy' }}</b>&nbsp;
+          <a data-toggle="tooltip" title="É possivel alterar a ordem dos itens arrastando e soltando e risca-los clicando na checkbox ao lado do item." class="no-print">
+            <i class="fa fa-question-circle"></i>
+          </a>
+        </h4>
 			</h2>
 		</div>
 	</div>
 
 	<div class="row no-print">
+    <div class="col-xs-4">
+      &nbsp;
+		</div>
 		<div class="col-xs-4">
 			<button type="button" class="btn btn-block btn-primary btn-lg noPrint" onclick="window.print();" title="Imprimir">
         <i class="fa fa-print"></i>&nbsp;Imprimir
       </button>
+		</div>
+    <div class="col-xs-4">
+      &nbsp;
 		</div>
 	</div>
 
@@ -31,11 +39,11 @@
   </div>
 
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-xs-12" align="center">
 			<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let compra of listCompras; let i = index" cdkDrag title="Segure e arraste para mudar ordem desse item">
           <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-          <input type="checkbox" (change)="riscaItem($event.target.checked, i);" class="form-check-input" id="checkbox{{i}}" title="Riscar item da lista">
+          <input type="checkbox" (change)="riscaItem($event.target.checked, i);" class="form-check-input noPrint" id="checkbox{{i}}" title="Riscar item da lista">
           &nbsp;<span id="item{{i}}">{{compra.item}}</span>
         </div>
       </div>

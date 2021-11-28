@@ -7,8 +7,10 @@ SELECT * FROM cardapioSemanal;
 -- USUARIOS
 SELECT * FROM usuario;
 
+DELETE FROM usuario WHERE id = 8;
+
 -- INGREDIENTES
-SELECT * FROM ingrediente where NOME like 'AZEITE';
+SELECT * FROM ingrediente where NOME like '%água%';
 
 -- RECEITAS
 SELECT * FROM receita where ID = 10;

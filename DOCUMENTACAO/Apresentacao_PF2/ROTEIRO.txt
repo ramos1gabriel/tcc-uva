@@ -45,50 +45,44 @@ Por fim, mais não menos importante temos que pensar no consumo sustentável. Qu
 Também é legal comentar que ao montar um cardápio facilita e qualifica a sua lista de compras, pois você irá considerar o que precisa para um determinado período e terá a oportunidade de realizar as escolhas de alimentações mais saudaveis.
 
 ---------------
------SLIDE
+-----SLIDE [FINALIZADO]
 ---------------
-*salientar que o node.js não é front-end!!!
 Tecnologias
 
-*node.js* = interpretador de js (utilizar fora do browser)
-*angular* = framework
-*typescript* =  linguagem de programação (superset de JavaScript)
-================
+Eu fiz uma divisão aqui de todas as tecnologias e ferramentas que utilizei para desenvolver o sistema, começando pelo:
 
-spring boot = framework (utiliza o spring)
+==
+FRONT-END
 
-O Spring Boot é um framework Java reduzir o tempo gasto com as configurações iniciais
+- Bootstrap - que é um framework web que é uam mão na roda ali na hora de criar o front-end para aplicações web.
 
+- Framework Angular para construção da interface de aplicações usando HTML, CSS e, principalmente, JavaScript. Seu foco é em aplicações web e front-end, baseadas em TypeScript.
 
-Spring Security: uma biblioteca que ajuda a proteger, por exemplo, seu aplicativo da web com OAuth2 ou Basic Auth.
+Ele possui alguns elementos básicos que tornam essa construção bem interessante. Dentre os principais, podemos destacar os componentes, templates, diretivas, roteamento, módulos, serviços, injeção de dependências;
 
-O SpringData é um projeto da SpringSource com proposta de unificar e facilitar o acesso a diferentes tecnologias de armazenamento de dados, como bancos de dados relacionais e os NoSQL.
+Usei também a linguagem de programação TypeScript (superset de JavaScript).
 
-Java Persistence API é uma API padrão da linguagem Java que descreve uma interface comum para frameworks de persistência de dados.
+*Eu destaquei em vermelho ali o node, pq no caso ele não seria uma tecnologia front-end, mas no caso aqui eu só coloquei ele, pq o angular usa ele como plataforma para interpretar de javascript.
 
-OAuth 2 é um protocolo de autorização que permite que uma aplicação se autentique em outra. 
+==
+BACK-END
+Como linguagem de programação o Java 8 (Umas das linguagens mais utilizadas no mundo e é a linguagem com que eu tenho mais familiaridade)
 
-Backend:
-Java
-Umas das linguagens mais utilizadas no mundo.
+Junto com o framework Spring Boot que ajuda a reduzir o tempo gasto com as configurações iniciais e em poucos minutos já tem um projeto todo configurado.
 
-Springboot
-Se diferencia dos conjuntos de softwares concorrentes devido ao seu tamanho, contendo inúmeros módulos prontos para se integrar aos diferentes tipos de serviços e plataformas a serem utilizados.
+Do ecosistema Spring, usei o SpringData que ajuda a unificar e facilitar o acesso a diferentes tecnologias de armazenamento de dados(nesse projeto foi banco MySQL).
 
-spring data
-spring security
+Também usei o modulo do Spring Security que ajuda a proteger o aplicativo da web implementando o protocolo de autorização OAuth 2 que permite que uma aplicação se autentique em outra (nesse caso quando eu faço login na aplicação eu gero um token utilizando JWT(Jason Web Token).
 
-Frontend:
-Angular
-Lançado pelo Google em 2012, inicialmente na sua versão JavaScript, tornou-se rapidamente umdos mais populares por facilitar o desenvolvimento de aplicações, alinhando componentes a padrões de projeto,como injeção de dependências, e arquitetura MVC.
+==
+FERAMENTAS:
+Git - Controle de Versão
+Github - Plataforma web para disponivibilizar meu codigo.
+VSCode - O Visual Studio Code é um editor da Microsoft que usei para parte do Angular;
+Spring Tools - Que um versão da IDE do Eclípse modificada pelo pessoal do spring que usei para parte do Java.
 
-Bootstrap
-Framework para o desenvolvimento de sites responsivos e mobile, criado originalmente no Twitter em 2010.
-
-typescript (javascript)
-
-MySQL
-[descrição]
+GESTÃO: Trello - Como a ferramenta de gestão do projeto
+BANCO DE DADOS: MySQL - banco de dados relacional
 
 ---------------
 -----SLIDE [FINALIZADO]
@@ -150,18 +144,18 @@ Nome: Gabriel Sousa
 Email: gabriel.sousa@uva.br
 Nome de Usuário: gabrielsousa
 Senha: 123456
-------------------------
+==
 2 - Cadastrar ingredientes
 Nome: Queijo Muçarela
 Nome: Queijo Minas
 Nome: Sachê de tempero pronto de carne
 (tentar cadastrar ovo para aparecer duplicidade)
-------------------------
+==
 3 - Criar receita
 Nome: Omelete de queijo com presunto
 Categoria: Lanches
 Descrição: Receita de omelete rápido e prático que leva ingredientes simples no recheio: queijo, presunto, tomate e cebola.
-------------------------
+==
 3.1 - Receita Ingrediente:
 6 ovos
 200 gramas de presunto
@@ -182,15 +176,15 @@ Descrição: Receita de omelete rápido e prático que leva ingredientes simples
 
 FONTE: https://receitas.globo.com/omelete-de-queijo-com-presunto-511d55154d09381f8d000044.ghtml
 
-------------------------
+==
 4 - Cardapio Semanal
 (quais receitas selecionar?)
 (selecionar uma receita secundaria spaghetti/frango?)
-------------------------
+==
 5 - gerar lista de compras
 
 ---------------
------SLIDE
+-----SLIDE [FINALIZADO]
 ---------------
 Trabalhos Futuros
 
@@ -208,16 +202,16 @@ Implementar feature de compartilhar o PDF da lista de compras gerada para aplica
 [MELHORIAS]
 
 1- Controle de edição
-Desenvolver e implementar regras de negócios de permissão no que diz respeito a edição e exclusão das receitas, permitindo somente ao criador das mesmas executar tais funções. Estando disponível aos outros usuários apenas a visualização da receita.
+Desenvolver e implementar regras de negócios de permissão no que diz respeito a edição e exclusão das receitas, ou seja, permitir somente ao criador das receita excluir ou edita-la. Estando disponível aos outros usuários apenas a visualização da receita.
 
-2 - Conversão das unidades de medida
-[[[[[[[[[ escrever aqui!!!!!!!! ]]]]]]]]]
+2-Conversor de medidas culinárias
+Esse melhoria seria para repensar e criar um padrão de medidas culinárias que apos muitas pesquisas que eu fiz atras de receitas na internet e tal. Tem muitas variações dessas medidas, por exemplo, no sistema hoje eu escolhi eu tenho a opção de colher(que equivale 15ml), mas existem diversas outras variações da colher de chá, colher de sobremesa, colher de sopa e etc. E em especial uma que eu pensei muito como poderia adaptar e a medida entre aspas "a gosto"...
 
 3 - Utilizar JUnit
 Implementar testes unitários usando JUnit para garantir um código mais limpo e confiável;
 
 [Disponibilizar Plataformas]
-Disponibilizar a aplicação para outras plataformas no caso os sistemas android e iOS dos smartphones.
+Disponibilizar a aplicação para outras plataformas no caso os sistemas android e iOS.
 
 (*opcional comentar)
 Adicionar novas features referentes a tela de login, como: Recurso de lembrar senha (mantendo o usuário logado mesmo se fechar o navegador) e recuperar senha (uma forma de recuperar a senha utilizando o e-mail de cadastro);

@@ -15,7 +15,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class ReceitaListComponent implements OnInit {
   page : number = 0;
-  count : number = 5;
+  count : number = 10;
   pages : Array<number>;
   firstPage : number = 0;
   lastPage : number;

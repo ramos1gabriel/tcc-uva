@@ -21,6 +21,8 @@ import org.springframework.stereotype.Component;
 Os navegadores possuem uma segurança que não permitem arquivos javascript acessarem serviços externos via
 http, os chamados CORS (Cross-Origin Resource Sharing). Se tentarmos acessar um serviço sem habilitá-lo,
 nos deparamos com a seguinte mensagem:
+
+FONTE: https://medium.com/@adrianonegrao/habilitar-cors-para-acessar-servi%C3%A7os-rest-e6a3a11db182
 */
 
 @Component
