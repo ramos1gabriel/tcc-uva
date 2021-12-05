@@ -40,7 +40,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
 
-            <a [routerLink]="['/']" class="dropdown-toggle" title="Voltar para home">
+            <a [routerLink]="['/']" class="dropdown-toggle" title="Voltar para p&aacute;gina inicial">
               <img src="assets\img\chef{{ shared.user.imagem }}.png" class="user-image" alt="Perfil" title="Perfil">
               <span class="hidden-xs">{{ shared.user.nome }}</span>
             </a>
@@ -82,7 +82,7 @@
 
           <!-- SAIR -->
           <li>
-            <a href="#" id="logout-confirm" title="Sair" (click)="signOut();"><i class="fa fa-sign-out"></i></a>
+            <a href="javascript:void(0);" id="logout-confirm" title="Sair" (click)="signOut();"><i class="fa fa-sign-out"></i></a>
           </li>
 
         </ul>

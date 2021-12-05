@@ -1,6 +1,7 @@
 import { SharedService } from './../../services/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user.model';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 
@@ -13,7 +14,9 @@ export class HeaderComponent implements OnInit {
 
   public shared : SharedService;
 
-  constructor() {
+  constructor(
+    private spinner: NgxSpinnerService
+  ) {
     this.shared = SharedService.getInstance();
     this.shared.user = new User('', '', '', '', '', '1');
   }
@@ -22,6 +25,7 @@ export class HeaderComponent implements OnInit {
   }
 
   signOut() : void {
+    this.spinner.show();
     this.shared.token = null;
     this.shared.user = null;
     window.location.href = '/login';
