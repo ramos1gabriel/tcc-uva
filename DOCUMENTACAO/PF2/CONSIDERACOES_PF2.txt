@@ -1,0 +1,23 @@
+CLAUDIO
+melhorar validação duplicidade no cadastro no ingrediente (se cadastrar ingrediente como "trigo" e dps "trigo2" vai bagunçar a banco); [x]
+modo de preparo deveria se na mesma tabela de receita; [não posso alterar isso na documentação!!]
+
+PAULO
+adicionar na documentação os criterios da pesquisa e aplicativos concorrentes; [x]
+seção "trabalhos relacionados" colocar a lacuna na documentação; [x]
+colocar referencias do pé de galinha James Martin; [x]
+repensar flexibilidade quantidade almoço e jantar; (trabalhos futuros) [x]
+quantidade receitas para cardapio semanal, utilizar 2 ou mais receitas; (trabalhos futuros) [x]
+copiar uma receita que já existe; (trabalhos futuros) [x]
+tornar receita publica(?); (trabalhos futuros) [já tem]
+submeter para usuarios testarem sistema; [x]
+
+====================
+RESULTADO: 
+====================
+APROVADO = 9,5
+====================
+
+*não precisa colocar coisa muito grande*
+justificativa | metodo de pesquisa | aplicacoes semelhantes | melhorias futuras
+Postar no CANVAS (ppt+pdf) = 10/12/2021

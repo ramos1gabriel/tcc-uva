@@ -9,7 +9,7 @@ Layout=AdminLTE (colorlib)
 -----SLIDE 1 [CAPA]
 ---------------
 
-BOA NOITES A TODOS, MEU NOME É GABRIEL E EU O MEU PROJETO É A APLICAÇÃO LISTA DE COMPRAS INTELIGENTE
+Boa noites a todos, meu nome é Gabriel e o meu projeto é LISTA DE COMPRAS INTELIGENTE
 
 ---------------
 -----SLIDE 2
@@ -17,15 +17,15 @@ BOA NOITES A TODOS, MEU NOME É GABRIEL E EU O MEU PROJETO É A APLICAÇÃO LIST
 
 O que é a Lista de Compras Inteligente?
 
-Pois bem, de forma resumida, trata-se de um serviço que possibilita ao usuário cadastrar suas receitas, e com essas receitas montar um cardápio semanal e ao final gerar uma lista de compras com todos os ingredientes que serão necessários para o preparo das receitas contidas no cardápio para a semana inteira.
+Pois bem, de forma resumida, trata-se de um serviço que possibilita ao usuário cadastrar suas receitas, e com essas receitas montar um cardápio semanal e ao final gerar uma lista de compras com todos os ingredientes que serão necessários para o preparo das refeições contidas no cardápio para a semana inteira.
 
-Nesse sistema o usuario devera criar uma conta para acesso-lo;
+Nesse sistema o usuario deverá criar uma conta para acesso-lo;
 
 Com a conta criada ele pode registrar os ingredientes que precisará utilizar nas futuras receitas;
 
 Cadastrar as suas receitas (informando quais dos ingredientes já cadastrados irá utilizar e sua devida quantidade e também o modo de preparo da receita)
 
-Poderá planejar um cardápio semanal com essas receitas  previamente cadastradas;
+Poderá montar um cardápio semanal(de segunda a sexta) com essas receitas  previamente cadastradas;
 
 E claro, gerar um lista de compras do cardápio semanal desejado;
 
@@ -36,11 +36,11 @@ Motivação
 
 Diversas pessoas já se encontram na situação de ir ao mercado comprar os ingredientes para o preparo de alguma refeição seja ela almoço, jantar, até mesmo um lanche ou sobremesa e quando chega em casa lembra que faltou comprar algo ou até mesmo não comprou porque não sabia que precisava do ingrediente para a receita e sabemos que com as diversas responsabilidade diárias, temos cada vez menos tempo de ficar indo ao mercado diversas vezes, até mesmo pelo gasto exagerado quando acabamos não comprando algo ou pior compramos em excesso e acabamos tendo que jogar os alimentos fora, seja por serem perecíveis como frutas, legumes ou por data de validade vencida.
 
-Conforme descrevi no slide ao realizar uma pesquisa de serviços similares ao do meu projeto encontrei diversas aplicações e sites que disponibilizam receitas, porém sua grande maioria não possui nenhuma forma de exportar os dados como lista de compras. 
+Conforme descrevi no slide ao realizar uma pesquisa de serviços similares encontrei diversas aplicações e sites que disponibilizam receitas, porém sua grande maioria não possui nenhuma forma de exportar os dados como lista de compras. 
 
-Em outros casos, as receitas estão vinculadas a marca como, por exemplo no site da Nestle onde só era possivel gerar uma lista de compras de receitas exclusivas da Nestle.
+Em outros casos, as receitas estão vinculadas a marca como, por exemplo no site da Nestle onde só era possivel gerar uma lista de compras de receitas exclusivas da Nestlé.
 
-E também durante toda minha pesquisa entre aplicativos de smartphone que ajudam a montar cardapios semanais para uma dieta balanciada ou lista de compras, não me deparei com nenhum que possua a proposta de otimizar todas as receitas em uma única lista de compras.
+Além disso não me deparei com nenhuma que possua a proposta de otimizar todas as receitas em uma única lista de compras.
 
 ---------------
 -----SLIDE 4
@@ -51,18 +51,13 @@ Por quê utilizar a Lista de Compras Inteligente?
 
 [Otimizar seu tempo no supermercado]
 Hoje em dia o tempo é algo extremamente valioso. Então, economizá-lo com a ida ao mercado se tornou uma prioridade também. 
-Ir às compras sem saber exatamente o que comprar ou o que tem na sua despensa, tornasse um grande problema. Com a LISTA DE COMPRAS INTELIGENTE, além de sabermos exatamente o que comprar também, também evitaremos futuras idas desnecessárias ao mercado, caso tenha esquecido de comprar tal produto ou até mesmo como eu comentei anteriormente não sabia que precisava de tal ingrediente e tantos outros casos...
+Ir às compras sem saber exatamente o que comprar ou o que tem na sua despensa, tornasse um grande problema. Com a LISTA DE COMPRAS INTELIGENTE, além de sabermos exatamente o que comprar também, também evitaremos futuras idas desnecessárias ao mercado.
 
 [Evitar gastos extras]
 E além do desperdicio de tempo, temos também o financeiro, pois com a lista em mãos, você consegue fazer uma pesquisa de preços e comprar o que está mais em conta. Também é possivel aproveite as ofertas de diversos estabelecimentos e reduza o valor da fatura no final do mês.
-E também quando a gente não sabe exatamente o que comprar acabamos levando alguma besteira, uma barra de chocolate ou um pote de sorvete que você viu que tava na promoção e etc... Eu sempre acabo fazendo isso.. *risos*
 
 [Evitar desperdício de alimentos]
-Por fim, mais não menos importante temos que pensar no consumo sustentável. Quando se tem uma lista de compras, é possivel visualizar melhor a quantidade que vai precisar de cada produto, evitando assim o desperdício e aproveitando melhor tudo que foi comprado que é um dos objetivos do meu projeto, otimizar ao maximo todas as refeições que vão ser feitas durante a semana e gerar uma lista de compras precisa de todos os ingredientes.
-
-*OPCIONAL
-Também é legal comentar que ao montar um cardápio facilita e qualifica a sua lista de compras, pois você irá considerar o que precisa para um determinado período e terá a oportunidade de realizar as escolhas de alimentações mais saudaveis.
-
+Por fim, mais não menos importante temos que pensar no consumo sustentável. Quando se tem uma lista de compras, é possivel visualizar melhor a quantidade que vai precisar de cada produto, evitando assim o desperdício e aproveitando melhor tudo que foi comprado.
 ---------------
 -----SLIDE 5
 ---------------
@@ -154,11 +149,11 @@ MySQL (banco de dados relacional)
 *******************************
 
 ---------------
------SLIDE 7
+-----SLIDE 7 *NÃO LER!!
 ---------------
 Modelo de Dados
 
-Aqui temos uma representação de Modelo de Relacionamento de Entidade, utilizando a anotação Martin (ou pé de galinha como é mais conhecido), proposta por James Martin.
+Aqui temos uma representação de Modelo de Relacionamento de Entidade, utilizando a anotação Martin (ou pé de galinha como é mais conhecido)
 
 [MySQL]
 Conforme eu comentei anteriormente o banco de dados que eu utilizei foi  o MySQL que é um sistema gerenciador de banco de dados relacional de código aberto usado na maioria das aplicações gratuitas. Eu já possui familiaridade com o banco porque foi um dos primeiros que utilizei no trabalho.
@@ -280,15 +275,15 @@ Desafios e Aprendizados
 
 Desenvolver esse sistema do zero me possibilitou a oportunidade de reconsiderar o desenvolvimento tradicional que muitas vezes se torna automatico quando estamos no trabalho, eu pude trasformar esse meu produto final em algo que gostaria de usar diariamente para facilitar as minhas compras. 
 
-Com certeza há inúmeras funcionalidades e melhorias além das apresentadas que eu gostaria de desenvolver acrescentar futuramente, mas o aprendizado possibilitado tornou a minha experiência em algo muito valioso. 
+Com certeza há inúmeras funcionalidades e melhorias além das apresentadas que eu gostaria de acrescentar futuramente, mas o aprendizado possibilitado tornou a minha experiência em algo muito valioso e gratificante. 
 
 Uma das grandes dificuldades encontradas logo de início foi devido a estar realizando o trabalho de forma individual, portanto tive que ser uma equipe de um "homem só", ou seja, assumi a função de analista de requisitos, analista de produto, analista de testes, arquiteto de sistema, designer, DBA e claro a minha favorita que é desenvolvedor.
 
 Também tive a oportunidade de trabalhar com o framework Angular que nunca tinha utilizado, e com isso fui capaz de aprender bastante sobre o funcionamento do framework que utiliza o Node.js como interpretador de JavaScript e em conjunto usa a linguagem de programação TypeScript para criar a interface com o usuário, no caso o front-end.
 
-Na parte do desenvolvimento back-end pude também relembrar diversos conceitos de programação orientada a objetos ao usando o Java em conjunto com um dos meus framework favoritos que o SpringBoot que agiliza demais na hora das configurações inciais do projeto, além de poder utilizar as bibliotecas do ecosistema do spring como o Spring Security e Spring Data JPA e no caso do banco MySQL não tive grandes dificuldades com ele, pois já utilizo ele profissionalmente. 
+Na parte do desenvolvimento back-end pude também relembrar diversos conceitos de programação orientada a objetos ao usando o Java em conjunto com um dos meus framework favoritos que o SpringBoot que agiliza demais na hora das configurações inciais do projeto, além de poder utilizar as bibliotecas do ecosistema do spring como o Spring Security e Spring Data JPA e no caso do banco MySQL. 
 
-Mas enfim, fui capaz relembrar e consolidar diversos aprendizados ensinados durante todo período acadêmico na universidade, como gestão de projeto de software, arquitetura, modelagem do banco de dados e de UML.
+Mas enfim, fui capaz relembrar e utilizar diversos aprendizados ensinados durante todo período acadêmico na universidade.
 
 ---------------
 -----SLIDE 12 [FINAL]
