@@ -104,16 +104,16 @@ ng serve
 ## Layout
 - **AdminLTE v2.4.5**
 - **Author:** Almsaeed Studio
-- **Website:** <https://adminlte.io>
+- **Website:** [adminlte.io](https://adminlte.io)
 - **License:** [Open source - MIT](http://opensource.org/licenses/MIT)
 
 ## Fonte/Icones
-- *Font Awesome* https://fontawesome.com/icons?d=gallery
+- [Font Awesome](https://fontawesome.com/icons?d=gallery)
 
 ## Bibliotecas Angular:
-- **SweetAlert** https://sweetalert.js.org/docs/
-- **NgxSpinner** https://napster2210.github.io/ngx-spinner/
+- [SweetAlert](https://sweetalert.js.org/docs/)
+- [NgxSpinner](https://napster2210.github.io/ngx-spinner/)
 
 ## Imagens:
-- **Imagens do perfil** https://www.flaticon.com/packs/cooking-14
-- **Imagens do cardápio semanal** https://www.flaticon.com/packs/take-away-22
+- [Imagens do perfil (flaticon)](https://www.flaticon.com/packs/cooking-14/)
+- [Imagens do cardápio semanal (flaticon)](https://www.flaticon.com/packs/take-away-22/)
