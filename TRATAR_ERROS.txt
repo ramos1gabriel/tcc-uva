@@ -1,4 +1,5 @@
-ERROS POSSIVEIS NO ANGULAR:
+TRATAR POSSIVEIS ERROS NO ANGULAR:
+
 ERRO: Could not find module “@angular-devkit/build-angular”
 TRATAMENTO: deletar pasta node_modules e usar comando "npm update"
 

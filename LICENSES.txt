@@ -16,7 +16,6 @@ https://getbootstrap.com/docs/4.0/components/alerts/
 --------------------
 BIBLIOTECAS ANGULAR:
 --------------------
-
 SweetAlert
 https://sweetalert.js.org/docs/
 
@@ -26,7 +25,6 @@ https://napster2210.github.io/ngx-spinner/
 --------------------
 IMAGENS:
 --------------------
-
 ICONE PERFIL:
 https://www.flaticon.com/packs/cooking-14
 

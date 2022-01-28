@@ -1,14 +1,14 @@
 Massa de teste BD:
-
+SCRIPTS\SCRIPT_FIT_COMPLETO_2021.sql
 -----------------------------------------
 Requests do serviços (Postman):
 SCRIPTS\TCC.postman_collection.json
 -----------------------------------------
 Back-end: Java 8
-- Usar STS4(Spring Tool Suite 4)
+- Eclipse/STS4
 -----------------------------------------
 Front-end: Angular 7
-- Usar VSCode(Visual Studio Code) usar comando "ng serve" para subir
+- VSCode(Visual Studio Code) usar comando "ng serve" para subir
 -----------------------------------------
 PROGRAMAS NECESSARIOS:
 -----------------------------------------
@@ -30,6 +30,5 @@ MySQL Workbench (para gerar o MER)
 
 Testes:
 Postman
-
 
 *TODOS ARQUIVOS DEVEM ESTAR NO GITHUB "tcc-uva"
