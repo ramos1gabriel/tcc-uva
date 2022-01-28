@@ -93,10 +93,10 @@ ng serve
 > Acesso via URL: http://localhost:4200/
 
 # Documentação
-- [Documentação do Projeto](DOCUMENTACAO\PF2\tcc_lista_compras_inteligente_v5.pdf)
-- [Diagramas UML](DOCUMENTACAO\UML\diagramas.asta) *(abrir com Astah Community)*
-- [Requests do serviços](SCRIPTS\TCC.postman_collection.json) *(abrir com Postman)*
-- [Massa de teste](SCRIPTS\SCRIPT_FIT_COMPLETO_2021.sql)
+- **Documentação do Projeto:** DOCUMENTACAO\PF2\tcc_lista_compras_inteligente_v5.pdf
+- **Diagramas UML:** DOCUMENTACAO\UML\diagramas.asta *(abrir com Astah Community)*
+- **Requests do serviços:** SCRIPTS\TCC.postman_collection.json *(abrir com Postman)*
+- **Massa de teste:** SCRIPTS\SCRIPT_FIT_COMPLETO_2021.sql
 
 
 # Licenses
