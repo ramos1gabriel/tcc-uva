@@ -93,33 +93,27 @@ ng serve
 > Acesso via URL: http://localhost:4200/
 
 # Documentação
-- **Documentação:** DOCUMENTACAO\PF2\tcc_lista_compras_inteligente_v5.pdf
-- **Diagramas UML:** DOCUMENTACAO\UML\diagramas.asta _(abrir com Astah Community)_
-- **Requests do serviços:** SCRIPTS\TCC.postman_collection.json _(abrir com Postman)_
-- **Massa de teste:** SCRIPTS\SCRIPT_FIT_COMPLETO_2021.sql
+- [Documentação do Projeto](DOCUMENTACAO\PF2\tcc_lista_compras_inteligente_v5.pdf)
+- [Diagramas UML](DOCUMENTACAO\UML\diagramas.asta) *(abrir com Astah Community)*
+- [Requests do serviços](SCRIPTS\TCC.postman_collection.json) *(abrir com Postman)*
+- [Massa de teste](SCRIPTS\SCRIPT_FIT_COMPLETO_2021.sql)
 
 
 # Licenses
 
 ## Layout
-**AdminLTE v2.4.5**
-**Author:** Almsaeed Studio
-**Website:** <https://adminlte.io>
-**License:** Open source - MIT
-Please visit http://opensource.org/licenses/MIT for more information
+- **AdminLTE v2.4.5**
+- **Author:** Almsaeed Studio
+- **Website:** <https://adminlte.io>
+- **License:** [Open source - MIT](http://opensource.org/licenses/MIT)
 
 ## Fonte/Icones
-*Font Awesome*
-https://fontawesome.com/icons?d=gallery
+- *Font Awesome* https://fontawesome.com/icons?d=gallery
 
 ## Bibliotecas Angular:
-**SweetAlert**
-https://sweetalert.js.org/docs/
-**NgxSpinner**
-https://napster2210.github.io/ngx-spinner/
+- **SweetAlert** https://sweetalert.js.org/docs/
+- **NgxSpinner** https://napster2210.github.io/ngx-spinner/
 
 ## Imagens:
-**Imagens do perfil**
-https://www.flaticon.com/packs/cooking-14
-**Imagens do cardápio semanal**
-https://www.flaticon.com/packs/take-away-22
+- **Imagens do perfil** https://www.flaticon.com/packs/cooking-14
+- **Imagens do cardápio semanal** https://www.flaticon.com/packs/take-away-22
