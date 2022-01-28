@@ -29,7 +29,6 @@ export class ReceitaingredienteNewComponent implements OnInit {
   usuario = new User('', '', '', '', '', '');
   receita = new Receita('', '', '', '', this.usuario);
   ingrediente = new Ingrediente('', '');
-  //recing = new ReceitaIngrediente('', '', 0, '', this.receita, this.ingrediente);
 
   shared : SharedService;
   message: {};
@@ -68,17 +67,12 @@ export class ReceitaingredienteNewComponent implements OnInit {
     if(idReceita != undefined){
       this.idReceita = idReceita;
       this.findByIdReceita(this.idReceita);
-      //console.log('ID RECEITA = '+this.idReceita);
     }
 
     let modo : string = this.route.snapshot.params['edit'];
     if(modo == 'edit') {
       this.modo = modo;
       this.findByReceitaId(idReceita);
-
-      /*setTimeout(() => {
-        console.log(this.arrayReceitaIngredientes.length);
-      }, 1000);*/
     }
   }
 
@@ -165,7 +159,6 @@ export class ReceitaingredienteNewComponent implements OnInit {
     if(tamanhoIng > 1){
       if(this.modo == 'edit') {
         let id : string = this.ingredientes[i].id;
-        //console.log(this.ingredientes[i]);
         if(id != '' && id != 'undefined') {
           this.delete(id);
         }
@@ -208,28 +201,6 @@ export class ReceitaingredienteNewComponent implements OnInit {
     };
   }
 
-  //VALIDACOES
-  /*validaQuantidade() {
-    let count = 0;
-    let error = false;
-    for (var i = 0; this.ingredientes.length > i; i++) {
-      if(this.ingredientes[i].quantidade <= 0){
-        error = true;
-        count = i+1;
-        break;
-      }
-    }
-    
-    if(error){
-      this.showMessage({
-        type : 'error',
-        text : `Quantidade deve ser maior do que ZERO no ${count}º ingrediente`
-      });
-    }
-
-    return error;
-  }*/
-
   validaQtde(valor : any, posicao : number) {
     if(valor <= 0) {
       this.ingredientes[posicao].quantidade = 1;
@@ -237,7 +208,7 @@ export class ReceitaingredienteNewComponent implements OnInit {
         type : 'error',
         text : `Quantidade deve ser maior do que ZERO`
       });
-    } else if(valor > 10000) { //REVISAR ISSO DPS!!
+    } else if(valor > 10000) {
       this.ingredientes[posicao].quantidade = 10000;
       this.showMessage({
         type : 'error',
@@ -270,42 +241,30 @@ export class ReceitaingredienteNewComponent implements OnInit {
   //COMPLEXIDADE ALTA
   persistirArray() {
     this.arrayReceitaIngredientes = []; //limpa array
-    
-    //if(!this.validaQuantidade()){ //validacao
 
-      for (var i = 0; this.ingredientes.length > i; i++) {
-        //seta valores
-        let id : string = this.ingredientes[i].id;
-        let ingrediente : string = this.ingredientes[i].ingrediente;
-        let qtde : any = this.ingredientes[i].quantidade;
-        let unidade : string = this.ingredientes[i].unidadeMedida == '' ? 'UNI' : this.ingredientes[i].unidadeMedida;
-        
-        //seta externos
-        //let rec = new Receita(this.idReceita, '', '', '');
-        let ing = new Ingrediente(ingrediente, '');
-        let recingNovo = new ReceitaIngrediente(id, '', qtde, unidade, this.receita, ing);
+    for (var i = 0; this.ingredientes.length > i; i++) {
+      //seta valores
+      let id : string = this.ingredientes[i].id;
+      let ingrediente : string = this.ingredientes[i].ingrediente;
+      let qtde : any = this.ingredientes[i].quantidade;
+      let unidade : string = this.ingredientes[i].unidadeMedida == '' ? 'UNI' : this.ingredientes[i].unidadeMedida;
+      
+      //seta externos
+      let ing = new Ingrediente(ingrediente, '');
+      let recingNovo = new ReceitaIngrediente(id, '', qtde, unidade, this.receita, ing);
 
-        //add array
-        this.arrayReceitaIngredientes.push(recingNovo);
-      }
+      //add array
+      this.arrayReceitaIngredientes.push(recingNovo);
+    }
 
-      //persiste array
-      //console.log(this.arrayReceitaIngredientes);
-      this.save(this.arrayReceitaIngredientes);
-    //}
+    //persiste array
+    this.save(this.arrayReceitaIngredientes);
   }
 
   save(listRecIng : Array<ReceitaIngrediente>){
-    //console.log(JSON.stringify(listRecIng));
-    //this.ReceitaIngredienteService.createOrUpdateAll(listRecIng)
     this.message = null; //tratar bug mensagem vermelha vazia
     this.ReceitaIngredienteService.createOrUpdateAll(listRecIng).subscribe((responseApi : ResponseApi) => {
       let listRecIngRet : Array<ReceitaIngrediente> = responseApi.datas;
-      //this.form.resetForm();
-      /*this.showMessage({
-        type : 'success',
-        text : `Total de ${listRecIngRet.length} ingredientes cadastrados com sucesso!`
-      });*/
       this.limparTela();
       if(this.modo == 'edit') {
         this.router.navigate(['/modopreparo-new', this.idReceita, 'edit']);
@@ -334,7 +293,6 @@ export class ReceitaingredienteNewComponent implements OnInit {
   delete(id : string) {
     this.message = {};
     this.ReceitaIngredienteService.delete(id).subscribe((responseApi : ResponseApi) => {
-      //??
     }, err => {
       this.showMessage({
         type : 'error',

@@ -41,7 +41,6 @@ export class CardapioListComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    //this.findAll(this.page, this.count);
     this.findAllPesquisa(this.page, this.count);
   }
 
@@ -54,7 +53,6 @@ export class CardapioListComponent implements OnInit {
       this.listCardapio = responseApi['data']['content'];
       this.pages = new Array(responseApi['data']['totalPages']);
       this.lastPage = this.pages.length-1;
-      //this.spinner.hide();
     }, err => {
       this.showMessage({
         type : 'error',
@@ -171,7 +169,6 @@ export class CardapioListComponent implements OnInit {
     };
   }
 
-  //RUDIMENTAR
   preencheProgressBar() {
     for (let i = 0; i < this.listCardapio.length; i++) {
       let progress : number = 0;
@@ -185,23 +182,5 @@ export class CardapioListComponent implements OnInit {
 
   exportListaCompraToPdf(id : string) {
     this.router.navigate(['/listacompra-detail', id]);
-    /*this.spinner.show();
-    this.CardapioService.generateDocumentReport(id).pipe(finalize(() => this.spinner.hide())).subscribe(response => {
-      //console.log(response);
-      let url = window.URL.createObjectURL(response.data);
-      //window.open(url,'_blank');
-      let a = document.createElement('a');
-      document.body.appendChild(a);
-      a.setAttribute('style', 'display: none');
-      a.setAttribute('target', 'blank');
-      a.href = url;
-      a.download = response.filename;
-      a.click();
-      window.URL.revokeObjectURL(url);
-      a.remove();
-    }, error => {
-      console.log(error);
-    });
-    */
   }
 }

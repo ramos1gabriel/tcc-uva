@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.user).pipe(finalize(() => this.spinner.hide())).subscribe((userAuthentication : currentUser) => {
       this.shared.token = userAuthentication.token;
       this.shared.user = userAuthentication.user;
-      //this.shared.user.profile = this.shared.user.profile.substring(5);
       this.shared.showTemplate.emit(true);
       this.router.navigate(['/']);
 

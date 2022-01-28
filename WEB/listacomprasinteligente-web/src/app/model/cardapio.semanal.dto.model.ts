@@ -2,9 +2,6 @@ import { Receita } from './receita.model';
 
 export class CardapioSemanalDTO {
     constructor(
-        //public id: string,
-        //public dataCriacao : Date,
-
         public segundaCafe : Receita,
         public tercaCafe : Receita,
         public quartaCafe : Receita,

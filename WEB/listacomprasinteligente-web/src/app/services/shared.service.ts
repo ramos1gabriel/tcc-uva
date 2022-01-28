@@ -27,9 +27,5 @@ export class SharedService {
       return false;
     }
     return this.user.email != '';
-    /*if(sessionStorage.getItem("currentUser") == null){
-      return false;
-    }
-    return true;*/
   }
 }

@@ -7,9 +7,4 @@ export class User {
         public username : string,
         public imagem : string
     ){}
-
-    //TESTE F5
-    /**/public toString(){
-        return this.id+","+this.username+","+this.senha;
-    }
 }

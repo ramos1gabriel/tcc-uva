@@ -98,27 +98,6 @@ export class CardapioNewComponent implements OnInit {
     }
   }
 
-  /*calculaSemana() {
-    //pega dia da semana
-    var options = {  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-    let dataAtual = new Date(this.dataFinal).toLocaleTimeString('en-us', options);
-    let datas = dataAtual.split(',');
-    
-    let diaSemana = datas[0];
-    //console.log('dia da semana='+diaSemana);
-
-    //em caso de ser final de semana
-    if(diaSemana == 'Saturday') {
-      this.dataInicial.setDate(this.dataInicial.getDate() + 2);
-    } else if(diaSemana == 'Sunday') {
-      this.dataInicial.setDate(this.dataInicial.getDate() + 1);
-    }
-
-    this.dataFinal.setDate(this.dataInicial.getDate() + 5);
-
-    console.log('data inicial='+this.formataData(this.dataInicial));
-  }*/
-
   //INICIO MODAL
   openModal(template: TemplateRef<any>, id : number) {
     this.modalRef = this.modalService.show(template);
@@ -259,10 +238,7 @@ export class CardapioNewComponent implements OnInit {
   insertDtoToArray(diaRefeicao : string, rec: Receita) {
     var diaRef = diaRefeicao.split('-');
     let id : string = this.route.snapshot.params['id'];
-    //console.log(diaRef);
-    //console.log('id='+id);
     if(id != undefined) {
-      //console.log('entrou update!');
       let novoRegistro : boolean = true;
       for (var i = 0; this.arrayCardapioSemanal.length > i; i++) {
         let dr = this.arrayCardapioSemanal[i].diaSemana + '-' + this.arrayCardapioSemanal[i].tipoRefeicao;
@@ -275,7 +251,6 @@ export class CardapioNewComponent implements OnInit {
         this.arrayCardapioSemanal.push(new CardapioSemanal('', this.data, diaRef[1], diaRef[0], rec));
       }
     } else {
-      //console.log('entrou new!');
       this.arrayCardapioSemanal.push(new CardapioSemanal('', null, diaRef[1], diaRef[0], rec));
     }
   }
@@ -467,7 +442,6 @@ export class CardapioNewComponent implements OnInit {
   //GAMBIARRA
   setarCardapioDTO(receita : Receita, posicao : string) {
     var diaRefeicao = posicao.split('-');
-    //console.log(this.cardapiosDTO);
 
     //CAFE
     if(diaRefeicao[1] == 'cafe') {

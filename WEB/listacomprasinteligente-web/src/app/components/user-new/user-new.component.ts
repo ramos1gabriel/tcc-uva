@@ -70,7 +70,7 @@ export class UserNewComponent implements OnInit {
   private showMessage(message : {type : string, text : string}) : void {
     this.message = message;
     this.buildClasses(message.type);
-    setTimeout(() => { //LIMPA MENSAGEM
+    setTimeout(() => {
       this.message = undefined;
     }, 3000);
   }

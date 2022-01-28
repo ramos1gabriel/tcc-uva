@@ -99,8 +99,6 @@ export class ModopreparoNewComponent implements OnInit {
     if(this.validacaoFlags()) {
       this.message = null; //tratar bug mensagem vermelha vazia
       this.ModopreparoService.createOrUpdate(this.modopreparo).subscribe((responseApi : ResponseApi) => {
-        //this.modopreparo = new ModoPreparo('', false, false, false, '', '', '', this.receita);
-        //let modopreparoRet : ModoPreparo = responseApi.data;
         this.form.resetForm();
         this.showMessage({
           type : 'success',
@@ -119,7 +117,7 @@ export class ModopreparoNewComponent implements OnInit {
   private showMessage(message : {type : string, text : string}) : void {
     this.message = message;
     this.buildClasses(message.type);
-    setTimeout(() => { //LIMPA MENSAGEM
+    setTimeout(() => {
       this.message = undefined;
     }, 3000);
   }
@@ -170,7 +168,6 @@ export class ModopreparoNewComponent implements OnInit {
   //validar se todos estao checked, pelo menos 1 deve ser preenchido
 
   calculaCaracteresRestantes(valor : number) {
-    //console.log(evento.target.value.length);
     let maximo : number = 500;
     this.caracteres = maximo - valor;
   }

@@ -58,7 +58,6 @@ export class IngredienteNewComponent implements OnInit {
         type : 'success',
         text : `${ingredienteRet.nome} cadastrado com sucesso!`
       });
-      //window.location.href = '/login';
     }, err => {
       this.showMessage({
         type : 'error',
@@ -70,7 +69,7 @@ export class IngredienteNewComponent implements OnInit {
   private showMessage(message : {type : string, text : string}) : void {
     this.message = message;
     this.buildClasses(message.type);
-    setTimeout(() => { //LIMPA MENSAGEM
+    setTimeout(() => {
       this.message = undefined;
     }, 3000);
   }

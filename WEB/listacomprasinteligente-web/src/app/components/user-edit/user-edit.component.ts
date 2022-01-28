@@ -61,13 +61,11 @@ export class UserEditComponent implements OnInit {
     this.UserService.createOrUpdate(this.user).subscribe((responseApi : ResponseApi) => {
       this.user = new User('', '', '', '', '', '1');
       let userRet : User = responseApi.data;
-      //this.form.resetForm();
       this.showMessage({
         type : 'success',
         text : `Dados atualizados com sucesso`
       });
       this.shared.user = userRet; //atualizar imagens em outros componentes
-      //window.location.href = '/login';
       this.router.navigate(['/']);
     }, err => {
       this.showMessage({

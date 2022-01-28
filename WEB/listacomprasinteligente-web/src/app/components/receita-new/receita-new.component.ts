@@ -47,7 +47,6 @@ export class ReceitaNewComponent implements OnInit {
   findById(id : string) {
     this.ReceitaService.findById(id).subscribe((responseApi : ResponseApi) => {
       this.receita = responseApi.data;
-      //this.user.senha = '';
     }, err => {
       this.showMessage({
         type : 'error',
@@ -61,7 +60,6 @@ export class ReceitaNewComponent implements OnInit {
     this.usuario = new User(this.shared.user.id, '', '', '', '', '');
     this.receita.usuario = this.usuario;
     this.ReceitaService.createOrUpdate(this.receita).subscribe((responseApi : ResponseApi) => {
-      //this.usuario = new User(this.shared.user.id, '', '', '', '', '');
       this.receita = new Receita('', '', '', '', this.usuario);
       let receitaRet : Receita = responseApi.data;
       this.form.resetForm();
@@ -87,7 +85,7 @@ export class ReceitaNewComponent implements OnInit {
   private showMessage(message : {type : string, text : string}) : void {
     this.message = message;
     this.buildClasses(message.type);
-    setTimeout(() => { //LIMPA MENSAGEM
+    setTimeout(() => {
       this.message = undefined;
     }, 3000);
   }
