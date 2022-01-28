@@ -1,6 +1,6 @@
 1 - Criar usuário
 Nome: Gabriel Sousa
-Email: gabriel.sousa@uva.br
+Email: gabriel.sousa@email.br
 Nome de Usuário: gabrielsousa
 Senha: 123456
 ------------------------

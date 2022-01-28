@@ -35,7 +35,7 @@ bibliografia
 modelos da URL
 lituratura
 citar no texto
-"a seguir sera apresrentado um diagrama de modelo de classes (faluer,. 1209)"
+"a seguir sera apresentado um diagrama de modelo de classes (faluer,. 1209)"
 
 descricao textual
 linkar regra de negocio
