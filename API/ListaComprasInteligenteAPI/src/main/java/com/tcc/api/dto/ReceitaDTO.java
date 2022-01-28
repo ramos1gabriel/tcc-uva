@@ -2,21 +2,12 @@ package com.tcc.api.dto;
 
 import com.tcc.api.enums.CategoriaEnum;
 
-//@Entity
 public class ReceitaDTO {
 	
-	//@Id
 	private Long id;
-	
-	//@Column(name = "nome")
 	private String nome;
-	
-	//@Column(name = "categoria")
 	private CategoriaEnum categoria;
-	
-	//@Column(name = "quantidade")
 	private Integer quantidade;
-	
 	private String usuario;
 	
 	public ReceitaDTO() {}

@@ -4,6 +4,8 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -30,6 +32,8 @@ import com.tcc.api.service.UsuarioService;
 @CrossOrigin(origins="*")
 public class ModoPreparoController {
 	
+	private static final Logger LOG = LoggerFactory.getLogger(ModoPreparoController.class);
+	
 	@Autowired
 	private ModoPreparoService modopreparoService;
 	
@@ -40,9 +44,10 @@ public class ModoPreparoController {
 	private UsuarioService usuarioService;
 	
 	@PostMapping()
-//	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<ModoPreparo>> create(HttpServletRequest request, @RequestBody ModoPreparo modopreparo,
 			BindingResult result) {
+		
+		LOG.info("Inicio create modopreparo...");
 		
 		Response<ModoPreparo> response = new Response<ModoPreparo>();
 		
@@ -59,9 +64,11 @@ public class ModoPreparoController {
 			response.setData(modopreparoPersitido);
 		
 		} catch (Exception e) {
+			LOG.error("Erro create modopreparo: {}", e.getMessage());
 			response.getErrors().add(e.getMessage());
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim create modopreparo...");
 		
 		return ResponseEntity.ok(response);
 	}
@@ -92,16 +99,11 @@ public class ModoPreparoController {
 		return usuarioService.findByUsername(username);
 	}
 	
-	private Integer generateNumber() {
-		Random random = new Random();
-		return random.nextInt(9999);
-	}
-	
 	@PutMapping()
-//	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<ModoPreparo>> update(HttpServletRequest request, @RequestBody ModoPreparo modopreparo,
 			BindingResult result) {
 		
+		LOG.info("Inicio update modopreparo...");
 		Response<ModoPreparo> response = new Response<ModoPreparo>();
 		
 		try {
@@ -115,14 +117,18 @@ public class ModoPreparoController {
 			response.setData(modopreparoPersistido);
 			
 		} catch (Exception e) {
+			LOG.error("Erro update modopreparo: {}", e.getMessage());
 			response.getErrors().add(e.getMessage());
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim update modopreparo...");
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	private void validaModoPreparoUpdate(ModoPreparo modopreparo, BindingResult result) {
+		
+		LOG.info("Validando update modopreparo...");
 		if(modopreparo.getId() == null) {
 			result.addError(new ObjectError("ModoPreparo", "ID nao informado!"));
 			return;
@@ -142,54 +148,61 @@ public class ModoPreparoController {
 	@GetMapping(value = "{id}")
 	public ResponseEntity<Response<ModoPreparo>> findById(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio findById modopreparo...");
 		Response<ModoPreparo> response = new Response<ModoPreparo>();
 		
 		ModoPreparo modopreparo = modopreparoService.findById(id);
 		if(modopreparo == null) {
+			LOG.info("Registro nao encontrado id: {}", id);
 			response.getErrors().add("Registro nao encontrado id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
-		response.setData(modopreparo);
+		LOG.info("Fim findById modopreparo...");
 		
+		response.setData(modopreparo);
 		return ResponseEntity.ok(response);
 	}
 	
 	@DeleteMapping(value = "{id}")
 	public ResponseEntity<Response<String>> delete(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio delete modopreparo...");
 		Response<String> response = new Response<String>();
-		
 		ModoPreparo modopreparo = modopreparoService.findById(id);
 		
 		if(modopreparo == null) {
+			LOG.info("Registro nao encontrado id: {}", id);
 			response.getErrors().add("Registro nao encontrado id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
 		
 		modopreparoService.delete(id);
+		LOG.info("Fim delete modopreparo...");
 		
 		return ResponseEntity.ok(new Response<String>());
 	}
 	
 	//ROLLBACK
 	public void deleteReceitaRollback(Long id) {
+		LOG.info("Rollback delete modoprepro..");
 		modopreparoService.delete(id);
 	}
 	
 	@GetMapping(value = "findByReceitaId/{id}")
 	public ResponseEntity<Response<ModoPreparo>> findByReceitaId(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio findByReceitaId modopreparo...");
 		Response<ModoPreparo> response = new Response<ModoPreparo>();
-		
 		ModoPreparo modopreparo = modopreparoService.findByReceitaId(id);
 		
 		if(modopreparo == null) {
+			LOG.info("Registros nao encontrado para o receita id: {}", id);
 			response.getErrors().add("Registros nao encontrado para o receita id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Inicio findByReceitaId modopreparo...");
 		
 		response.setData(modopreparo);
-		
 		return ResponseEntity.ok(response);
 	}
 }

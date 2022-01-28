@@ -34,6 +34,8 @@ import com.tcc.api.service.UsuarioService;
 @CrossOrigin(origins="*")
 public class IngredienteController {
 	
+	private static final Logger LOG = LoggerFactory.getLogger(IngredienteController.class);
+	
 	@Autowired
 	private IngredienteService ingredienteService;
 	
@@ -43,13 +45,11 @@ public class IngredienteController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ListaCompraController.class);
-	
 	@PostMapping()
-//	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<Ingrediente>> create(HttpServletRequest request, @RequestBody Ingrediente ingrediente,
 			BindingResult result) {
 		
+		LOG.info("Inicio create ingrediente...");
 		Response<Ingrediente> response = new Response<Ingrediente>();
 		
 		try {
@@ -68,20 +68,23 @@ public class IngredienteController {
 		
 		} catch (Exception e) {
 			if(e.getMessage().contains("NonUniqueResultException")) {
-				LOGGER.info("Erro de unique no ingrediente");
+				LOG.error("Erro unique ingrediente");
 				response.getErrors().add("Nome de ingrediente ja cadastrado!");
 				return ResponseEntity.badRequest().body(response);
 			} else {
-				LOGGER.info("Erro no create Ingrediente: "+e);
+				LOG.error("Erro create ingrediente: {}", e.getMessage());
 				response.getErrors().add(e.getMessage());
 				return ResponseEntity.badRequest().body(response);
 			}
 		}
+		LOG.info("Fim create ingrediente...");
 		
 		return ResponseEntity.ok(response);
 	}
 
 	private void validaIngredienteCriado(Ingrediente ingrediente, BindingResult result) {
+		
+		LOG.info("Validando create ingrediente...");
 		if(ingrediente.getNome() == null) {
 			result.addError(new ObjectError("Ingrediente", "Nome do ingrediente nao informado!"));
 			return;
@@ -90,6 +93,7 @@ public class IngredienteController {
 	
 	private void validaDuplicidade(Ingrediente ingrediente, BindingResult result) {
 		
+		LOG.info("Validando duplicidade ingrediente...");
 		Ingrediente ingredientePesquisa = ingredienteService.findByNome(ingrediente.getNome().trim());
 		
 		if(ingredientePesquisa != null) {
@@ -103,16 +107,11 @@ public class IngredienteController {
 		return usuarioService.findByUsername(username);
 	}
 	
-	private Integer generateNumber() {
-		Random random = new Random();
-		return random.nextInt(9999);
-	}
-	
 	@PutMapping()
-//	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<Ingrediente>> update(HttpServletRequest request, @RequestBody Ingrediente ingrediente,
 			BindingResult result) {
 		
+		LOG.info("Inicio update ingrediente...");
 		Response<Ingrediente> response = new Response<Ingrediente>();
 		
 		try {
@@ -126,15 +125,18 @@ public class IngredienteController {
 			response.setData(ingredientePersistido);
 			
 		} catch (Exception e) {
-			LOGGER.info("Erro no update Ingrediente: "+e);
+			LOG.info("Erro update ingrediente: {}", e.getMessage());
 			response.getErrors().add(e.getMessage());
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim update ingrediente...");
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	private void validaIngredienteUpdate(Ingrediente ingrediente, BindingResult result) {
+		
+		LOG.info("Validando update ingrediente...");
 		if(ingrediente.getId() == null) {
 			result.addError(new ObjectError("Ingrediente", "ID nao informado!"));
 			return;
@@ -147,16 +149,18 @@ public class IngredienteController {
 	}
 	
 	@GetMapping(value = "{id}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
 	public ResponseEntity<Response<Ingrediente>> findById(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio findById ingrediente...");
 		Response<Ingrediente> response = new Response<Ingrediente>();
 		
 		Ingrediente ingrediente = ingredienteService.findById(id);
 		if(ingrediente == null) {
+			LOG.info("Registro nao encontrado id: {}", id);
 			response.getErrors().add("Registro nao encontrado id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim findById ingrediente...");
 		
 		response.setData(ingrediente);
 		
@@ -164,47 +168,50 @@ public class IngredienteController {
 	}
 	
 	@DeleteMapping(value = "{id}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<String>> delete(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio delete ingrediente...");
 		Response<String> response = new Response<String>();
 		
 		Ingrediente ingrediente = ingredienteService.findById(id);
 		
 		if(ingrediente == null) {
+			LOG.info("Registro nao encontrado id: {}", id);
 			response.getErrors().add("Registro nao encontrado id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
 		
 		ingredienteService.delete(id);
+		LOG.info("Fim delete ingrediente...");
 		
 		return ResponseEntity.ok(new Response<String>());
 	}
 	
 	@GetMapping(value = "{page}/{count}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
 	public ResponseEntity<Response<Page<Ingrediente>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
 
+		LOG.info("Inicio findAll ingrediente...");
 		Response<Page<Ingrediente>> response = new Response<Page<Ingrediente>>();
 		Page<Ingrediente> ingredientes = null;
 		
 		ingredientes = ingredienteService.findAll(page, count);
 		
 		if(ingredientes.isEmpty()) {
+			LOG.info("Nenhum registro encontrado");
 			response.getErrors().add("Nenhum registro encontrado");
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim findAll ingrediente...");
 		
 		response.setData(ingredientes);
-		
 		return ResponseEntity.ok(response);
 	}
-	
 	
 	@GetMapping(value = "{page}/{count}/{nome}")
 	public ResponseEntity<Response<Page<Ingrediente>>> findByNome(HttpServletRequest request, @PathVariable("page") int page, 
 			@PathVariable("count") int count, @PathVariable("nome") String nome) {
 		
+		LOG.info("Inicio findByNome ingrediente...");
 		Response<Page<Ingrediente>> response = new Response<Page<Ingrediente>>();
 		Page<Ingrediente> ingredientes = null;
 		
@@ -214,6 +221,7 @@ public class IngredienteController {
 			response.getErrors().add("Nenhum registro encontrado com o nome: "+nome);
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim findByNome ingrediente...");
 		
 		response.setData(ingredientes);
 		return ResponseEntity.ok(response);
@@ -222,36 +230,40 @@ public class IngredienteController {
 	@GetMapping()
 	public ResponseEntity<Response<List<Ingrediente>>> findAll(HttpServletRequest request) {
 		
+		LOG.info("Inicio findAll ingrediente...");
 		Response<List<Ingrediente>> response = new Response<List<Ingrediente>>();
 		List<Ingrediente> ingredientes = null;
 		
 		ingredientes = ingredienteService.findAll();
 		
 		if(ingredientes.isEmpty()) {
+			LOG.info("Nenhum registro encontrado");
 			response.getErrors().add("Nenhum registro encontrado");
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim findAll ingrediente...");
 		
 		response.setData(ingredientes);
-		
 		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping(value = "recing/{id}")
 	public ResponseEntity<Response<List<String>>> findReceitaNomeInRecIng(HttpServletRequest request, @PathVariable("id") Long id) {
 		
+		LOG.info("Inicio findReceitaNomeInRecIng ingrediente...");
 		Response<List<String>> response = new Response<List<String>>();
 		List<String> nomes = null;
 		
 		nomes = ingredienteService.findReceitaNomeInRecIng(id);
 		
 		if(nomes.isEmpty()) {
+			LOG.info("Nenhum registro encontrado");
 			response.getErrors().add("Nenhum registro encontrado");
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim findReceitaNomeInRecIng ingrediente...");
 		
 		response.setData(nomes);
-		
 		return ResponseEntity.ok(response);
 	}
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,8 @@ import com.tcc.api.service.UsuarioService;
 @CrossOrigin(origins="*")
 public class ReceitaIngredienteController {
 	
+	private static final Logger LOG = LoggerFactory.getLogger(ReceitaIngredienteController.class);
+	
 	@Autowired
 	private ReceitaIngredienteService recIngService;
 	
@@ -44,32 +48,36 @@ public class ReceitaIngredienteController {
 	public ResponseEntity<Response<ReceitaIngrediente>> create(HttpServletRequest request, @RequestBody List<ReceitaIngrediente> listRecIng,
 			BindingResult result) {
 		
+		LOG.info("Inicio create receitaingrediente...");
 		Response<ReceitaIngrediente> response = new Response<ReceitaIngrediente>();
 		
 		try {
 			validaCriacao(listRecIng, result);
-			//validaDuplicidade(recIng, result); //NAO TEM DUPLICIDADE NO JAVA, TEM APENAS NO FRONT!!
+			//validaDuplicidade(recIng, result); //nao tem duplicidade no java, tem apenas no front!!
 			
 			if(result.hasErrors()) {
 				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 				return ResponseEntity.badRequest().body(response);
 			}
 			
-			//ReceitaIngrediente recIngPersitido = (ReceitaIngrediente) recIngService.createOrUpdate(recIng);
 			List<ReceitaIngrediente> listRecIngPersitido = (List<ReceitaIngrediente>) recIngService.createOrUpdateAll(listRecIng);
 			for (int i = 0; i < listRecIngPersitido.size(); i++) {
 				response.getDatas().add(listRecIngPersitido.get(i));
 			}
 		
 		} catch (Exception e) {
+			LOG.error("Erro create receitaingrediente: {}", e.getMessage());
 			response.getErrors().add(e.getMessage());
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim create receitaingrediente...");
 		
 		return ResponseEntity.ok(response);
 	}
 
 	private void validaCriacao(List<ReceitaIngrediente> listRecIng, BindingResult result) {
+		
+		LOG.info("Validando create receitaingrediente...");
 		listRecIng.forEach(recing -> {
 			if(recing.getIngrediente().getId() == null) {
 				result.addError(new ObjectError("ReceitaIngrediente", "Ingrediente nao informado!"));
@@ -101,6 +109,7 @@ public class ReceitaIngredienteController {
 	public ResponseEntity<Response<ReceitaIngrediente>> update(HttpServletRequest request, @RequestBody List<ReceitaIngrediente> listRecIng,
 			BindingResult result) {
 		
+		LOG.info("Inicio update receitaingrediente...");
 		Response<ReceitaIngrediente> response = new Response<ReceitaIngrediente>();
 		
 		try {
@@ -116,19 +125,19 @@ public class ReceitaIngredienteController {
 			}
 			
 		} catch (Exception e) {
+			LOG.error("Erro update receitaingrediente: {}", e.getMessage());
 			response.getErrors().add(e.getMessage());
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim update receitaingrediente...");
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	private void validaUpdate(List<ReceitaIngrediente> listRecIng, BindingResult result) {
+		
+		LOG.info("Validando update receitaingrediente...");
 		listRecIng.forEach(recing -> {
-			/*if(recing.getId() == null) {
-				result.addError(new ObjectError("ReceitaIngrediente", "ID nao informado!"));
-				return;
-			}*/
 			if(recing.getIngrediente().getId() == null) {
 				result.addError(new ObjectError("ReceitaIngrediente", "Ingrediente nao informado!"));
 				return;
@@ -143,33 +152,25 @@ public class ReceitaIngredienteController {
 	@GetMapping(value = "{id}")
 	public ResponseEntity<Response<ReceitaIngrediente>> findById(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio findById receitaingrediente...");
 		Response<ReceitaIngrediente> response = new Response<ReceitaIngrediente>();
-		
 		ReceitaIngrediente recIng = recIngService.findById(id);
+		
 		if(recIng == null) {
 			response.getErrors().add("Registro nao encontrado id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim findById receitaingrediente...");
 		
-//		List<ChangeStatus> changes = new ArrayList<ChangeStatus>();
-//		Iterable<ChangeStatus> changesCurrent = ticketService.listChangeStatus(ticket.getId());
-//		for (Iterator<ChangeStatus> iterator = changesCurrent.iterator(); iterator.hasNext();) {
-//			ChangeStatus changeStatus = (ChangeStatus) iterator.next();
-//			changeStatus.setTicket(null);
-//			changes.add(changeStatus);
-//		}
-//		
-//		ticket.setChanges(changes);
 		response.setData(recIng);
-		
 		return ResponseEntity.ok(response);
 	}
 	
 	@DeleteMapping(value = "{id}")
 	public ResponseEntity<Response<String>> delete(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio delete receitaingrediente...");
 		Response<String> response = new Response<String>();
-		
 		ReceitaIngrediente recIng = recIngService.findById(id);
 		
 		if(recIng == null) {
@@ -178,6 +179,7 @@ public class ReceitaIngredienteController {
 		}
 		
 		recIngService.delete(id);
+		LOG.info("Fim delete receitaingrediente...");
 		
 		return ResponseEntity.ok(new Response<String>());
 	}
@@ -185,37 +187,32 @@ public class ReceitaIngredienteController {
 	@GetMapping(value = "{page}/{count}")
 	public ResponseEntity<Response<Page<ReceitaIngrediente>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
 
+		LOG.info("Inicio findAll receitaingrediente...");
 		Response<Page<ReceitaIngrediente>> response = new Response<Page<ReceitaIngrediente>>();
 		Page<ReceitaIngrediente> recIngs = null;
-		
-//		Usuario userRequest = userFromRequest(request);
-//		if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECHNICIAN)) {
-//			tickets = ticketService.listTicket(page, count);
-//		}
-//		if(userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTOMER)) {
-//			tickets = ticketService.findByCurrentUser(page, count, userRequest.getId());
-//		}
 		
 		recIngs = recIngService.findAll(page, count);
 		
 		if(recIngs.isEmpty()) {
+			LOG.info("Nenhum registro encontrado");
 			response.getErrors().add("Nenhum registro encontrado");
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim findAll receitaingrediente...");
 		
 		response.setData(recIngs);
-		
 		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping(value = "findByReceitaId/{id}")
 	public ResponseEntity<Response<ReceitaIngrediente>> findByReceitaId(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio findByReceitaId receitaingrediente...");
 		Response<ReceitaIngrediente> response = new Response<ReceitaIngrediente>();
-		
 		List<ReceitaIngrediente> recings = recIngService.findByReceitaId(id);
 		
 		if(recings.isEmpty()) {
+			LOG.info("Registros nao encontrado para o receita id: {}", id);
 			response.getErrors().add("Registros nao encontrado para o receita id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
@@ -223,6 +220,7 @@ public class ReceitaIngredienteController {
 		for (int i = 0; i < recings.size(); i++) {
 			response.getDatas().add(recings.get(i));
 		}
+		LOG.info("Fim findByReceitaId receitaingrediente...");
 		
 		return ResponseEntity.ok(response);
 	}

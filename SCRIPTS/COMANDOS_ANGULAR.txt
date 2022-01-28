@@ -1,4 +1,6 @@
+------------------------
 CRIANDO NOVA TELA:
+------------------------
 
 *CRIAR TUDO EM SUAS RESPECTIVAS PASTAS
 src\app\components
@@ -19,12 +21,18 @@ ADICIONAR no menu
 GERAR .JS.MAP:
 ng build
 
+------------------------
 BAIXAR/ATUALIZAR modules:
+------------------------
 npm update
 
+------------------------
 SUBIR SERVIDOR:
+------------------------
 ng serve
 
+------------------------
 INSTALAR/DESINSTALAR modules:
+------------------------
 npm install --save <nome>
 npm uninstall --save <nome>

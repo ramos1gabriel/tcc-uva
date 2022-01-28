@@ -1,5 +1,11 @@
-SELECT * FROM cardapioSemanal car GROUP BY car.DATA_CRIACAO;
-SELECT COUNT(car.DATA_CRIACAO) FROM cardapiosemanal car WHERE car.DATA_CRIACAO = '2021-10-22';
+-- agrupar cardapios (melhor pra visualizar)
+SELECT * FROM cardapiosemanal cardapio
+GROUP BY cardapio.DATA_CRIACAO;
+
+-- contar qtd refeicoes no cardapio semanal
+SELECT COUNT(cardapio.DATA_CRIACAO) AS REFEICOES
+FROM cardapiosemanal cardapio 
+WHERE cardapio.DATA_CRIACAO = '2021-11-07';
 
 -- CARDAPIOS
 SELECT * FROM cardapioSemanal;
@@ -7,14 +13,15 @@ SELECT * FROM cardapioSemanal;
 -- USUARIOS
 SELECT * FROM usuario;
 
-DELETE FROM usuario WHERE id = 8;
+-- EXCLUIR USUARIO
+DELETE FROM usuario WHERE ID = 8;
 
--- INGREDIENTES
-SELECT * FROM ingrediente where NOME like '%água%';
+-- PROCURAR INGREDIENTE
+SELECT * FROM ingrediente WHERE NOME LIKE '%caf%';
 
 -- RECEITAS
-SELECT * FROM receita where ID = 10;
-SELECT * FROM receitaingrediente where INGREDIENTE_ID = 26;
+SELECT * FROM receita WHERE ID = 10;
+SELECT * FROM receitaingrediente WHERE INGREDIENTE_ID = 26;
 SELECT * FROM modopreparo;
 
 

@@ -1,12 +1,6 @@
 package com.tcc.api.controller;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,13 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-//import javax.measure.MetricPrefix;
-//import javax.measure.Quantity;
-//import javax.measure.Unit;
-//import javax.measure.quantity.Mass;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,26 +27,16 @@ import com.tcc.api.entity.Usuario;
 import com.tcc.api.response.Response;
 import com.tcc.api.security.jwt.JwtTokenUtil;
 import com.tcc.api.service.CardapioSemanalService;
-import com.tcc.api.service.JasperService;
 import com.tcc.api.service.ReceitaIngredienteService;
 import com.tcc.api.service.UsuarioService;
 import com.tcc.api.util.Util;
-
-import net.sf.jasperreports.engine.JRException;
-
-//import tec.units.ri.quantity.Quantities;
-//import tec.units.ri.unit.Units;
-
 
 @RestController
 @RequestMapping(value="/api/lista")
 @CrossOrigin(origins="*")
 public class ListaCompraController {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ListaCompraController.class);
-	
-//	@Autowired
-//	private ListaCompraService listacompraService;
+	private static final Logger LOG = LoggerFactory.getLogger(ListaCompraController.class);
 	
 	@Autowired
 	protected JwtTokenUtil jwtTokenUtil;
@@ -67,78 +44,55 @@ public class ListaCompraController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	//@Autowired
-	//private ReceitaService receitaService;
-	
-	//@Autowired
-	//private IngredienteService ingredienteService;
-	
 	@Autowired
 	private ReceitaIngredienteService recingService;
 	
 	@Autowired
 	private CardapioSemanalService cardapioService;
 	
-	@Autowired
-    private DataSource dataSource;
-	
-	@Autowired 
-	private HttpServletResponse response;
-	
-	@Autowired
-    private JasperService jasperService;
-	
 	private final String REGEX_NUMBER = "[^0-9.]";
-	
-	//um get q recebe o id do cardapio
-	//da um findall pelo id do cardapio
-	//nao retornou nada: CREATE, retornou: UPDATE
 	
 	//HTML
 	@GetMapping(value = "gerarLista/{id}")
 	public ResponseEntity<Response<ListaCompra>> gerarLista(@PathVariable("id") String data) {
 		
+		LOG.info("Inicio gerarLista listacompras...");
+		
 		Response<ListaCompra> response = new Response<ListaCompra>();
 		
 		List<ListaCompra> listaCompra = montaLista(data); //gerar a lista
 		
-		//segunda lista auxiliar
-		
+		LOG.info("Ordena lista por ordem alfabetica...");
 		Collections.sort(listaCompra); //ordem alfabetica
 		
 		if(listaCompra.isEmpty()) {
+			LOG.info("Nao foi possivel gerar lista para cardapio do dia: {}", data);
 			response.getErrors().add("Nao foi possivel gerar lista para cardapio do dia: "+data);
 			return ResponseEntity.badRequest().body(response);
 		}
 		
-		for (int i = 0; i < listaCompra.size(); i++) { //transformar em lambda
+		for (int i = 0; i < listaCompra.size(); i++) {
 			response.getDatas().add(listaCompra.get(i));
 		}
+		LOG.info("Fim gerarLista listacompras...");
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	private List<ListaCompra> montaLista(String data) {
 		
-		//busca listcompra por id
-//		List<ListaCompra> listas = listacompraService.findAllByCardapio(id);
+		LOG.info("Inicio montaLista listacompras...");
+		
 		List<ListaCompra> listas = new ArrayList<ListaCompra>();
-//		//se existir limpa tabela
-//		if(!listas.isEmpty()) {
-//			listacompraService.deleteByCardapioId(id);
-//			listas.clear();
-//		}
 		
 		//pega o cardapio
 		java.time.LocalDate dataLocalDate = Util.stringToLocalDate(data);
+		LOG.info("Buscando cardapio do dia: {}", dataLocalDate);
 		List<CardapioSemanal> cardapios = cardapioService.findAllByDataCriacao(dataLocalDate);//findById(id);
 		
-		//pega todos id das receitas do cardapio
-		//List<Long> listaRefeicoes = cardapio.getRefeicoes();
-		
 		//recupera todos ingredienteXreceita utilizados no cardapio
+		LOG.info("Recupera todos os ingredientereceita do cardapio..");
 		List<ReceitaIngrediente> listaIngredientes = new ArrayList<ReceitaIngrediente>();
-		
 		for (CardapioSemanal idRec : cardapios) {
 			//if(idRec > 0) {
 				recingService.findByReceitaId(idRec.getReceita().getId()).forEach(
@@ -150,66 +104,61 @@ public class ListaCompraController {
 		//CONVERSAO UNIDADES DE MEDIDA = https://www.baeldung.com/javax-measure
 		
 		//agrupa ingredientes pelo id
+		LOG.info("Agrupando ingredientes..");
 		Map<Long, List<ReceitaIngrediente>> ingredienteAgrupado = listaIngredientes.stream().collect(Collectors.groupingBy(ReceitaIngrediente::getIngredienteId));
-		
 		Map<String, String> listaAux = new HashMap<String, String>();
 		
 		for (Long valor : ingredienteAgrupado.keySet()) {
 			List<ReceitaIngrediente> lista = ingredienteAgrupado.get(valor);
-			
 			String ingrediente = "";
 			String unidadeMedida = "";
 			BigDecimal qtdeTotal = BigDecimal.ZERO;
 			
-			//mudar para lambda
 			for (ReceitaIngrediente rc : lista) {
-				//qtdeTotal += rc.getQuantidade();
 				qtdeTotal = qtdeTotal.add(rc.getQuantidade());
 				ingrediente = rc.getIngrediente().getNome();
 				unidadeMedida = String.valueOf(rc.getUnidadeMedida());
 				//System.out.println(rc.getIngrediente().getNome()+": "+qtdeTotal+""+rc.getUnidadeMedida());
 			}
+			
 			if("UNI".equals(unidadeMedida)) {
 				listaAux.put(ingrediente, qtdeTotal.intValue()+""+unidadeMedida);
 			} else {
 				listaAux.put(ingrediente, qtdeTotal+""+unidadeMedida);
 			}
-			
 		}
-		
-//		Map<String, String> listaAux2 = new HashMap<String, String>();
-//		for (String key: listaAux.keySet()) {
-//			listaAux2.put(key, tratarUnidadeMedida(listaAux.get(key)));
-//		}
 		
 		for (String key: listaAux.keySet()) {
 			//System.out.println(key +": "+tratarUnidadeMedida(listaAux.get(key)));
 			ListaCompra lc = new ListaCompra();
 			lc.setItem(key +": "+tratarUnidadeMedida(listaAux.get(key)));
-			//lc.setCardapio(cardapios.get(0));
 			lc.setDataCriacao(dataLocalDate);
 			listas.add(lc);
 		}
 		
-		return listas;//listacompraService.saveAll(listas);
+		LOG.info("Fim montaLista listacompras...");
+		
+		return listas;
 	}
 	
+	/**
+	 * XCR=250 ml
+	 * COL=15 ml
+	 * K=KILO
+	 * KG=KILOGRAM
+	 * G=GRAM
+	 * MG=Unit<Length> milligram = MetricPrefix.MILLI(GRAM)
+	 * L=LITRE
+	 * ML=Unit<Length> millilitre = MetricPrefix.MILLI(LITRE)
+	 * M=METRE
+	 * CM=Unit<Length> centimeter = MetricPrefix.CENTI(METRE)
+	 * MM=Unit<Length> millimeter = MetricPrefix.MILLI(METRE)
+	 * UNI=nesse caso retorna direto pra lista de compra (COMPRAR UMA UNIDADE)
+	 **/
 	private String tratarUnidadeMedida(String unidade) {
 		
-		/*
-		 * XCR=250 ml
-		 * COL=15 ml
-		 * K=KILO
-		 * KG=KILOGRAM
-		 * G=GRAM
-		 * MG=Unit<Length> milligram = MetricPrefix.MILLI(GRAM)
-		 * L=LITRE
-		 * ML=Unit<Length> millilitre = MetricPrefix.MILLI(LITRE)
-		 * M=METRE
-		 * CM=Unit<Length> centimeter = MetricPrefix.CENTI(METRE)
-		 * MM=Unit<Length> millimeter = MetricPrefix.MILLI(METRE)
-		 * UNI=nesse caso retorna direto pra lista de compra (COMPRAR UMA UNIDADE)
-		 */
+		LOG.info("Inicio tratarUnidadeMedida listacompras...");
+		
 		BigDecimal unidadeMedida = new BigDecimal(unidade.replaceAll(REGEX_NUMBER, ""));
 		String uniMed = "";
 		
@@ -221,7 +170,6 @@ public class ListaCompraController {
 			} else {
 				uniMed = uniMedAux.toString() +" mL";
 			}
-			//Quantity<Volume> l6 = Quantities.getQuantity(6, Units.LITRE);
 		} else if(unidade.contains("COL")) {//15ml
 			BigDecimal uniMedAux = unidadeMedida.multiply(new BigDecimal(15));
 			if(uniMedAux.compareTo(new BigDecimal(1000)) >= 0) {
@@ -233,8 +181,6 @@ public class ListaCompraController {
 		} else if(unidade.contains("KG")) {
 			uniMed = unidadeMedida.toString() + " kg";
 		} else if(unidade.contains("G")) {
-			//Quantity<Mass> kg = Quantities.getQuantity(unidadeMedida, Units.KILOGRAM);
-			
 			if(unidadeMedida.compareTo(new BigDecimal(1000)) >= 0) {
 				unidadeMedida = unidadeMedida.divide(new BigDecimal(1000));
 				uniMed = unidadeMedida.toString() +" kg";
@@ -278,6 +224,8 @@ public class ListaCompraController {
 		} else { //UNIDADE
 			uniMed = unidadeMedida.toString() +" unidade(s)";
 		}
+		
+		LOG.info("Fim tratarUnidadeMedida listacompras...");
 		
 		return uniMed.replace(".", ",");
 	}

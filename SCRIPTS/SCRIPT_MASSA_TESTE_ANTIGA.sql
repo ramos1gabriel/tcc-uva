@@ -1,3 +1,7 @@
+-- --------------------------------------------------------
+-- MASSA DE TESTE (DEFASADA)
+-- --------------------------------------------------------
+
 -- INGREDIENTES
 INSERT INTO `ingrediente` (`ID`, `NOME`) VALUES
 	(1, 'Batata'),

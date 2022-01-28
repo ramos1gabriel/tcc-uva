@@ -20,7 +20,6 @@ public interface CardapioSemanalRepository extends JpaRepository<CardapioSemanal
 	@Query("SELECT COUNT(car.dataCriacao) FROM CardapioSemanal car WHERE car.dataCriacao = :data")
 	Integer countReceitas(java.time.LocalDate data);
 	
-	//@Query("SELECT * FROM CardapioSemanal car GROUP BY car.dataCriacao")
 	@Query(nativeQuery = true, value ="SELECT * FROM cardapioSemanal car GROUP BY car.DATA_CRIACAO")
 	List<CardapioSemanal> findAllGroupByDataCriacao();
 	

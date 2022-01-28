@@ -18,9 +18,6 @@ import com.tcc.api.service.ReceitaService;
 public class ReceitaServiceImpl implements ReceitaService {
 	
 	@Autowired
-	private EntityManager em;
-	
-	@Autowired
 	private ReceitaRepository receitaRepository;
 
 	@Override
@@ -58,22 +55,4 @@ public class ReceitaServiceImpl implements ReceitaService {
 	public List<Receita> findAll() {
 		return this.receitaRepository.findAll();
 	}
-	
-	/*
-	@Override
-	public Page<ReceitaDTO> pesquisaReceita(int page, int count) {
-
-		String queryString = "SELECT REC.ID AS id, "
-				+ "REC.NOME AS nome, "
-				+ "REC.CATEGORIA AS categoria, "
-				+ "COUNT(RECING.RECEITA_ID) AS quantidade "
-				+ "FROM RECEITA REC,RECEITA_INGREDIENTES "
-				+ "RECING WHERE REC.ID = RECING.RECEITA_ID "
-				+ "GROUP BY REC.ID";
-		
-		List<ReceitaDTO> list = em.createNativeQuery(queryString).getResultList();
-		Pageable pageable = PageRequest.of(page, count);
-		Page<ReceitaDTO> receitas = new PageImpl<>(list, pageable, list.size());
-		return receitas;
-	}*/
 }

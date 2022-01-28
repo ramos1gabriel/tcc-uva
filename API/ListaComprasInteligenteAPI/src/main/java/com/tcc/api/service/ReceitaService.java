@@ -18,13 +18,6 @@ public interface ReceitaService {
 	
 	Page<Receita> findAll(int page, int count);
 	
-//	Page<Receita> findByNomeIgnoreCaseContainingOrderByNomeDesc(int page, int count, String nome);
-	
-	//criar uma q traga os ingredientes e modo de preparo (DTO?)
-	//Page<ReceitaDTO> findAllPesquisa(int page, int count);
-	
-	/*Page<ReceitaDTO> pesquisaReceita(int page, int count);*/
-	
 	Integer countIngredientePorReceita(Long id);
 	
 	List<Receita> findAll();

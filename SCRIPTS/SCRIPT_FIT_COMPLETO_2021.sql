@@ -3,6 +3,7 @@
 -- CARDAPIO FIT COMPLETO
 -- FONTE: https://blog.tudogostoso.com.br/cardapios/receitas-faceis/cardapio-semanal-saudavel/
 -- CRIADO EM: 03/08/2021
+-- ALTERACAO: 07/11/2021
 -- --------------------------------------------------------
 
 -- INGREDIENTES
@@ -111,7 +112,7 @@ INSERT INTO `receita` (`ID`, `CATEGORIA`, `DESCRICAO`, `NOME`, `USUARIO_ID`) VAL
 	(19, 'alimentacao_saudavel', '', 'Escondidinho de Frango com Batata Doce', 1),
 	(20, 'alimentacao_saudavel', 'Dica: é um ótimo acompanhamento para o kibe cru.\n', 'Pasta de Grão de Bico', 1),
 	(21, 'alimentacao_saudavel', '', 'Panqueca sem farinha', 1);
-	
+    
 -- RECEITA X INGREDIENTE
 INSERT INTO `receitaingrediente` (`ID`, `OBSERVACAO`, `QTD`, `UNIDADE_MEDIDA`, `INGREDIENTE_ID`, `RECEITA_ID`) VALUES
 	(1, '', 2.00, 'UNI', 1, 1),
@@ -283,6 +284,32 @@ INSERT INTO `modopreparo` (`ID`, `DESCRICAO`, `RECEITA_ID`) VALUES
 	(19, 'Cozinhe o grão de bico na panela de pressão até ficar macio.\nBata no liquidificador com duas conchas da água do cozimento.\nMisture com os demais ingredientes.\nSe necessário acrescente mais água do cozimento.\nA textura deve ficar como um patê.\nColoque um fio de azeite de oliva e sirva com pão sírio ou árabe.', 20),
 	(20, 'Bata todos os ingredientes no liquidificador até obter uma consistência líquida e homogênea. Aqueça uma frigideira antiaderente untada com manteiga. Quando ela estiver bem quente, despeje uma concha da massa e gire a frigideira para que ela se espalhe. Cozinhe em fogo baixo até que a massa comece a borbulhar e secar. Para finalizar, despeje molho branco por cima das panquecas, salpique bastante queijo ralado e leve ao forno preaquecido a 180° C, por cerca de 15 minutos.', 21);
 
--- CARDAPIO
-INSERT INTO `cardapiosemanal` (`ID`, `DATA_CRIACAO`, `QUARTA_ALMOCO`, `QUARTA_CAFE`, `QUARTA_JANTAR`, `QUARTA_LANCHE`, `QUINTA_ALMOCO`, `QUINTA_CAFE`, `QUINTA_JANTAR`, `QUINTA_LANCHE`, `SEGUNDA_ALMOCO`, `SEGUNDA_CAFE`, `SEGUNDA_JANTAR`, `SEGUNDA_LANCHE`, `SEXTA_ALMOCO`, `SEXTA_CAFE`, `SEXTA_JANTAR`, `SEXTA_LANCHE`, `TERCA_ALMOCO`, `TERCA_CAFE`, `TERCA_JANTAR`, `TERCA_LANCHE`) VALUES
-	(1, '2021-08-03', 10, 9, 13, 12, 15, 14, 17, 16, 2, 1, 4, 3, 19, 18, 21, 20, 6, 5, 8, 7);
+-- CARDAPIO SEMANAL
+INSERT INTO cardapiosemanal (ID, DATA_CRIACAO, DIA_SEMANA, TIPO_REFEICAO, RECEITA_ID) VALUES 
+	(1, CURDATE(), 'segunda', 'cafe', 1),
+	(2, CURDATE(), 'terca', 'cafe', 5),
+	(3, CURDATE(), 'quarta', 'cafe', 9),
+	(4, CURDATE(), 'quinta', 'cafe', 14),
+	(5, CURDATE(), 'sexta', 'cafe', 18),
+	(6, CURDATE(), 'segunda', 'almoco', 2),
+	(7, CURDATE(), 'terca', 'almoco', 6),
+	(8, CURDATE(), 'quarta', 'almoco', 10),
+	(9, CURDATE(), 'quinta', 'almoco', 15),
+	(10, CURDATE(), 'sexta', 'almoco', 19),
+	(11, CURDATE(), 'segunda', 'lanche', 3),
+	(12, CURDATE(), 'terca', 'lanche', 7),
+	(13, CURDATE(), 'quarta', 'lanche', 12),
+	(14, CURDATE(), 'quinta', 'lanche', 16),
+	(15, CURDATE(), 'sexta', 'lanche', 20),
+	(16, CURDATE(), 'segunda', 'jantar', 4),
+	(17, CURDATE(), 'terca', 'jantar', 8),
+	(18, CURDATE(), 'quarta', 'jantar', 13),
+	(19, CURDATE(), 'quinta', 'jantar', 17),
+	(20, CURDATE(), 'sexta', 'jantar', 21);
+	
+	
+	
+	
+	
+	
+	

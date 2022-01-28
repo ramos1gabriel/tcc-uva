@@ -57,7 +57,6 @@ public class Receita {
     private Usuario usuario;
     
     @JsonIgnore
-    //cascade = CascadeType.ALL
     @OneToMany(mappedBy = "receita", fetch=FetchType.LAZY)
     private List<CardapioSemanal> cardapiosemanal;
     
@@ -134,9 +133,4 @@ public class Receita {
 	public void setCardapiosemanal(List<CardapioSemanal> cardapiosemanal) {
 		this.cardapiosemanal = cardapiosemanal;
 	}
-	
-//	@Override
-//    public String toString() {
-//        return "Categoria [id=" + getId() + ", nome=" + getNome() + ", descricao=" + getDescricao() + "]";
-//    }
 }

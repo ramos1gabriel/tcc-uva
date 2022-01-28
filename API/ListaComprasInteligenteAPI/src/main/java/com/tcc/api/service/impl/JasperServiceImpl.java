@@ -19,29 +19,6 @@ import net.sf.jasperreports.engine.JasperReport;
 @Service
 public class JasperServiceImpl implements JasperService {
 	
-//	@Autowired
-//	private ListaCompraRepository listacompraRepository;
-//
-//	@Override
-//	public List<ListaCompra> saveAll(List<ListaCompra> listRecIng) {
-//		return this.listacompraRepository.saveAll(listRecIng);
-//	}
-//
-//	@Override
-//	public ListaCompra findById(Long id) {
-//		return this.listacompraRepository.findById(id).orElse(null);
-//	}
-//
-//	@Override
-//	public List<ListaCompra> findAllByCardapio(Long id) {
-//		return this.listacompraRepository.findAllByCardapio(id);
-//	}
-//
-//	@Override
-//	public void deleteByCardapioId(Long id) {
-//		this.listacompraRepository.deleteByCardapioId(id);
-//	}
-	
 	@Override
 	public byte[] gerarPDF(Connection connection, String nomeRelatorio, Map parametros) throws JRException, IOException {
 		

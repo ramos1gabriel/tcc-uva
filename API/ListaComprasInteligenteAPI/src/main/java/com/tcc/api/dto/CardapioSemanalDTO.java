@@ -5,26 +5,12 @@ import java.time.LocalDate;
 import com.tcc.api.enums.DiaEnum;
 import com.tcc.api.enums.RefeicaoEnum;
 
-//@Entity
-//@Table(name="cardapiosemanal")
 public class CardapioSemanalDTO {
 	
-	//@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@Column(name="ID")
 	private Long id;
-
-	//@Temporal(TemporalType.DATE)
-	//@Column(name = "DATA_CRIACAO", nullable = false)
 	private LocalDate dataCriacao;
-	
-	//@NotNull
-    //@Enumerated(value = EnumType.STRING)
-	//@Column(name = "TIPO_REFEICAO", nullable = true)
 	private RefeicaoEnum tipoRefeicao;
-	
 	private DiaEnum diaSemana;
-	
 	private Integer qtdRefeicoes;
 	
 	public CardapioSemanalDTO() {}

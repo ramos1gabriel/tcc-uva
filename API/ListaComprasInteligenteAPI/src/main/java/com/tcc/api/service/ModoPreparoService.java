@@ -4,17 +4,11 @@ import com.tcc.api.entity.ModoPreparo;
 
 public interface ModoPreparoService {
 	
-//	ModoPreparo findByNome(String nome);
-	
 	ModoPreparo createOrUpdate(ModoPreparo modopreparo);
 	
 	ModoPreparo findById(Long id);
 	
 	void delete(Long id);
-	
-	//Page<ModoPreparo> findAll(int page, int count);
-	
-	//Page<Receita> findByNomeIgnoreCaseContainingOrderByNomeDesc(int page, int count, String nome);
 	
 	void deleteByReceitaId(Long id);
 	

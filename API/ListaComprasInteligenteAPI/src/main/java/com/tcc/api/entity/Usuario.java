@@ -127,12 +127,4 @@ public class Usuario {
 	public void setReceita(List<Receita> receita) {
 		this.receita = receita;
 	}
-	
-//	public ProfileEnum getProfile() {
-//		return profile;
-//	}
-//	
-//	public void setProfile(ProfileEnum profile) {
-//		this.profile = profile;
-//	}
 }

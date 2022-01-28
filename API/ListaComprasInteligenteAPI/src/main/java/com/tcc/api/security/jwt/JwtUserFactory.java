@@ -16,7 +16,6 @@ public class JwtUserFactory {
 	//Cria um jwt do usuario logado
 	public static JwtUser create(Usuario usuario) {
 		return new JwtUser(usuario.getId(), usuario.getUsername(), usuario.getSenha(), mapToGrantedAuthorities(ProfileEnum.ROLE_ADMIN));
-//		return new JwtUsuario(usuario.getId(), usuario.getEmail(), usuario.getPassword(), mapToGrantedAuthorities(user.getProfile()));
 	}
 
 	//Converte o perfil do usuario para o formato usado pelo spring security

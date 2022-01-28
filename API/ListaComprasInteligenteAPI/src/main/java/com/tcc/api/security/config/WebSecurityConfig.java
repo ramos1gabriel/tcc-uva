@@ -68,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.headers().cacheControl();
     }
 	
-	//NECESSARIO POR CAUSA DA VERSAO SPRING 2
+	//necessario por causa da versao spring 2
 	@Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

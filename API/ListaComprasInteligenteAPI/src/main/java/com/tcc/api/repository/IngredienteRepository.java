@@ -17,9 +17,6 @@ public interface IngredienteRepository extends JpaRepository<Ingrediente, Long> 
 	
 	List<Ingrediente> findAll();
 	
-	/*
-	 * SELECT REC.NOME FROM RECEITA REC, RECEITA_INGREDIENTES RECING WHERE REC.ID = RECING.RECEITA_ID AND RECING.INGREDIENTE_ID = 4
-	 */
 	@Query("SELECT rec.nome FROM Receita rec, ReceitaIngrediente recing WHERE rec.id = recing.receita.id and recing.ingrediente.id = ?1")
 	List<String> findReceitaNomeInRecIng(Long id);
 }

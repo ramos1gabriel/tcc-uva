@@ -14,11 +14,6 @@ public class ModoPreparoServiceImpl implements ModoPreparoService {
 	@Autowired
 	private ModoPreparoRepository modopreparoRepository;
 
-//	@Override
-//	public ModoPreparo findByNome(String nome) {
-//		return this.modopreparoRepository.findByNome(nome);
-//	}
-
 	@Override
 	public ModoPreparo createOrUpdate(ModoPreparo ingrediente) {
 		return this.modopreparoRepository.save(ingrediente);
@@ -44,17 +39,4 @@ public class ModoPreparoServiceImpl implements ModoPreparoService {
 	public ModoPreparo findByReceitaId(Long id) {
 		return this.modopreparoRepository.findByReceitaId(id);
 	}
-
-//	@Override
-//	public Page<Receita> findAll(int page, int count) {
-//		Pageable pages = PageRequest.of(page, count); //contrutor de PageRequest esta deprecated no SPRING 2, trocar por .of
-//		return this.receitaRepository.findAll(pages);
-//	}
-	
-//	@Override
-//	public Page<Ingrediente> findByNomeIgnoreCaseContainingOrderByDesc(int page, int count, String nome) {
-//
-//		Pageable pages = PageRequest.of(page, count);
-//		return this.ingredienteRepository.findByNomeIgnoreCaseContainingOrderByNomeDesc(nome, pages);
-//	}
 }

@@ -11,8 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -29,11 +29,11 @@ FONTE: https://medium.com/@adrianonegrao/habilitar-cors-para-acessar-servi%C3%A7
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SimpleCORSFilter implements Filter {
 	
-	private final Log logger = LogFactory.getLog(this.getClass());
+	private static final Logger LOG = LoggerFactory.getLogger(SimpleCORSFilter.class);
 
 	@Override
 	public void init(FilterConfig fc) throws ServletException {
-		logger.info("ListaComprasInteligenteAPI | SimpleCORSFilter loaded");
+		LOG.info("ListaComprasInteligenteAPI | SimpleCORSFilter loaded");
 	}
 
 	@Override
@@ -50,7 +50,6 @@ public class SimpleCORSFilter implements Filter {
 		} else {
 			chain.doFilter(req, resp);
 		}
-
 	}
 
 	@Override

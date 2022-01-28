@@ -9,26 +9,25 @@
 
 # [Em construção....]
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
-- Type some Markdown on the left
-- See HTML in the right
-- ✨Magic ✨
-
 ## Descrição do projeto
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra gravida erat, sit amet efficitur tellus condimentum ac. Mauris laoreet vulputate pulvinar. Phasellus fermentum diam vitae accumsan ultricies. Aliquam fringilla ut enim a imperdiet. Sed efficitur fermentum tortor in eleifend. Morbi in lectus enim. Donec eget tortor sit amet elit convallis ultricies. Sed laoreet molestie elit ac tempor.
+A Lista de Compras Inteligente tem como objetivo otimizando gastos com compras, diminuir o desperdício de alimentos, poupar o tempo com compras diárias e planejar um cardápio de refeições mais saudáveis.
+O sistema deve abranger:
+- As rotinas relacionadas a login e logout.
+- As rotinas relacionadas à criação e atualização dos usuários.
+- As rotinas relacionadas a criação, consulta, atualização e destruição de dados (CRUD) dos ingredientes.
+- As rotinas relacionadas a criação, consulta, atualização e destruição de dados (CRUD) das receitas.
+- As rotinas relacionadas a criação, consulta, atualização e destruição de dados (CRUD) dos cardápios semanais.
+- Gerar relatórios das listas de compras contendo todos os ingredientes necessários para o preparo de todas as receitas descritas no cardápio semanal selecionado.
 
-## Tecnologia
+## Tecnologias
 
-**Front end:**
-- Node.js - Interpretador de JavaScript (utilizado fora do browser);
-- Angular 7 - Framework;
-- TypeScript -  Linguagem de programação (superset de JavaScript);
-- Bootstrap 4
+**Front-end:**
+- Node.js - Interpretador de JS (utilizado fora do browser)
+- Angular 7 - Framework
+- TypeScript - Linguagem de programação (superset de JavaScript)
+- Bootstrap 4 - Framework web
 
-**Back end:**
+**Back-end:**
 - Java 8 - Linguagem de programação
 - Spring Boot - Framework
 - Spring Security
@@ -37,9 +36,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra gravida 
 **Banco de Dados:**
 - MySQL
 
+**Gestão:**
+- Trello
+
 ## Ferramentas
 **Documentação:**
 - Word - Microsoft Office 2013
+- PowerPoint - Microsoft Office 2013
 - Astah Community (UML)
 
 **IDE:**
@@ -51,7 +54,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra gravida 
 - GitHub Desktop
 
 **Banco de Dados:**
-- MySQL
 - MySQL Workbench (gerar o MER)
 
 **Testes:**
@@ -61,24 +63,36 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra gravida 
 - Adobe Photoshop CS6
 
 
-## Installation
+## Instalação
 
-Dillinger requires [Node.js](https://nodejs.org/) v10+ to run.
+Lista de Compras Inteligente requer os itens abaixo instalados para ser executado:
+- [MySQL](https://dev.mysql.com/downloads/installer/) v8+
+- [Java](https://www.oracle.com/java/technologies/downloads/) v8+
+- [Node.js](https://nodejs.org/) v10+
 
-Install the dependencies and devDependencies and start the server.
-
+#### Instalando o Angular CLI
 ```sh
-cd dillinger
-npm i
-node app
+npm install -g @angular/cli
+```
+> Atenção: No **package.json** definir a versão do Angular para `7.2.0`!
+
+
+#### Instalando as dependências
+```sh
+npm install sweetalert --save
+npm install ngx-spinner --save
 ```
 
-For production environments...
+#### Configurando back-end
+Importar o projeto java e rodar um **maven install** para baixar todas dependências e logo após subir o projeto.
+> Observação: Não é necessário configurar o banco, pois o java já cria o database e as tabelas (caso não existam).
 
+
+#### Subir front-end
 ```sh
-npm install --production
-NODE_ENV=production node app
+ng serve
 ```
+Acesso via URL: http://localhost:4200/
 
 ## Plugins
 
@@ -175,11 +189,11 @@ MIT
 ## Layout
 **AdminLTE v2.4.5**
 **Author:** Almsaeed Studio
-**Website:** Almsaeed Studio <https://adminlte.io>
+**Website:** <https://adminlte.io>
 **License:** Open source - MIT
 Please visit http://opensource.org/licenses/MIT for more information
 
-## Icones
+## Fonte/Icones
 *Font Awesome*
 https://fontawesome.com/icons?d=gallery
 
@@ -190,7 +204,7 @@ https://sweetalert.js.org/docs/
 https://napster2210.github.io/ngx-spinner/
 
 ## Imagens:
-**Icones do perfil**
+**Imagens do perfil**
 https://www.flaticon.com/packs/cooking-14
-**Icones do cardápio semanal**
+**Imagens do cardápio semanal**
 https://www.flaticon.com/packs/take-away-22

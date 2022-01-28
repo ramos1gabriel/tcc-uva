@@ -1,5 +1,5 @@
 Massa de teste BD:
-SCRIPTS\SCRIPT_CARDAPIO_FIT_COMPLETO.sql
+
 -----------------------------------------
 Requests do serviços (Postman):
 SCRIPTS\TCC.postman_collection.json
@@ -31,5 +31,5 @@ MySQL Workbench (para gerar o MER)
 Testes:
 Postman
 
----
+
 *TODOS ARQUIVOS DEVEM ESTAR NO GITHUB "tcc-uva"

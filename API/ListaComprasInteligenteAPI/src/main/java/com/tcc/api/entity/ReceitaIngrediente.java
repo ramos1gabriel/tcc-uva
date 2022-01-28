@@ -38,7 +38,6 @@ public class ReceitaIngrediente {
     private Ingrediente ingrediente;
     
     @Column(name = "QTD", nullable = false)
-    //private Double quantidade;
     private BigDecimal quantidade; 
     
     @Enumerated(value = EnumType.STRING)
@@ -68,14 +67,6 @@ public class ReceitaIngrediente {
 	public void setReceita(Receita receita) {
 		this.receita = receita;
 	}
-
-	/*public Double getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Double quantidade) {
-		this.quantidade = quantidade;
-	}*/
 	
 	public BigDecimal getQuantidade() {
 		return quantidade;

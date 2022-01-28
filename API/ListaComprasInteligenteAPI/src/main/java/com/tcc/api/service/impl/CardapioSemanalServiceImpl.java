@@ -58,12 +58,6 @@ public class CardapioSemanalServiceImpl implements CardapioSemanalService {
 		return this.cardapiosemanalRepository.countReceitas(data);
 	}
 	
-//	@Override
-//	public Page<CardapioSemanal> findAllGroupByDataCriacao(int page, int count) {
-//		Pageable pages = PageRequest.of(page, count);
-//		return this.cardapiosemanalRepository.findAllGroupByDataCriacao(pages);
-//	}
-	
 	@Override
 	public List<CardapioSemanal> findAllGroupByDataCriacao() {
 		return this.cardapiosemanalRepository.findAllGroupByDataCriacao();

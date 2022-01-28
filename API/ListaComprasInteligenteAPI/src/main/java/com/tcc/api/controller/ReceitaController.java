@@ -6,6 +6,8 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -40,6 +42,8 @@ import com.tcc.api.service.UsuarioService;
 @CrossOrigin(origins="*")
 public class ReceitaController {
 	
+	private static final Logger LOG = LoggerFactory.getLogger(ReceitaController.class);
+	
 	@Autowired
 	private ReceitaService receitaService;
 	
@@ -56,10 +60,10 @@ public class ReceitaController {
 	private UsuarioService usuarioService;
 	
 	@PostMapping()
-//	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<Receita>> create(HttpServletRequest request, @RequestBody Receita receita,
 			BindingResult result) {
 		
+		LOG.info("Inicio create receita...");
 		Response<Receita> response = new Response<Receita>();
 		
 		try {
@@ -71,22 +75,22 @@ public class ReceitaController {
 				return ResponseEntity.badRequest().body(response);
 			}
 			
-			//CREATE
-			//receita.setCategoria(CategoriaEnum.getCategoria(receita.getCategoria().toString()));
-			
-			
 			Receita receitaPersitido = (Receita) receitaService.createOrUpdate(receita);
 			response.setData(receitaPersitido);
 		
 		} catch (Exception e) {
+			LOG.error("Erro create receita: {}", e.getMessage());
 			response.getErrors().add(e.getMessage());
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim create receita...");
 		
 		return ResponseEntity.ok(response);
 	}
 
 	private void validaReceitaCriada(Receita receita, BindingResult result) {
+		
+		LOG.info("Validando create receita...");
 		if(receita.getNome() == null) {
 			result.addError(new ObjectError("Receita", "Nome nao informado!"));
 			return;
@@ -99,6 +103,7 @@ public class ReceitaController {
 	
 	private void validaDuplicidade(Receita receita, BindingResult result) {
 		
+		LOG.info("Validando duplicidade receita...");
 		Receita receitaPesquisa = receitaService.findByNome(receita.getNome());
 		
 		if(receitaPesquisa != null) {
@@ -112,16 +117,11 @@ public class ReceitaController {
 		return usuarioService.findByUsername(username);
 	}
 	
-	private Integer generateNumber() {
-		Random random = new Random();
-		return random.nextInt(9999);
-	}
-	
 	@PutMapping()
-//	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<Receita>> update(HttpServletRequest request, @RequestBody Receita receita,
 			BindingResult result) {
 		
+		LOG.info("Inicio update receita...");
 		Response<Receita> response = new Response<Receita>();
 		
 		try {
@@ -135,14 +135,18 @@ public class ReceitaController {
 			response.setData(receitaPersistido);
 			
 		} catch (Exception e) {
+			LOG.error("Erro update receita: {}", e.getMessage());
 			response.getErrors().add(e.getMessage());
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim update receita...");
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	private void validaReceitaUpdate(Receita receita, BindingResult result) {
+		
+		LOG.info("Validando update receita...");
 		if(receita.getId() == null) {
 			result.addError(new ObjectError("Receita", "ID nao informado!"));
 			return;
@@ -160,109 +164,77 @@ public class ReceitaController {
 	}
 	
 	@GetMapping(value = "{id}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
 	public ResponseEntity<Response<Receita>> findById(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio findById receita...");
 		Response<Receita> response = new Response<Receita>();
 		
 		Receita receita = receitaService.findById(id);
 		if(receita == null) {
+			LOG.info("Registro nao encontrado id: {}", id);
 			response.getErrors().add("Registro nao encontrado id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim findById receita...");
 		
-//		List<ChangeStatus> changes = new ArrayList<ChangeStatus>();
-//		Iterable<ChangeStatus> changesCurrent = ticketService.listChangeStatus(ticket.getId());
-//		for (Iterator<ChangeStatus> iterator = changesCurrent.iterator(); iterator.hasNext();) {
-//			ChangeStatus changeStatus = (ChangeStatus) iterator.next();
-//			changeStatus.setTicket(null);
-//			changes.add(changeStatus);
-//		}
-//		
-//		ticket.setChanges(changes);
 		response.setData(receita);
 		
 		return ResponseEntity.ok(response);
 	}
 	
 	@DeleteMapping(value = "{id}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER')")
 	public ResponseEntity<Response<String>> delete(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio delete receita...");
 		Response<String> response = new Response<String>();
-		
 		Receita receita = receitaService.findById(id);
 		
 		if(receita == null) {
+			LOG.info("Registro nao encontrado id: {}", id);
 			response.getErrors().add("Registro nao encontrado id: "+id);
 			return ResponseEntity.badRequest().body(response);
 		}
 		
 		receitaService.delete(id);
+		LOG.info("Fim delete receita...");
 		
 		return ResponseEntity.ok(new Response<String>());
 	}
 	
 	@GetMapping(value = "{page}/{count}")
-//	@PreAuthorize("hasAnyRole('CUSTOMER', 'TECHNICIAN')")
 	public ResponseEntity<Response<Page<Receita>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
 
+		LOG.info("Inicio findAll receita...");
 		Response<Page<Receita>> response = new Response<Page<Receita>>();
 		Page<Receita> receitas = null;
-		
-//		Usuario userRequest = userFromRequest(request);
-//		if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECHNICIAN)) {
-//			tickets = ticketService.listTicket(page, count);
-//		}
-//		if(userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTOMER)) {
-//			tickets = ticketService.findByCurrentUser(page, count, userRequest.getId());
-//		}
 		
 		receitas = receitaService.findAll(page, count);
 		
 		if(receitas.isEmpty()) {
+			LOG.info("Nenhum registro encontrado");
 			response.getErrors().add("Nenhum registro encontrado");
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim findAll receita...");
 		
 		response.setData(receitas);
-		
 		return ResponseEntity.ok(response);
 	}
 	
-	
-//	@GetMapping(value = "{page}/{count}/{nome}")
-//	public ResponseEntity<Response<Page<Receita>>> findByNome(HttpServletRequest request, @PathVariable("page") int page, 
-//			@PathVariable("count") int count, @PathVariable("nome") String nome) {
-//		
-//		Response<Page<Receita>> response = new Response<Page<Receita>>();
-//		Page<Receita> receitas = null;
-//		
-//		receitas = receitaService.findByNomeIgnoreCaseContainingOrderByNomeDesc(page, count, nome);
-//		
-//		if(receitas.isEmpty()) {
-//			response.getErrors().add("Nenhum registro encontrado com o nome: "+nome);
-//			return ResponseEntity.badRequest().body(response);
-//		}
-//		
-//		response.setData(receitas);
-//		return ResponseEntity.ok(response);
-//	}
-	
 	//ROLLBACK
 	public void deleteReceitaRollback(Long id) {
+		LOG.info("Rollback delete receita..");
 		receitaService.delete(id);
 	}
 	
 	@GetMapping(value = "pesquisa/{page}/{count}")
 	public ResponseEntity<Response<Page<ReceitaDTO>>> findAllPesquisa(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
 
+		LOG.info("Inicio findAllPesquisa receita...");
 		Response<Page<ReceitaDTO>> response = new Response<Page<ReceitaDTO>>();
 		
 		Page<ReceitaDTO> dtos = null;
 		List<ReceitaDTO> dtolist = new ArrayList<ReceitaDTO>();
-		
-		//receitas = receitaService.pesquisaReceita(page, count);
 		
 		//PREENCHE DTO
 		List<Receita> receitas = receitaService.findAll();
@@ -293,23 +265,22 @@ public class ReceitaController {
 
 		dtos = new PageImpl<>(dtolist.subList(start, end), pageable, dtolist.size());
 		
-		//dtos = new PageImpl<>(dtolist, pageable, dtolist.size());
-		
 		if(dtos.isEmpty()) {
+			LOG.info("Nenhum registro encontrado");
 			response.getErrors().add("Nenhum registro encontrado");
 			return ResponseEntity.badRequest().body(response);
 		}
+		LOG.info("Fim findAllPesquisa receita...");
 		
 		response.setData(dtos);
-		
 		return ResponseEntity.ok(response);
 	}
 	
 	@DeleteMapping(value = "deleteAll/{id}")
 	public ResponseEntity<Response<String>> deleteAll(@PathVariable("id") Long id) {
 		
+		LOG.info("Inicio deleteAll receita...");
 		Response<String> response = new Response<String>();
-		
 		Receita receita = receitaService.findById(id);
 		
 		if(receita == null) {
@@ -318,9 +289,12 @@ public class ReceitaController {
 		}
 		
 		//sequencia
+		LOG.info("Deleta em cascata: ModoPreparo, ReceitaIngrediente e Receita...");
 		modopreparoService.deleteByReceitaId(id);
 		receitaingredienteService.deleteByReceitaId(id);
 		receitaService.delete(id);
+
+		LOG.info("Fim deleteAll receita...");
 		
 		return ResponseEntity.ok(new Response<String>());
 	}

@@ -23,17 +23,7 @@ public enum CategoriaEnum {
 //	Lanches("Lanches"),
 //	Alimentacao_saudavel("Alimentação Saudável"),
 //	Outros("Outros");
-	
-//	private String descricao;
-//	 
-//	CategoriaEnum(String descricao) {
-//        this.descricao = descricao;
-//    }
-// 
-//    public String getDescricao() {
-//        return descricao;
-//    }
-	
+
 	public static CategoriaEnum getCategoria(String categoria) {
 		switch(categoria) {
 			case "Bolos e tortas doces":
